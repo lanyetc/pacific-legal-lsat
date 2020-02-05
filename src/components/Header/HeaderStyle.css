@@ -1,0 +1,53 @@
+.appBar {
+    display: flex;
+    padding: 18px 64px;
+    margin-bottom: 20px;
+    color: #747474;
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none !important;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+
+.navContainer {
+    min-height: 50px;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.appBar .navBrand {
+    line-height: 30px;
+    padding: 8px 16px;
+}
+
+.navTitle {
+    font-size: 28px;
+    padding: 0 16px;
+    color: #193c81;
+    display: inline-block;
+    line-height: 46px;
+    vertical-align: bottom;
+}
+
+.appBar .navList {
+    font-size: 14px;
+    margin: 0;
+    list-style: none;
+}
+
+.appBar .navListItem {
+    float: left;
+    position: relative;
+    display: block;
+    width: auto;
+}
+
+.appBar .navLink {
+    position: relative;
+}
