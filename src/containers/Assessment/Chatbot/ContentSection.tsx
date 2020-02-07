@@ -1,32 +1,91 @@
 import React from "react";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Button from '@material-ui/core/Button';
+import ChatbotMessage from './ChatbotMessage'
+import UserMessage from "./UserMessage";
 
-export default function ChatContentSection() {
-    const content = "Intro Info. Privacy policies should explain to the person whose personal information we are collecting: why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing.";
-    return (
+
+export default class ChatContentSection extends React.Component {
+    
+    constructor(props: any) {
+        super(props);
+    }
+
+    // garbage data - will need to be passed through props
+    private data = {
+        messages: [ // this will need to be encoded in classes. 
+          {
+            id: 1,
+            type: "multi",
+            content: 'Intro',
+            options: [
+              {
+                id: 700,
+                label: "option 1",
+              },
+              {
+                id: 701,
+                label: "option 2",
+              }
+            ],
+            extraInfo: [],
+            triggers: [
+                {
+                    answers: [
+                        {
+                            questionId: 1,
+                            optionId: 700
+                        }
+                    ],
+                    results: [
+                        "some result for q 1"
+                    ],
+                    response: ["some response"],
+                    nextQuestionId: 1
+                }
+            ]
+          },
+          {
+            id: 2,
+            content: 'some contnent',
+            options: [
+              {
+                id: 888,
+                label: "some label"
+              }
+            ],
+            extraInfo: [],
+            triggers: []
+          }
+        ],
+      }
+
+
+    render(){
+       const messageOptions =  this.data.messages.map((message) => {
+           
+            if(message.content){
+               return (
+                <div>
+                    <ChatbotMessage content={message.content}></ChatbotMessage>
+                    {message.options && <UserMessage userOptions={message.options}></UserMessage>}
+               </div>
+               )
+            } 
+        });
+
+        return(
         <div className="content-container">
             <div className="chat-area">
-                <div className="chat-block left">
-                    <div className="avatar"></div>
-                    <div className="bubble white round">{content}</div>
-                </div>
-                <div className="chat-block right">
-                    <div className="avatar"></div>
-                    <div className="bubble white round">
-                        <List>
-                            <ListItem className="navListItem">
-                                <Button className="navLink">Yse</Button>
-                            </ListItem>
-                            <ListItem className="navListItem">
-                                <Button className="navLink">No</Button>
-                            </ListItem>
-                        </List>
-                    </div>
-                </div>
+                {messageOptions}   
             </div>
         </div>
-    );
+        )
+    }
+
 }
+
+
+
+
+
+
