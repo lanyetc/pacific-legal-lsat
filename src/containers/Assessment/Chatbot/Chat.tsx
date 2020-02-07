@@ -4,7 +4,7 @@ import ChatbotMessage from './ChatbotMessage'
 import UserMessage from "./UserMessage";
 
 
-export default class ChatContentSection extends React.Component {
+export default class Chat extends React.Component {
     
     constructor(props: any) {
         super(props);
