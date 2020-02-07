@@ -11,17 +11,6 @@ import {getSurvey, Node} from "../../../data/data";
 import { triggerAsyncId } from 'async_hooks';
 import { Message } from '@material-ui/icons';
 
-
-
-interface Message {
-  id: number,
-  type: string,
-  content: string,
-  options: any,
-  extraInfo: any,
-  triggers: any
-}
-
 interface IState {
   currentMessage: Node,
   questionPath: any,
@@ -54,7 +43,6 @@ export default class ChatbotPage extends React.Component {
             this.setState((state: IState, props) => {
               return {
                 currentMessage: nextMessage,
-                selectedOption: null,
                 questionPath: {},
                 messageList: [nextMessage] // CHANGE THIS TO ADD TO THE MESSAGE LIST (right now it just replaces the current message list)
               }
