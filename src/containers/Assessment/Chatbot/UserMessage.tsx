@@ -10,14 +10,11 @@ export default function UserMessage(props: any) {
     // what props do user messages need? 
     // takes userOptions for props.
 
-    function handleResponseOptions(e: any){
-        console.log("response options need to be handled: " + e)
-    }
-
+ 
     const options = props.userOptions
     const optionItems = options.map((option: any) =>
-        <ListItem className="navListItem" key={option.id}>
-            <Button className="navLink" onClick={handleResponseOptions}>{option.label}</Button>
+        <ListItem className="navListItem" id={option.id} key={option.id}>
+            <Button className="navLink" onClick={() => props.handleSelectOptions(option.id)}>{option.label}</Button>
         </ListItem>
     );
 

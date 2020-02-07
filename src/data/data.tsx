@@ -3,21 +3,21 @@ enum NodeTypes {
     multi,
     message
 }
-interface Option {
+export interface Option {
     id: number;
     label: string;
 }
-interface Answer {
+export interface Answer {
     questionId: number;
     optionId: number;
 }
-interface Trigger {
+export interface Trigger {
     answers: Array<Answer>;
     response?: Array<string>;
     results: Array<string>;
     nextQuestionId: number;
 }
-interface Node {
+export interface Node {
     id: number;
     type: NodeTypes;
     content: string;
@@ -26,7 +26,7 @@ interface Node {
     extraInfo?: Array<string>;
 }
 
-interface NodeDictionary {
+export interface NodeDictionary {
     [key: number]: Node;
 }
 
