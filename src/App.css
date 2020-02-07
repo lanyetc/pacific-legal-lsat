@@ -12,7 +12,206 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+/*************************************************************************************************** 
 
+RESULTS PAGE CSS STARTS
+
+***************************************************************************************************/
+.resultsFullPage {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.resultsNav{
+  list-style: none; 
+  /* width: 100%; */
+  text-align: center;
+  display: inline-block;
+  padding: 0 0 20px 0;
+  border-bottom: 1px solid black;
+  margin-top: 110px;
+  margin-left: -80px;
+
+}
+.resultsNav li {
+  /* float: left; */
+  padding: 0 40px 0 0;
+  /* border: solid 5px black; */
+  transition: all ease-in 1s;
+  font-family: ProximaNova;
+  font-size: 15px;
+  line-height: 1.07;
+  text-align: left;
+  color: #707070;
+}
+
+.resultsRightSide {
+  width: 70%;
+  text-align: center;
+  float: left;
+  /* width: 100%; */
+}
+.resultsLefttSide {
+  width: 30%;
+  float: left;
+  height: 100vh;
+  /* padding: 10px; */
+  background-color:#10aeec;
+  margin-top: 102px;
+}
+.moduleParagraph{
+  font-family: ProximaNova;
+  font-size: 15px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  color: #ffffff;
+  margin-left: 75px;
+
+}
+.moduleBlock{
+  height: 181px;
+  width: 295px;
+}
+.downloadButton{
+  width: 127px;
+  height: 38px;
+  background-color: #ffe601;
+  border-radius: 4px;
+  border: solid 1px #707070;
+}
+.shareButton{
+  width: 127px;
+  height: 38px;
+  border-radius: 4px;
+  border: solid 1px #707070;
+  background-color: #e7e7e7;
+  margin-left: 20px;
+ 
+}
+.buttonBlock{
+margin-left: 75px;
+display: inline-block;
+padding-top: 20px;
+height: 40px;
+width: 284px;
+
+}
+
+.moduleFont{
+  font-family: ProximaNova;
+  font-size: 30px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  color: #ffffff;
+  margin-left: 74px;
+}
+.resultsMiddle {
+  width: 50%;
+  text-align: left;
+  float: left;
+  margin: 0 0 0 40px;
+}
+.resultsFullPage h1{
+  /* width: 182px;
+  height: 41px; */
+  font-family: ProximaNova;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.11;
+  letter-spacing: normal;
+  text-align: left;
+  color: #273b6e;
+}
+.resultsNav li {
+  float: left;
+}
+.todoList {
+  padding: 0;
+  position: relative;
+  list-style: none;
+}
+
+.todoList li{
+  
+  border-radius: 12px;
+  margin-top: 30px;
+}
+.moreinfoButton{
+  /* margin: 0 5px 0 150px; */
+  position: absolute;
+    right: 110px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: solid 1px #707070;
+}
+.createButton{
+  position: absolute;
+    right: 20px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: solid 1px #707070;
+  background-color: #273b6e;
+}
+.resultsImage{
+  width: 60%;
+  margin-left: 75px;
+  margin-top: 54px;
+}
+.reminderFont{
+  /* width:182px;
+  height: 41px; */
+  font-family: ProximaNova;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.11;
+  letter-spacing: normal;
+  text-align: left;
+  color: #273b6e;
+}
+.Reminder{
+  width: 40%;
+  text-align: left;
+  margin: 0 0 0 40px;
+  float: left;
+}
+.reminderList{
+  width: 80%;
+  float: left;
+  border-radius: 12px;
+  background-color: #efefef;
+  margin-top: 10px;
+}
+.reminderList li{
+  margin: 20px;
+  /* list-style: none; */
+}
+.footerResults{
+  background-color: #273b6e;
+  width: 100%;
+  margin: 150px 0 0 0;
+}
+.footerInnerResults {
+  width: 100%;
+  background: rgb(206, 206, 206);
+  height: 160px;
+}
+.footerResults h1 {
+  text-align: center;
+  color: #e7e7e7;
+  padding: 5px 0 0 0;
+}
+/*************************************************************************************************** 
+
+RESULTS PAGE CSS ENDS
+
+***************************************************************************************************/
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
