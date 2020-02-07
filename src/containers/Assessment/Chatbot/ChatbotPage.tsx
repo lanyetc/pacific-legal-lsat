@@ -7,7 +7,10 @@ import HeaderLinks from "../../../components/Header/HeaderLink"
 import ProgressSection from "./ProgressSection";
 import ChatContentSection from "./ContentSection";
 import ToDoSection from "./ToDoSection";
+import {getSurvey} from "../../../data/data";
 const ChatbotPage = () => {
+  let survey = getSurvey();
+  console.log(survey);
   return (
     <div className="full-screen-container grey">
       <Header
