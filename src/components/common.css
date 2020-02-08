@@ -11,6 +11,12 @@ html, body, #root {
 .transparent {
     background-color: transparent !important;
 }
+.textwhite {
+    color: #ffffff !important;
+}
+.bold {
+    font-weight: 500 !important;
+}
 .flex {
     flex: 1;
 }

@@ -1,0 +1,39 @@
+.moudule-result-container {
+    width: 420px;
+    height: 100%;
+    background-color: #10aeec;
+    float: left;
+    padding: 24px 70px;
+    box-sizing: border-box;;
+}
+.result-detail-container {
+    width: calc(100% - 420px);
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    padding: 0 50px;
+}
+
+.module-title {
+    font-size: 26px;
+}
+
+.module-title-sm {
+    font-size: 20px;
+}
+
+.module-repo {
+    margin-top: 16px;
+}
+
+.moudule-result-container .btn-group {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.moudule-result-container .btn-group button{
+    flex: 1;
+    max-width: 128px;
+}

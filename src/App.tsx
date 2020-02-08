@@ -9,11 +9,12 @@ import Card from "@material-ui/core/Card";
 import { Grid } from "@material-ui/core";
 
 // Importing Images from assets/images
-import leftpic from "../src/Assets/img/leftpic.png";
+import leftpic from "./assets/img/leftpic.png";
 import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 
-import ChatbotPage from "./containers/Assessment/Chatbot/ChatbotPage"
+import ChatbotPage from "./containers/Assessment/Chatbot/ChatbotPage";
+import ResultPage from "./containers/Assessment/Result/ResultPage";
 import './App.css';
 import './components/common.css';
 
@@ -24,13 +25,14 @@ const App = () => {
     <Router history={hist}>
     <Switch>
       <Route path="/assessment" component={ChatbotPage} />
+      <Route path="/result" component={ResultPage} />
       <Route path="/" component={ChatbotPage} />
     </Switch>
   </Router>
   );
 }
 
-export default function Resultfunction(props: { [x: string]: any; }) {
+ function Resultfunction(props: { [x: string]: any; }) {
     const { ...rest } = props;
     return (
         <div className="fullContainer">
@@ -118,3 +120,5 @@ export default function Resultfunction(props: { [x: string]: any; }) {
         </div>
     );
 }
+
+export default App;
