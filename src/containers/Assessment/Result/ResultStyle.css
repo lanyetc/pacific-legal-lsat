@@ -26,14 +26,45 @@
     margin-top: 16px;
 }
 
+.list-container .btn-group, 
+.moudule-result-container .btn-group {
+    display: flex;
+    justify-content: space-between;
+}
+
 .moudule-result-container .btn-group {
     margin-top: 24px;
     margin-bottom: 24px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .moudule-result-container .btn-group button{
     flex: 1;
     max-width: 128px;
+}
+
+.result.todo-container {
+    padding: 48px 0;
+    width: calc(100% - 336px);
+    float: left;
+}
+.list-container {
+    margin-top: 24px;
+    padding: 0 8px;
+}
+.result.todo-container .title {
+    padding-left: 24px;
+}
+
+.list-container .btn-group button span{
+    font-size: 12px;
+}
+.list-container .btn-group button:not(:last-child) {
+    margin-right: 8px;
+}
+.remindder-container {
+    padding-left: 54px;
+    width: 336px;
+    box-sizing: border-box;
+    padding-top: 48px;
+    float: left;
 }

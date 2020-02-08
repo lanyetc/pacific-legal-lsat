@@ -4,7 +4,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 
 export default function ToDoSection() {
     return (
-        <div className="todo-container round white">
+        <div className="chat todo-container round white">
             <div className="todo-titile-box">
                 <div className="container">
                     <DescriptionIcon className="icon"></DescriptionIcon>
