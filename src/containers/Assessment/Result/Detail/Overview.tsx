@@ -2,9 +2,9 @@ import React from "react";
 import TabNav from "../../../../components/TabNav/TabNav";
 import { Typography, List, ListItem, Radio, FormControlLabel, ListItemSecondaryAction, Button } from "@material-ui/core";
 import DescriptionIcon from '@material-ui/icons/Description';
-import { getTodoList } from '../../../../data/context';
-function TodoList() {
-    let todoList = getTodoList();
+import { getContext } from '../../../../data/context';
+function TodoList( props: any) {
+    const {todoList} = props;
     return (
         <div className="list-container round grey">
             <List>
@@ -29,12 +29,12 @@ function TodoList() {
     );
 }
 
-function ResultList() {
-    let todoList = getTodoList();
+function ReminderList(props: any) {
+    const {reminderList} = props;
     return (
         <div className="list-container ">
             <List>
-                {todoList.map((item: any, key: any) => {
+                {reminderList.map((item: any, key: any) => {
                     return (<ListItem key={key}>
                         <FormControlLabel
                             value={item.title}
@@ -50,7 +50,8 @@ function ResultList() {
 }
 
 
-export default function Overview() {
+export default function Overview(props: any) {
+    const {context} = props;
     return (
         <div className="container">
             <div className="result todo-container">
@@ -58,14 +59,14 @@ export default function Overview() {
                     <DescriptionIcon></DescriptionIcon>
                     <span className="title">TO-DO LIST</span>
                 </Typography>
-                <TodoList></TodoList>
+                <TodoList todoList={context.todos}></TodoList>
             </div>
             <div className="result remindder-container">
                 <Typography variant="h4" component="h4" className="title bold">
                     <DescriptionIcon></DescriptionIcon>
                     <span className="title">REMINDERS</span>
                 </Typography>
-                <ResultList></ResultList>
+                <ReminderList reminderList={context.reminders}></ReminderList>
             </div>
         </div>
     );

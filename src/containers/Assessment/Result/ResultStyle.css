@@ -68,3 +68,24 @@
     padding-top: 48px;
     float: left;
 }
+.repo-container {
+    padding-top: 56px;
+}
+.repo-item {
+    padding: 24px;
+    border-bottom: solid 0.5px #707070;
+    display: flex;
+}
+.question-container {
+    width: 338px;
+}
+.question-container .link {
+    margin-top: 36px;
+}
+.info-container {
+    width: calc(100% - 338px);
+    margin-left: 20px;
+}
+.info-container .link {
+    text-align: right;
+}
