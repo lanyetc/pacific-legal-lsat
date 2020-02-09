@@ -1,8 +1,6 @@
 import React from "react";
-import TabNav from "../../../../components/TabNav/TabNav";
 import { Typography, List, ListItem, Radio, FormControlLabel, ListItemSecondaryAction, Button } from "@material-ui/core";
 import DescriptionIcon from '@material-ui/icons/Description';
-import { getContext } from '../../../../data/context';
 function TodoList( props: any) {
     const {todoList} = props;
     return (
