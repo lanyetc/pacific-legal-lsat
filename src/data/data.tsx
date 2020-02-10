@@ -1,3 +1,4 @@
+import {Item} from './context';
 enum NodeTypes {
     single,
     multi,
@@ -15,6 +16,7 @@ export interface Trigger {
     answers: Array<Answer>;
     response?: Array<string>;
     results: Array<string>;
+    todos?: Array<Item>;
     nextQuestionId: number;
 }
 export interface Node {
@@ -61,7 +63,7 @@ function createAnswer(_answer: Answer): {questionId: number, optionId: number} {
     }
     return newAnswer;
 }
-function createTrigger(_trigger: Trigger): {answers: Array<Answer>, results: Array<string>, nextQuestionId: number, response?: Array<string>} {
+function createTrigger(_trigger: Trigger): {answers: Array<Answer>, results: Array<string>, nextQuestionId: number, response?: Array<string>, todos?: Array<Item>} {
     let newTrigger: Trigger;
     newTrigger = {
         answers: _trigger.answers,
@@ -120,6 +122,7 @@ function getSurvey() {
                         {questionId: 1, optionId: 100}
                     ],
                     results: ["some repo on quetion 1 No"],
+                    todos: [{title: "Todo Item 1"}],
                     nextQuestionId: 2
                 }
             ],
@@ -160,6 +163,7 @@ function getSurvey() {
                         {questionId: 3, optionId: 301}
                     ],
                     results: ["some repo on quetion 1 No"],
+                    todos: [{title: "Todo Item 2"}],
                     nextQuestionId: 4
                 }
             ]
@@ -294,6 +298,7 @@ function getSurvey() {
                         {questionId: 7, optionId: 700}
                     ],
                     results: ["some repo on quetion 7 No"],
+                    todos: [{title: "Todo Item 5"}],
                     nextQuestionId: 2
                 }
             ]
@@ -328,6 +333,7 @@ function getSurvey() {
                         {questionId: 8, optionId: 800}
                     ],
                     results: ["some repo on quetion 8 No"],
+                    todos: [{title: "Todo Item 4"}],
                     nextQuestionId: 7
                 }
             ],
@@ -363,6 +369,7 @@ function getSurvey() {
                         {questionId: 9, optionId: 900}
                     ],
                     results: ["some repo on quetion 9 No"],
+                    todos: [{title: "Todo Item 3"}],
                     nextQuestionId: 5
                 }
             ],
