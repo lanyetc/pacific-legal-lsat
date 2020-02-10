@@ -5,10 +5,10 @@ import UserMessage from "./UserMessage";
 
 
 export default function Chat(props: any) { 
-  const messageOptions =  props.messages.map((message: any) => {
+  const messageOptions =  props.messages.map((message: any, key: any) => {
       if(message.content){  
           return (
-          <div>
+          <div key={key}>
               <ChatbotMessage content={message.content}></ChatbotMessage>
               {message.options && <UserMessage userOptions={message.options} handleSelectOptions={props.handleSelectOptions}></UserMessage>}
           </div>
