@@ -1,0 +1,15 @@
+.footerResults{
+    background-color: #273b6e;
+    width: 100%;
+    margin: 150px 0 0 0;
+  }
+  .footerInnerResults {
+    width: 100%;
+    background: rgb(206, 206, 206);
+    height: 160px;
+  }
+  .footerResults h1 {
+    text-align: center;
+    color: #e7e7e7;
+    padding: 5px 0 0 0;
+  }
