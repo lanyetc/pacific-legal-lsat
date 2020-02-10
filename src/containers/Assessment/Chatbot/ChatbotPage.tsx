@@ -14,8 +14,10 @@ import { Message } from '@material-ui/icons';
 interface IState {
   currentMessage: Node,
   questionPath: any,
-  messageList: any[]
+  messageList: any[],
+  todoList: any[]
 }
+
 export default class ChatbotPage extends React.Component {
   survey: any;
   state: IState;
@@ -27,7 +29,8 @@ export default class ChatbotPage extends React.Component {
     this.state = {
       currentMessage: this.survey[1],
       questionPath: [],
-      messageList: [this.survey[1]]
+      messageList: [this.survey[1]],
+      todoList:[]
     };
     this.handleSelectOptions = this.handleSelectOptions.bind(this);
   }
@@ -71,7 +74,7 @@ export default class ChatbotPage extends React.Component {
               <Chat 
               messages={this.state.messageList}
               handleSelectOptions={this.handleSelectOptions}></Chat>
-              <ToDoSection></ToDoSection>
+              <ToDoSection ></ToDoSection>
           </div>
   
       </div>

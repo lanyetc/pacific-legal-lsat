@@ -3,6 +3,7 @@ import Header from "../../../components/Header/Header";
 import HeaderLinks from "../../../components/Header/HeaderLink";
 import ModuleResult from "./ModuleResult";
 import ResultDetail from "./Detail/ResultDetail";
+import Footer from '../../../components/Footer/Footer'
 
 export default function ResultPage() {
     return (
@@ -20,7 +21,7 @@ export default function ResultPage() {
               <ModuleResult></ModuleResult>
               <ResultDetail></ResultDetail>
           </div>
-  
+          <Footer></Footer>
       </div>
     );
 }
