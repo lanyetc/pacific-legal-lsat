@@ -34,11 +34,11 @@ export default class ChatbotPage extends React.Component {
 
   public handleSelectOptions(id: any){ // this method will need to be refactored and the functionality will need to be extended later.
     const selectedOptionId = id
-    this.state.questionPath.push({questionId:this.state.currentMessage.id, optionId: selectedOptionId});
+    this.state.questionPath.push({questionId:this.state.currentMessage.id, optionId: selectedOptionId}); // add selected option to pathlist
+    const pathLength = this.state.questionPath.length - 1;
     this.state.currentMessage.triggers.forEach((trigger: any) => {
-      trigger.answers.forEach((answer: any) => {
-        if(answer.optionId === selectedOptionId && answer.questionId === this.state.currentMessage.id){
-            
+      trigger.answers.forEach((answer: any, index:any) => {
+        if(answer.optionId === this.state.questionPath[pathLength-index].optionId && answer.questionId === this.state.questionPath[pathLength-index].questionId){ // check path    
           const nextMessage = this.survey[trigger.nextQuestionId];
           this.state.messageList.push(nextMessage);
             this.setState((state: IState, props) => {     
