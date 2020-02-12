@@ -2,7 +2,7 @@ import React from "react";
 
 import { Breadcrumbs, Link, Button, Typography } from "@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import leftpic from '../../../Assets/img/leftpic.png';
+import leftpic from '../../../assets/img/leftpic.png';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import ScreenShareOutlinedIcon from '@material-ui/icons/ScreenShareOutlined';
 

@@ -1,5 +1,4 @@
-import {Item} from './context';
-enum NodeTypes {
+export enum NodeTypes {
     single,
     multi,
     message
@@ -16,7 +15,6 @@ export interface Trigger {
     answers: Array<Answer>;
     response?: Array<string>;
     results: Array<string>;
-    todos?: Array<Item>;
     nextQuestionId: number;
 }
 export interface Node {
@@ -63,7 +61,7 @@ function createAnswer(_answer: Answer): {questionId: number, optionId: number} {
     }
     return newAnswer;
 }
-function createTrigger(_trigger: Trigger): {answers: Array<Answer>, results: Array<string>, nextQuestionId: number, response?: Array<string>, todos?: Array<Item>} {
+function createTrigger(_trigger: Trigger): {answers: Array<Answer>, results: Array<string>, nextQuestionId: number, response?: Array<string>} {
     let newTrigger: Trigger;
     newTrigger = {
         answers: _trigger.answers,
@@ -122,7 +120,6 @@ function getSurvey() {
                         {questionId: 1, optionId: 100}
                     ],
                     results: ["some repo on quetion 1 No"],
-                    todos: [{title: "Todo Item 1"}],
                     nextQuestionId: 2
                 }
             ],
@@ -133,6 +130,38 @@ function getSurvey() {
             ]
         }
     );
+        // NEW
+
+        survey[2] = createNode(
+            {
+                id: 2,
+                type: NodeTypes.message,
+                content: "This message doesn't need to be replied",
+                options: [
+                    // {
+                    //     id: 201,
+                    //     label: "Yes"
+                    // },
+                    // {
+                    //     id: 200,
+                    //     label: "No"
+                    // }
+                ],
+                triggers: [
+                    {
+                        answers: [
+                           // {questionId: 2, optionId: 201}
+                        ],
+                        // response: [],
+                        results: [],
+                        nextQuestionId: 3
+                    }
+                ]
+                // extraInfo: [ "What does this look like?"]
+            }
+    
+        
+        );
     // questionId = 2 belongs to another submodule, so it's not included in here
     survey[3] = createNode(
         {
@@ -163,7 +192,6 @@ function getSurvey() {
                         {questionId: 3, optionId: 301}
                     ],
                     results: ["some repo on quetion 1 No"],
-                    todos: [{title: "Todo Item 2"}],
                     nextQuestionId: 4
                 }
             ]
@@ -291,15 +319,14 @@ function getSurvey() {
                     ],
                     response: ["Good Job"],
                     results: ["some repo on quetion 7 Yes"],
-                    nextQuestionId: 2
+                    nextQuestionId: 10
                 },
                 {
                     answers: [
                         {questionId: 7, optionId: 700}
                     ],
                     results: ["some repo on quetion 7 No"],
-                    todos: [{title: "Todo Item 5"}],
-                    nextQuestionId: 2
+                    nextQuestionId: 10
                 }
             ]
         }
@@ -333,7 +360,6 @@ function getSurvey() {
                         {questionId: 8, optionId: 800}
                     ],
                     results: ["some repo on quetion 8 No"],
-                    todos: [{title: "Todo Item 4"}],
                     nextQuestionId: 7
                 }
             ],
@@ -369,13 +395,17 @@ function getSurvey() {
                         {questionId: 9, optionId: 900}
                     ],
                     results: ["some repo on quetion 9 No"],
-                    todos: [{title: "Todo Item 3"}],
                     nextQuestionId: 5
                 }
             ],
             extraInfo: [ "What does this look like?"]
         }
+
+    
     );
+
+
+
     return survey;
 }
 

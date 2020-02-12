@@ -7,7 +7,7 @@ import HeaderLinks from "../../../components/Header/HeaderLink"
 import ProgressBar from "./ProgressBar";
 import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
-import {getSurvey, Node, Answer} from "../../../data/data";
+import {getSurvey, Node, Answer, NodeTypes} from "../../../data/data";
 import { triggerAsyncId } from 'async_hooks';
 import { Message } from '@material-ui/icons';
 
@@ -41,12 +41,17 @@ export default class ChatbotPage extends React.Component {
     const pathLength = this.state.questionPath.length - 1;
     let triggered = false;
     this.state.currentMessage.triggers.forEach((trigger: any) => {
-      trigger.answers.forEach((answer: any, index:any) => {// check path  
-        triggered = false;
-        if(answer.optionId === this.state.questionPath[pathLength-index].optionId && answer.questionId === this.state.questionPath[pathLength-index].questionId){ 
-            triggered = true;  
-        }
-      })
+      if (this.state.currentMessage.type === NodeTypes.message) {
+        trigger == true;
+      }
+      else {
+        trigger.answers.forEach((answer: any, index:any) => {// check path  
+          triggered = false;
+          if(answer.optionId === this.state.questionPath[pathLength-index].optionId && answer.questionId === this.state.questionPath[pathLength-index].questionId){ 
+              triggered = true;  
+            } 
+        })
+      }
       if (triggered) {
         const nextMessage = this.survey[trigger.nextQuestionId];
         this.state.messageList.push(nextMessage);
