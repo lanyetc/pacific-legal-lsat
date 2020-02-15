@@ -1,5 +1,5 @@
 import {Item, Result} from './context';
-enum NodeTypes {
+export enum NodeTypes {
     single,
     multi,
     message
@@ -15,7 +15,7 @@ export interface Answer {
 export interface Trigger {
     answers: Array<Answer>;
     response?: Array<string>;
-    result: Result;
+    result?: Result;
     todos?: Array<Item>;
     nextQuestionId: number;
 }
@@ -69,7 +69,7 @@ function createAnswer(_answer: Answer): {questionId: number, optionId: number} {
     }
     return newAnswer;
 }
-function createTrigger(_trigger: Trigger): {answers: Array<Answer>, result: Result, nextQuestionId: number, response?: Array<string>, todos?: Array<Item>} {
+function createTrigger(_trigger: Trigger): {answers: Array<Answer>, nextQuestionId: number, result?: Result, response?: Array<string>, todos?: Array<Item>} {
     let newTrigger: Trigger;
     newTrigger = {
         answers: _trigger.answers,
@@ -139,6 +139,25 @@ function getSurvey() {
             ]
         }
     );
+        // NEW
+
+        survey[2] = createNode(
+            {
+                id: 2,
+                type: NodeTypes.message,
+                content: "This message doesn't need to be replied",
+                options: [],
+                triggers: [
+                    {
+                        answers: [],
+                        nextQuestionId: 3
+                    }
+                ]
+                // extraInfo: [ "What does this look like?"]
+            }
+    
+        
+        );
     // questionId = 2 belongs to another submodule, so it's not included in here
     survey[3] = createNode(
         {
@@ -381,7 +400,12 @@ function getSurvey() {
             ],
             extraInfo: [ "What does this look like?"]
         }
+
+    
     );
+
+
+
     return survey;
 }
 

@@ -70,6 +70,8 @@
 }
 .repo-container {
     padding-top: 56px;
+    height: 100%;
+    overflow-y: auto;
 }
 .repo-item {
     padding: 24px;
@@ -89,3 +91,8 @@
 .info-container .link {
     text-align: right;
 }
+
+.result-detail-container .container {
+    height: 100%;
+}
+

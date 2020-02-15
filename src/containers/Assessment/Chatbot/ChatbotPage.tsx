@@ -7,7 +7,7 @@ import HeaderLinks from "../../../components/Header/HeaderLink"
 import ProgressBar from "./ProgressBar";
 import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
-import { getSurvey, Node, Answer, Module } from "../../../data/data";
+import { getSurvey, Node, Answer, Module, NodeTypes } from "../../../data/data";
 import { ResultContext, ResultContextConsumer, Context } from '../../../data/context';
 import { triggerAsyncId } from 'async_hooks';
 import { Message } from '@material-ui/icons';
@@ -49,12 +49,16 @@ export default class ChatbotPage extends React.Component {
         this.state.questionPath.push(resultItem.path); // add selected option to pathlist
         const pathLength = this.state.questionPath.length - 1;
         this.state.currentMessage.triggers.forEach((trigger: any) => {
-            trigger.answers.forEach((answer: any, index: any) => {// check path  
-                triggered = false;
-                if (answer.optionId === this.state.questionPath[pathLength - index].optionId && answer.questionId === this.state.questionPath[pathLength - index].questionId) {
-                    triggered = true;
-                }
-            })
+            if(this.state.currentMessage.type === NodeTypes.message) {
+                triggered = true;
+            } else {
+                trigger.answers.forEach((answer: any, index: any) => {// check path  
+                    triggered = false;
+                    if (answer.optionId === this.state.questionPath[pathLength - index].optionId && answer.questionId === this.state.questionPath[pathLength - index].questionId) {
+                        triggered = true;
+                    }
+                })
+            }
             if (triggered) {
                 if (!this.survey[trigger.nextQuestionId]) {
                     this.context.router.push("/result");
