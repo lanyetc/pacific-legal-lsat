@@ -1,4 +1,4 @@
-import {Item} from './context';
+import {Item, Result} from './context';
 enum NodeTypes {
     single,
     multi,
@@ -15,7 +15,7 @@ export interface Answer {
 export interface Trigger {
     answers: Array<Answer>;
     response?: Array<string>;
-    results: Array<string>;
+    result: Result;
     todos?: Array<Item>;
     nextQuestionId: number;
 }
@@ -30,6 +30,12 @@ export interface Node {
 
 export interface NodeDictionary {
     [key: number]: Node;
+}
+
+export interface Module {
+    name: string,
+    modules?: {[key: number]: Module},
+    nodes?: NodeDictionary
 }
 
 function createNode(_node: Node): {id: number, type: NodeTypes, content: string, options: Array<Option>, triggers: Array<Trigger>, extraInfo?:Array<string>} {
@@ -63,11 +69,11 @@ function createAnswer(_answer: Answer): {questionId: number, optionId: number} {
     }
     return newAnswer;
 }
-function createTrigger(_trigger: Trigger): {answers: Array<Answer>, results: Array<string>, nextQuestionId: number, response?: Array<string>, todos?: Array<Item>} {
+function createTrigger(_trigger: Trigger): {answers: Array<Answer>, result: Result, nextQuestionId: number, response?: Array<string>, todos?: Array<Item>} {
     let newTrigger: Trigger;
     newTrigger = {
         answers: _trigger.answers,
-        results: _trigger.results,
+        result: _trigger.result,
         nextQuestionId: _trigger.nextQuestionId
     }
     if(_trigger.response) {
@@ -76,21 +82,21 @@ function createTrigger(_trigger: Trigger): {answers: Array<Answer>, results: Arr
     return newTrigger;
 }
 
-function testing() {
-    let survey: NodeDictionary = {};
-    let options: Array<Option> = [];
-    options.push(createOption({id:100, label: "Yes"}));
-    options.push(createOption({id:101, label: "No"}));
-    let triggers: Array<Trigger> = [];
-    let answers: Array<Answer> = [];
-    answers = [{questionId: 1, optionId: 100}];
-    triggers.push(createTrigger({answers: answers, results: ["some repo on quetion1 Yes"], nextQuestionId: 2}));
-    answers = [{questionId: 1, optionId: 101}];
-    triggers.push(createTrigger({answers: answers, results: ["some repo on question1 No"], nextQuestionId: 3}));
-    let extraInfo = [ "What is privacy?","Do I need a privacy policy?","What should a privacy policy contain?"];
-    survey[1] = createNode({id: 1, type: NodeTypes.single, content: "Does your org have a privacy policy?", options: options, triggers: triggers, extraInfo: extraInfo});
-    console.log(survey);
-}
+// function testing() {
+//     let survey: NodeDictionary = {};
+//     let options: Array<Option> = [];
+//     options.push(createOption({id:100, label: "Yes"}));
+//     options.push(createOption({id:101, label: "No"}));
+//     let triggers: Array<Trigger> = [];
+//     let answers: Array<Answer> = [];
+//     answers = [{questionId: 1, optionId: 100}];
+//     triggers.push(createTrigger({answers: answers, results: ["some repo on quetion1 Yes"], nextQuestionId: 2}));
+//     answers = [{questionId: 1, optionId: 101}];
+//     triggers.push(createTrigger({answers: answers, results: ["some repo on question1 No"], nextQuestionId: 3}));
+//     let extraInfo = [ "What is privacy?","Do I need a privacy policy?","What should a privacy policy contain?"];
+//     survey[1] = createNode({id: 1, type: NodeTypes.single, content: "Does your org have a privacy policy?", options: options, triggers: triggers, extraInfo: extraInfo});
+//     console.log(survey);
+// }
 
 function getSurvey() {
     let survey: NodeDictionary = {};
@@ -114,14 +120,14 @@ function getSurvey() {
                     answers: [
                         {questionId: 1, optionId: 101}
                     ],
-                    results: ["some repo on quetion 1 Yes"],
+                    result: {questionId:1, optionId: 101, repo: "some repo on quetion 1 Yes"},
                     nextQuestionId: 3
                 },
                 {
                     answers: [
                         {questionId: 1, optionId: 100}
                     ],
-                    results: ["some repo on quetion 1 No"],
+                    result: {questionId:1, optionId: 100, repo: "some repo on quetion 1 No"},
                     todos: [{title: "Todo Item 1"}],
                     nextQuestionId: 2
                 }
@@ -155,14 +161,14 @@ function getSurvey() {
                         {questionId: 3, optionId: 300}
                     ],
                     response: [ "Good Job"],
-                    results: ["some repo on quetion 3 All"],
+                    result: {questionId:3, optionId: 300, repo: "some repo on quetion 3 No"},
                     nextQuestionId: 4
                 },
                 {
                     answers: [
                         {questionId: 3, optionId: 301}
                     ],
-                    results: ["some repo on quetion 1 No"],
+                    result: {questionId:3, optionId: 301, repo: "some repo on quetion 3 Yes"},
                     todos: [{title: "Todo Item 2"}],
                     nextQuestionId: 4
                 }
@@ -189,14 +195,14 @@ function getSurvey() {
                     answers: [
                         {questionId: 4, optionId: 401}
                     ],
-                    results: ["some repo on quetion 4 Yes"],
+                    result: {questionId:4, optionId: 401, repo: "some repo on quetion 4 Yes"},
                     nextQuestionId: 6
                 },
                 {
                     answers: [
                         {questionId: 4, optionId: 400}
                     ],
-                    results: ["some repo on quetion 4 No"],
+                    result: {questionId:4, optionId: 400, repo: "some repo on quetion 4 No"},
                     nextQuestionId: 5
                 }
             ]
@@ -222,14 +228,14 @@ function getSurvey() {
                     answers: [
                         {questionId: 5, optionId: 501}
                     ],
-                    results: ["some repo on quetion 5 Yes"],
+                    result: {questionId:5, optionId: 501, repo: "some repo on quetion 5 Yes"},
                     nextQuestionId: 8
                 },
                 {
                     answers: [
                         {questionId: 5, optionId: 500}
                     ],
-                    results: ["some repo on quetion 5 No"],
+                    result: {questionId:5, optionId: 500, repo: "some repo on quetion 5 No"},
                     nextQuestionId: 7
                 }
             ]
@@ -255,14 +261,14 @@ function getSurvey() {
                     answers: [
                         {questionId: 6, optionId: 601}
                     ],
-                    results: ["some repo on quetion 6 Yes"],
+                    result: {questionId:6, optionId: 601, repo: "some repo on quetion 6 Yes"},
                     nextQuestionId: 9
                 },
                 {
                     answers: [
                         {questionId: 6, optionId: 600}
                     ],
-                    results: ["some repo on quetion 6 No"],
+                    result: {questionId:6, optionId: 600, repo: "some repo on quetion 6 No"},
                     nextQuestionId: 5
                 }
             ],
@@ -290,14 +296,14 @@ function getSurvey() {
                         {questionId: 7, optionId: 701}
                     ],
                     response: ["Good Job"],
-                    results: ["some repo on quetion 7 Yes"],
+                    result: {questionId:7, optionId: 701, repo: "some repo on quetion 7 Yes"},
                     nextQuestionId: 2
                 },
                 {
                     answers: [
                         {questionId: 7, optionId: 700}
                     ],
-                    results: ["some repo on quetion 7 No"],
+                    result: {questionId:7, optionId: 700, repo: "some repo on quetion 7 No"},
                     todos: [{title: "Todo Item 5"}],
                     nextQuestionId: 2
                 }
@@ -325,14 +331,14 @@ function getSurvey() {
                         {questionId: 8, optionId: 801}
                     ],
                     response: ["Good Job"],
-                    results: ["some repo on quetion 8 Yes"],
+                    result: {questionId:8, optionId: 801, repo: "some repo on quetion 8 Yes"},
                     nextQuestionId: 7
                 },
                 {
                     answers: [
                         {questionId: 8, optionId: 800}
                     ],
-                    results: ["some repo on quetion 8 No"],
+                    result: {questionId:8, optionId: 800, repo: "some repo on quetion 8 No"},
                     todos: [{title: "Todo Item 4"}],
                     nextQuestionId: 7
                 }
@@ -361,14 +367,14 @@ function getSurvey() {
                         {questionId: 9, optionId: 901}
                     ],
                     response: ["Good Job"],
-                    results: ["some repo on quetion 9 Yes"],
+                    result: {questionId:9, optionId: 901, repo: "some repo on quetion 9 Yes"},
                     nextQuestionId: 5
                 },
                 {
                     answers: [
                         {questionId: 9, optionId: 900}
                     ],
-                    results: ["some repo on quetion 9 No"],
+                    result: {questionId:9, optionId: 900, repo: "some repo on quetion 9 No"},
                     todos: [{title: "Todo Item 3"}],
                     nextQuestionId: 5
                 }
@@ -379,6 +385,13 @@ function getSurvey() {
     return survey;
 }
 
+function getModules() {
+    let modules:{[key:number]: Module} = {};
+    modules[1] = {name: "Privacy Policy", nodes: getSurvey()};
+}
+
+
 export {
-    getSurvey
+    getSurvey,
+    getModules
 }

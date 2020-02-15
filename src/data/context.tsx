@@ -1,4 +1,6 @@
 import {Answer} from './data'
+import React from 'react';
+
 export interface Item {
     title: string
 }
@@ -6,6 +8,13 @@ export interface Result {
     questionId: number,
     optionId: number,
     repo: string
+}
+export interface ModuleResult {
+    name: string,
+    todos: Array<Item>,
+    reminders: Array<Item>,
+    results: Array<Result>,
+    path: Array<Answer>
 }
 // Context: record all infomation would be used for result page
 // results: the repo for each answered question. 
@@ -15,10 +24,7 @@ export interface Result {
 //       may be can only keep the "results" feild?
 // Consider: how to split results of different sub-modules?
 export interface Context {
-    path: Array<Answer>,
-    todos: Array<Item>,
-    reminders: Array<Item>,
-    results: Array<Result>
+    modules: {[key: number]: ModuleResult};
 }
 
 // Context data generating functions. Only for testing
@@ -60,6 +66,57 @@ export function getContext() {
     let todos = getTodoList();
     let reminders = getReminders();
     let results = getResultList();
-    let context:Context = {path: path, todos: todos, reminders: reminders, results: results};
+    let module = {name: "Privacy Policy", path: path, todos: todos, reminders: reminders, results: results};
+    let context:Context = {modules: {1: module}};
     return context; 
 }
+
+// default context
+const context:Context = {modules:{}};
+
+export const ResultContext = React.createContext({
+    context: context,
+    updateContext: (id: number, contextItm: any) => {}
+})
+
+export class ResultContextProvider extends React.Component {
+
+    
+    updateContext = (id: number, contextItem: any) => {
+        let context = this.state.context;
+        if (context.modules[id]) { // if current module already exist in result context
+            context.modules[id].todos = context.modules[id].todos.concat(contextItem.todos);
+            context.modules[id].reminders = context.modules[id].reminders.concat(contextItem.reminders);
+            context.modules[id].results.push(contextItem.result);
+            context.modules[id].path.push(contextItem.path);
+        } else {
+            context.modules[id] = {
+                name: contextItem.name,
+                todos: contextItem.todos,
+                reminders: contextItem.reminders,
+                results: [contextItem.result],
+                path: [contextItem.path]
+            }; // if module does not exist
+        }
+        this.setState({ context: context})
+    }
+    state = {
+        context: context,
+        updateContext: this.updateContext
+    }
+
+    render() {
+        return (
+            <ResultContext.Provider value={this.state}>
+                {this.props.children}
+            </ResultContext.Provider>
+        ) 
+    }
+}
+
+export const ResultContextConsumer = ResultContext.Consumer
+
+// export const ResultContext = React.createContext(
+//     context,
+//     updateContext: (id: number, contextItm: any) => {}
+// )
