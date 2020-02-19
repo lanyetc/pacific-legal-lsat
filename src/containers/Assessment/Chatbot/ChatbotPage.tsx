@@ -74,6 +74,7 @@ export default class ChatbotPage extends React.Component {
                 
                 // const nextMessage = this.survey[trigger.nextQuestionId];
                 // this.state.messageList.push(nextMessage);
+                this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
                 let newTodoList = trigger.todos ? trigger.todos : []
                 this.state.todoList = this.state.todoList.concat(newTodoList)
                 resultItem.name = "Privacy Polic";
