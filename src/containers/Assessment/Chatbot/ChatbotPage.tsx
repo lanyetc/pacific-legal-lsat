@@ -30,15 +30,27 @@ export default class ChatbotPage extends React.Component {
         this.state = {
             currentMessage: this.survey[1],
             questionPath: [],
-            messageList: [this.survey[1]],
+            messageList: [],
             todoList: [],
             context: this.context
         };
         this.handleSelectOptions = this.handleSelectOptions.bind(this);
     }
-
-    public init() {
-
+    componentDidMount() {
+        this.displayNextMsg(1);
+    }
+    public displayNextMsg(id: number) {
+        const nextMessage = this.survey[id];
+        this.state.messageList.push(nextMessage);
+        this.setState((state: IState, props) => {
+            return {
+                currentMessage: nextMessage,
+                messageList: state.messageList // CHANGE THIS TO ADD TO THE MESSAGE LIST (right now it just replaces the current message list)
+            }
+        })
+        if (nextMessage.type === NodeTypes.message) { // if next message type is general message, auto display next one
+            this.displayNextMsg(nextMessage.triggers[0].nextQuestionId);
+        }
     }
 
     public handleSelectOptions(id: any) { // this method will need to be refactored and the functionality will need to be extended later.
@@ -49,22 +61,19 @@ export default class ChatbotPage extends React.Component {
         this.state.questionPath.push(resultItem.path); // add selected option to pathlist
         const pathLength = this.state.questionPath.length - 1;
         this.state.currentMessage.triggers.forEach((trigger: any) => {
-            if(this.state.currentMessage.type === NodeTypes.message) {
-                triggered = true;
-            } else {
-                trigger.answers.forEach((answer: any, index: any) => {// check path  
-                    triggered = false;
-                    if (answer.optionId === this.state.questionPath[pathLength - index].optionId && answer.questionId === this.state.questionPath[pathLength - index].questionId) {
-                        triggered = true;
-                    }
-                })
-            }
-            if (triggered) {
-                if (!this.survey[trigger.nextQuestionId]) {
-                    this.context.router.push("/result");
+            trigger.answers.forEach((answer: any, index: any) => {// check path  
+                triggered = false;
+                if (answer.optionId === this.state.questionPath[pathLength - index].optionId && answer.questionId === this.state.questionPath[pathLength - index].questionId) {
+                    triggered = true;
                 }
-                const nextMessage = this.survey[trigger.nextQuestionId];
-                this.state.messageList.push(nextMessage);
+            })
+            if (triggered) {
+                // if (!this.survey[trigger.nextQuestionId]) {
+                //     this.context.router.push("/result");
+                // }
+                
+                // const nextMessage = this.survey[trigger.nextQuestionId];
+                // this.state.messageList.push(nextMessage);
                 let newTodoList = trigger.todos ? trigger.todos : []
                 this.state.todoList = this.state.todoList.concat(newTodoList)
                 resultItem.name = "Privacy Polic";
@@ -75,12 +84,13 @@ export default class ChatbotPage extends React.Component {
                 console.log(this.context);
                 this.setState((state: IState, props) => {
                     return {
-                        currentMessage: nextMessage,
+                        // currentMessage: nextMessage,
                         questionPath: state.questionPath,
-                        messageList: state.messageList, // CHANGE THIS TO ADD TO THE MESSAGE LIST (right now it just replaces the current message list)
+                        // messageList: state.messageList, // CHANGE THIS TO ADD TO THE MESSAGE LIST (right now it just replaces the current message list)
                         todoList: newTodoList
                     }
                 })
+                this.displayNextMsg(trigger.nextQuestionId);
             }
         })
     }

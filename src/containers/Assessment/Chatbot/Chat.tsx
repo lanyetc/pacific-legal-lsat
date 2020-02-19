@@ -10,7 +10,7 @@ export default function Chat(props: any) {
           return (
           <div key={key}>
               <ChatbotMessage content={message.content}></ChatbotMessage>
-              {message.options && <UserMessage userOptions={message.options} handleSelectOptions={props.handleSelectOptions}></UserMessage>}
+              {message.options && message.options.length>0 && <UserMessage userOptions={message.options} handleSelectOptions={props.handleSelectOptions}></UserMessage>}
           </div>
           )
       } 
