@@ -7,13 +7,14 @@ import HeaderLinks from "../../../components/Header/HeaderLink"
 import ProgressBar from "./ProgressBar";
 import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
-import { getSurvey, Node, Answer, Module, NodeTypes } from "../../../data/data";
+import { getSurvey, getModules, Node, Answer, Module, NodeTypes, TriggerType, Trigger } from "../../../data/data";
 import { ResultContext, ResultContextConsumer, Context } from '../../../data/context';
 import { triggerAsyncId } from 'async_hooks';
 import { Message } from '@material-ui/icons';
 
 interface IState {
     currentMessage: Node,
+    currentModuleId: any,
     questionPath: any,
     messageList: any[],
     todoList: any[],
@@ -22,13 +23,16 @@ interface IState {
 
 export default class ChatbotPage extends React.Component {
     survey: any;
+    modules: any;
     state: IState;
     constructor(props: any) {
         super(props);
         // let context = this.context;
         this.survey = getSurvey();
+        this.modules = getModules();
         this.state = {
             currentMessage: this.survey[1],
+            currentModuleId: 1,
             questionPath: [],
             messageList: [],
             todoList: [],
@@ -39,8 +43,21 @@ export default class ChatbotPage extends React.Component {
     componentDidMount() {
         this.displayNextMsg(1);
     }
-    public displayNextMsg(id: number) {
-        const nextMessage = this.survey[id];
+
+    public checkModule(trigger: Trigger) {
+        let moduleId = this.state.currentModuleId;
+        switch (trigger.type) {
+            case TriggerType.skip: 
+                moduleId = trigger.nextModuleId;
+                break;
+            default: 
+        }
+        return moduleId;
+    }
+
+    public displayNextMsg(qId: number) {
+        // const nextMessage = this.survey[qId];
+        const nextMessage = this.modules[this.state.currentModuleId].nodes[qId];
         this.state.messageList.push(nextMessage);
         this.setState((state: IState, props) => {
             return {
@@ -49,7 +66,13 @@ export default class ChatbotPage extends React.Component {
             }
         })
         if (nextMessage.type === NodeTypes.message) { // if next message type is general message, auto display next one
+            this.setState((state: IState, props) => {
+                return {
+                    currentModuleId: this.checkModule(nextMessage.triggers[0])
+                }
+            })
             this.displayNextMsg(nextMessage.triggers[0].nextQuestionId);
+            
         }
     }
 
@@ -68,30 +91,21 @@ export default class ChatbotPage extends React.Component {
                 }
             })
             if (triggered) {
-                // if (!this.survey[trigger.nextQuestionId]) {
-                //     this.context.router.push("/result");
-                // }
-                
-                // const nextMessage = this.survey[trigger.nextQuestionId];
-                // this.state.messageList.push(nextMessage);
                 this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
                 let newTodoList = trigger.todos ? trigger.todos : []
-                this.state.todoList = this.state.todoList.concat(newTodoList)
                 resultItem.name = "Privacy Polic";
                 resultItem.todos = newTodoList;
                 resultItem.reminders = newTodoList; // change it to reminderlist
                 resultItem.result = trigger.result;
                 this.context.updateContext(1, resultItem);
                 console.log(this.context);
-                this.setState((state: IState, props) => {
-                    return {
-                        // currentMessage: nextMessage,
-                        questionPath: state.questionPath,
-                        // messageList: state.messageList, // CHANGE THIS TO ADD TO THE MESSAGE LIST (right now it just replaces the current message list)
-                        todoList: newTodoList
-                    }
+                this.setState({
+                    currentModuleId: this.checkModule(trigger),
+                    questionPath: this.state.questionPath,
+                    todoList: this.state.todoList.concat(newTodoList)
+                }, ()=> {
+                    this.displayNextMsg(trigger.nextQuestionId);
                 })
-                this.displayNextMsg(trigger.nextQuestionId);
             }
         })
     }
