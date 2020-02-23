@@ -11,8 +11,7 @@ import { Grid } from "@material-ui/core";
 // Importing Images from assets/images
 import leftpic from "./assets/img/leftpic.png";
 import { Router, Route, Switch } from 'react-router-dom';
-import { createBrowserHistory } from "history";
-
+import history from './history';
 import ChatbotPage from "./containers/Assessment/Chatbot/ChatbotPage";
 import ResultPage from "./containers/Assessment/Result/ResultPage";
 
@@ -21,11 +20,9 @@ import './App.css';
 import './components/common.css';
 
 
-var hist = createBrowserHistory();
-
 const App = () => {
   return (
-    <Router history={hist}>
+    <Router history={history}>
       <ResultContextProvider>
         <Switch>
 

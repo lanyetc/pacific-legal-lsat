@@ -770,12 +770,178 @@ function getSurvey_part2() {
                         { questionId: 10, optionId: 1000 }
                     ],
                     result: { questionId: 10, optionId: 1000, repo: "some repo on question 10 No" },
-                    todos: [{ title: "Todo Item 2" }],
                     nextQuestionId: 11
                 }
             ]
         }
     )
+    survey[12] = createNode(
+        {
+            id: 12,
+            type: NodeTypes.single,
+            content: "Do you explain what the P.I. will be used for?",
+            options: [
+                {
+                    id: 1200,
+                    label: "No"
+                },
+                {
+                    id: 1201,
+                    label: "Yes"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 12, optionId: 1201 }
+                    ],
+                    response: ["Good Job"],
+                    result: { questionId: 12, optionId: 1201, repo: "some repo on question 12 Yes" },
+                    nextQuestionId: 13
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 12, optionId: 1200 }
+                    ],
+                    todos: [{ title: "Todo Item 6" }],
+                    result: { questionId: 12, optionId: 1200, repo: "some repo on question 12 No" },
+                    nextQuestionId: 13
+                }
+            ]
+        }
+    )
+    survey[13] = createNode(
+        {
+            id: 13,
+            type: NodeTypes.single,
+            content: "Do you obtain consent from the person?",
+            options: [
+                {
+                    id: 1300,
+                    label: "No"
+                },
+                {
+                    id: 1301,
+                    label: "Yes"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 13, optionId: 1301 }
+                    ],
+                    result: { questionId: 13, optionId: 1301, repo: "some repo on question 13 Yes" },
+                    nextQuestionId: 15
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 13, optionId: 1300 }
+                    ],
+                    result: { questionId: 13, optionId: 1300, repo: "some repo on question 13 No" },
+                    nextQuestionId: 14
+                }
+            ]
+        }
+    )
+    survey[14] = createNode(
+        {
+            id: 14,
+            type: NodeTypes.multi,
+            content: "Our information is collected .. Select all that apply.",
+            options: [
+                {
+                    id: 1400,
+                    label: "No"
+                },
+                {
+                    id: 1401,
+                    label: "Yes"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 14, optionId: 1401 }
+                    ],
+                    result: { questionId: 14, optionId: 1401, repo: "some repo on question 14 Yes" },
+                    nextQuestionId: 17
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 14, optionId: 1400 }
+                    ],
+                    result: { questionId: 14, optionId: 1400, repo: "some repo on question 14 No" },
+                    nextQuestionId: 16
+                }
+            ]
+        }
+    )
+    survey[15] = createNode(
+        {
+            id: 15,
+            type: NodeTypes.multi,
+            content: "Do you use a consent form?",
+            options: [
+                {
+                    id: 1500,
+                    label: "No"
+                },
+                {
+                    id: 1501,
+                    label: "Yes"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 15, optionId: 1501 }
+                    ],
+                    response: ["Good Job."],
+                    result: { questionId: 15, optionId: 1501, repo: "some repo on question 15 Yes" },
+                    nextQuestionId: 14
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 15, optionId: 1500 }
+                    ],
+                    todos: [{title: "Todo Item 7"}],
+                    result: { questionId: 15, optionId: 1500, repo: "some repo on question 15 No" },
+                    nextQuestionId: 16
+                }
+            ]
+        }
+    )
+    survey[16] = createNode(
+        {
+            id: 16,
+            type: NodeTypes.single,
+            content: "You completed module",
+            options: [
+                {
+                    id: 1600,
+                    label: "Go to Results"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.exit,
+                    answers: [
+                        { questionId: 16, optionId: 1600 }
+                    ],
+                    nextQuestionId: -1
+                }
+            ]
+        }
+    )
+
 
     return survey;
 }

@@ -11,6 +11,7 @@ import { getSurvey, getModules, Node, Answer, Module, NodeTypes, TriggerType, Tr
 import { ResultContext, ResultContextConsumer, Context } from '../../../data/context';
 import { triggerAsyncId } from 'async_hooks';
 import { Message } from '@material-ui/icons';
+import history from '../../../history';
 
 interface IState {
     currentMessage: Node,
@@ -91,13 +92,16 @@ export default class ChatbotPage extends React.Component {
                 }
             })
             if (triggered) {
-                this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
+                if (trigger.type === TriggerType.exit) {
+                    history.push('/result')
+                } else {
+                    this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
                 let newTodoList = trigger.todos ? trigger.todos : []
                 resultItem.name = "Privacy Polic";
                 resultItem.todos = newTodoList;
                 resultItem.reminders = newTodoList; // change it to reminderlist
                 resultItem.result = trigger.result;
-                this.context.updateContext(1, resultItem);
+                this.context.updateContext(this.state.currentModuleId, resultItem);
                 console.log(this.context);
                 this.setState({
                     currentModuleId: this.checkModule(trigger),
@@ -106,6 +110,7 @@ export default class ChatbotPage extends React.Component {
                 }, ()=> {
                     this.displayNextMsg(trigger.nextQuestionId);
                 })
+                }
             }
         })
     }

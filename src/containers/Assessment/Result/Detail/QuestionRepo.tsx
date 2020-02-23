@@ -3,7 +3,8 @@ import { getSurvey } from '../../../../data/data';
 import { Typography, Link } from "@material-ui/core";
 import { Result } from "../../../../data/context";
 export default function QuestionRepo(props: any) {
-    const { resultList } = props;
+    const { resultList, questionList} = props;
+    console.log(questionList);
     const survey = getSurvey();
     return (
         <div className="repo-container">
@@ -13,10 +14,10 @@ export default function QuestionRepo(props: any) {
 
                         <div className="question-container">
                             <Typography variant="body2" component="p" className="title" gutterBottom>
-                                {survey[result.questionId].content}
+                                {questionList[result.questionId].content}
                             </Typography>
                             <Typography variant="body2" component="p">
-                                because you answered: {survey[result.questionId].options.find(opt => opt.id === result.optionId)?.label}
+                                because you answered: {questionList[result.questionId].options.find((opt: { id: number; }) => opt.id === result.optionId)?.label}
                             </Typography>
                             <Typography variant="body2" component="p" className="link" >
                                 <Link>Change my answer</Link>
