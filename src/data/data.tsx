@@ -7,6 +7,7 @@ export enum NodeTypes {
 
 export enum TriggerType {
     next, // next message
+    default, // default triggre without condition, should always be the last trigger
     skip, // skip to next sub-module
     exit // exit survey
 }
@@ -27,13 +28,17 @@ export interface Trigger {
     nextQuestionId: number;
     nextModuleId?: number;
 }
+export interface ExtraInfo {
+    title: string,
+    content: string
+}
 export interface Node {
     id: number;
     type: NodeTypes;
     content: string;
     options: Array<Option>;
     triggers: Array<Trigger>;
-    extraInfo?: Array<string>;
+    extraInfo?: ExtraInfo;
 }
 
 export interface NodeDictionary {
@@ -46,7 +51,7 @@ export interface Module {
     nodes?: NodeDictionary
 }
 
-function createNode(_node: Node): { id: number, type: NodeTypes, content: string, options: Array<Option>, triggers: Array<Trigger>, extraInfo?: Array<string> } {
+function createNode(_node: Node): { id: number, type: NodeTypes, content: string, options: Array<Option>, triggers: Array<Trigger>, extraInfo?: ExtraInfo } {
     let newNode: Node;
     newNode = {
         id: _node.id,
@@ -146,11 +151,11 @@ function getSurvey() {
                     nextModuleId: 2
                 }
             ],
-            extraInfo: [
-                "What is privacy?",
-                "Do I need a privacy policy?",
-                "What should a privacy policy contain?"
-            ]
+            extraInfo: {
+                title: "What is a privacy policy?",
+                content: "A privacy policy is a document which describes whose personal information we are collecting: " + 
+                    "why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing."
+            }
         }
     );
     // questionId = 2 belongs to another submodule, so it's not included in here
@@ -294,7 +299,11 @@ function getSurvey() {
                     nextQuestionId: 5
                 }
             ],
-            extraInfo: ["Explain analytics"]
+            extraInfo: {
+                title: "WHAT ARE DATA ANALYTICS?",
+                content: "Data analytics refers to tracking website usage for reporting and evaluating purposes. " + 
+                    "Google Analytics is a common example of a data analytics service."
+            }
         }
     );
     survey[7] = createNode(
@@ -369,7 +378,12 @@ function getSurvey() {
                     nextQuestionId: 7
                 }
             ],
-            extraInfo: ["Might need supporting info here"]
+            extraInfo: {
+                title: "WHAT IS THIS?",
+                content: "Terms and conditions are the agreement between a service and the service user. " + 
+                    "This is the legal text that we agree to before using a service and it can often be " +
+                    "accessed by a link on the bottom of a website or within the settings."
+            }
         }
     );
     survey[9] = createNode(
@@ -406,8 +420,7 @@ function getSurvey() {
                     todos: [{ title: "Todo Item 3" }],
                     nextQuestionId: 5
                 }
-            ],
-            extraInfo: ["What does this look like?"]
+            ]
         }
     );
 
@@ -415,7 +428,6 @@ function getSurvey() {
 
     return survey;
 }
-
 
 function getSurvey_part1() {
     let survey: NodeDictionary = {};
@@ -454,11 +466,11 @@ function getSurvey_part1() {
                     nextModuleId: 2
                 }
             ],
-            extraInfo: [
-                "What is privacy?",
-                "Do I need a privacy policy?",
-                "What should a privacy policy contain?"
-            ]
+            extraInfo: {
+                title: "What is a privacy policy?",
+                content: "A privacy policy is a document which describes whose personal information we are collecting: " + 
+                    "why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing."
+            }
         }
     );
     // questionId = 2 belongs to another submodule, so it's not included in here
@@ -602,7 +614,11 @@ function getSurvey_part1() {
                     nextQuestionId: 5
                 }
             ],
-            extraInfo: ["Explain analytics"]
+            extraInfo: {
+                title: "WHAT ARE DATA ANALYTICS?",
+                content: "Data analytics refers to tracking website usage for reporting and evaluating purposes. " + 
+                    "Google Analytics is a common example of a data analytics service."
+            }
         }
     );
     survey[7] = createNode(
@@ -677,7 +693,12 @@ function getSurvey_part1() {
                     nextQuestionId: 7
                 }
             ],
-            extraInfo: ["Might need supporting info here"]
+            extraInfo: {
+                title: "WHAT IS THIS?",
+                content: "Terms and conditions are the agreement between a service and the service user. " + 
+                    "This is the legal text that we agree to before using a service and it can often be " +
+                    "accessed by a link on the bottom of a website or within the settings."
+            }
         }
     );
     survey[9] = createNode(
@@ -714,8 +735,7 @@ function getSurvey_part1() {
                     todos: [{ title: "Todo Item 3" }],
                     nextQuestionId: 5
                 }
-            ],
-            extraInfo: ["What does this look like?"]
+            ]
         }
     );
 
@@ -723,6 +743,7 @@ function getSurvey_part1() {
 
     return survey;
 }
+
 function getSurvey_part2() {
     let survey: NodeDictionary = {};
     survey[2] = createNode(
@@ -747,12 +768,12 @@ function getSurvey_part2() {
             content: "Does your org collect personal information?",
             options: [
                 {
-                    id: 1000,
-                    label: "No"
-                },
-                {
                     id: 1001,
                     label: "Yes"
+                },
+                {
+                    id: 1000,
+                    label: "No"
                 }
             ],
             triggers: [
@@ -782,12 +803,12 @@ function getSurvey_part2() {
             content: "Do you explain what the P.I. will be used for?",
             options: [
                 {
-                    id: 1200,
-                    label: "No"
-                },
-                {
                     id: 1201,
                     label: "Yes"
+                },
+                {
+                    id: 1200,
+                    label: "No"
                 }
             ],
             triggers: [
@@ -819,12 +840,12 @@ function getSurvey_part2() {
             content: "Do you obtain consent from the person?",
             options: [
                 {
-                    id: 1300,
-                    label: "No"
-                },
-                {
                     id: 1301,
                     label: "Yes"
+                },
+                {
+                    id: 1300,
+                    label: "No"
                 }
             ],
             triggers: [
@@ -854,12 +875,12 @@ function getSurvey_part2() {
             content: "Our information is collected .. Select all that apply.",
             options: [
                 {
-                    id: 1400,
-                    label: "No"
-                },
-                {
                     id: 1401,
                     label: "Yes"
+                },
+                {
+                    id: 1400,
+                    label: "No"
                 }
             ],
             triggers: [
@@ -889,12 +910,12 @@ function getSurvey_part2() {
             content: "Do you use a consent form?",
             options: [
                 {
-                    id: 1500,
-                    label: "No"
-                },
-                {
                     id: 1501,
                     label: "Yes"
+                },
+                {
+                    id: 1500,
+                    label: "No"
                 }
             ],
             triggers: [
@@ -923,25 +944,157 @@ function getSurvey_part2() {
         {
             id: 16,
             type: NodeTypes.single,
-            content: "You completed module",
+            content: "Is the person an employee of the org?",
             options: [
                 {
+                    id: 1601,
+                    label: "Yes"
+                },
+                {
                     id: 1600,
-                    label: "Go to Results"
+                    label: "No"
                 }
             ],
             triggers: [
                 {
-                    type: TriggerType.exit,
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 16, optionId: 1601 }
+                    ],
+                    result: { questionId: 16, optionId: 1601, repo: "some repo on question 16 Yes" },
+                    nextQuestionId: 18
+                },
+                {
+                    type: TriggerType.next,
                     answers: [
                         { questionId: 16, optionId: 1600 }
                     ],
-                    nextQuestionId: -1
+                    result: { questionId: 16, optionId: 1600, repo: "some repo on question 16 No" },
+                    todos: [{title: "Todo Item 8"}],
+                    nextQuestionId: 17
                 }
             ]
         }
     )
-
+    survey[17] = createNode(
+        {
+            id: 17,
+            type: NodeTypes.single,
+            content: "Does the P.I you collect help fufill the orgs mission/purpose?",
+            options: [
+                {
+                    id: 1701,
+                    label: "Yes"
+                },
+                {
+                    id: 1700,
+                    label: "No"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 17, optionId: 1701 }
+                    ],
+                    result: { questionId: 17, optionId: 1701, repo: "some repo on question 17 Yes" },
+                    nextQuestionId: 20
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 17, optionId: 1700 }
+                    ],
+                    result: { questionId: 17, optionId: 1700, repo: "some repo on question 17 No" },
+                    nextQuestionId: 20
+                }
+            ],
+            extraInfo: {
+                title: "I NEED MORE INFORMATION",
+                content: "Information collected should be related to the society’s purpose/goals. " + 
+                    "For example, “we are a theatre company and collect information from our subscribers to sell tickets.”"
+            },
+        }
+    )
+    survey[18] = createNode(
+        {
+            id: 18,
+            type: NodeTypes.single,
+            content: "Select reasons for collecting employee information. Select one.",
+            options: [
+                {
+                    id: 1800,
+                    label: "Establish employment"
+                },
+                {
+                    id: 1801,
+                    label: "Manage employment"
+                },
+                {
+                    id: 1802,
+                    label: "Terminate employment"
+                },
+                {
+                    id: 1803,
+                    label: "Other reasons"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 18, optionId: 1803 }
+                    ],
+                    result: { questionId: 18, optionId: 1803, repo: "some repo on question 18 other reasons" },
+                    todos: [{title: "Todo Item 8"}],
+                    nextQuestionId: 17
+                },
+                {
+                    type: TriggerType.default,
+                    answers: [],
+                    result: { questionId: 18, optionId: 1800, repo: "some repo on question 18" },
+                    nextQuestionId: 19
+                }
+            ]
+        }
+    )
+    survey[19] = createNode(
+        {
+            id: 19,
+            type: NodeTypes.single,
+            content: "Do you let these employees know ahead of time?",
+            options: [
+                {
+                    id: 1901,
+                    label: "Yes"
+                },
+                {
+                    id: 1900,
+                    label: "No"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 19, optionId: 1900 }
+                    ],
+                    result: { questionId: 19, optionId: 1900, repo: "some repo on question 19 N0" },
+                    todos: [{title: "Todo Item 9"}],
+                    nextQuestionId: 17
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 19, optionId: 1901 }
+                    ],
+                    response: ["Good Job"],
+                    result: { questionId: 18, optionId: 1800, repo: "some repo on question 19 Yes" },
+                    nextQuestionId: 17
+                }
+            ]
+        }
+    )
 
     return survey;
 }

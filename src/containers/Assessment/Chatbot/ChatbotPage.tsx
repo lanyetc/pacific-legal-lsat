@@ -40,6 +40,7 @@ export default class ChatbotPage extends React.Component {
             context: this.context
         };
         this.handleSelectOptions = this.handleSelectOptions.bind(this);
+        this.handleShowExtraInfo = this.handleShowExtraInfo.bind(this);
     }
     componentDidMount() {
         this.displayNextMsg(1);
@@ -84,13 +85,17 @@ export default class ChatbotPage extends React.Component {
         resultItem.path = { questionId: this.state.currentMessage.id, optionId: selectedOptionId };
         this.state.questionPath.push(resultItem.path); // add selected option to pathlist
         const pathLength = this.state.questionPath.length - 1;
-        this.state.currentMessage.triggers.forEach((trigger: any) => {
-            trigger.answers.forEach((answer: any, index: any) => {// check path  
-                triggered = false;
-                if (answer.optionId === this.state.questionPath[pathLength - index].optionId && answer.questionId === this.state.questionPath[pathLength - index].questionId) {
-                    triggered = true;
-                }
-            })
+        this.state.currentMessage.triggers.some((trigger: any) => {
+            if (trigger.type === TriggerType.default) {
+                trigger = true;
+            } else {
+                trigger.answers.forEach((answer: any, index: any) => {// check path  
+                    triggered = false;
+                    if (answer.optionId === this.state.questionPath[pathLength - index].optionId && answer.questionId === this.state.questionPath[pathLength - index].questionId) {
+                        triggered = true;
+                    }
+                })
+            }
             if (triggered) {
                 if (trigger.type === TriggerType.exit) {
                     history.push('/result')
@@ -111,7 +116,18 @@ export default class ChatbotPage extends React.Component {
                     this.displayNextMsg(trigger.nextQuestionId);
                 })
                 }
+                return true;
             }
+        })
+    }
+    public handleShowExtraInfo() {
+        let repeatMsg = Object.assign({}, this.state.currentMessage);
+        let lastMsg = this.state.messageList[this.state.messageList.length - 1];
+        lastMsg.showExtraInfo = true;
+        // this.state.messageList[this.state.messageList.length - 1].showExtraInfo = true; // may need to be optimized
+        this.state.messageList.push(repeatMsg);
+        this.setState( {
+            messageList: this.state.messageList
         })
     }
 
@@ -135,6 +151,7 @@ export default class ChatbotPage extends React.Component {
                     
                     <Chat
                         messages={this.state.messageList}
+                        handleShowExtraInfo = {this.handleShowExtraInfo}
                         handleSelectOptions={this.handleSelectOptions}></Chat>
                     <ToDoSection
                         todoList={this.state.todoList}
