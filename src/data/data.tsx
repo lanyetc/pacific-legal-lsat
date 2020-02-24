@@ -1006,7 +1006,7 @@ function getSurvey_part2() {
                         { questionId: 17, optionId: 1700 }
                     ],
                     result: { questionId: 17, optionId: 1700, repo: "some repo on question 17 No" },
-                    nextQuestionId: 20
+                    nextQuestionId: 66
                 }
             ],
             extraInfo: {
@@ -1091,6 +1091,29 @@ function getSurvey_part2() {
                     response: ["Good Job"],
                     result: { questionId: 18, optionId: 1800, repo: "some repo on question 19 Yes" },
                     nextQuestionId: 17
+                }
+            ]
+        }
+    )
+
+    survey[66] = createNode(
+        {
+            id: 66,
+            type: NodeTypes.single,
+            content: "You completed module",
+            options: [
+                {
+                    id: 6600,
+                    label: "Go to the results"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.exit,
+                    answers: [
+                        {questionId: 66, optionId: 6600}
+                    ],
+                    nextQuestionId: -1
                 }
             ]
         }
