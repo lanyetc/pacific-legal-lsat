@@ -49,10 +49,10 @@ export default class ChatbotPage extends React.Component {
     public checkModule(trigger: Trigger) {
         let moduleId = this.state.currentModuleId;
         switch (trigger.type) {
-            case TriggerType.skip: 
+            case TriggerType.skip:
                 moduleId = trigger.nextModuleId;
                 break;
-            default: 
+            default:
         }
         return moduleId;
     }
@@ -74,14 +74,17 @@ export default class ChatbotPage extends React.Component {
                 }
             })
             this.displayNextMsg(nextMessage.triggers[0].nextQuestionId);
-            
+
         }
     }
 
-    public handleSelectOptions(id: any) { // this method will need to be refactored and the functionality will need to be extended later.
-        const selectedOptionId = id
+    public handleSelectOptions(questionId: any, optionId: any) { // this method will need to be refactored and the functionality will need to be extended later.
+        if (questionId !== this.state.currentMessage.id) {
+            return;
+        }
+        const selectedOptionId = optionId;
         let triggered = false;
-        let resultItem:any = {};
+        let resultItem: any = {};
         let lastMessage = this.state.currentMessage;
         lastMessage.selectedOptionId = selectedOptionId; // set selected optionId
         resultItem.path = { questionId: this.state.currentMessage.id, optionId: selectedOptionId };
@@ -103,36 +106,38 @@ export default class ChatbotPage extends React.Component {
                     history.push('/result')
                 } else {
                     this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
-                let newTodoList = trigger.todos ? trigger.todos : []
-                resultItem.name = "Privacy Polic";
-                resultItem.todos = newTodoList;
-                resultItem.reminders = newTodoList; // change it to reminderlist
-                resultItem.result = trigger.result;
-                this.context.updateContext(this.state.currentModuleId, resultItem);
-                console.log(this.context);
-                this.setState({
-                    currentMessage: lastMessage,
-                    currentModuleId: this.checkModule(trigger),
-                    questionPath: this.state.questionPath,
-                    todoList: this.state.todoList.concat(newTodoList)
-                }, ()=> {
-                    this.displayNextMsg(trigger.nextQuestionId);
-                })
+                    let newTodoList = trigger.todos ? trigger.todos : []
+                    resultItem.name = "Privacy Polic";
+                    resultItem.todos = newTodoList;
+                    resultItem.reminders = newTodoList; // change it to reminderlist
+                    resultItem.result = trigger.result;
+                    this.context.updateContext(this.state.currentModuleId, resultItem);
+                    console.log(this.context);
+                    this.setState({
+                        currentMessage: lastMessage,
+                        currentModuleId: this.checkModule(trigger),
+                        questionPath: this.state.questionPath,
+                        todoList: this.state.todoList.concat(newTodoList)
+                    }, () => {
+                        this.displayNextMsg(trigger.nextQuestionId);
+                    })
                 }
                 return true;
             }
         })
     }
-    public handleShowExtraInfo() {
-        let repeatMsg = Object.assign({}, this.state.currentMessage);
-        let lastMsg = this.state.messageList[this.state.messageList.length - 1];
-        lastMsg.showExtraInfo = true;
-        // this.state.messageList[this.state.messageList.length - 1].showExtraInfo = true; // may need to be optimized
-        this.state.messageList.push(repeatMsg);
-        this.setState( {
-            currentMessage: repeatMsg,
-            messageList: this.state.messageList
-        })
+    public handleShowExtraInfo(questionId: any) {
+        if (questionId === this.state.currentMessage.id) {
+            let repeatMsg = Object.assign({}, this.state.currentMessage);
+            let lastMsg = this.state.messageList[this.state.messageList.length - 1];
+            lastMsg.showExtraInfo = true;
+            // this.state.messageList[this.state.messageList.length - 1].showExtraInfo = true; // may need to be optimized
+            this.state.messageList.push(repeatMsg);
+            this.setState({
+                currentMessage: repeatMsg,
+                messageList: this.state.messageList
+            })
+        }
     }
 
     render() {
@@ -152,10 +157,10 @@ export default class ChatbotPage extends React.Component {
 
                 <div className="main-container">
                     <ProgressBar ></ProgressBar>
-                    
+
                     <Chat
                         messages={this.state.messageList}
-                        handleShowExtraInfo = {this.handleShowExtraInfo}
+                        handleShowExtraInfo={this.handleShowExtraInfo}
                         handleSelectOptions={this.handleSelectOptions}></Chat>
                     <ToDoSection
                         todoList={this.state.todoList}

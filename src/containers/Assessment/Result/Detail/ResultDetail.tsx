@@ -23,13 +23,13 @@ export default function ResultDetail(props: any) {
         <div className="result-detail-container">
             <TabNav 
             tabList = {[
-                {title: subModule[0].name, tabContent: <Overview context={context.modules[1]}/>},
-                {title: subModule[1].name, tabContent: <QuestionRepo questionList={survey[1].nodes}  resultList={context.modules[1].results}/>},
-                {title: subModule[2].name, tabContent: <QuestionRepo questionList={survey[2].nodes} resultList={context.modules[2].results}/>},
-                {title: subModule[3].name, tabContent: <QuestionRepo questionList={survey[1].nodes} resultList={context.modules[1].results}/>},
-                {title: subModule[4].name, tabContent: <QuestionRepo questionList={survey[1].nodes} resultList={context.modules[1].results}/>},
-                {title: subModule[5].name, tabContent: <QuestionRepo questionList={survey[1].nodes} resultList={context.modules[1].results}/>},
-                {title: subModule[6].name, tabContent: <QuestionRepo questionList={survey[1].nodes} resultList={context.modules[1].results}/>}
+                {title: subModule[0].name, tabContent: <Overview context={context.modules[2]}/>},
+                // {title: subModule[1].name, tabContent: <QuestionRepo questionList={survey[1].nodes}  resultList={context.modules[1].results}/>},
+                // {title: subModule[2].name, tabContent: <QuestionRepo questionList={survey[2].nodes} resultList={context.modules[2].results}/>},
+                // {title: subModule[3].name, tabContent: <QuestionRepo questionList={survey[1].nodes} resultList={context.modules[1].results}/>},
+                // {title: subModule[4].name, tabContent: <QuestionRepo questionList={survey[1].nodes} resultList={context.modules[1].results}/>},
+                // {title: subModule[5].name, tabContent: <QuestionRepo questionList={survey[1].nodes} resultList={context.modules[1].results}/>},
+                // {title: subModule[6].name, tabContent: <QuestionRepo questionList={survey[1].nodes} resultList={context.modules[1].results}/>}
             ]}
             ></TabNav>
       </div>

@@ -26,7 +26,7 @@ export default function ResultPage() {
                     )}
                 </ResultContextConsumer>
             </div>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </div>
     );
 }
