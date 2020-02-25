@@ -68,3 +68,8 @@
 .chat .list-container {
     padding: 0 86px;
 }
+
+.nav-list-item .nav-link.selected {
+    background-color: #193c81;
+    color: #ffffff;
+}

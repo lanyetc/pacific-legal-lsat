@@ -14,7 +14,7 @@ import { Message } from '@material-ui/icons';
 import history from '../../../history';
 
 interface IState {
-    currentMessage: Node,
+    currentMessage: any,
     currentModuleId: any,
     questionPath: any,
     messageList: any[],
@@ -82,6 +82,8 @@ export default class ChatbotPage extends React.Component {
         const selectedOptionId = id
         let triggered = false;
         let resultItem:any = {};
+        let lastMessage = this.state.currentMessage;
+        lastMessage.selectedOptionId = selectedOptionId; // set selected optionId
         resultItem.path = { questionId: this.state.currentMessage.id, optionId: selectedOptionId };
         this.state.questionPath.push(resultItem.path); // add selected option to pathlist
         const pathLength = this.state.questionPath.length - 1;
@@ -109,6 +111,7 @@ export default class ChatbotPage extends React.Component {
                 this.context.updateContext(this.state.currentModuleId, resultItem);
                 console.log(this.context);
                 this.setState({
+                    currentMessage: lastMessage,
                     currentModuleId: this.checkModule(trigger),
                     questionPath: this.state.questionPath,
                     todoList: this.state.todoList.concat(newTodoList)
@@ -127,6 +130,7 @@ export default class ChatbotPage extends React.Component {
         // this.state.messageList[this.state.messageList.length - 1].showExtraInfo = true; // may need to be optimized
         this.state.messageList.push(repeatMsg);
         this.setState( {
+            currentMessage: repeatMsg,
             messageList: this.state.messageList
         })
     }
