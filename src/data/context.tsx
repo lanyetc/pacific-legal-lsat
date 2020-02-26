@@ -25,6 +25,8 @@ export interface ModuleResult {
 // Consider: how to split results of different sub-modules?
 export interface Context {
     modules: {[key: number]: ModuleResult};
+    todos?: Array<Item>;
+    reminders?: Array<Item>;
 }
 
 // Context data generating functions. Only for testing
@@ -72,7 +74,11 @@ export function getContext() {
 }
 
 // default context
-const context:Context = {modules:{}};
+const context:Context = {
+    modules:{},
+    todos: [],
+    reminders: []
+};
 
 export const ResultContext = React.createContext({
     context: context,
@@ -98,6 +104,8 @@ export class ResultContextProvider extends React.Component {
                 path: [contextItem.path]
             }; // if module does not exist
         }
+        context.todos = context.todos?.concat(contextItem.todos);
+        context.reminders = context.reminders?.concat(contextItem.todos);
         this.setState({ context: context})
     }
     state = {

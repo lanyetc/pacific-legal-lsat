@@ -25,6 +25,7 @@ export interface Trigger {
     response?: Array<string>;
     result?: Result;
     todos?: Array<Item>;
+    reminders?: Array<Item>;
     nextQuestionId: number;
     nextModuleId?: number;
 }
@@ -644,7 +645,8 @@ function getSurvey_part1() {
                     ],
                     response: ["Good Job"],
                     result: { questionId: 7, optionId: 701, repo: "some repo on quetion 7 Yes" },
-                    nextQuestionId: 2
+                    nextQuestionId: 2,
+                    nextModuleId: 2
                 },
                 {
                     type: TriggerType.skip,
@@ -653,7 +655,8 @@ function getSurvey_part1() {
                     ],
                     result: { questionId: 7, optionId: 700, repo: "some repo on quetion 7 No" },
                     todos: [{ title: "Todo Item 5" }],
-                    nextQuestionId: 2
+                    nextQuestionId: 2,
+                    nextModuleId: 2
                 }
             ]
         }
@@ -791,7 +794,8 @@ function getSurvey_part2() {
                         { questionId: 10, optionId: 1000 }
                     ],
                     result: { questionId: 10, optionId: 1000, repo: "some repo on question 10 No" },
-                    nextQuestionId: 11
+                    nextQuestionId: 11,
+                    nextModuleId: 3
                 }
             ]
         }
@@ -1006,7 +1010,7 @@ function getSurvey_part2() {
                         { questionId: 17, optionId: 1700 }
                     ],
                     result: { questionId: 17, optionId: 1700, repo: "some repo on question 17 No" },
-                    nextQuestionId: 66
+                    nextQuestionId: 20
                 }
             ],
             extraInfo: {
@@ -1093,6 +1097,1059 @@ function getSurvey_part2() {
                     nextQuestionId: 17
                 }
             ]
+        }
+    )
+    survey[20] = createNode(
+        {
+            id: 20,
+            type: NodeTypes.multi,
+            content: "Select the reasons you collect personal information. Select all that apply.",
+            options: [
+                {
+                    id: 2000,
+                    label: "To communicate with members"
+                },
+                {
+                    id: 2001,
+                    label: "To send newsletters and invitations"
+                },
+                {
+                    id: 2002,
+                    label: "For service phone calls and emails"
+                },
+                {
+                    id: 2003,
+                    label: "For audit purposes"
+                },
+                {
+                    id: 2004,
+                    label: "To solicit donations"
+                },
+                {
+                    id: 2005,
+                    label: "To issue tax receipts"
+                },
+                {
+                    id: 2006,
+                    label: "Other reasons"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 20, optionId: 2006 }
+                    ],
+                    result: { questionId: 20, optionId: 2006, repo: "some repo on question 20 Other reasons" },
+                    response: ["Your use of personal information could be problematic. Check the “Permissions for Personal Information” at the end of the assessment to learn more."],
+                    todos: [{title: "Todo Item 10"}],
+                    nextQuestionId: 21
+                },
+                {
+                    type: TriggerType.default,
+                    answers: [],
+                    response: ["Great - these are all permissible uses of personal information!"],
+                    result: { questionId: 20, optionId: 2000, repo: "some repo on question 20" },
+                    nextQuestionId: 21
+                }
+            ]
+        }
+    )
+    survey[21] = createNode(
+        {
+            id: 21,
+            type: NodeTypes.single,
+            content: "Does your organization give out personal information either within or outside the organization?",
+            options: [
+                {
+                    id: 2101,
+                    label: "Yes"
+                },
+                {
+                    id: 2100,
+                    label: "No"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 21, optionId: 2100 }
+                    ],
+                    result: { questionId: 21, optionId: 2100, repo: "some repo on question 21 No" },
+                    nextQuestionId: 28
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 21, optionId: 2101 }
+                    ],
+                    result: { questionId: 21, optionId: 2101, repo: "some repo on question 21 Yes" },
+                    nextQuestionId: 22
+                }
+            ]
+        }
+    )
+    survey[22] = createNode(
+        {
+            id: 22,
+            type: NodeTypes.single,
+            content: "Do you get explicit consent from people before giving out their personal information?",
+            options: [
+                {
+                    id: 2201,
+                    label: "Yes"
+                },
+                {
+                    id: 2200,
+                    label: "No"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 22, optionId: 2200 }
+                    ],
+                    result: { questionId: 22, optionId: 2200, repo: "some repo on question 22 No" },
+                    nextQuestionId: 23
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 22, optionId: 2201 }
+                    ],
+                    response: ["Great!"],
+                    result: { questionId: 22, optionId: 2201, repo: "some repo on question 22 Yes" },
+                    nextQuestionId: 24
+                }
+            ],
+            extraInfo: {title: "WHAT IS EXPLICIT CONSENT?", content: "For example, this could include..."}
+        }
+    )
+    survey[23] = createNode(
+        {
+            id: 23,
+            type: NodeTypes.single,
+            content: "Is the purpose for collecting personal information obvious?",
+            options: [
+                {
+                    id: 2301,
+                    label: "Yes"
+                },
+                {
+                    id: 2300,
+                    label: "No"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 23, optionId: 2300 }
+                    ],
+                    result: { questionId: 23, optionId: 2300, repo: "some repo on question 23 No" },
+                    todos: [{title: "Todo Item 11"}],
+                    nextQuestionId: 25
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 23, optionId: 2301 }
+                    ],
+                    result: { questionId: 23, optionId: 2301, repo: "some repo on question 23 Yes" },
+                    nextQuestionId: 25
+                }
+            ]
+        }
+    )
+    survey[24] = createNode(
+        {
+            id: 24,
+            type: NodeTypes.single,
+            content: "Have you been required to provide personal information due to a court order or subpoena?",
+            options: [
+                {
+                    id: 2401,
+                    label: "Yes"
+                },
+                {
+                    id: 2400,
+                    label: "No"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 24, optionId: 2400 }
+                    ],
+                    result: { questionId: 24, optionId: 2400, repo: "some repo on question 24 No" },
+                    nextQuestionId: 26
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 24, optionId: 2401 }
+                    ],
+                    result: { questionId: 24, optionId: 2401, repo: "some repo on question 24 Yes" },
+                    nextQuestionId: 27
+                }
+            ]
+        }
+    )
+    survey[25] = createNode(
+        {
+            id: 25,
+            type: NodeTypes.single,
+            content: "Do these people voluntarily provide their personal information?",
+            options: [
+                {
+                    id: 2501,
+                    label: "Yes"
+                },
+                {
+                    id: 2500,
+                    label: "No"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 25, optionId: 2500 }
+                    ],
+                    result: { questionId: 25, optionId: 2500, repo: "some repo on question 25 No" },
+                    todos: [{title: "Todo Item 12"}],
+                    nextQuestionId: 24
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 25, optionId: 2501 }
+                    ],
+                    response: ["Good job!"],
+                    result: { questionId: 25, optionId: 2501, repo: "some repo on question 25 Yes" },
+                    nextQuestionId: 24
+                }
+            ]
+        }
+    )
+    survey[26] = createNode(
+        {
+            id: 26,
+            type: NodeTypes.multi,
+            content: "Select all the reasons you disclose personal information internally, including information from a Members Register. (Multiple choice, select all that apply).",
+            options: [
+                {
+                    id: 2600,
+                    label: "To register/call a general meeting"
+                },
+                {
+                    id: 2601,
+                    label: "To submit a member proposal"
+                },
+                {
+                    id: 2602,
+                    label: "To influence the voting of members"
+                },
+                {
+                    id: 2603,
+                    label: "Other reasons"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 26, optionId: 2603 }
+                    ],
+                    result: { questionId: 26, optionId: 2603, repo: "some repo on question 27 Other reasons" },
+                    todos: [{title: "Todo Item 14"}],
+                    nextQuestionId: 28
+                },
+                {
+                    type: TriggerType.default,
+                    answers: [],
+                    response: ["Great!"],
+                    result: { questionId: 26, optionId: 2601, repo: "some repo on question 26" },
+                    nextQuestionId: 28
+                }
+            ]
+        }
+    )
+    survey[27] = createNode(
+        {
+            id: 27,
+            type: NodeTypes.single,
+            content: "Does your privacy policy explain that you may disclose personal information for legal reasons?",
+            options: [
+                {
+                    id: 2701,
+                    label: "Yes"
+                },
+                {
+                    id: 2700,
+                    label: "No"
+                },
+                {
+                    id: 2702,
+                    label: "NO PRIVACY POLICY YET"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 27, optionId: 2700 }
+                    ],
+                    result: { questionId: 27, optionId: 2700, repo: "some repo on question 27 No" },
+                    response: ["Got it, adding this to your to-do list!"],
+                    reminders: [{title: "Todo Item 13"}],
+                    nextQuestionId: 26
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 27, optionId: 2701 }
+                    ],
+                    result: { questionId: 27, optionId: 2701, repo: "some repo on question 27 Yes" },
+                    response: ["Perfect!"],
+                    nextQuestionId: 26
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 27, optionId: 2702 }
+                    ],
+                    response: ["Okay, be sure to add this information to your privacy policy once you create it!"],
+                    reminders: [{title: "Todo Item 13"}],
+                    result: { questionId: 27, optionId: 2702, repo: "some repo on question 27 No PP" },
+                    nextQuestionId: 26
+                }
+            ]
+        }
+    )
+    survey[28] = createNode(
+        {
+            id: 28,
+            type: NodeTypes.single,
+            content: "Let’s talk about storing personal information! Select everyone who can access personal information.",
+            options: [
+                {
+                    id: 2800,
+                    label: "All employees"
+                },
+                {
+                    id: 2801,
+                    label: "All employees and volunteers"
+                },
+                {
+                    id: 2802,
+                    label: "A small number of authorized individuals"
+                },
+                {
+                    id: 2803,
+                    label: "No one"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 28, optionId: 2800 }
+                    ],
+                    result: { questionId: 28, optionId: 2800, repo: "some repo on question 28 All" },
+                    response: ["Okay for small organizations. If you are a larger organization, you will want to reduce access to only a few individuals."],
+                    nextQuestionId: 29
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 28, optionId: 2801 }
+                    ],
+                    result: { questionId: 28, optionId: 2801, repo: "some repo on question 28 small" },
+                    response: ["Perfect!"],
+                    nextQuestionId: 29
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 28, optionId: 2802 }
+                    ],
+                    response: ["Let’s change the access to a few designated individuals!"],
+                    reminders: [{title: "Todo Item 15"}],
+                    result: { questionId: 28, optionId: 2802, repo: "some repo on question 28 volunteers" },
+                    nextQuestionId: 29
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 28, optionId: 2803 }
+                    ],
+                    response: ["Let’s change the access to a few designated individuals!"],
+                    reminders: [{title: "Todo Item 15"}],
+                    result: { questionId: 28, optionId: 2803, repo: "some repo on question 28 no one" },
+                    nextQuestionId: 29
+                }
+            ]
+        }
+    )
+    survey[29] = createNode(
+        {
+            id: 29,
+            type: NodeTypes.single,
+            content: "Do you have policies and procedures to keep personal information secure?",
+            options: [
+                {
+                    id: 2901,
+                    label: "YES"
+                },
+                {
+                    id: 2900,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 29, optionId: 2900 }
+                    ],
+                    result: { questionId: 29, optionId: 2900, repo: "some repo on question 29 No" },
+                    reminders: [{title: "Todo Item 16"}],
+                    response: ["Be sure to keep personal information secure! Check your results at the end of the module to find more tips on securing personal information."],
+                    nextQuestionId: 30
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 29, optionId: 2901 }
+                    ],
+                    result: { questionId: 29, optionId: 2901, repo: "some repo on question 29 Yes" },
+                    response: ["Good for you!"],
+                    nextQuestionId: 30
+                }
+            ]
+        }
+    )
+    survey[30] = createNode(
+        {
+            id: 30,
+            type: NodeTypes.single,
+            content: "Where do you store personal information?",
+            options: [
+                {
+                    id: 3000,
+                    label: "ON PAPER"
+                },
+                {
+                    id: 3001,
+                    label: "ON THE COMPUTER"
+                },
+                {
+                    id: 3002,
+                    label: "ON THE COMPUTER AND ON PAPER"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 30, optionId: 3000 }
+                    ],
+                    result: { questionId: 30, optionId: 3000, repo: "some repo on question 30 paper" },
+                    nextQuestionId: 33
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 30, optionId: 3001 }
+                    ],
+                    result: { questionId: 30, optionId: 3001, repo: "some repo on question 30 paper/digital" },
+                    nextQuestionId: 31
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 30, optionId: 3002 }
+                    ],
+                    result: { questionId: 30, optionId: 3002, repo: "some repo on question 30 digital" },
+                    nextQuestionId: 32
+                }
+            ]
+        }
+    )
+    survey[31] = createNode(
+        {
+            id: 31,
+            type: NodeTypes.single,
+            content: "Do you keep your sensitive data encrypted?",
+            options: [
+                {
+                    id: 3101,
+                    label: "YES"
+                },
+                {
+                    id: 3100,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 31, optionId: 3100 }
+                    ],
+                    result: { questionId: 31, optionId: 3100, repo: "some repo on question 31 No" },
+                    response: ["This is a great way to keep data secure, added to your list"],
+                    reminders: [{title: "Todo Item 18"}],
+                    nextQuestionId: 34
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 31, optionId: 3101 }
+                    ],
+                    result: { questionId: 31, optionId: 3101, repo: "some repo on question 31 Yes" },
+                    response: ["Great!"],
+                    nextQuestionId: 34
+                }
+            ]
+        }
+    )
+    survey[32] = createNode(
+        {
+            id: 32,
+            type: NodeTypes.single,
+            content: "Do you keep your paper documents in a locked cabinet?",
+            options: [
+                {
+                    id: 3201,
+                    label: "YES"
+                },
+                {
+                    id: 3200,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 32, optionId: 3200 }
+                    ],
+                    result: { questionId: 32, optionId: 3200, repo: "some repo on question 32 No" },
+                    response: ["Lock those documents up!"],
+                    todos: [{title: "Todo Item 17"}],
+                    nextQuestionId: 31
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 32, optionId: 3201 }
+                    ],
+                    result: { questionId: 32, optionId: 3201, repo: "some repo on question 32 Yes" },
+                    response: ["Good job!"],
+                    nextQuestionId: 31
+                }
+            ]
+        }
+    )
+    survey[33] = createNode(
+        {
+            id: 33,
+            type: NodeTypes.single,
+            content: "Do you keep your paper documents in a locked cabinet?",
+            options: [
+                {
+                    id: 3301,
+                    label: "YES"
+                },
+                {
+                    id: 3300,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 33, optionId: 3300 }
+                    ],
+                    result: { questionId: 33, optionId: 3300, repo: "some repo on question 33 No" },
+                    response: ["Lock those documents up!"],
+                    todos: [{title: "Todo Item 17"}],
+                    nextQuestionId: 39
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 33, optionId: 3301 }
+                    ],
+                    result: { questionId: 33, optionId: 3301, repo: "some repo on question 33 Yes" },
+                    response: ["Good job!"],
+                    nextQuestionId: 39
+                }
+            ]
+        }
+    )
+    survey[34] = createNode(
+        {
+            id: 34,
+            type: NodeTypes.single,
+            content: "Is your digital content password protected?",
+            options: [
+                {
+                    id: 3401,
+                    label: "YES"
+                },
+                {
+                    id: 3400,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 34, optionId: 3400 }
+                    ],
+                    result: { questionId: 34, optionId: 3400, repo: "some repo on question 34 No" },
+                    response: ["Always use passwords to keep your digital content secure."],
+                    todos: [{title: "Todo Item 19"}],
+                    nextQuestionId: 36
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 34, optionId: 3401 }
+                    ],
+                    result: { questionId: 34, optionId: 3401, repo: "some repo on question 34 Yes" },
+                    nextQuestionId: 35
+                }
+            ]
+        }
+    )
+    survey[35] = createNode(
+        {
+            id: 35,
+            type: NodeTypes.single,
+            content: "How often do you change your passwords?",
+            options: [
+                {
+                    id: 3500,
+                    label: "0-6 MONTHS"
+                },
+                {
+                    id: 3501,
+                    label: "6-12 MONTHS"
+                },
+                {
+                    id: 3502,
+                    label: "OVER A YEAR"
+                },
+                {
+                    id: 3503,
+                    label: "NEVER"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 35, optionId: 3500 }
+                    ],
+                    result: { questionId: 35, optionId: 3500, repo: "some repo on question 35 0-6" },
+                    response: ["Awesome, keep it up!"],
+                    nextQuestionId: 36
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 35, optionId: 3501 }
+                    ],
+                    result: { questionId: 35, optionId: 3501, repo: "some repo on question 35 6-12" },
+                    response: ["Pretty good, try changing your passwords every 6 months."],
+                    nextQuestionId: 36
+                },
+                {
+                    type: TriggerType.default,
+                    answers: [],
+                    result: { questionId: 35, optionId: 3502, repo: "some repo on question 35 over 1 year" },
+                    response: ["Change passwords every 6 months to keep your digital content secure."],
+                    reminders: [{title: "Todo Item 20"}],
+                    nextQuestionId: 36
+                }
+            ]
+        }
+    )
+    survey[36] = createNode(
+        {
+            id: 36,
+            type: NodeTypes.single,
+            content: "Do you collect Digitally Created Personal Information (D.C.P.I.), such as information from website traffic?",
+            options: [
+                {
+                    id: 3601,
+                    label: "YES"
+                },
+                {
+                    id: 3600,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 36, optionId: 3600 }
+                    ],
+                    result: { questionId: 36, optionId: 3600, repo: "some repo on question 36 No" },
+                    nextQuestionId: 38
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 36, optionId: 3601 }
+                    ],
+                    result: { questionId: 36, optionId: 3601, repo: "some repo on question 36 Yes" },
+                    nextQuestionId: 37
+                }
+            ],
+            extraInfo: {
+                title: "WHAT IS D.C.P.I.?",
+                content: " Digitally created personal information includes location information, " + 
+                    "including GPS data; device identifiers such as IP and MAC addresses; click stream data, " +
+                    "browser history, bookmarks; user generated social network data such as comments, ratings, " +
+                    "likes and dislikes, Twitter stream, or customer service interactions." 
+            }
+        }
+    )
+    survey[37] = createNode(
+        {
+            id: 37,
+            type: NodeTypes.single,
+            content: "Does your privacy policy include information about the D.C.P.I. you collect?",
+            options: [
+                {
+                    id: 3701,
+                    label: "YES"
+                },
+                {
+                    id: 3700,
+                    label: "NO"
+                },
+                {
+                    id: 3702,
+                    label: "NO PRIVACY POLICY YET"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 37, optionId: 3700 }
+                    ],
+                    result: { questionId: 37, optionId: 3700, repo: "some repo on question 37 No" },
+                    response: ["Added to your list! Check out your results at the end to find suggested wording to add to your privacy policy."],
+                    reminders: [{title: "Todo Item 21"}],
+                    nextQuestionId: 38
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 37, optionId: 3701 }
+                    ],
+                    result: { questionId: 37, optionId: 3701, repo: "some repo on question 37 Yes" },
+                    response: ["Great!"],
+                    nextQuestionId: 38
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 37, optionId: 3702 }
+                    ],
+                    result: { questionId: 37, optionId: 3702, repo: "some repo on question 37 No PP" },
+                    response: ["Be sure to include this when you make your privacy policy!"],
+                    reminders: [{title: "Todo Item 21"}],
+                    nextQuestionId: 38
+                }
+            ]
+        }
+    )
+    survey[38] = createNode(
+        {
+            id: 38,
+            type: NodeTypes.single,
+            content: "How often do you review your antivirus software?",
+            options: [
+                {
+                    id: 3800,
+                    label: "0-6 MONTHS"
+                },
+                {
+                    id: 3801,
+                    label: "6-12 MONTHS"
+                },
+                {
+                    id: 3802,
+                    label: "MORE THAN A YEAR"
+                },
+                {
+                    id: 3803,
+                    label: "NEVER"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 38, optionId: 3800 }
+                    ],
+                    result: { questionId: 38, optionId: 3800, repo: "some repo on question 38 0-6" },
+                    response: ["Great!"],
+                    nextQuestionId: 39
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 38, optionId: 3803 }
+                    ],
+                    result: { questionId: 38, optionId: 3803, repo: "some repo on question 38 never" },
+                    reminders: [{title: "Todo Item 22"}],
+                    response: ["It’s a good idea to review your antivirus software every 6 months."],
+                    nextQuestionId: 39
+                },
+                {
+                    type: TriggerType.default,
+                    answers: [],
+                    result: { questionId: 38, optionId: 3802, repo: "some repo on question 38" },
+                    response: ["Not bad, try to review once every 6 months!"],
+                    nextQuestionId: 39
+                }
+            ]
+        }
+    )
+    survey[39] = createNode(
+        {
+            id: 39,
+            type: NodeTypes.single,
+            content: "Do you have personal information that is no longer necessary for legal or business purposes?",
+            options: [
+                {
+                    id: 3901,
+                    label: "YES"
+                },
+                {
+                    id: 3900,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 39, optionId: 3900 }
+                    ],
+                    result: { questionId: 39, optionId: 3900, repo: "some repo on question 39 no" },
+                    nextQuestionId: 42
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 39, optionId: 3901 }
+                    ],
+                    result: { questionId: 39, optionId: 3901, repo: "some repo on question 39 yes" },
+                    nextQuestionId: 40
+                }
+            ]
+        }
+    )
+    survey[40] = createNode(
+        {
+            id: 40,
+            type: NodeTypes.single,
+            content: "How long are you keeping this information?",
+            options: [
+                {
+                    id: 4000,
+                    label: "LESS THAN 1 YEAR"
+                },
+                {
+                    id: 4001,
+                    label: "MORE THAN 1 YEAR"
+                },
+                {
+                    id: 4002,
+                    label: "PERMANENTLY"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 40, optionId: 4002 }
+                    ],
+                    result: { questionId: 40, optionId: 4002, repo: "some repo on question 40 PERMANENTLY" },
+                    response: ["Not a good idea, let’s keep going to see what we should do with this information."],
+                    todos: [{title: "Todo Item 23"}],
+                    nextQuestionId: 42
+                },
+                {
+                    type: TriggerType.default,
+                    answers: [],
+                    result: { questionId: 40, optionId: 4001, repo: "some repo on question 40" },
+                    nextQuestionId: 41
+                }
+            ]
+        }
+    )
+    survey[41] = createNode(
+        {
+            id: 41,
+            type: NodeTypes.single,
+            content: "Is the personal information you still have being used to make a decision that would affect this individual?",
+            options: [
+                {
+                    id: 4101,
+                    label: "YES"
+                },
+                {
+                    id: 4100,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 41, optionId: 4100 }
+                    ],
+                    result: { questionId: 41, optionId: 4100, repo: "some repo on question 41 no" },
+                    response: ["If the personal information has no relevance, it is time to destroy it."],
+                    todos: [{title: "Todo Item 24"}],
+                    nextQuestionId: 42
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 41, optionId: 4101 }
+                    ],
+                    result: { questionId: 41, optionId: 4101, repo: "some repo on question 41 yes" },
+                    response: ["Okay, keep the information for one year after making the decision."],
+                    nextQuestionId: 42
+                }
+            ]
+        }
+    )
+    survey[42] = createNode(
+        {
+            id: 42,
+            type: NodeTypes.single,
+            content: "How long do you keep your financial information?",
+            options: [
+                {
+                    id: 4200,
+                    label: "LESS THAN 7 YEARS"
+                },
+                {
+                    id: 4201,
+                    label: "7 YEARS"
+                },
+                {
+                    id: 4202,
+                    label: "MORE THAN 7 YEARS"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 42, optionId: 4200 }
+                    ],
+                    result: { questionId: 42, optionId: 4200, repo: "some repo on question 42 4200" },
+                    response: ["Keep financial information for 7 years."],
+                    todos: [{title: "Todo Item 25"}],
+                    nextQuestionId: 43
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 42, optionId: 4201 }
+                    ],
+                    result: { questionId: 42, optionId: 4201, repo: "some repo on question 41 4201" },
+                    response: ["Perfect!"],
+                    nextQuestionId: 43
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 42, optionId: 4202 }
+                    ],
+                    result: { questionId: 42, optionId: 4202, repo: "some repo on question 41 4202" },
+                    response: ["Destroy financial information after 7 years."],
+                    nextQuestionId: 43
+                }
+            ]
+        }
+    )
+    survey[43] = createNode(
+        {
+            id: 43,
+            type: NodeTypes.single,
+            content: "How long does your organization keep relevant records?",
+            options: [
+                {
+                    id: 4300,
+                    label: "LESS THAN 10 YEARS"
+                },
+                {
+                    id: 4301,
+                    label: "10 YEARS"
+                },
+                {
+                    id: 4302,
+                    label: "10 YEARS, LONGER IF IT IS RELEVANT"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 43, optionId: 4300 }
+                    ],
+                    result: { questionId: 43, optionId: 4300, repo: "some repo on question 43 4300" },
+                    response: ["Keep all records for at least 10 years!"],
+                    todos: [{title: "Todo Item 26"}],
+                    nextQuestionId: 11,
+                    nextModuleId: 3
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 43, optionId: 4301 }
+                    ],
+                    result: { questionId: 43, optionId: 4301, repo: "some repo on question 43 4301" },
+                    response: ["Good start - be sure to keep relevant records as long as they are relevant."],
+                    nextQuestionId: 11,
+                    nextModuleId: 3
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 43, optionId: 4302 }
+                    ],
+                    result: { questionId: 43, optionId: 4302, repo: "some repo on question 43 4302" },
+                    response: ["Great!"],
+                    nextQuestionId: 11,
+                    nextModuleId: 3
+                }
+            ],
+            extraInfo: {
+                title: "WHAT IS RELEVANT?",
+                content: "Please write 1-2 sentences describing what relevant records are in this context"
+            }
         }
     )
 

@@ -5,6 +5,7 @@ import ModuleResult from "./ModuleResult";
 import ResultDetail from "./Detail/ResultDetail";
 import Footer from '../../../components/Footer/Footer'
 import { ResultContextConsumer } from "../../../data/context";
+import "./ResultStyle.css";
 
 export default function ResultPage() {
     return (
@@ -19,7 +20,7 @@ export default function ResultPage() {
 
             />
             <div className="main-container">
-                <ModuleResult></ModuleResult>
+               
                 <ResultContextConsumer>
                     {({ context }) => (
                         <ResultDetail context={context}></ResultDetail>

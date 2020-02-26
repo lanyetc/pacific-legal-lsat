@@ -1,10 +1,10 @@
 import React from "react";
 import { Typography, List, ListItem, Radio, FormControlLabel, ListItemSecondaryAction, Button } from "@material-ui/core";
 import DescriptionIcon from '@material-ui/icons/Description';
-function TodoList( props: any) {
-    const {todoList} = props;
+function TodoList(props: any) {
+    const { todoList } = props;
     return (
-        <div className="list-container round grey">
+        <div className="list-container round">
             <List>
                 {todoList.map((item: any, key: any) => {
                     return (<ListItem key={key}>
@@ -28,7 +28,7 @@ function TodoList( props: any) {
 }
 
 function ReminderList(props: any) {
-    const {reminderList} = props;
+    const { reminderList } = props;
     return (
         <div className="list-container ">
             <List>
@@ -49,21 +49,25 @@ function ReminderList(props: any) {
 
 
 export default function Overview(props: any) {
-    const {context} = props;
+    const { context } = props;
     return (
-        <div className="container">
+        <div className="overview-container">
             <div className="result todo-container">
-                <Typography variant="h4" component="h4" className="title bold">
-                    <DescriptionIcon></DescriptionIcon>
-                    <span className="title">TO-DO LIST</span>
-                </Typography>
+                <div className="title-container">
+                    <Typography variant="h4" component="h4" className="title bold">
+                        <DescriptionIcon></DescriptionIcon>
+                        <span className="title">TO-DO LIST</span>
+                    </Typography>
+                </div>
                 <TodoList todoList={context.todos}></TodoList>
             </div>
-            <div className="result remindder-container">
-                <Typography variant="h4" component="h4" className="title bold">
-                    <DescriptionIcon></DescriptionIcon>
-                    <span className="title">REMINDERS</span>
-                </Typography>
+            <div className="result reminder-container">
+                <div className="title-container">
+                    <Typography variant="h4" component="h4" className="title bold">
+                        <DescriptionIcon></DescriptionIcon>
+                        <span className="title">REMINDERS</span>
+                    </Typography>
+                </div>
                 <ReminderList reminderList={context.reminders}></ReminderList>
             </div>
         </div>
