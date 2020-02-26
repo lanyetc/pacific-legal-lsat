@@ -2179,10 +2179,181 @@ function getSurvey_part2() {
     return survey;
 }
 
+function getSurvey_part3() {
+    let survey: NodeDictionary = {};
+    survey[11] = createNode(
+        {
+            id: 11,
+            type: NodeTypes.message,
+            content: "A privacy policy governs the organizations use of individuals’ data, " +
+                "while a confidentiality policy covers keeping individuals’ data private so that unauthorized people cannot access it.",
+            options: [],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [],
+                    nextQuestionId: 44
+                }
+            ]
+        }
+    );
+    survey[44] = createNode(
+        {
+            id: 44,
+            type: NodeTypes.single,
+            content: "Does your organization have a separate confidentiality policy from your privacy policy?",
+            options: [
+                {
+                    id: 4401,
+                    label: "YES"
+                },
+                {
+                    id: 4400,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 44, optionId: 4401 }
+                    ],
+                    result: { questionId: 44, optionId: 4401, repo: "some repo on question 44 Yes" },
+                    response: ["Great!"],
+                    nextQuestionId: 45
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 44, optionId: 4400 }
+                    ],
+                    result: { questionId: 44, optionId: 4400, repo: "some repo on question 44 No" },
+                    response: ["Added to your to-do list!"],
+                    reminders: [{title: "Todo Item 27"}],
+                    nextQuestionId: 47,
+                    nextModuleId: 4
+                }
+            ]
+        }
+    )
+    survey[45] = createNode(
+        {
+            id: 45,
+            type: NodeTypes.single,
+            content: "Does your confidentiality policy outline who can access personal information?",
+            options: [
+                {
+                    id: 4501,
+                    label: "YES"
+                },
+                {
+                    id: 4500,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 45, optionId: 4501 }
+                    ],
+                    result: { questionId: 45, optionId: 4501, repo: "some repo on question 45 Yes" },
+                    nextQuestionId: 46
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 45, optionId: 4500 }
+                    ],
+                    result: { questionId: 45, optionId: 4500, repo: "some repo on question 45 No" },
+                    response: ["Be sure to clearly state who can access personal information in your confidentiality policy. " +
+                    "Remember: the more hands on it; the more likely a breach."],
+                    reminders: [{title: "Todo Item 28"}],
+                    nextQuestionId: 47,
+                    nextModuleId: 4
+                }
+            ]
+        }
+    )
+    survey[46] = createNode(
+        {
+            id: 46,
+            type: NodeTypes.single,
+            content: "Who has access to personal information?",
+            options: [
+                {
+                    id: 4600,
+                    label: "Everyone"
+                },
+                {
+                    id: 4601,
+                    label: "Many people"
+                },
+                {
+                    id: 4602,
+                    label: "Only one person"
+                },
+                {
+                    id: 4603,
+                    label: "A few people"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 46, optionId: 4602 }
+                    ],
+                    result: { questionId: 46, optionId: 4602, repo: "some repo on question 46 one" },
+                    response: ["Pretty good! You could also give a couple more appropriate individuals access if this person needs support."],
+                    nextQuestionId: 47,
+                    nextModuleId: 4
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 46, optionId: 4603 }
+                    ],
+                    result: { questionId: 46, optionId: 4603, repo: "some repo on question 46 few" },
+                    response: ["Awesome!"],
+                    nextQuestionId: 47,
+                    nextModuleId: 4
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 46, optionId: 4600 }
+                    ],
+                    result: { questionId: 46, optionId: 4600, repo: "some repo on question 46 everyone" },
+                    response: ["Be sure to clearly state who can access personal information in your confidentiality policy. " +
+                            "Remember: the more hands on it; the more likely a breach. "],
+                    reminders: [{title: "Todo Item 29"}],
+                    nextQuestionId: 47,
+                    nextModuleId: 4
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 46, optionId: 4601 }
+                    ],
+                    result: { questionId: 46, optionId: 4601, repo: "some repo on question 46 many" },
+                    response: ["Be sure to clearly state who can access personal information in your confidentiality policy. " +
+                            "Remember: the more hands on it; the more likely a breach. "],
+                    reminders: [{title: "Todo Item 29"}],
+                    nextQuestionId: 47,
+                    nextModuleId: 4
+                }
+            ]
+        }
+    )
+    return survey;
+}
+
 function getModules() {
     let modules: { [key: number]: Module } = {};
     modules[1] = { name: "Privacy Policy", nodes: getSurvey_part1() };
     modules[2] = { name: "Personal Info", nodes: getSurvey_part2()};
+    modules[3] = { name: "Confidentiality", nodes: getSurvey_part3()};
     return modules;
 }
 
