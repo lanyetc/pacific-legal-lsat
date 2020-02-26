@@ -2349,11 +2349,126 @@ function getSurvey_part3() {
     return survey;
 }
 
+function getSurvey_part4() {
+    let survey: NodeDictionary = {};
+    survey[47] = createNode(
+        {
+            id: 47,
+            type: NodeTypes.message,
+            content: "Every organization needs to have one person who can answer questions about the collection, " +
+                "use and disclosure of data. This role is called the Privacy Officer.",
+            options: [],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [],
+                    nextQuestionId: 48
+                }
+            ]
+        }
+    );
+    survey[48] = createNode(
+        {
+            id: 48,
+            type: NodeTypes.single,
+            content: "Does your organization have a designated privacy officer?",
+            options: [
+                {
+                    id: 4801,
+                    label: "YES"
+                },
+                {
+                    id: 4800,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 48, optionId: 4801 }
+                    ],
+                    result: { questionId: 48, optionId: 4801, repo: "some repo on question 48 Yes" },
+                    nextQuestionId: 49
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 48, optionId: 4800 }
+                    ],
+                    result: { questionId: 48, optionId: 4800, repo: "some repo on question 48 No" },
+                    response: ["Added to your to-do list!"],
+                    todos: [{title: "Todo Item 30"}],
+                    nextQuestionId: 50,
+                    nextModuleId: 5
+                }
+            ]
+        }
+    )
+    survey[49] = createNode(
+        {
+            id: 49,
+            type: NodeTypes.single,
+            content: "Is your privacy officers contact information included in your privacy policy?",
+            options: [
+                {
+                    id: 4901,
+                    label: "YES"
+                },
+                {
+                    id: 4900,
+                    label: "NO"
+                },
+                {
+                    id: 4902,
+                    label: "NO PRIVACY POLICY YET"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 49, optionId: 4901 }
+                    ],
+                    result: { questionId: 49, optionId: 4901, repo: "some repo on question 49 Yes" },
+                    response: ["Great!"],
+                    nextQuestionId: 50,
+                    nextModuleId: 5
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 49, optionId: 4900 }
+                    ],
+                    result: { questionId: 49, optionId: 4900, repo: "some repo on question 49 No" },
+                    response: ["Be sure to add this to your privacy policy!"],
+                    reminders: [{title: "Todo Item 31"}],
+                    nextQuestionId: 50,
+                    nextModuleId: 5
+                },
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 49, optionId: 4902 }
+                    ],
+                    result: { questionId: 49, optionId: 4902, repo: "some repo on question 49 No PP" },
+                    response: ["Add this to your privacy policy once you create it!"],
+                    reminders: [{title: "Todo Item 31"}],
+                    nextQuestionId: 50,
+                    nextModuleId: 5
+                }
+            ]
+        }
+    )
+    return survey;
+}
+
 function getModules() {
     let modules: { [key: number]: Module } = {};
     modules[1] = { name: "Privacy Policy", nodes: getSurvey_part1() };
     modules[2] = { name: "Personal Info", nodes: getSurvey_part2()};
     modules[3] = { name: "Confidentiality", nodes: getSurvey_part3()};
+    modules[4] = { name: "Privacy Officer", nodes: getSurvey_part4()};
     return modules;
 }
 
