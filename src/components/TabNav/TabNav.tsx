@@ -1,11 +1,6 @@
 import React from "react";
 import { Tabs, Tab } from "@material-ui/core";
-function a11yProps(index: any) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-}
+
 export default function TabNav(props: any) {
     const { tabList } = props;
     const [value, setValue] = React.useState(0);
@@ -27,11 +22,11 @@ export default function TabNav(props: any) {
             <Tab label="Item Three" {...a11yProps(2)} /> */}
             </Tabs>
             {tabList.map((prop: any, key: any) => {
-                    if (key === value) {
-                        return <div key={key} className="container">{prop.tabContent}</div>;
-                    }
-                    return null;
-                })}
+                if (key === value) {
+                    return <div key={key} className="container">{prop.tabContent}</div>;
+                }
+                return null;
+            })}
         </div>
 
     );

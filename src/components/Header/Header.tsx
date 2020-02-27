@@ -7,7 +7,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import Hidden from "@material-ui/core/Hidden";
-import Drawer from "@material-ui/core/Drawer";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 
@@ -16,25 +15,25 @@ import '../common.css'
 
 
 export default function Header(props: { color: any; rightLinks: any; leftLinks: any; brand: string; toolTitle: string; fixed: boolean; absolute: boolean; }) {
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-      };
-const { color, rightLinks, leftLinks, brand, toolTitle, fixed, absolute } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+  const { rightLinks, leftLinks, brand, toolTitle } = props;
 
   const brandComponent = <div><Button className="navBrand">{brand}</Button><span className="navTitle">{toolTitle}</span></div>;
   return (
     <AppBar className="appBar transparent">
       <Toolbar className="navContainer">
-        {leftLinks !== undefined ? {brandComponent} : null}
+        {leftLinks !== undefined ? { brandComponent } : null}
         <div className="flex">
           {leftLinks !== undefined ? (
             <Hidden smDown implementation="css">
               {leftLinks}
             </Hidden>
           ) : (
-            brandComponent
-          )}
+              brandComponent
+            )}
         </div>
         <Hidden smDown implementation="css">
           {rightLinks}
