@@ -16,6 +16,7 @@ interface IState {
     questionPath: any,
     messageList: any[],
     todoList: any[],
+    reminderList: any[],
     context: Context
 }
 
@@ -34,6 +35,7 @@ export default class ChatbotPage extends React.Component {
             questionPath: [],
             messageList: [],
             todoList: [],
+            reminderList: [],
             context: this.context
         };
         this.handleSelectOptions = this.handleSelectOptions.bind(this);
@@ -91,10 +93,12 @@ export default class ChatbotPage extends React.Component {
                         history.push('/result')
                     } else {
                         /// add to result
-                        let newTodoList = trigger.todos ? trigger.todos : []
+                        let newTodoList = trigger.todos ? trigger.todos : [];
+                        let newReminderList = trigger.reminders ? trigger.reminders : [];
+                        resultItem.report = trigger.resultReport;                        
                         resultItem.name = "Privacy Policy";
                         resultItem.todos = newTodoList;
-                        resultItem.reminders = newTodoList; // change it to reminderlist
+                        resultItem.reminders = newReminderList; // change it to reminderlist
                         resultItem.result = trigger.result;
                         this.context.updateContext(this.state.currentModuleId, resultItem);
 
@@ -105,7 +109,8 @@ export default class ChatbotPage extends React.Component {
                                 currentMessage: state.currentMessage,
                                 currentModuleId: this.checkModule(trigger),
                                 questionPath: state.questionPath,
-                                todoList: state.todoList.concat(newTodoList)
+                                todoList: state.todoList.concat(newTodoList),
+                                reminderList: state.reminderList.concat(newReminderList)
                             }
                         }, () => this.displayNextMsg(trigger.nextQuestionId));
                     }
@@ -169,7 +174,7 @@ export default class ChatbotPage extends React.Component {
                         handleSelectOptions={this.handleSelectOptions}></Chat>
                     <ToDoSection
                         todoList={this.state.todoList}
-                        reminderList={this.state.todoList}></ToDoSection>
+                        reminderList={this.state.reminderList}></ToDoSection>
                 </div>
 
             </div>

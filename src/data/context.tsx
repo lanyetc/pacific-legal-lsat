@@ -105,7 +105,7 @@ export class ResultContextProvider extends React.Component {
             }; // if module does not exist
         }
         context.todos = context.todos?.concat(contextItem.todos);
-        context.reminders = context.reminders?.concat(contextItem.todos);
+        context.reminders = context.reminders?.concat(contextItem.reminders);
         this.setState({ context: context})
     }
     state = {

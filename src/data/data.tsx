@@ -506,7 +506,7 @@ function getSurvey_part1() {
                         { questionId: 3, optionId: 301 }
                     ],
                     result: { questionId: 3, optionId: 301, repo: "some repo on quetion 3 Yes" },
-                    todos: [{ title: "Todo Item 2" }],
+                    reminders: [{ title: "Todo Item 2" }],
                     nextQuestionId: 4
                 }
             ]
@@ -654,7 +654,7 @@ function getSurvey_part1() {
                         { questionId: 7, optionId: 700 }
                     ],
                     result: { questionId: 7, optionId: 700, repo: "some repo on quetion 7 No" },
-                    todos: [{ title: "Todo Item 5" }],
+                    reminders: [{ title: "Todo Item 5" }],
                     nextQuestionId: 2,
                     nextModuleId: 2
                 }
@@ -692,7 +692,7 @@ function getSurvey_part1() {
                         { questionId: 8, optionId: 800 }
                     ],
                     result: { questionId: 8, optionId: 800, repo: "some repo on quetion 8 No" },
-                    todos: [{ title: "Todo Item 4" }],
+                    reminders: [{ title: "Todo Item 4" }],
                     nextQuestionId: 7
                 }
             ],
@@ -735,7 +735,7 @@ function getSurvey_part1() {
                         { questionId: 9, optionId: 900 }
                     ],
                     result: { questionId: 9, optionId: 900, repo: "some repo on quetion 9 No" },
-                    todos: [{ title: "Todo Item 3" }],
+                    reminders: [{ title: "Todo Item 3" }],
                     nextQuestionId: 5
                 }
             ]
@@ -937,7 +937,7 @@ function getSurvey_part2() {
                     answers: [
                         { questionId: 15, optionId: 1500 }
                     ],
-                    todos: [{ title: "Todo Item 7" }],
+                    reminders: [{ title: "Todo Item 7" }],
                     result: { questionId: 15, optionId: 1500, repo: "some repo on question 15 No" },
                     nextQuestionId: 16
                 }
@@ -1478,7 +1478,7 @@ function getSurvey_part2() {
                         { questionId: 28, optionId: 2802 }
                     ],
                     response: ["Let’s change the access to a few designated individuals!"],
-                    reminders: [{title: "Todo Item 15"}],
+                    todos: [{title: "Todo Item 15"}],
                     result: { questionId: 28, optionId: 2802, repo: "some repo on question 28 volunteers" },
                     nextQuestionId: 29
                 },
@@ -1488,7 +1488,7 @@ function getSurvey_part2() {
                         { questionId: 28, optionId: 2803 }
                     ],
                     response: ["Let’s change the access to a few designated individuals!"],
-                    reminders: [{title: "Todo Item 15"}],
+                    todos: [{title: "Todo Item 15"}],
                     result: { questionId: 28, optionId: 2803, repo: "some repo on question 28 no one" },
                     nextQuestionId: 29
                 }

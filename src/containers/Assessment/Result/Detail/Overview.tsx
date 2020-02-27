@@ -40,6 +40,12 @@ function ReminderList(props: any) {
                             label={item.title}
                             labelPlacement="end"
                         />
+                         <ListItemSecondaryAction>
+                            <div className="btn-group">
+                                <Button variant="outlined">more info</Button>
+                                <Button variant="contained" color="primary">create now</Button>
+                            </div>
+                        </ListItemSecondaryAction>
                     </ListItem>)
                 })}
             </List>
