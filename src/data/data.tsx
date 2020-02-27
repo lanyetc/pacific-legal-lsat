@@ -2545,7 +2545,7 @@ function getSurvey_part5() {
                         { questionId: 53, optionId: 5300 }
                     ],
                     result: {questionId: 53, optionId: 5300, repo: "some repo to question 53 no"},
-                    nextQuestionId: 59,
+                    nextQuestionId: 58,
                     nextModuleId: 6
                 },
                 {
@@ -2631,7 +2631,7 @@ function getSurvey_part5() {
                     answers: [],
                     result: {questionId: 55, optionId: 5500, repo: "some repo to question 55 B"},
                     response: ["Great, they can have this information!"],
-                    nextQuestionId: 59,
+                    nextQuestionId: 58,
                     nextModuleId: 6
                 }
             ]
@@ -2679,7 +2679,54 @@ function getSurvey_part5() {
                     result: {questionId: 56, optionId: 5600, repo: "some repo to question 56 B"},
                     response: ["Don’t give out this information. If you plan to deny a request for information, consult a lawyer."],
                     todos: [{title: "Todo Item 33"}],
-                    nextQuestionId: 59,
+                    nextQuestionId: 58,
+                    nextModuleId: 6
+                }
+            ]
+        }
+    );
+    survey[57] = createNode(
+        {
+            id: 57,
+            type: NodeTypes.single,
+            content: "Would disclosing this information.. ",
+            options: [
+                {
+                    id: 5700,
+                    label: "Threaten the safety/harm of another person"
+                },
+                {
+                    id: 5701,
+                    label: "Cause grave harm to the requester"
+                },
+                {
+                    id: 5702,
+                    label: "Reveal personal information about another person"
+                },
+                {
+                    id: 5703,
+                    label: "None of the above"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 57, optionId: 5703 }
+                    ],
+                    result: {questionId: 57, optionId: 5703, repo: "some repo to question 57 None"},
+                    response: ["Proceed with caution. If you plan to deny a request for information, consult a lawyer."],
+                    nextQuestionId: 58,
+                    nextModuleId: 6
+                },
+                {
+                    type: TriggerType.default,
+                    answers: [],
+                    result: {questionId: 56, optionId: 5600, repo: "some repo to question 56 B"},
+                    response: ["Don’t give out this information. If you plan to deny a request for information, consult a lawyer."],
+                    todos: [{title: "Todo Item 33"}],
+                    nextQuestionId: 58,
+                    nextModuleId: 6
                 }
             ]
         }
@@ -2688,14 +2735,254 @@ function getSurvey_part5() {
 }
 function getSurvey_part6() {
     let survey: NodeDictionary = {};
-    survey[66] = createNode(
+    survey[58] = createNode(
         {
-            id: 66,
+            id: 58,
+            type: NodeTypes.message,
+            content: "Canada’s Anti-Spam Law (CASL) provides regulations around sending mass messages to members and the public.",
+            options: [],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [],
+                    nextQuestionId: 59
+                }
+            ]
+        }
+    );
+    survey[59] = createNode(
+        {
+            id: 59,
+            type: NodeTypes.single,
+            content: "Do you send messages to your members or the public?",
+            options: [
+                {
+                    id: 5901,
+                    label: "YES"
+                },
+                {
+                    id: 5900,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 59, optionId: 5900 }
+                    ],
+                    result: {questionId: 59, optionId: 5900, repo: "some repo to question 59 No"},
+                    nextQuestionId: 65,
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 59, optionId: 5901 }
+                    ],
+                    result: {questionId: 59, optionId: 5901, repo: "some repo to question 59 Yes"},
+                    nextQuestionId: 60,
+                }
+            ]
+        }
+    );
+    survey[60] = createNode(
+        {
+            id: 60,
+            type: NodeTypes.single,
+            content: "Are you a registered charity?",
+            options: [
+                {
+                    id: 6001,
+                    label: "YES"
+                },
+                {
+                    id: 6000,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 60, optionId: 6000 }
+                    ],
+                    result: {questionId: 60, optionId: 6000, repo: "some repo to question 60 No"},
+                    nextQuestionId: 62,
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 60, optionId: 6001 }
+                    ],
+                    result: {questionId: 60, optionId: 6001, repo: "some repo to question 60 Yes"},
+                    nextQuestionId: 61,
+                }
+            ],
+            extraInfo: {
+                title: "I’M NOT SURE",
+                content: "A registered charity .. "
+            }
+        }
+    );
+    survey[61] = createNode(
+        {
+            id: 61,
+            type: NodeTypes.single,
+            content: "What is your main reason for sending mass messages?",
+            options: [
+                {
+                    id: 6100,
+                    label: "FUNDRAISING"
+                },
+                {
+                    id: 6101,
+                    label: "OTHER"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 61, optionId: 6100 }
+                    ],
+                    result: {questionId: 61, optionId: 6100, repo: "some repo to question 61 FUNDRAISING"},
+                    nextQuestionId: 62,
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 61, optionId: 6101 }
+                    ],
+                    result: {questionId: 61, optionId: 6101, repo: "some repo to question 60 other"},
+                    response: ["Heads up - charities are only allowed to send mass messages for fundraising!"],
+                    todos: [{title: "Todo Item 34"}],
+                    nextQuestionId: 62,
+                }
+            ]
+        }
+    );
+    survey[62] = createNode(
+        {
+            id: 62,
+            type: NodeTypes.single,
+            content: "Do you get consent before sending mass messages?",
+            options: [
+                {
+                    id: 6201,
+                    label: "YES"
+                },
+                {
+                    id: 6200,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 62, optionId: 6200 }
+                    ],
+                    result: {questionId: 62, optionId: 6200, repo: "some repo to question 62 No"},
+                    response: ["Make sure individuals “opt-in” to mass messages before adding them to your mailing list."],
+                    todos: [{title: "Todo Item 35"}],
+                    nextQuestionId: 63,
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 62, optionId: 6201 }
+                    ],
+                    result: {questionId: 62, optionId: 6201, repo: "some repo to question 62 yes"},
+                    response: ["Great!"],
+                    nextQuestionId: 63,
+                }
+            ]
+        }
+    );
+    survey[63] = createNode(
+        {
+            id: 63,
+            type: NodeTypes.single,
+            content: "Do you include contact information in your mass messages?",
+            options: [
+                {
+                    id: 6301,
+                    label: "YES"
+                },
+                {
+                    id: 6300,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 63, optionId: 6300 }
+                    ],
+                    result: {questionId: 63, optionId: 6300, repo: "some repo to question 63 No"},
+                    response: ["Be sure you add this to all your mass messages!"],
+                    todos: [{title: "Todo Item 36"}],
+                    nextQuestionId: 64,
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 63, optionId: 6301 }
+                    ],
+                    result: {questionId: 63, optionId: 6301, repo: "some repo to question 63 yes"},
+                    response: ["Good job!"],
+                    nextQuestionId: 64,
+                }
+            ]
+        }
+    );
+    survey[64] = createNode(
+        {
+            id: 64,
+            type: NodeTypes.single,
+            content: "Do you include an “unsubscribe” option within your mass messages?",
+            options: [
+                {
+                    id: 6401,
+                    label: "YES"
+                },
+                {
+                    id: 6400,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 64, optionId: 6400 }
+                    ],
+                    result: {questionId: 64, optionId: 6400, repo: "some repo to question 64 No"},
+                    response: ["Include this in all your mass messages!"],
+                    todos: [{title: "Todo Item 37"}],
+                    nextQuestionId: 65,
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 64, optionId: 6401 }
+                    ],
+                    result: {questionId: 64, optionId: 6401, repo: "some repo to question 64 yes"},
+                    response: ["Perfect!"],
+                    nextQuestionId: 65,
+                }
+            ]
+        }
+    );
+    survey[65] = createNode(
+        {
+            id: 65,
             type: NodeTypes.single,
             content: "You completed module",
             options: [
                 {
-                    id: 6600,
+                    id: 6500,
                     label: "Go to the results"
                 }
             ],
@@ -2703,7 +2990,7 @@ function getSurvey_part6() {
                 {
                     type: TriggerType.exit,
                     answers: [
-                        {questionId: 66, optionId: 6600}
+                        {questionId: 65, optionId: 6500}
                     ],
                     nextQuestionId: -1
                 }
@@ -2719,6 +3006,8 @@ function getModules() {
     modules[2] = { name: "Personal Info", nodes: getSurvey_part2()};
     modules[3] = { name: "Confidentiality", nodes: getSurvey_part3()};
     modules[4] = { name: "Privacy Officer", nodes: getSurvey_part4()};
+    modules[5] = { name: "Requests", nodes: getSurvey_part5()};
+    modules[6] = { name: "Requests", nodes: getSurvey_part6()};
     return modules;
 }
 
