@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../../../components/Header/Header";
 import HeaderLinks from "../../../components/Header/HeaderLink";
-import ModuleResult from "./ModuleResult";
 import ResultDetail from "./Detail/ResultDetail";
 import { ResultContextConsumer } from "../../../data/context";
 import "./ResultStyle.css";

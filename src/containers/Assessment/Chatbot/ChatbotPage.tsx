@@ -112,6 +112,7 @@ export default class ChatbotPage extends React.Component {
                     return true;
                 }
             })
+            return true; // FIXME to remove compiler warnings for now
         })
     }
 

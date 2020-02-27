@@ -12,6 +12,7 @@ export default function TabNav(props: any) {
         if (tab.title) {
             return <Tab label={tab.title} key={i} className="tab" />
         }
+        return true; // FIXME adding this for now to quiet the compiler warnings
     });
     return (
         <div className="container">

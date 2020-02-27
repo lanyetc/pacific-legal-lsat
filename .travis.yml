@@ -15,7 +15,3 @@ deploy:
   local_dir: dist
   on:
     branch: master
-
-process:
-  env:
-    CI: false

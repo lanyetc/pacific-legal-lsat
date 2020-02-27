@@ -1,5 +1,4 @@
 import React from "react";
-import { getSurvey } from '../../../../data/data';
 import { Typography, Link } from "@material-ui/core";
 import { Result } from "../../../../data/context";
 export default function QuestionRepo(props: any) {

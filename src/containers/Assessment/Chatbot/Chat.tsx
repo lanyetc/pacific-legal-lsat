@@ -18,6 +18,7 @@ export default function Chat(props: any) {
           </div>
           )
       } 
+      return true; // FIXME to remove compiler warnings for now
   });
 
   return(
