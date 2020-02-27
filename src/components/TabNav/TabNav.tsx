@@ -1,11 +1,6 @@
 import React from "react";
 import { Tabs, Tab } from "@material-ui/core";
-function a11yProps(index: any) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-}
+
 export default function TabNav(props: any) {
     const { tabList } = props;
     const [value, setValue] = React.useState(0);

@@ -1,7 +1,6 @@
 import React from "react";
 import TabNav from "../../../../components/TabNav/TabNav";
 import Overview from "./Overview";
-import { getModules } from "../../../../data/data";
 export default function ResultDetail(props: any) {
     let subModule = [
         { name: "OUTCOME" },
@@ -12,7 +11,6 @@ export default function ResultDetail(props: any) {
         { name: "Requests" },
         { name: "Antispam" }
     ]
-    let survey = getModules();
     console.log(props.context);
     // const context = getContext();
     const { context } = props;

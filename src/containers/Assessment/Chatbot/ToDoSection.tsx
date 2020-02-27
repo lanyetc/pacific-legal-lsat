@@ -3,7 +3,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import { List, ListItem, FormControlLabel, Radio } from "@material-ui/core";
 
 export default function ToDoSection(props: any) {
-    const { todoList, reminderList } = props;
+    const { todoList } = props;
     console.log(todoList);
     return (
         <div className="chat todo-container round white">
