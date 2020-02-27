@@ -2153,28 +2153,6 @@ function getSurvey_part2() {
         }
     )
 
-    survey[66] = createNode(
-        {
-            id: 66,
-            type: NodeTypes.single,
-            content: "You completed module",
-            options: [
-                {
-                    id: 6600,
-                    label: "Go to the results"
-                }
-            ],
-            triggers: [
-                {
-                    type: TriggerType.exit,
-                    answers: [
-                        {questionId: 66, optionId: 6600}
-                    ],
-                    nextQuestionId: -1
-                }
-            ]
-        }
-    )
 
     return survey;
 }
@@ -2456,6 +2434,278 @@ function getSurvey_part4() {
                     reminders: [{title: "Todo Item 31"}],
                     nextQuestionId: 50,
                     nextModuleId: 5
+                }
+            ]
+        }
+    )
+    return survey;
+}
+function getSurvey_part5() {
+    let survey: NodeDictionary = {};
+    survey[50] = createNode(
+        {
+            id: 50,
+            type: NodeTypes.message,
+            content: "Sometimes an organization will get requests for information.",
+            options: [],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [],
+                    nextQuestionId: 51
+                }
+            ]
+        }
+    );
+    survey[51] = createNode(
+        {
+            id: 51,
+            type: NodeTypes.message,
+            content: "Explain what type of P.I. must be redacted",
+            options: [],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [],
+                    nextQuestionId: 52
+                }
+            ]
+        }
+    );
+    survey[52] = createNode(
+        {
+            id: 52,
+            type: NodeTypes.single,
+            content: "Does your privacy policy explain how someone could access the information you collect?",
+            options: [
+                {
+                    id: 5201,
+                    label: "YES"
+                },
+                {
+                    id: 5200,
+                    label: "NO"
+                },
+                {
+                    id: 5202,
+                    label: "NO PRIVACY POLICY YET"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 52, optionId: 5200 }
+                    ],
+                    response: ["Check out the suggested wording in your results at the end of the module to add this to your privacy policy!"],
+                    result: {questionId: 52, optionId: 5200, repo: "some repo to question 52 no"},
+                    reminders: [{title: "Todo Item 32"}],
+                    nextQuestionId: 53
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 52, optionId: 5201 }
+                    ],
+                    result: {questionId: 52, optionId: 5201, repo: "some repo to question 52 yes"},
+                    nextQuestionId: 53
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 52, optionId: 5202 }
+                    ],
+                    response: ["Be sure to add this to your privacy policy once you create it!"],
+                    result: {questionId: 52, optionId: 5202, repo: "some repo to question 52 no pp"},
+                    reminders: [{title: "Todo Item 32"}],
+                    nextQuestionId: 53
+                }
+            ]
+        }
+    );
+    survey[53] = createNode(
+        {
+            id: 53,
+            type: NodeTypes.single,
+            content: "Have you received or expect to receive requests for information?",
+            options: [
+                {
+                    id: 5301,
+                    label: "YES"
+                },
+                {
+                    id: 5300,
+                    label: "NO"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.skip,
+                    answers: [
+                        { questionId: 53, optionId: 5300 }
+                    ],
+                    result: {questionId: 53, optionId: 5300, repo: "some repo to question 53 no"},
+                    nextQuestionId: 59,
+                    nextModuleId: 6
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 53, optionId: 5301 }
+                    ],
+                    result: {questionId: 53, optionId: 5301, repo: "some repo to question 53 Yes"},
+                    nextQuestionId: 54
+                }
+            ]
+        }
+    );
+    survey[54] = createNode(
+        {
+            id: 54,
+            type: NodeTypes.single,
+            content: "Who is asking",
+            options: [
+                {
+                    id: 5400,
+                    label: "SOMEONE LOOKING FOR THEIR INFORMATION"
+                },
+                {
+                    id: 5401,
+                    label: "SOMEONE LOOKING FOR INFORMATION ABOUT OTHERS"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 54, optionId: 5400 }
+                    ],
+                    result: {questionId: 54, optionId: 5400, repo: "some repo to question 54 A"},
+                    nextQuestionId: 55,
+                },
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 54, optionId: 5401 }
+                    ],
+                    result: {questionId: 54, optionId: 5401, repo: "some repo to question 54 B"},
+                    nextQuestionId: 56
+                }
+            ]
+        }
+    );
+    survey[55] = createNode(
+        {
+            id: 55,
+            type: NodeTypes.single,
+            content: "Are they requesting ..",
+            options: [
+                {
+                    id: 5500,
+                    label: "THEIR PERSONAL INFORMATION"
+                },
+                {
+                    id: 5501,
+                    label: "HOW THEIR PERSONAL INFORMATION IS BEING USED"
+                },
+                {
+                    id: 5502,
+                    label: "WHO HAS ACCESS TO THEIR PERSONAL INFORMATION"
+                },
+                {
+                    id: 5503,
+                    label: "OTHER INFORMATION"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 55, optionId: 5503 }
+                    ],
+                    result: {questionId: 55, optionId: 5503, repo: "some repo to question 55 D"},
+                    nextQuestionId: 56,
+                },
+                {
+                    type: TriggerType.default,
+                    answers: [],
+                    result: {questionId: 55, optionId: 5500, repo: "some repo to question 55 B"},
+                    response: ["Great, they can have this information!"],
+                    nextQuestionId: 59,
+                    nextModuleId: 6
+                }
+            ]
+        }
+    );
+    survey[56] = createNode(
+        {
+            id: 56,
+            type: NodeTypes.single,
+            content: "Is the information ..",
+            options: [
+                {
+                    id: 5600,
+                    label: "Protected by S-C privilege?"
+                },
+                {
+                    id: 5601,
+                    label: "Likely to harm the competitive position of the organization"
+                },
+                {
+                    id: 5602,
+                    label: "Part of an investigation/appeal uncompleted"
+                },
+                {
+                    id: 5603,
+                    label: "Part of a mediation/arbitration"
+                },
+                {
+                    id: 5604,
+                    label: "None of the above"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.next,
+                    answers: [
+                        { questionId: 56, optionId: 5604 }
+                    ],
+                    result: {questionId: 56, optionId: 5604, repo: "some repo to question 56 None"},
+                    nextQuestionId: 57,
+                },
+                {
+                    type: TriggerType.default,
+                    answers: [],
+                    result: {questionId: 56, optionId: 5600, repo: "some repo to question 56 B"},
+                    response: ["Don’t give out this information. If you plan to deny a request for information, consult a lawyer."],
+                    todos: [{title: "Todo Item 33"}],
+                    nextQuestionId: 59,
+                }
+            ]
+        }
+    );
+    return survey;
+}
+function getSurvey_part6() {
+    let survey: NodeDictionary = {};
+    survey[66] = createNode(
+        {
+            id: 66,
+            type: NodeTypes.single,
+            content: "You completed module",
+            options: [
+                {
+                    id: 6600,
+                    label: "Go to the results"
+                }
+            ],
+            triggers: [
+                {
+                    type: TriggerType.exit,
+                    answers: [
+                        {questionId: 66, optionId: 6600}
+                    ],
+                    nextQuestionId: -1
                 }
             ]
         }

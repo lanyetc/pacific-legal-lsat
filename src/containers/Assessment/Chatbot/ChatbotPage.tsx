@@ -52,6 +52,9 @@ export default class ChatbotPage extends React.Component {
             case TriggerType.skip:
                 moduleId = trigger.nextModuleId;
                 break;
+            case TriggerType.default:
+                moduleId = trigger.nextModuleId ? trigger.nextModuleId : moduleId;
+                break;
             default:
         }
         return moduleId;
