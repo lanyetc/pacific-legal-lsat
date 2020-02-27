@@ -5,7 +5,6 @@ import { Result } from "../../../../data/context";
 export default function QuestionRepo(props: any) {
     const { resultList, questionList} = props;
     console.log(questionList);
-    const survey = getSurvey();
     return (
         <div className="repo-container">
             {resultList.map((result: Result, key: any) => {

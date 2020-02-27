@@ -7,10 +7,8 @@ import HeaderLinks from "../../../components/Header/HeaderLink"
 import ProgressBar from "./ProgressBar";
 import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
-import { getSurvey, getModules, Node, Answer, Module, NodeTypes, TriggerType, Trigger } from "../../../data/data";
-import { ResultContext, ResultContextConsumer, Context } from '../../../data/context';
-import { triggerAsyncId } from 'async_hooks';
-import { Message } from '@material-ui/icons';
+import { getSurvey, getModules, NodeTypes, TriggerType, Trigger } from "../../../data/data";
+import { ResultContext, Context } from '../../../data/context';
 import history from '../../../history';
 
 interface IState {
