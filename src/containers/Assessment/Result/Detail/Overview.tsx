@@ -1,8 +1,8 @@
 import React from "react";
 import { Typography, List, ListItem, Radio, FormControlLabel, ListItemSecondaryAction, Button } from "@material-ui/core";
 import DescriptionIcon from '@material-ui/icons/Description';
-function TodoList( props: any) {
-    const {todoList} = props;
+function TodoList(props: any) {
+    const { todoList } = props;
     return (
         <div className="list-container round grey">
             <List>
@@ -28,7 +28,7 @@ function TodoList( props: any) {
 }
 
 function ReminderList(props: any) {
-    const {reminderList} = props;
+    const { reminderList } = props;
     return (
         <div className="list-container ">
             <List>
@@ -49,7 +49,7 @@ function ReminderList(props: any) {
 
 
 export default function Overview(props: any) {
-    const {context} = props;
+    const { context } = props;
     return (
         <div className="container">
             <div className="result todo-container">

@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import ChatbotPage from "./containers/Assessment/Chatbot/ChatbotPage";
 import ResultPage from "./containers/Assessment/Result/ResultPage";
-import { ResultContextProvider} from '././data/context'
+import { ResultContextProvider } from '././data/context'
 import './App.css';
 import './components/common.css';
 
