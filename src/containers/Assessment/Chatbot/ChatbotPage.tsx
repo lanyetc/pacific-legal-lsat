@@ -44,24 +44,13 @@ export default class ChatbotPage extends React.Component {
         this.displayNextMsg(1);
     }
 
-    public checkModule(trigger: Trigger) {
-        let moduleId = this.state.currentModuleId;
-        switch (trigger.type) {
-            case TriggerType.skip:
-                moduleId = trigger.nextModuleId;
-                break;
-            default:
-        }
-        return moduleId;
-    }
-
     public displayNextMsg(qId: number) {
         const nextMessage = this.modules[this.state.currentModuleId].nodes[qId];
         this.state.messageList.push(nextMessage);
         this.setState((state: IState, props) => {
             return {
                 currentMessage: nextMessage,
-                messageList: state.messageList // CHANGE THIS TO ADD TO THE MESSAGE LIST (right now it just replaces the current message list)
+                messageList: state.messageList
             }
         })
         if (nextMessage.type === NodeTypes.message) { // if next message type is general message, auto display next one
@@ -73,10 +62,6 @@ export default class ChatbotPage extends React.Component {
             this.displayNextMsg(nextMessage.triggers[0].nextQuestionId);
 
         }
-    }
-
-    private isInactiveQuestion(questionId: number) {
-        return questionId !== this.state.currentMessage.id
     }
 
     public handleSelectOptions(questionId: any, selectedOptionId: any) { // this method will need to be refactored and the functionality will need to be extended later.
@@ -130,10 +115,6 @@ export default class ChatbotPage extends React.Component {
         })
     }
 
-    public isCorrectTrigger(answer: any, currentQuestionId: any, currentOptionId: any) {
-        return answer.optionId === currentOptionId && answer.questionId === currentQuestionId
-    }
-
     public handleShowExtraInfo(questionId: any) {
         if (this.isInactiveQuestion(questionId)) {
             return;
@@ -146,6 +127,25 @@ export default class ChatbotPage extends React.Component {
                 messageList: [...state.messageList, repeatMessage]
             }
         });
+    }
+
+    public checkModule(trigger: Trigger) {
+        let moduleId = this.state.currentModuleId;
+        switch (trigger.type) {
+            case TriggerType.skip:
+                moduleId = trigger.nextModuleId;
+                break;
+            default:
+        }
+        return moduleId;
+    }
+
+    public isCorrectTrigger(answer: any, currentQuestionId: any, currentOptionId: any) {
+        return answer.optionId === currentOptionId && answer.questionId === currentQuestionId
+    }
+
+    private isInactiveQuestion(questionId: number) {
+        return questionId !== this.state.currentMessage.id
     }
 
     render() {
@@ -161,11 +161,8 @@ export default class ChatbotPage extends React.Component {
                     absolute
 
                 />
-
-
                 <div className="main-container">
                     <ProgressBar ></ProgressBar>
-
                     <Chat
                         messages={this.state.messageList}
                         handleShowExtraInfo={this.handleShowExtraInfo}
