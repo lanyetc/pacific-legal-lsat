@@ -110,9 +110,6 @@ export default class ChatbotPage extends React.Component {
                 if (trigger.type === TriggerType.exit) {
                     history.push('/result')
                 } else {
-                    // oh no! modifying state outside of setstate!
-                    this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
-
                     /// add to resultItem
                     let newTodoList = trigger.todos ? trigger.todos : []
                     resultItem.name = "Privacy Policy";
@@ -123,14 +120,16 @@ export default class ChatbotPage extends React.Component {
                     this.context.updateContext(this.state.currentModuleId, resultItem);
                     console.log(this.context);
 
-                    this.setState({
-                        currentMessage: lastMessage,
-                        currentModuleId: this.checkModule(trigger),
-                        questionPath: this.state.questionPath,
-                        todoList: this.state.todoList.concat(newTodoList)
-                    }, () => {
-                        this.displayNextMsg(trigger.nextQuestionId);
-                    })
+                    this.setState((state: IState, props: any) => {
+                        state.currentMessage.selectedOptionId = selectedOptionId;
+                        this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
+                        return {
+                            currentMessage: state.currentMessage,
+                            currentModuleId: this.checkModule(trigger),
+                            questionPath: state.questionPath,
+                            todoList: state.todoList.concat(newTodoList)
+                        }
+                    }, () => this.displayNextMsg(trigger.nextQuestionId));
                 }
                 return true;
             }
@@ -141,7 +140,7 @@ export default class ChatbotPage extends React.Component {
         if (this.isInactiveQuestion(questionId)) {
             return;
         }
-        this.setState(function (state: IState, props: any) {
+        this.setState((state: IState, props: any) => {
             const repeatMessage = cloneDeep(state.currentMessage);
             state.currentMessage.showExtraInfo = true;
             return {
