@@ -1,4 +1,4 @@
-import {Answer} from './data'
+import { Answer } from './data'
 import React from 'react';
 
 export interface Item {
@@ -24,40 +24,40 @@ export interface ModuleResult {
 //       may be can only keep the "results" feild?
 // Consider: how to split results of different sub-modules?
 export interface Context {
-    modules: {[key: number]: ModuleResult};
+    modules: { [key: number]: ModuleResult };
 }
 
 // Context data generating functions. Only for testing
 function getPath() {
     let pathList: Array<Answer> = [];
-    pathList.push({questionId: 1, optionId: 100});
-    pathList.push({questionId: 3, optionId: 300});
-    pathList.push({questionId: 4, optionId: 401});
+    pathList.push({ questionId: 1, optionId: 100 });
+    pathList.push({ questionId: 3, optionId: 300 });
+    pathList.push({ questionId: 4, optionId: 401 });
     return pathList;
 }
 
 function getTodoList() {
     let todoList: Array<Item> = [];
-    todoList.push({title: "Create a privacy policy"});
-    todoList.push({title: "Review social media terms of service"});
-    todoList.push({title: "Outline personal info access "});
-    todoList.push({title: "Train employees on privacy policies"});
+    todoList.push({ title: "Create a privacy policy" });
+    todoList.push({ title: "Review social media terms of service" });
+    todoList.push({ title: "Outline personal info access " });
+    todoList.push({ title: "Train employees on privacy policies" });
     return todoList;
 }
 
 function getReminders() {
     let reminderList: Array<Item> = [];
-    reminderList.push({title: "Only use mass messages for fundraising"});
-    reminderList.push({title: "Get consent before sending mass messages"});
-    reminderList.push({title: "Lorem ipsum dolor sit amet"});
-    return reminderList; 
+    reminderList.push({ title: "Only use mass messages for fundraising" });
+    reminderList.push({ title: "Get consent before sending mass messages" });
+    reminderList.push({ title: "Lorem ipsum dolor sit amet" });
+    return reminderList;
 }
 
 function getResultList() {
     let resultList: Array<Result> = [];
-    resultList.push({questionId: 1, optionId: 100, repo: "result repo no 1"});
-    resultList.push({questionId: 3, optionId: 300, repo: "result repo no 3"});
-    resultList.push({questionId: 4, optionId: 401, repo: "result repo no 4"});
+    resultList.push({ questionId: 1, optionId: 100, repo: "result repo no 1" });
+    resultList.push({ questionId: 3, optionId: 300, repo: "result repo no 3" });
+    resultList.push({ questionId: 4, optionId: 401, repo: "result repo no 4" });
     return resultList;
 }
 
@@ -66,22 +66,22 @@ export function getContext() {
     let todos = getTodoList();
     let reminders = getReminders();
     let results = getResultList();
-    let module = {name: "Privacy Policy", path: path, todos: todos, reminders: reminders, results: results};
-    let context:Context = {modules: {1: module}};
-    return context; 
+    let module = { name: "Privacy Policy", path: path, todos: todos, reminders: reminders, results: results };
+    let context: Context = { modules: { 1: module } };
+    return context;
 }
 
 // default context
-const context:Context = {modules:{}};
+const context: Context = { modules: {} };
 
 export const ResultContext = React.createContext({
     context: context,
-    updateContext: (id: number, contextItm: any) => {}
+    updateContext: (id: number, contextItm: any) => { }
 })
 
 export class ResultContextProvider extends React.Component {
 
-    
+
     updateContext = (id: number, contextItem: any) => {
         let context = this.state.context;
         if (context.modules[id]) { // if current module already exist in result context
@@ -98,7 +98,7 @@ export class ResultContextProvider extends React.Component {
                 path: [contextItem.path]
             }; // if module does not exist
         }
-        this.setState({ context: context})
+        this.setState({ context: context })
     }
     state = {
         context: context,
@@ -110,7 +110,7 @@ export class ResultContextProvider extends React.Component {
             <ResultContext.Provider value={this.state}>
                 {this.props.children}
             </ResultContext.Provider>
-        ) 
+        )
     }
 }
 

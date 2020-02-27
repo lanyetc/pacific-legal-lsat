@@ -1,9 +1,7 @@
 import React from 'react';
 import './ChatbotStyle.css';
-
 import Header from '../../../components/Header/Header'
 import HeaderLinks from "../../../components/Header/HeaderLink"
-
 import ProgressBar from "./ProgressBar";
 import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
@@ -26,7 +24,6 @@ export default class ChatbotPage extends React.Component {
     state: IState;
     constructor(props: any) {
         super(props);
-        // let context = this.context;
         this.survey = getSurvey();
         this.modules = getModules();
         this.state = {
@@ -105,7 +102,7 @@ export default class ChatbotPage extends React.Component {
                 } else {
                     this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
                     let newTodoList = trigger.todos ? trigger.todos : []
-                    resultItem.name = "Privacy Polic";
+                    resultItem.name = "Privacy Policy";
                     resultItem.todos = newTodoList;
                     resultItem.reminders = newTodoList; // change it to reminderlist
                     resultItem.result = trigger.result;

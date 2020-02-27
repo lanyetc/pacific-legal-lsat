@@ -93,7 +93,7 @@ function createTrigger(_trigger: Trigger): { type: TriggerType, answers: Array<A
     if (_trigger.response) {
         newTrigger.response = _trigger.response;
     }
-    if( _trigger.nextModuleId) {
+    if (_trigger.nextModuleId) {
         newTrigger.nextModuleId = _trigger.nextModuleId;
     }
     return newTrigger;
@@ -153,7 +153,7 @@ function getSurvey() {
             ],
             extraInfo: {
                 title: "What is a privacy policy?",
-                content: "A privacy policy is a document which describes whose personal information we are collecting: " + 
+                content: "A privacy policy is a document which describes whose personal information we are collecting: " +
                     "why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing."
             }
         }
@@ -301,7 +301,7 @@ function getSurvey() {
             ],
             extraInfo: {
                 title: "WHAT ARE DATA ANALYTICS?",
-                content: "Data analytics refers to tracking website usage for reporting and evaluating purposes. " + 
+                content: "Data analytics refers to tracking website usage for reporting and evaluating purposes. " +
                     "Google Analytics is a common example of a data analytics service."
             }
         }
@@ -380,7 +380,7 @@ function getSurvey() {
             ],
             extraInfo: {
                 title: "WHAT IS THIS?",
-                content: "Terms and conditions are the agreement between a service and the service user. " + 
+                content: "Terms and conditions are the agreement between a service and the service user. " +
                     "This is the legal text that we agree to before using a service and it can often be " +
                     "accessed by a link on the bottom of a website or within the settings."
             }
@@ -468,7 +468,7 @@ function getSurvey_part1() {
             ],
             extraInfo: {
                 title: "What is a privacy policy?",
-                content: "A privacy policy is a document which describes whose personal information we are collecting: " + 
+                content: "A privacy policy is a document which describes whose personal information we are collecting: " +
                     "why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing."
             }
         }
@@ -616,7 +616,7 @@ function getSurvey_part1() {
             ],
             extraInfo: {
                 title: "WHAT ARE DATA ANALYTICS?",
-                content: "Data analytics refers to tracking website usage for reporting and evaluating purposes. " + 
+                content: "Data analytics refers to tracking website usage for reporting and evaluating purposes. " +
                     "Google Analytics is a common example of a data analytics service."
             }
         }
@@ -695,7 +695,7 @@ function getSurvey_part1() {
             ],
             extraInfo: {
                 title: "WHAT IS THIS?",
-                content: "Terms and conditions are the agreement between a service and the service user. " + 
+                content: "Terms and conditions are the agreement between a service and the service user. " +
                     "This is the legal text that we agree to before using a service and it can often be " +
                     "accessed by a link on the bottom of a website or within the settings."
             }
@@ -933,7 +933,7 @@ function getSurvey_part2() {
                     answers: [
                         { questionId: 15, optionId: 1500 }
                     ],
-                    todos: [{title: "Todo Item 7"}],
+                    todos: [{ title: "Todo Item 7" }],
                     result: { questionId: 15, optionId: 1500, repo: "some repo on question 15 No" },
                     nextQuestionId: 16
                 }
@@ -970,7 +970,7 @@ function getSurvey_part2() {
                         { questionId: 16, optionId: 1600 }
                     ],
                     result: { questionId: 16, optionId: 1600, repo: "some repo on question 16 No" },
-                    todos: [{title: "Todo Item 8"}],
+                    todos: [{ title: "Todo Item 8" }],
                     nextQuestionId: 17
                 }
             ]
@@ -1011,7 +1011,7 @@ function getSurvey_part2() {
             ],
             extraInfo: {
                 title: "I NEED MORE INFORMATION",
-                content: "Information collected should be related to the society’s purpose/goals. " + 
+                content: "Information collected should be related to the society’s purpose/goals. " +
                     "For example, “we are a theatre company and collect information from our subscribers to sell tickets.”"
             },
         }
@@ -1046,7 +1046,7 @@ function getSurvey_part2() {
                         { questionId: 18, optionId: 1803 }
                     ],
                     result: { questionId: 18, optionId: 1803, repo: "some repo on question 18 other reasons" },
-                    todos: [{title: "Todo Item 8"}],
+                    todos: [{ title: "Todo Item 8" }],
                     nextQuestionId: 17
                 },
                 {
@@ -1080,7 +1080,7 @@ function getSurvey_part2() {
                         { questionId: 19, optionId: 1900 }
                     ],
                     result: { questionId: 19, optionId: 1900, repo: "some repo on question 19 N0" },
-                    todos: [{title: "Todo Item 9"}],
+                    todos: [{ title: "Todo Item 9" }],
                     nextQuestionId: 17
                 },
                 {
@@ -1111,7 +1111,7 @@ function getSurvey_part2() {
                 {
                     type: TriggerType.exit,
                     answers: [
-                        {questionId: 66, optionId: 6600}
+                        { questionId: 66, optionId: 6600 }
                     ],
                     nextQuestionId: -1
                 }
@@ -1125,7 +1125,7 @@ function getSurvey_part2() {
 function getModules() {
     let modules: { [key: number]: Module } = {};
     modules[1] = { name: "Privacy Policy", nodes: getSurvey_part1() };
-    modules[2] = { name: "Personal Info", nodes: getSurvey_part2()};
+    modules[2] = { name: "Personal Info", nodes: getSurvey_part2() };
     return modules;
 }
 

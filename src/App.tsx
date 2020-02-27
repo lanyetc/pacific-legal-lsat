@@ -13,7 +13,6 @@ const App = () => {
     <Router history={history}>
       <ResultContextProvider>
         <Switch>
-
           <Route path="/assessment" component={ChatbotPage} />
           <Route path="/result" component={ResultPage} />
           <Route path="/" component={ChatbotPage} />
