@@ -66,38 +66,38 @@ function createNode(_node: Node): { id: number, type: NodeTypes, content: string
     return newNode;
 }
 
-function createOption(_option: Option): { id: number, label: string } {
-    let newOption: Option;
-    newOption = {
-        id: _option.id,
-        label: _option.label
-    }
-    return newOption;
-}
-function createAnswer(_answer: Answer): { questionId: number, optionId: number } {
-    let newAnswer: Answer;
-    newAnswer = {
-        questionId: _answer.questionId,
-        optionId: _answer.optionId
-    }
-    return newAnswer;
-}
-function createTrigger(_trigger: Trigger): { type: TriggerType, answers: Array<Answer>, nextQuestionId: number, result?: Result, response?: Array<string>, todos?: Array<Item>, nextModuleId?: number } {
-    let newTrigger: Trigger;
-    newTrigger = {
-        type: _trigger.type,
-        answers: _trigger.answers,
-        result: _trigger.result,
-        nextQuestionId: _trigger.nextQuestionId
-    }
-    if (_trigger.response) {
-        newTrigger.response = _trigger.response;
-    }
-    if (_trigger.nextModuleId) {
-        newTrigger.nextModuleId = _trigger.nextModuleId;
-    }
-    return newTrigger;
-}
+// function createOption(_option: Option): { id: number, label: string } {
+//     let newOption: Option;
+//     newOption = {
+//         id: _option.id,
+//         label: _option.label
+//     }
+//     return newOption;
+// }
+// function createAnswer(_answer: Answer): { questionId: number, optionId: number } {
+//     let newAnswer: Answer;
+//     newAnswer = {
+//         questionId: _answer.questionId,
+//         optionId: _answer.optionId
+//     }
+//     return newAnswer;
+// }
+// function createTrigger(_trigger: Trigger): { type: TriggerType, answers: Array<Answer>, nextQuestionId: number, result?: Result, response?: Array<string>, todos?: Array<Item>, nextModuleId?: number } {
+//     let newTrigger: Trigger;
+//     newTrigger = {
+//         type: _trigger.type,
+//         answers: _trigger.answers,
+//         result: _trigger.result,
+//         nextQuestionId: _trigger.nextQuestionId
+//     }
+//     if (_trigger.response) {
+//         newTrigger.response = _trigger.response;
+//     }
+//     if (_trigger.nextModuleId) {
+//         newTrigger.nextModuleId = _trigger.nextModuleId;
+//     }
+//     return newTrigger;
+// }
 
 // function testing() {
 //     let survey: NodeDictionary = {};
