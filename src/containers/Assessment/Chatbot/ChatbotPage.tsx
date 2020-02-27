@@ -8,6 +8,7 @@ import ToDoSection from "./ToDoSection";
 import { getSurvey, getModules, NodeTypes, TriggerType, Trigger } from "../../../data/data";
 import { ResultContext, Context } from '../../../data/context';
 import history from '../../../history';
+import cloneDeep from 'lodash/cloneDeep';
 
 interface IState {
     currentMessage: any,
@@ -22,6 +23,7 @@ export default class ChatbotPage extends React.Component {
     survey: any;
     modules: any;
     state: IState;
+
     constructor(props: any) {
         super(props);
         this.survey = getSurvey();
@@ -37,6 +39,7 @@ export default class ChatbotPage extends React.Component {
         this.handleSelectOptions = this.handleSelectOptions.bind(this);
         this.handleShowExtraInfo = this.handleShowExtraInfo.bind(this);
     }
+
     componentDidMount() {
         this.displayNextMsg(1);
     }
@@ -53,7 +56,6 @@ export default class ChatbotPage extends React.Component {
     }
 
     public displayNextMsg(qId: number) {
-        // const nextMessage = this.survey[qId];
         const nextMessage = this.modules[this.state.currentModuleId].nodes[qId];
         this.state.messageList.push(nextMessage);
         this.setState((state: IState, props) => {
@@ -73,24 +75,32 @@ export default class ChatbotPage extends React.Component {
         }
     }
 
-    public handleSelectOptions(questionId: any, optionId: any) { // this method will need to be refactored and the functionality will need to be extended later.
-        if (questionId !== this.state.currentMessage.id) {
+    private isInactiveQuestion(questionId: number) {
+        return questionId !== this.state.currentMessage.id
+    }
+
+    public handleSelectOptions(questionId: any, selectedOptionId: any) { // this method will need to be refactored and the functionality will need to be extended later.
+        if (this.isInactiveQuestion(questionId)) {
             return;
         }
-        const selectedOptionId = optionId;
+
         let triggered = false;
+        let lastMessage = this.state.currentMessage; // why "lastMessage"?
+        lastMessage.selectedOptionId = selectedOptionId; // set selected optionId. why?
+
+        // add the result item to the question path
         let resultItem: any = {};
-        let lastMessage = this.state.currentMessage;
-        lastMessage.selectedOptionId = selectedOptionId; // set selected optionId
         resultItem.path = { questionId: this.state.currentMessage.id, optionId: selectedOptionId };
-        this.state.questionPath.push(resultItem.path); // add selected option to pathlist
-        const pathLength = this.state.questionPath.length - 1;
+        this.state.questionPath.push(resultItem.path);
+
+        // some tests if at least one trigger causes this function to return true
         this.state.currentMessage.triggers.some((trigger: any) => {
-            if (trigger.type === TriggerType.default) {
+            if (trigger.type === TriggerType.default) { // why do we need default?
                 trigger = true;
             } else {
-                trigger.answers.forEach((answer: any, index: any) => {// check path  
+                trigger.answers.forEach((answer: any, index: any) => { // check path  
                     triggered = false;
+                    const pathLength = this.state.questionPath.length - 1;
                     if (answer.optionId === this.state.questionPath[pathLength - index].optionId && answer.questionId === this.state.questionPath[pathLength - index].questionId) {
                         triggered = true;
                     }
@@ -100,14 +110,19 @@ export default class ChatbotPage extends React.Component {
                 if (trigger.type === TriggerType.exit) {
                     history.push('/result')
                 } else {
+                    // oh no! modifying state outside of setstate!
                     this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
+
+                    /// add to resultItem
                     let newTodoList = trigger.todos ? trigger.todos : []
                     resultItem.name = "Privacy Policy";
                     resultItem.todos = newTodoList;
                     resultItem.reminders = newTodoList; // change it to reminderlist
                     resultItem.result = trigger.result;
+
                     this.context.updateContext(this.state.currentModuleId, resultItem);
                     console.log(this.context);
+
                     this.setState({
                         currentMessage: lastMessage,
                         currentModuleId: this.checkModule(trigger),
@@ -121,18 +136,19 @@ export default class ChatbotPage extends React.Component {
             }
         })
     }
+
     public handleShowExtraInfo(questionId: any) {
-        if (questionId === this.state.currentMessage.id) {
-            let repeatMsg = Object.assign({}, this.state.currentMessage);
-            let lastMsg = this.state.messageList[this.state.messageList.length - 1];
-            lastMsg.showExtraInfo = true;
-            // this.state.messageList[this.state.messageList.length - 1].showExtraInfo = true; // may need to be optimized
-            this.state.messageList.push(repeatMsg);
-            this.setState({
-                currentMessage: repeatMsg,
-                messageList: this.state.messageList
-            })
+        if (this.isInactiveQuestion(questionId)) {
+            return;
         }
+        this.setState(function (state: IState, props: any) {
+            const repeatMessage = cloneDeep(state.currentMessage);
+            state.currentMessage.showExtraInfo = true;
+            return {
+                currentMessage: repeatMessage,
+                messageList: [...state.messageList, repeatMessage]
+            }
+        });
     }
 
     render() {

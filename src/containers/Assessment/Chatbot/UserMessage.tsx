@@ -7,10 +7,6 @@ import Button from '@material-ui/core/Button';
 
 
 export default function UserMessage(props: any) {
-    // what props do user messages need? 
-    // takes userOptions for props.
-
-
     const options = props.message.options;
     const questionId = props.message.id;
     const extraOption = props.message.extraInfo;
