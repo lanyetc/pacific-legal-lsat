@@ -71,16 +71,13 @@ export default class ChatbotPage extends React.Component {
             return;
         }
 
-        let lastMessage = this.state.currentMessage; // why "lastMessage"?
-        lastMessage.selectedOptionId = selectedOptionId;
-
         // add the result item to the question path
         let resultItem: any = {};
         resultItem.path = { questionId: this.state.currentMessage.id, optionId: selectedOptionId };
         this.state.questionPath.push(resultItem.path); // FIXME modifies state outside of setstate
 
         // why are we using some?
-        this.state.currentMessage.triggers.some((trigger: any) => {
+        this.state.currentMessage.triggers.some((trigger: Trigger) => {
             if (trigger.type === TriggerType.default) { // why do we need default?
                 return false; // changed this to return false to make it clear that no trigger ends up running. 
             }
@@ -92,10 +89,9 @@ export default class ChatbotPage extends React.Component {
                     if (trigger.type === TriggerType.exit) {
                         history.push('/result')
                     } else {
-                        /// add to result
-                        let newTodoList = trigger.todos ? trigger.todos : [];
-                        let newReminderList = trigger.reminders ? trigger.reminders : [];
-                        resultItem.report = trigger.resultReport;                        
+                        // add to result
+                        let newTodoList = trigger.todos ? trigger.todos : []
+                        let newReminderList = trigger.reminders ? trigger.reminders : []
                         resultItem.name = "Privacy Policy";
                         resultItem.todos = newTodoList;
                         resultItem.reminders = newReminderList; // change it to reminderlist
@@ -108,9 +104,8 @@ export default class ChatbotPage extends React.Component {
                             return {
                                 currentMessage: state.currentMessage,
                                 currentModuleId: this.checkModule(trigger),
-                                questionPath: state.questionPath,
-                                todoList: state.todoList.concat(newTodoList),
-                                reminderList: state.reminderList.concat(newReminderList)
+                                questionPath: state.questionPath, 
+                                todoList: state.todoList.concat(newTodoList)
                             }
                         }, () => this.displayNextMsg(trigger.nextQuestionId));
                     }
