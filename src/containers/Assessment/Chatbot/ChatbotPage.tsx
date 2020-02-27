@@ -84,56 +84,54 @@ export default class ChatbotPage extends React.Component {
             return;
         }
 
-        let triggered = false;
         let lastMessage = this.state.currentMessage; // why "lastMessage"?
-        lastMessage.selectedOptionId = selectedOptionId; // set selected optionId. why?
+        lastMessage.selectedOptionId = selectedOptionId;
 
         // add the result item to the question path
         let resultItem: any = {};
         resultItem.path = { questionId: this.state.currentMessage.id, optionId: selectedOptionId };
-        this.state.questionPath.push(resultItem.path);
+        this.state.questionPath.push(resultItem.path); // FIXME modifies state outside of setstate
 
-        // some tests if at least one trigger causes this function to return true
+        // why are we using some?
         this.state.currentMessage.triggers.some((trigger: any) => {
             if (trigger.type === TriggerType.default) { // why do we need default?
-                trigger = true;
-            } else {
-                trigger.answers.forEach((answer: any, index: any) => { // check path  
-                    triggered = false;
-                    const pathLength = this.state.questionPath.length - 1;
-                    if (answer.optionId === this.state.questionPath[pathLength - index].optionId && answer.questionId === this.state.questionPath[pathLength - index].questionId) {
-                        triggered = true;
+                return false; // changed this to return false to make it clear that no trigger ends up running. 
+            }
+
+            trigger.answers.forEach((answer: any, index: any) => { // check path  
+                const pathLength = this.state.questionPath.length - 1;
+                const { optionId, questionId } = this.state.questionPath[pathLength - index];
+                if (this.isCorrectTrigger(answer, questionId, optionId)) {
+                    if (trigger.type === TriggerType.exit) {
+                        history.push('/result')
+                    } else {
+                        /// add to result
+                        let newTodoList = trigger.todos ? trigger.todos : []
+                        resultItem.name = "Privacy Policy";
+                        resultItem.todos = newTodoList;
+                        resultItem.reminders = newTodoList; // change it to reminderlist
+                        resultItem.result = trigger.result;
+                        this.context.updateContext(this.state.currentModuleId, resultItem);
+
+                        this.setState((state: IState, props: any) => {
+                            state.currentMessage.selectedOptionId = selectedOptionId;
+                            state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
+                            return {
+                                currentMessage: state.currentMessage,
+                                currentModuleId: this.checkModule(trigger),
+                                questionPath: state.questionPath,
+                                todoList: state.todoList.concat(newTodoList)
+                            }
+                        }, () => this.displayNextMsg(trigger.nextQuestionId));
                     }
-                })
-            }
-            if (triggered) {
-                if (trigger.type === TriggerType.exit) {
-                    history.push('/result')
-                } else {
-                    /// add to resultItem
-                    let newTodoList = trigger.todos ? trigger.todos : []
-                    resultItem.name = "Privacy Policy";
-                    resultItem.todos = newTodoList;
-                    resultItem.reminders = newTodoList; // change it to reminderlist
-                    resultItem.result = trigger.result;
-
-                    this.context.updateContext(this.state.currentModuleId, resultItem);
-                    console.log(this.context);
-
-                    this.setState((state: IState, props: any) => {
-                        state.currentMessage.selectedOptionId = selectedOptionId;
-                        this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
-                        return {
-                            currentMessage: state.currentMessage,
-                            currentModuleId: this.checkModule(trigger),
-                            questionPath: state.questionPath,
-                            todoList: state.todoList.concat(newTodoList)
-                        }
-                    }, () => this.displayNextMsg(trigger.nextQuestionId));
+                    return true;
                 }
-                return true;
-            }
+            })
         })
+    }
+
+    public isCorrectTrigger(answer: any, currentQuestionId: any, currentOptionId: any) {
+        return answer.optionId === currentOptionId && answer.questionId === currentQuestionId
     }
 
     public handleShowExtraInfo(questionId: any) {
