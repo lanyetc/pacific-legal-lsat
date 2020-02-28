@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pacific-legal-lsat/precache-manifest.422d89deb23595d7f64635e0cf6e0229.js"
+  "/pacific-legal-lsat/precache-manifest.2faf82e29daeca57b1f3d3e00d709e45.js"
 );
 
 self.addEventListener('message', (event) => {
