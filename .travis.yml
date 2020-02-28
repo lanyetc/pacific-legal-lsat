@@ -1,5 +1,6 @@
 language: node_js
 node_js: stable
+verbose: true
 
 cache:
   directories:
@@ -12,6 +13,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: dist
+  local_dir: build
   on:
     branch: master
