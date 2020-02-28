@@ -77,7 +77,7 @@ export default class ChatbotPage extends React.Component {
         this.state.questionPath.push(resultItem.path); // FIXME modifies state outside of setstate
 
         // why are we using some?
-        this.state.currentMessage.triggers.some((trigger: Trigger) => {
+        this.state.currentMessage.triggers.forEach((trigger: Trigger) => {
             if (trigger.type === TriggerType.default) { // why do we need default?
                 return false; // changed this to return false to make it clear that no trigger ends up running. 
             }
@@ -104,15 +104,13 @@ export default class ChatbotPage extends React.Component {
                             return {
                                 currentMessage: state.currentMessage,
                                 currentModuleId: this.checkModule(trigger),
-                                questionPath: state.questionPath, 
+                                questionPath: state.questionPath,
                                 todoList: state.todoList.concat(newTodoList)
                             }
                         }, () => this.displayNextMsg(trigger.nextQuestionId));
                     }
-                    return true;
                 }
             })
-            return true; // FIXME to remove compiler warnings for now
         })
     }
 
