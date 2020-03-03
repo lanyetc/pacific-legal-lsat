@@ -1,14 +1,13 @@
 .appBar {
     display: flex;
-    padding: 18px 64px;
+    padding: 8px 140px;
     margin-bottom: 20px;
     color: #747474;
     width: 100%;
-    background-color: transparent;
-    box-shadow: none !important;
     align-items: center;
     flex-flow: row nowrap;
     justify-content: flex-start;
+    box-shadow: 0 3px 6px 0 rgba(46, 46, 46, 0.4) !important;
 }
 
 .navContainer {
@@ -22,17 +21,20 @@
 }
 
 .appBar .navBrand {
-    line-height: 30px;
-    padding: 8px 16px;
+    width: 52px;
 }
 
-.navTitle {
-    font-size: 28px;
-    padding: 0 16px;
-    color: #193c81;
+.navTitle, .brandTitle {
+    font-size: 25px;
+    color: #464545;
     display: inline-block;
-    line-height: 46px;
+    line-height: 52px;
     vertical-align: bottom;
+}
+
+.brandTitle {
+    padding-left: 54px;
+    font-weight: 600;
 }
 
 .appBar .navList {
@@ -50,6 +52,10 @@
 
 .appBar .navLink {
     position: relative;
+    font-size: 14px;
+    color: #464545;
+    text-transform: capitalize;
+    font-weight: normal;
 }
 
 .tab span{

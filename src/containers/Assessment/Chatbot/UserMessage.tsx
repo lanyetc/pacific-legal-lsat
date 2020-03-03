@@ -22,9 +22,8 @@ export default function UserMessage(props: any) {
             </ListItem>) : null
 
     return (
-        <div className="chat-block right">
-            <div className="avatar"></div>
-            <div className="bubble white round">
+        <div className="chat-block user">
+            <div className="bubble round">
                 <List>
                     {optionItems}
                     {extraOptionItem}

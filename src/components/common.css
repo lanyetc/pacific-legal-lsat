@@ -1,5 +1,6 @@
 html, body, #root {
     height: 100%;
+    font-family: Lato;
 }
 
 .white {
@@ -51,8 +52,8 @@ html, body, #root {
 }
 
 .main-container {
-    height: calc(100% - 100px);
-    padding-top: 100px;
+    height: calc(100% - 80px);
+    margin-top: 80px;
 }
 
 .round {

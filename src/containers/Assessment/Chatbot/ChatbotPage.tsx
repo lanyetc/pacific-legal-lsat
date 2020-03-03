@@ -9,6 +9,7 @@ import { getSurvey, getModules, NodeTypes, TriggerType, Trigger } from "../../..
 import { ResultContext, Context } from '../../../data/context';
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
+import banrdIcon from "../../../assets/img/botavator.svg";
 
 interface IState {
     currentMessage: any,
@@ -152,8 +153,9 @@ export default class ChatbotPage extends React.Component {
         return (
             <div className="full-screen-container grey">
                 <Header
-                    brand="PLEO"
-                    toolTitle="NPO SELF ASSESSMENT "
+                    brand= {banrdIcon}
+                    brandName = "LSALT 2.0 | "
+                    toolTitle="Non-Profit Self Assessment"
                     fixed
                     color="white"
                     rightLinks={<HeaderLinks />}

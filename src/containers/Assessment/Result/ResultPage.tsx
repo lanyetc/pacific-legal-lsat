@@ -4,13 +4,16 @@ import HeaderLinks from "../../../components/Header/HeaderLink";
 import ResultDetail from "./Detail/ResultDetail";
 import { ResultContextConsumer } from "../../../data/context";
 import "./ResultStyle.css";
+import banrdIcon from "../../../assets/img/botavator.svg";
+
 
 export default function ResultPage() {
     return (
         <div className="full-screen-container white">
             <Header
-                brand="PLEO"
-                toolTitle="NPO SELF ASSESSMENT "
+                brand={banrdIcon}
+                brandName = "LSALT 2.0 | "
+                toolTitle="Non-profit Self Assessment"
                 fixed
                 color="white"
                 rightLinks={<HeaderLinks />}
