@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs, Tab } from "@material-ui/core";
+import './TabNatStyle.css';
 
 export default function TabNav(props: any) {
     const { tabList } = props;
@@ -16,11 +17,8 @@ export default function TabNav(props: any) {
     });
     return (
         <div className="container">
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" variant="fullWidth">
+            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" variant="fullWidth" className="tab-nav">
                 {tabs}
-                {/* <Tab label="Item One" {...a11yProps(0)} />
-            <Tab label="Item Two" {...a11yProps(1)} />
-            <Tab label="Item Three" {...a11yProps(2)} /> */}
             </Tabs>
             {tabList.map((prop: any, key: any) => {
                 if (key === value) {

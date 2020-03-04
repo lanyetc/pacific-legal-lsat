@@ -9,7 +9,7 @@ import banrdIcon from "../../../assets/img/botavator.svg";
 
 export default function ResultPage() {
     return (
-        <div className="full-screen-container white">
+        <div className="full-screen-container white result-page">
             <Header
                 brand={banrdIcon}
                 brandName = "LSALT 2.0 | "

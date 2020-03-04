@@ -47,6 +47,11 @@ export default class ChatbotPage extends React.Component {
         this.displayNextMsg(1);
     }
 
+    public scrollToBottom() {
+        let chatbotScorller = document.getElementById('chatbot-scroller') as HTMLElement;
+        chatbotScorller.scrollTop = chatbotScorller.scrollHeight;
+    }
+
     public displayNextMsg(qId: number) {
         const nextMessage = this.modules[this.state.currentModuleId].nodes[qId];
         this.state.messageList.push(nextMessage);
@@ -55,6 +60,8 @@ export default class ChatbotPage extends React.Component {
                 currentMessage: nextMessage,
                 messageList: state.messageList
             }
+        },() => {
+            this.scrollToBottom();
         })
         if (nextMessage.type === NodeTypes.message) { // if next message type is general message, auto display next one
             this.setState((state: IState, props) => {
@@ -63,8 +70,8 @@ export default class ChatbotPage extends React.Component {
                 }
             })
             this.displayNextMsg(nextMessage.triggers[0].nextQuestionId);
-
         }
+        
     }
 
     public handleSelectOptions(questionId: any, selectedOptionId: any) { // this method will need to be refactored and the functionality will need to be extended later.
@@ -143,7 +150,8 @@ export default class ChatbotPage extends React.Component {
                     history.push('/result')
                 } else {
                     this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
-                    let newTodoList = trigger.todos ? trigger.todos : []
+                    let newTodoList = trigger.todos ? trigger.todos : [];
+                    let newReminderList = trigger.reminders? trigger.reminders : [];
                     resultItem.name = "Privacy Polic";
                     resultItem.todos = newTodoList;
                     resultItem.reminders = newTodoList; // change it to reminderlist
@@ -154,7 +162,8 @@ export default class ChatbotPage extends React.Component {
                         currentMessage: lastMessage,
                         currentModuleId: this.checkModule(trigger),
                         questionPath: this.state.questionPath,
-                        todoList: this.state.todoList.concat(newTodoList)
+                        todoList: this.state.todoList.concat(newTodoList),
+                        reminderList: this.state.reminderList.concat(newReminderList)
                     }, () => {
                         this.displayNextMsg(trigger.nextQuestionId);
                     })
