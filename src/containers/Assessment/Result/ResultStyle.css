@@ -118,3 +118,32 @@
     background-color: #a7a7a7;
     text-align: center;
 }
+
+.result .list-container {
+    margin-top: 0;
+    padding: 0 50px;
+}
+
+.result .list-container .list-item {
+    padding: 36px 0;
+    border-bottom: solid 1px #cbcbcb;
+}
+
+.result .todo-item-bullet,
+.result .reminder-item-bullet {
+    border-radius: 20px;
+}
+
+.result .todo-item-bullet {
+    box-shadow: 1px 1px 3px 0 rgba(79, 118, 250, 0.76);
+    background-color: #2756f2;
+}
+
+.result .reminder-item-bullet {
+    box-shadow: 1px 1px 3px 0 rgba(79, 118, 250, 0.76);
+    background-color: #464545;
+}
+
+.item-label {
+    margin-left: 12px;
+}

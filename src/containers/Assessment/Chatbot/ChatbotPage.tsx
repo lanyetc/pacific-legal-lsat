@@ -106,7 +106,8 @@ export default class ChatbotPage extends React.Component {
                                 currentMessage: state.currentMessage,
                                 currentModuleId: this.checkModule(trigger),
                                 questionPath: state.questionPath,
-                                todoList: state.todoList.concat(newTodoList)
+                                todoList: state.todoList.concat(newTodoList),
+                                reminderList: state.reminderList.concat(newReminderList)
                             }
                         }, () => this.displayNextMsg(trigger.nextQuestionId));
                     }
@@ -151,10 +152,10 @@ export default class ChatbotPage extends React.Component {
     render() {
         console.log("messagelist: " + JSON.stringify(this.state.messageList))
         return (
-            <div className="full-screen-container grey">
+            <div className="full-screen-container grey chatbot-page">
                 <Header
                     brand= {banrdIcon}
-                    brandName = "LSALT 2.0 | "
+                    brandName = "LSALT 2.0 |"
                     toolTitle="Non-Profit Self Assessment"
                     fixed
                     color="white"

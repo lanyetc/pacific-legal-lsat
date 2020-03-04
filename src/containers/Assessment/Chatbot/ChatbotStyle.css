@@ -1,3 +1,7 @@
+.chatbot-page.full-screen-container {
+    overflow-y: hidden;
+}
+
 .content-container {
     height: 100%;
     width: calc(100% - 144px - 452px);
@@ -50,12 +54,18 @@
   font-weight: 800;
 }
 
-.todo-item-bullet {
+.todo-item-bullet, .reminder-item-bullet {
     width: 12px;
     height: 12px;
     border-radius: 2px;
-    border: solid 1.1px #e48241;
+}
+
+.todo-item-bullet {
     background-color: #e48241;
+}
+
+.reminder-item-bullet {
+    background-color: #848484;
 }
 
 .chat.todo-container .item-label {
@@ -104,7 +114,7 @@
     box-sizing: border-box;
     vertical-align: top;
     margin: 0 8px;
-    max-width: 600px;
+    min-width: 320px;
     display: inline-block;
 }
 
@@ -114,9 +124,32 @@
 }
 
 .user .bubble {
-    min-width: 320px;
     background-color: #f8f1e7;
     right: 0;
+}
+
+@media (min-width: 1410px) {
+    .bubble {
+        max-width: 600px;
+    }
+}
+
+@media (min-width: 1320px) and (max-width: 1409px) {
+    .bubble {
+        max-width: 500px;
+    }
+}
+
+@media (min-width: 1210px) and (max-width: 1319px) {
+    .bubble {
+        max-width: 400px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1210px) {
+    .bubble {
+        max-width: calc(100% - 100px);
+    }
 }
 
 

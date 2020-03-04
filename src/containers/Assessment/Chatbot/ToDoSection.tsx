@@ -32,12 +32,8 @@ export default function ToDoSection(props: any) {
                     <List>
                         {reminderList.map((item: any, key: any) => {
                             return (<ListItem key={key}>
-                                <FormControlLabel
-                                    value={item.title}
-                                    control={<Radio color="primary" />}
-                                    label={item.title}
-                                    labelPlacement="end"
-                                />
+                               <div className="reminder-item-bullet"/>
+                                <span className= "item-label" >{item.title}</span>
                             </ListItem>)
                         })}
                     </List>
