@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/pacific-legal-lsat/static/css/main.e4dbef0b.chunk.css",
-    "main.js": "/pacific-legal-lsat/static/js/main.06b44721.chunk.js",
-    "main.js.map": "/pacific-legal-lsat/static/js/main.06b44721.chunk.js.map",
+    "main.css": "/pacific-legal-lsat/static/css/main.50c8a3a2.chunk.css",
+    "main.js": "/pacific-legal-lsat/static/js/main.4097451a.chunk.js",
+    "main.js.map": "/pacific-legal-lsat/static/js/main.4097451a.chunk.js.map",
     "runtime-main.js": "/pacific-legal-lsat/static/js/runtime-main.6dffc024.js",
     "runtime-main.js.map": "/pacific-legal-lsat/static/js/runtime-main.6dffc024.js.map",
-    "static/js/2.899f8b7f.chunk.js": "/pacific-legal-lsat/static/js/2.899f8b7f.chunk.js",
-    "static/js/2.899f8b7f.chunk.js.map": "/pacific-legal-lsat/static/js/2.899f8b7f.chunk.js.map",
+    "static/js/2.1217b4c4.chunk.js": "/pacific-legal-lsat/static/js/2.1217b4c4.chunk.js",
+    "static/js/2.1217b4c4.chunk.js.map": "/pacific-legal-lsat/static/js/2.1217b4c4.chunk.js.map",
     "index.html": "/pacific-legal-lsat/index.html",
-    "precache-manifest.2faf82e29daeca57b1f3d3e00d709e45.js": "/pacific-legal-lsat/precache-manifest.2faf82e29daeca57b1f3d3e00d709e45.js",
+    "precache-manifest.b8a42bb2bb69914de47e7a0529f2bc52.js": "/pacific-legal-lsat/precache-manifest.b8a42bb2bb69914de47e7a0529f2bc52.js",
     "service-worker.js": "/pacific-legal-lsat/service-worker.js",
-    "static/css/main.e4dbef0b.chunk.css.map": "/pacific-legal-lsat/static/css/main.e4dbef0b.chunk.css.map",
-    "static/js/2.899f8b7f.chunk.js.LICENSE.txt": "/pacific-legal-lsat/static/js/2.899f8b7f.chunk.js.LICENSE.txt"
+    "static/css/main.50c8a3a2.chunk.css.map": "/pacific-legal-lsat/static/css/main.50c8a3a2.chunk.css.map",
+    "static/js/2.1217b4c4.chunk.js.LICENSE.txt": "/pacific-legal-lsat/static/js/2.1217b4c4.chunk.js.LICENSE.txt",
+    "static/media/botavator.svg": "/pacific-legal-lsat/static/media/botavator.308830c4.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.6dffc024.js",
-    "static/js/2.899f8b7f.chunk.js",
-    "static/css/main.e4dbef0b.chunk.css",
-    "static/js/main.06b44721.chunk.js"
+    "static/js/2.1217b4c4.chunk.js",
+    "static/css/main.50c8a3a2.chunk.css",
+    "static/js/main.4097451a.chunk.js"
   ]
 }
