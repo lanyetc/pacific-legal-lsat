@@ -1,4 +1,4 @@
-import {Option, Trigger, SingleSelectQuestion, MultiSelectQuestion, AutoPlayMessage, OptionMatcher} from './index'
+import {Option, Trigger, SingleSelectQuestion, MultiSelectQuestion, AutoPlayMessage, ConditionMatcher} from './index'
 import { v4 as uuidv4 } from 'uuid';
 
 export enum NodeType {
@@ -13,27 +13,24 @@ export interface NodeData {
     options: Option[]
     triggers: Trigger[] 
     extraInfo: string[]
-    optionMatcher: OptionMatcher
 }
-
-
 
 export class NodeFactory {
 
     static createNodeFromData(data: NodeData): Node|never {
-        let { type, content, options, triggers, extraInfo, optionMatcher } = data 
+        let { type, content, options, triggers, extraInfo } = data 
         if (type == NodeType.singleSelect){
             return new SingleSelectQuestion(
-                content, options, triggers, extraInfo, optionMatcher
+                content, options, triggers, extraInfo
             )
         }
         else if (type == NodeType.multiSelect){
             return new MultiSelectQuestion(
-                content, options, triggers, extraInfo, optionMatcher
+                content, options, triggers, extraInfo
             )
         } else if (type == NodeType.autoPlayMessage){
             return new AutoPlayMessage(
-                content, options, triggers, extraInfo, optionMatcher
+                content, options, triggers, extraInfo
             )
         }
         throw new Error();       
@@ -48,8 +45,7 @@ export class Node {
         private _content: string[], 
         private _options: Option[], 
         private _triggers: Trigger[], 
-        private _extraInfo: string[],
-        public optionMatcher: OptionMatcher){
+        private _extraInfo: string[]){
         this._id = uuidv4();
     }
 
