@@ -75,102 +75,54 @@ export default class ChatbotPage extends React.Component {
     }
 
     public handleSelectOptions(questionId: any, selectedOptionId: any) { // this method will need to be refactored and the functionality will need to be extended later.
-        // if (this.isInactiveQuestion(questionId)) {
-        //     return;
-        // }
-
-        // // add the result item to the question path
-        // let resultItem: any = {};
-        // resultItem.path = { questionId: this.state.currentMessage.id, optionId: selectedOptionId };
-        // this.state.questionPath.push(resultItem.path); // FIXME modifies state outside of setstate
-
-        // // why are we using some?
-        // this.state.currentMessage.triggers.forEach((trigger: Trigger) => {
-        //     if (trigger.type === TriggerType.default) { // why do we need default?
-        //         return false; // changed this to return false to make it clear that no trigger ends up running. 
-        //     }
-
-        //     trigger.answers.forEach((answer: any, index: any) => { // check path  
-        //         const pathLength = this.state.questionPath.length - 1;
-        //         const { optionId, questionId } = this.state.questionPath[pathLength - index];
-        //         if (this.isCorrectTrigger(answer, questionId, optionId)) {
-        //             if (trigger.type === TriggerType.exit) {
-        //                 history.push('/result')
-        //             } else {
-        //                 // add to result
-        //                 let newTodoList = trigger.todos ? trigger.todos : []
-        //                 let newReminderList = trigger.reminders ? trigger.reminders : []
-        //                 resultItem.name = "Privacy Policy";
-        //                 resultItem.todos = newTodoList;
-        //                 resultItem.reminders = newReminderList; // change it to reminderlist
-        //                 resultItem.result = trigger.result;
-        //                 this.context.updateContext(this.state.currentModuleId, resultItem);
-
-        //                 this.setState((state: IState, props: any) => {
-        //                     state.currentMessage.selectedOptionId = selectedOptionId;
-        //                     state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
-        //                     return {
-        //                         currentMessage: state.currentMessage,
-        //                         currentModuleId: this.checkModule(trigger),
-        //                         questionPath: state.questionPath,
-        //                         todoList: state.todoList.concat(newTodoList),
-        //                         reminderList: state.reminderList.concat(newReminderList)
-        //                     }
-        //                 }, () => this.displayNextMsg(trigger.nextQuestionId));
-        //             }
-        //         }
-        //     })
-        // })
-
-        // comment the current code and add the previous version. Just to make the default work for now.
-        // Remove this once the refactor finished
-        if (questionId !== this.state.currentMessage.id) {
+        if (this.isInactiveQuestion(questionId)) {
             return;
         }
-        let triggered = false;
+
+        // add the result item to the question path
         let resultItem: any = {};
-        let lastMessage = this.state.currentMessage;
-        lastMessage.selectedOptionId = selectedOptionId; // set selected optionId
         resultItem.path = { questionId: this.state.currentMessage.id, optionId: selectedOptionId };
-        this.state.questionPath.push(resultItem.path); // add selected option to pathlist
-        const pathLength = this.state.questionPath.length - 1;
-        this.state.currentMessage.triggers.some((trigger: any) => {
-            if (trigger.type === TriggerType.default) {
-                triggered = true;
-            } else {
-                trigger.answers.forEach((answer: any, index: any) => {// check path  
-                    triggered = false;
-                    if (answer.optionId === this.state.questionPath[pathLength - index].optionId && answer.questionId === this.state.questionPath[pathLength - index].questionId) {
-                        triggered = true;
+        this.state.questionPath.push(resultItem.path); // FIXME modifies state outside of setstate
+
+        // why are we using some?
+        this.state.currentMessage.triggers.forEach((trigger: Trigger) => {
+            if (trigger.type === TriggerType.default) { // why do we need default?
+                return false; // changed this to return false to make it clear that no trigger ends up running. 
+            }
+
+            trigger.answers.forEach((answer: any, index: any) => { // check path  
+                const pathLength = this.state.questionPath.length - 1;
+                const { optionId, questionId } = this.state.questionPath[pathLength - index];
+                if (this.isCorrectTrigger(answer, questionId, optionId)) {
+                    if (trigger.type === TriggerType.exit) {
+                        history.push('/result')
+                    } else {
+                        // add to result
+                        let newTodoList = trigger.todos ? trigger.todos : []
+                        let newReminderList = trigger.reminders ? trigger.reminders : []
+                        resultItem.name = "Privacy Policy";
+                        resultItem.todos = newTodoList;
+                        resultItem.reminders = newReminderList; // change it to reminderlist
+                        resultItem.result = trigger.result;
+                        this.context.updateContext(this.state.currentModuleId, resultItem);
+
+                        this.setState((state: IState, props: any) => {
+                            state.currentMessage.selectedOptionId = selectedOptionId;
+                            state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
+                            return {
+                                currentMessage: state.currentMessage,
+                                currentModuleId: this.checkModule(trigger),
+                                questionPath: state.questionPath,
+                                todoList: state.todoList.concat(newTodoList),
+                                reminderList: state.reminderList.concat(newReminderList)
+                            }
+                        }, () => this.displayNextMsg(trigger.nextQuestionId));
                     }
-                })
-            }
-            if (triggered) {
-                if (trigger.type === TriggerType.exit) {
-                    history.push('/result')
-                } else {
-                    this.state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
-                    let newTodoList = trigger.todos ? trigger.todos : [];
-                    let newReminderList = trigger.reminders? trigger.reminders : [];
-                    resultItem.name = "Privacy Polic";
-                    resultItem.todos = newTodoList;
-                    resultItem.reminders = newTodoList; // change it to reminderlist
-                    resultItem.result = trigger.result;
-                    this.context.updateContext(this.state.currentModuleId, resultItem);
-                    console.log(this.context);
-                    this.setState({
-                        currentMessage: lastMessage,
-                        currentModuleId: this.checkModule(trigger),
-                        questionPath: this.state.questionPath,
-                        todoList: this.state.todoList.concat(newTodoList),
-                        reminderList: this.state.reminderList.concat(newReminderList)
-                    }, () => {
-                        this.displayNextMsg(trigger.nextQuestionId);
-                    })
                 }
-                return true;
-            }
+            })
         })
+
+        
     }
 
     public handleShowExtraInfo(questionId: any) {

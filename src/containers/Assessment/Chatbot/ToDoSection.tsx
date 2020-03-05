@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, FormControlLabel, Radio } from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 
 export default function ToDoSection(props: any) {
     const { todoList, reminderList } = props;

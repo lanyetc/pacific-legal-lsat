@@ -1,6 +1,5 @@
 import React from "react";
-import { Typography, List, ListItem, Radio, FormControlLabel, ListItemSecondaryAction, Button } from "@material-ui/core";
-import DescriptionIcon from '@material-ui/icons/Description';
+import { Typography, List, ListItem, ListItemSecondaryAction, Button } from "@material-ui/core";
 function TodoList(props: any) {
     const { todoList } = props;
     return (
