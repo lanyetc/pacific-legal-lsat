@@ -1,5 +1,5 @@
 import React from "react";
-import botAvator from "../../../assets/img/botavator.svg"
+import botAvator from "../../../Assets/img/botavator.svg"
 
 export default function ChatbotMessage(props: any) {
     return (

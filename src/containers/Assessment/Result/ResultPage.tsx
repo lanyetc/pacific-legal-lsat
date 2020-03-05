@@ -4,7 +4,7 @@ import HeaderLinks from "../../../components/Header/HeaderLink";
 import ResultDetail from "./Detail/ResultDetail";
 import { ResultContextConsumer } from "../../../data/context";
 import "./ResultStyle.css";
-import banrdIcon from "../../../assets/img/botavator.svg";
+import banrdIcon from "../../../Assets/img/botavator.svg";
 
 
 export default function ResultPage() {

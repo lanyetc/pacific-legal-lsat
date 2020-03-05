@@ -9,7 +9,7 @@ import { getSurvey, getModules, NodeTypes, TriggerType, Trigger } from "../../..
 import { ResultContext, Context } from '../../../data/context';
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
-import banrdIcon from "../../../assets/img/botavator.svg";
+import banrdIcon from "../../../Assets/img/botavator.svg";
 
 interface IState {
     currentMessage: any,
