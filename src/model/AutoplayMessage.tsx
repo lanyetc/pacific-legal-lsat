@@ -1,12 +1,12 @@
-import {Option, Node, Trigger, OptionMatcher} from './index'
+import {Option, Node, Trigger, OptionMatcher} from '.'
 
-export class AutoplayMessage extends Node {
+export class AutoPlayMessage extends Node {
     constructor(
         content: string[], 
         options: Option[], 
         triggers: Trigger[], 
         extraInfo: string[],
-        matchOptions: OptionMatcher){
-            super(content, options, triggers, extraInfo, matchOptions)
+        optionMatcher: OptionMatcher){
+            super(content, options, triggers, extraInfo, optionMatcher)
     }
 }

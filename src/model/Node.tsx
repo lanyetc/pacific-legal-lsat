@@ -1,4 +1,4 @@
-import {Option, Trigger, SingleSelectQuestion, MultiSelectQuestion, AutoplayMessage, OptionMatcher} from './index'
+import {Option, Trigger, SingleSelectQuestion, MultiSelectQuestion, AutoPlayMessage, OptionMatcher} from './index'
 import { v4 as uuidv4 } from 'uuid';
 
 export enum NodeType {
@@ -32,7 +32,7 @@ export class NodeFactory {
                 content, options, triggers, extraInfo, optionMatcher
             )
         } else if (type == NodeType.autoPlayMessage){
-            return new AutoplayMessage(
+            return new AutoPlayMessage(
                 content, options, triggers, extraInfo, optionMatcher
             )
         }
