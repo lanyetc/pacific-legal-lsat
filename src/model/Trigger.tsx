@@ -1,4 +1,4 @@
-import {Condition} from './index'
+import {Condition, ConditionData, ConditionFactory} from './Condition'
 export class Trigger{ 
     constructor(
         private _condition: Condition,
@@ -10,17 +10,18 @@ export class Trigger{
 }
 
 export interface TriggerData {
-    condition: Condition,
+    conditionData: ConditionData,
     action: any,
     todo?: any,
     reminder?: any
 }
 
 export class TriggerFactory{
-    creatTriggersFromData(triggerDatas: TriggerData[]){
+    static creatTriggersFromData(triggerDatas: TriggerData[]){
         let triggers: Trigger[] = [];
         triggerDatas.forEach(data => {
-            let { condition, action, todo, reminder } = data;
+            let { conditionData, action, todo, reminder } = data;
+            const condition: Condition = ConditionFactory.createConditionFromData(conditionData);
             triggers.push(new Trigger(condition, action, todo, reminder));
         });
         return triggers;

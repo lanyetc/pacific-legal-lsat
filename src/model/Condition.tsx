@@ -18,7 +18,7 @@ export class Condition{
 
 
 export class ConditionFactory {
-    createConditionFromData(conditionData: ConditionData){
+    static createConditionFromData(conditionData: ConditionData){
         if(conditionData.type == ConditionMatchType.all){
             const matcher: ConditionMatcher = new MatchAllConditionOptions()
             return new Condition(matcher, conditionData.options)
