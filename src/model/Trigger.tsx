@@ -18,11 +18,11 @@ export interface TriggerData {
 
 export class TriggerFactory{
     creatTriggersFromData(triggerDatas: TriggerData[]){
-        let triggers: Trigger[];
+        let triggers: Trigger[] = [];
         triggerDatas.forEach(data => {
             let { condition, action, todo, reminder } = data;
             triggers.push(new Trigger(condition, action, todo, reminder));
         });
-        
+        return triggers;
     }
 }
