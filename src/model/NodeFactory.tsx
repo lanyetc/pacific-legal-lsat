@@ -6,8 +6,8 @@ import {ConditionFactory} from './Condition'
 
 export class NodeFactory {
     static createNodeFromData(data: NodeData): Node|never {
-        let { type, content, optionData, triggersData, extraInfo } = data 
-        // const triggers: Trigger[] = TriggerFactory.createTriggersFromData(triggersData);
+        let { type, content, optionData, triggerData, extraInfo } = data 
+        const triggers: Trigger[] = TriggerFactory.creatTriggersFromData(triggerData);
         // const options: Option[] = OptionFactory.createOptionsFromData(optionData)
         if (type == NodeType.singleSelect){
             // return new SingleSelectQuestion(

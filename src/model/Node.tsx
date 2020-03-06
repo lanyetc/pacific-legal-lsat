@@ -12,7 +12,7 @@ export interface NodeData {
     type: NodeType
     content: string[]
     optionData: any[] // TODO CHANGE THIS BACK to OptionData[]
-    triggersData: TriggerData[] 
+    triggerData: TriggerData[] 
     extraInfo: string[]
 }
 
