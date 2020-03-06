@@ -11,7 +11,7 @@ export class Trigger{
 }
 
 export interface TriggerData {
-    conditionData: ConditionData,
+    condition: ConditionData,
     action: any,
     todo?: any,
     reminder?: any,
@@ -22,8 +22,8 @@ export class TriggerFactory{
     static creatTriggersFromData(triggerDatas: TriggerData[]){
         let triggers: Trigger[] = [];
         triggerDatas.forEach(data => {
-            let { conditionData, action, todo, reminder, response } = data;
-            const condition: Condition = ConditionFactory.createConditionFromData(conditionData);
+            let { action, todo, reminder, response } = data;
+            const condition: Condition = ConditionFactory.createConditionFromData(data.condition);
             triggers.push(new Trigger(condition, action, todo, reminder, response));
         });
         return triggers;

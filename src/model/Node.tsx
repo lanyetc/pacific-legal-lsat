@@ -8,22 +8,22 @@ export enum NodeType {
 }
 
 export interface NodeData {
-    type: NodeType,
+    type: NodeType
     id: number
-    content: string[]
-    optionData: any[] // TODO CHANGE THIS BACK to OptionsData[]
-    triggerData: TriggerData[] 
-    extraInfo: string[]
+    content: string
+    options: any[] // TODO CHANGE THIS BACK to OptionsData[]
+    triggers: TriggerData[] 
+    extraInfo: any
 }
 
 // TODO: we need to figure out which ones are optional 
 export class Node {
     constructor(
         private _id: number,
-        private _content: string[], 
+        private _content: string, 
         private _options: Option[], 
         private _triggers: Trigger[], 
-        private _extraInfo: string[]){
+        private _extraInfo: any){
     }
 
 
