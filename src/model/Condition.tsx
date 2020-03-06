@@ -18,7 +18,7 @@ export class Condition{
 
 
 export class ConditionFactory {
-    createConditionFromData(conditionData: ConditionData){
+    static createConditionFromData(conditionData: ConditionData): Condition|never{
         if(conditionData.type == ConditionMatchType.all){
             const matcher: ConditionMatcher = new MatchAllConditionOptions()
             return new Condition(matcher, conditionData.options)
@@ -27,5 +27,6 @@ export class ConditionFactory {
             const matcher: ConditionMatcher = new MatchSomeConditionOptions()
             return new Condition(matcher, conditionData.options)
         }
+        throw new Error();
     }
 }
