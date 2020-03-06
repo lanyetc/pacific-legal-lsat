@@ -1,4 +1,4 @@
-import {Option, Trigger, SingleSelectQuestion, MultiSelectQuestion, AutoPlayMessage, ConditionMatcher} from './index'
+import {Option, Trigger, SingleSelectQuestion, MultiSelectQuestion, AutoPlayMessage} from './index'
 import { v4 as uuidv4 } from 'uuid';
 
 export enum NodeType {
@@ -10,31 +10,9 @@ export enum NodeType {
 export interface NodeData {
     type: NodeType
     content: string[]
-    options: Option[]
-    triggers: Trigger[] 
+    optionsData: any[] // TODO CHANGE THIS BACK to OptionsData[]
+    triggersData: any[]  // TODO change this back to TriggersData[]
     extraInfo: string[]
-}
-
-export class NodeFactory {
-
-    static createNodeFromData(data: NodeData): Node|never {
-        let { type, content, options, triggers, extraInfo } = data 
-        if (type == NodeType.singleSelect){
-            return new SingleSelectQuestion(
-                content, options, triggers, extraInfo
-            )
-        }
-        else if (type == NodeType.multiSelect){
-            return new MultiSelectQuestion(
-                content, options, triggers, extraInfo
-            )
-        } else if (type == NodeType.autoPlayMessage){
-            return new AutoPlayMessage(
-                content, options, triggers, extraInfo
-            )
-        }
-        throw new Error();       
-    }
 }
 
 // TODO: we need to figure out which ones are optional 
