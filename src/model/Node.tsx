@@ -1,5 +1,6 @@
 import {Option, Trigger, SingleSelectQuestion, MultiSelectQuestion, AutoPlayMessage} from './index'
 import { v4 as uuidv4 } from 'uuid';
+import {TriggerData} from './Trigger'
 
 export enum NodeType {
     singleSelect,
@@ -10,8 +11,8 @@ export enum NodeType {
 export interface NodeData {
     type: NodeType
     content: string[]
-    optionsData: any[] // TODO CHANGE THIS BACK to OptionsData[]
-    triggersData: any[]  // TODO change this back to TriggersData[]
+    optionData: any[] // TODO CHANGE THIS BACK to OptionData[]
+    triggersData: TriggerData[] 
     extraInfo: string[]
 }
 
