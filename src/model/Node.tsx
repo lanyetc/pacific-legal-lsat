@@ -11,8 +11,8 @@ export enum NodeType {
 export interface NodeData {
     type: NodeType
     content: string[]
-    optionData: any[] // TODO CHANGE THIS BACK to OptionData[]
-    triggerData: TriggerData[] 
+    optionData: any[] // TODO CHANGE THIS BACK to OptionsData[]
+    triggersData: TriggerData[] 
     extraInfo: string[]
 }
 

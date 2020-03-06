@@ -2,7 +2,6 @@
 import {SingleSelectQuestion, MultiSelectQuestion, AutoPlayMessage, NodeType, Node, Trigger} from './index'
 import {NodeData} from './Node'
 import {TriggerFactory} from './Trigger'
-import {ConditionFactory} from './Condition'
 
 export class NodeFactory {
     static createNodeFromData(data: NodeData): Node|never {
