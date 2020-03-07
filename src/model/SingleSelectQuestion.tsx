@@ -1,12 +1,15 @@
-import {Option, Trigger, Node} from './index'
+import {Option, Trigger, Message} from './index'
+import { ResponseMatcher } from './ResponseMatcher'
 
-export class SingleSelectQuestion extends Node{
+export class SingleSelectQuestion extends Message{
     constructor(
+        responseMatcher: ResponseMatcher,
         id: number,
         content: string, 
         options: Option[], 
         triggers: Trigger[], 
+        defualtTrigger: Trigger,
         extraInfo: any){
-            super(id, content, options, triggers, extraInfo)
+            super(responseMatcher, id, content, options, triggers, defualtTrigger, extraInfo)
     }
 }

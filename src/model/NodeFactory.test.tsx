@@ -1,15 +1,12 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import {NodeFactory} from './NodeFactory'
-import {NodeType, Node} from './Node'
-import {ConditionMatchType} from './Condition'
+import {MessageFactory} from './MessageFactory'
+import {MessageType, Message} from './Message'
 
 
-test('Node Creation', () => {
-    const node: Node = NodeFactory.createNodeFromData(
+test('Message Creation', () => {
+    const message = MessageFactory.createMessageFromData(
         {
             id: 1,
-            type: NodeType.singleSelect,
+            type: MessageType.singleSelect,
             content: "Does your org have a privacy policy?",
             options: [
                 {
@@ -23,18 +20,25 @@ test('Node Creation', () => {
             ],
             triggers: [
                 {
+                    expectedResponses: [100],
                     action: { // fix this
                         type: "next",
                         nextQuestionId: 5
                     },
-                    condition: {
-                        type: ConditionMatchType.some,
-                        options: [
-                            {questionId: 1, optionId: 101}
-                        ]
-                    },
+                    resultReport: "some result report.",
+                    todo: "todo item 1",
+                    reminder: "reminder item 1"
                 },
             ],
+            defaultTrigger: {
+                expectedResponses: [101],
+                    action: { // fix this
+                        type: "next",
+                        nextQuestionId: 3
+                    },
+                    resultReport: "some result report.",
+                    reply: "good job!"
+            },
             extraInfo: {
                 title: "What is a privacy policy?",
                 content: "A privacy policy is a document which describes whose personal information we are collecting: " +
@@ -43,5 +47,5 @@ test('Node Creation', () => {
         }
     );
 
-    console.log(JSON.stringify(node));
+    console.log(JSON.stringify(message));
 });
