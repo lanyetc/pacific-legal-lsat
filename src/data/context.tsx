@@ -24,9 +24,9 @@ export interface ModuleResult {
 //       may be can only keep the "results" feild?
 // Consider: how to split results of different sub-modules?
 export interface Context {
-    modules: {[key: number]: ModuleResult};
-    todos?: Array<Item>;
-    reminders?: Array<Item>;
+    modules: { [key: number]: ModuleResult };
+    todos: Array<Item>;
+    reminders: Array<Item>;
 }
 
 // Context data generating functions. Only for testing
@@ -69,13 +69,17 @@ export function getContext() {
     let reminders = getReminders();
     let results = getResultList();
     let module = { name: "Privacy Policy", path: path, todos: todos, reminders: reminders, results: results };
-    let context: Context = { modules: { 1: module } };
+    let context: Context = {
+        modules: { 1: module }, 
+        todos: [],
+        reminders: []
+    };
     return context;
 }
 
 // default context
-const context:Context = {
-    modules:{},
+const context: Context = {
+    modules: {},
     todos: [],
     reminders: []
 };
@@ -104,9 +108,9 @@ export class ResultContextProvider extends React.Component {
                 path: [contextItem.path]
             }; // if module does not exist
         }
-        context.todos = context.todos?.concat(contextItem.todos);
-        context.reminders = context.reminders?.concat(contextItem.reminders);
-        this.setState({ context: context})
+        context.todos = context.todos.concat(contextItem.todos);
+        context.reminders = context.reminders.concat(contextItem.reminders);
+        this.setState({ context: context })
     }
     state = {
         context: context,

@@ -31,10 +31,14 @@ export class Message {
     }
 
     // getters/setters
+    get id() {
+        return this._id;
+    }
+
     get triggers() {
         return this._triggers;
     }
-    get defualtTrigger() {
+    get defaultTrigger() {
         return this._defaultTrigger;
     }
 
@@ -47,6 +51,6 @@ export class Message {
             }
             return trigger;
         })
-        return this.defualtTrigger;
+        return this.defaultTrigger;
     }
 }

@@ -17,6 +17,7 @@ export default function ResultPage() {
                 fixed
                 color="white"
                 rightLinks={<HeaderLinks />}
+                leftLinks={null} 
                 absolute
 
             />

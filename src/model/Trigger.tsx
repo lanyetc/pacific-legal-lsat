@@ -3,14 +3,34 @@ export class Trigger{
         private _expectedResponses: number[], // an array of expected options id.
         private _action: any,
         private _resultReport: string,
-        private _todo?: any,
-        private _reminder?: any,
+        private _todos?: any[],
+        private _reminders?: any[],
         private _reply?: string){
         }
 
     // getters/setters
     get expectedResponses() {
         return this._expectedResponses;
+    }
+
+    get reply() {
+        return this._reply;
+    }
+
+    get action() {
+        return this._action;
+    }
+
+    get resultReport() {
+        return this._resultReport;
+    }
+
+    get todos() {
+        return this._todos;
+    }
+
+    get reminders() {
+        return this._reminders;
     }
 }
 
@@ -25,7 +45,7 @@ export interface TriggerData {
 
 export class TriggerFactory{
     // create an array of triggers
-    static creatTriggersFromData(triggerDatas: TriggerData[]){
+    static createTriggersFromData(triggerDatas: TriggerData[]){
         let triggers: Trigger[] = [];
         triggerDatas.forEach(data => {
             let { expectedResponses, action, resultReport, todo, reminder, reply } = data;
@@ -34,7 +54,7 @@ export class TriggerFactory{
         return triggers;
     }
     // create a single default trigger
-    static creatTriggerFromData(triggerData: TriggerData) {
+    static createTriggerFromData(triggerData: TriggerData) {
         let { expectedResponses, action, resultReport, todo, reminder, reply } = triggerData;
         return new Trigger(expectedResponses, action, resultReport, todo, reminder, reply);
     }
