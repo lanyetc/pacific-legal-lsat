@@ -1,31 +1,65 @@
 
 
+import { mocked } from 'ts-jest/utils'
+
 import {MessageFactory} from '../../../model/index'
-import {MessageType, Message} from '../../../model/index'
+import {MessageType, Message, ResponsePath, Trigger} from '../../../model/index'
 import {getSurvey, getModules} from '../../../data/data'
 import ChatbotPage from './ChatbotPage'
+// import {MessageType, Message} from '../../../model/Message'
+
 jest.mock('../../../data/data')
+// jest.mock('../../../model/Message')
 const mockedGetSurvey = getSurvey as jest.Mock<any>
-const mockedGetModules = getModules as jest.Mock<any>
+const mockedGetModules = getModules as jest.Mock<any> 
+// const mockedMessage: any = mocked(Message, true)
+
 
 describe("ChatbotPage", () => {
-    beforeEach(() => {
+    beforeAll(() => {
+
         const surveyDialogue = generateMessages()
         mockedGetSurvey.mockReturnValue(surveyDialogue)
 
         mockedGetModules.mockReturnValue(
          [{ name: "Privacy Policy", nodes: surveyDialogue }]
         )
-    })
 
-    test('mocked modules and questions are being loaded', () => {
-        let chatbotPage: any = new ChatbotPage();
-        console.log(JSON.stringify(chatbotPage.survey))
+        const trigger: Trigger = new Trigger([1,2], {}, "some result report", ["todo1"], ["reminder1"], "replyy");
+        Message.prototype.findTrigger = jest.fn((responsePath: ResponsePath ) => trigger);
+
+        // let spy = jest.spyOn(Message, 'findTrigger').mockImplementation((responsePath: ResponsePath): Trigger => trigger);
+        // const mockedFindTrigger = jest.fn((trigger: any) => { return "yay"; });
+        // mockedMessage.findTrigger = mockedFindTrigger;
         
     })
 
+    test('mocked modules and questions are being loaded', () => {
+        const surveyDialogue = generateMessages()
+        mockedGetSurvey.mockReturnValue(surveyDialogue)
+
+        const modules = [{ name: "Privacy Policy", nodes: surveyDialogue }]
+        mockedGetModules.mockReturnValue(modules)
+
+        let chatbotPage: any = new ChatbotPage();
+        expect(chatbotPage.survey).toBe(surveyDialogue);
+        expect(chatbotPage.modules).toBe(modules)
+    })
+
+
+    // test('findTrigger method is mocked', () => {
+    //     let chatbotPage: any = new ChatbotPage();
+    //     console.log(JSON.stringify(chatbotPage.handleSelectOptions({moduleId: 3, messageId: 0})))
+    // })
+
+    test('something or other', () => {
+        let chatbotPage: any = new ChatbotPage();
+        chatbotPage.isInactiveQuestion = jest.fn().mockReturnValue(false);
+        chatbotPage.handleSelectOptions(1, 0)
+    })
+
     function generateMessages() {
-        const message1 = MessageFactory.createMessageFromData(
+        const message1: Message= MessageFactory.createMessageFromData(
             {
                 id: 1,
                 type: MessageType.singleSelect,
@@ -69,7 +103,7 @@ describe("ChatbotPage", () => {
             }
         );
     
-        const message2 = MessageFactory.createMessageFromData(
+        const message2: Message = MessageFactory.createMessageFromData(
             {
                 id: 1,
                 type: MessageType.singleSelect,

@@ -1,4 +1,3 @@
-import {Option, Trigger} from './index'
 
 export interface ResponseMatcher {
     /*

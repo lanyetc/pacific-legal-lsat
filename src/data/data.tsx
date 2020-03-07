@@ -14,11 +14,11 @@ export interface Module {
 // COMMENTED OUT SURVEY UNTIL WE UPDATE IT
 
 export function getSurvey(){
-
+    return "dummy data"
 }
 
 export function getModules(){
-    
+    return "more dummy data"
 }
 
 // function getSurvey() {

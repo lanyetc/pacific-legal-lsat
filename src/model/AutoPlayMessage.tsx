@@ -1,4 +1,7 @@
-import {Option, Trigger, Message, ResponseMatcher} from '.'
+import {Option} from './Option'
+import {Trigger} from './Trigger'
+import {Message} from './Message'
+import {ResponseMatcher} from './ResponseMatcher'
 
 export class AutoPlayMessage extends Message{
     constructor(

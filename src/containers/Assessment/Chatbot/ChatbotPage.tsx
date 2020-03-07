@@ -75,14 +75,19 @@ export default class ChatbotPage extends React.Component {
 
     // TODO test that a response item is added to the responsePath
     private updateResponsePath(responseItem: any) {
-        this.setState({
-            responsePath: [...responseItem]
+        this.setState((state: IState) => {
+            // state.responsePath.addResponseItem(responseItem);  TODO fix this.
+            return {
+                responsePath: state.responsePath
+            }
         });
     }
 
     private updateMessageList(message: any) {
         this.setState((state: IState, props: any) => {
-            const lastMessageIndex = state.displayedMessages.length - 1
+            let lastMessageIndex = state.displayedMessages.length - 1
+            if(lastMessageIndex < 0) 
+                lastMessageIndex = 0
             state.displayedMessages[lastMessageIndex].response = message; // TODO add components instead of message strings.
             return {
                 messageList: state.displayedMessages
@@ -90,15 +95,22 @@ export default class ChatbotPage extends React.Component {
         });
     }
 
-    public async handleSelectOptions(messageId: any, selectedOptionId: any) {
-        if (this.isInactiveQuestion(messageId)) {
+    // it should 
+    // return when a question is inactive
+    // add a responseItem to the responsePath
+    // update the messageList with a reply 
+    // add a result Item to the context
+    // get the next message
+    // call displayNextMessage
+    public async handleSelectOptions(questionId: any, selectedOptionId: any) { 
+        if (this.isInactiveQuestion(questionId)) {
             return;
         }
 
         const responseItem = { messageId: this.state.currentMessage.id, optionId: selectedOptionId }; // TODO create a ResultItem class // TODO maybe rename path to messageResponse
         await this.updateResponsePath(responseItem) // check if this works with async await
 
-        const trigger: Trigger = this.state.currentMessage.findTrigger(this.state.responsePath); // the responsePath has to be updated by this point because we use it to find the trigger.
+        const trigger: any = this.state.currentMessage.findTrigger(this.state.responsePath); // the responsePath has to be updated by this point because we use it to find the trigger.
         await this.updateMessageList(trigger.reply)
 
         let resultItem: any = {

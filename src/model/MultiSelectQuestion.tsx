@@ -1,4 +1,6 @@
-import {Option, Trigger, Message, } from './index'
+import {Option} from './Option'
+import {Trigger} from './Trigger'
+import {Message} from './Message'
 import { ResponseMatcher } from './ResponseMatcher'
 
 export class MultiSelectQuestion extends Message {

@@ -47,5 +47,5 @@ test('Message Creation', () => {
         }
     );
 
-    console.log(JSON.stringify(message));
+    // console.log(JSON.stringify(message));
 });
