@@ -16,9 +16,7 @@ interface IState {
     currentMessage: Message,
     currentModuleId: any,
     responsePath: ResponsePath,
-    messageList: any[],
-    todoList: any[],
-    reminderList: any[],
+    displayedMessages: any[],
     context: Context
 }
 
@@ -34,8 +32,8 @@ export default class ChatbotPage extends React.Component {
     modules: any;
     state: IState;
 
-    constructor(props: any) {
-        super(props);
+    constructor() {
+        super({})
         this.survey = getSurvey();
         this.modules = getModules();
         const responsePath: ResponsePath = new ResponsePath()
@@ -43,9 +41,7 @@ export default class ChatbotPage extends React.Component {
             currentMessage: this.survey[1],
             currentModuleId: 1,
             responsePath: responsePath,
-            messageList: [], //TODO  maybe we don't need messagelist or todolist.. also responsepath here because the context gets them
-            todoList: [],
-            reminderList: [],
+            displayedMessages: [], //TODO  maybe we don't need messagelist or todolist.. also responsepath here because the context gets them
             context: this.context
         };
         this.handleSelectOptions = this.handleSelectOptions.bind(this);
@@ -60,12 +56,12 @@ export default class ChatbotPage extends React.Component {
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
         const nextMessage = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
-        this.state.messageList.push(nextMessage);
+        this.state.displayedMessages.push(nextMessage);
         this.setState((state: IState, props) => {
             return {
                 currentModuleId: next.moduleId,
                 currentMessage: nextMessage,
-                messageList: state.messageList
+                messageList: state.displayedMessages
             }
         }, () => {
             this.scrollToBottom();
@@ -86,10 +82,10 @@ export default class ChatbotPage extends React.Component {
 
     private updateMessageList(message: any) {
         this.setState((state: IState, props: any) => {
-            const lastMessageIndex = state.messageList.length - 1
-            state.messageList[lastMessageIndex].response = message; // TODO add components instead of message strings.
+            const lastMessageIndex = state.displayedMessages.length - 1
+            state.displayedMessages[lastMessageIndex].response = message; // TODO add components instead of message strings.
             return {
-                messageList: state.messageList
+                messageList: state.displayedMessages
             }
         });
     }
@@ -119,7 +115,7 @@ export default class ChatbotPage extends React.Component {
         this.displayNextMessage(nextMessage) // TODO if we push to history in dispaly next message.. will the rest of this function even run?   
     }   // maybe we can move the pushexit to diplayNextMessage... 
 
-    public handleShowExtraInfo(questionId: any) {
+    public handleShowExtraInfo(questionId: any) {// TODO This.. doesn't work yet. 
         if (this.isInactiveQuestion(questionId)) {
             return;
         }
@@ -128,7 +124,7 @@ export default class ChatbotPage extends React.Component {
             // state.currentMessage.showExtraInfo = true;
             return {
                 currentMessage: repeatMessage,
-                messageList: [...state.messageList, repeatMessage]
+                messageList: [...state.displayedMessages, repeatMessage]
             }
         });
     }
@@ -161,7 +157,10 @@ export default class ChatbotPage extends React.Component {
     }
 
     render() {
-        console.log("messagelist: " + JSON.stringify(this.state.messageList))
+        console.log("messagelist: " + JSON.stringify(this.state.displayedMessages))
+        const todos = this.state.context.moduleResults[this.state.currentModuleId].todos
+        const reminders = this.state.context.moduleResults[this.state.currentModuleId].reminders
+
         return (
             <div className="full-screen-container grey chatbot-page">
                 <Header
@@ -177,12 +176,12 @@ export default class ChatbotPage extends React.Component {
                 <div className="main-container">
                     <ProgressBar ></ProgressBar>
                     <Chat
-                        messages={this.state.messageList}
+                        messages={this.state.displayedMessages}
                         handleShowExtraInfo={this.handleShowExtraInfo}
                         handleSelectOptions={this.handleSelectOptions}></Chat>
                     <ToDoSection
-                        todoList={this.state.todoList}
-                        reminderList={this.state.reminderList}></ToDoSection>
+                        todoList={todos}
+                        reminderList={reminders}></ToDoSection>
                 </div>
 
             </div>

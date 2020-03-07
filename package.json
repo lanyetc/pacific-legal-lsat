@@ -35,6 +35,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "export \"CI=false\" && react-scripts build",
+    "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject"
   },

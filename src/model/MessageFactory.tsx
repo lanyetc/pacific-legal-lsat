@@ -11,8 +11,8 @@ export class MessageFactory {
     }
     static createMessageFromData(data: MessageData): Message|never {
         let { id, type, content, extraInfo } = data 
-        const triggers: Trigger[] = TriggerFactory.creatTriggersFromData(data.triggers);
-        const defaultTrigger:Trigger = TriggerFactory.creatTriggerFromData(data.defaultTrigger);
+        const triggers: Trigger[] = TriggerFactory.createTriggersFromData(data.triggers);
+        const defaultTrigger:Trigger = TriggerFactory.createTriggerFromData(data.defaultTrigger);
         const options: Option[] = OptionFactory.createOptionsFromData(data.options)
         if (type == MessageType.singleSelect){
             const matcher: ResponseMatcher = new MatchPartialResponse();
