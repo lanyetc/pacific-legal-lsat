@@ -3,10 +3,10 @@ import {Option, Trigger, Node} from './index'
 export class MultiSelectQuestion extends Node {
     constructor(
         id: number,
-        content: string[], 
+        content: string, 
         options: Option[], 
         triggers: Trigger[], 
-        extraInfo: string[]){
+        extraInfo: any){
             super(id,content, options, triggers, extraInfo)
     }
 }

@@ -1,12 +1,12 @@
-import {Option, Node, Trigger} from './index'
+import {Option, Trigger, Node} from '.'
 
-export class AutoPlayMessage extends Node {
+export class AutoPlayMessage extends Node{
     constructor(
         id: number,
-        content: string[], 
+        content: string, 
         options: Option[], 
         triggers: Trigger[], 
-        extraInfo: string[]){
+        extraInfo: any){
             super(id, content, options, triggers, extraInfo)
     }
 }
