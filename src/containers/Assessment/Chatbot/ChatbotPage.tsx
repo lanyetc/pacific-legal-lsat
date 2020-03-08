@@ -86,7 +86,7 @@ export default class ChatbotPage extends React.Component {
     // TODO test that a response item is added to the responsePath
     private updateResponsePath(responseItem: any) {
         this.setState((state: IState) => {
-            // state.responsePath.addResponseItem(responseItem);  TODO fix this.
+            state.responsePath.addResponseItem(responseItem); 
             return {
                 responsePath: state.responsePath
             }
@@ -172,7 +172,8 @@ export default class ChatbotPage extends React.Component {
 
     }
 
-    public async processSelectedOptions(questionId: any, selectedOptionIds: any) {
+    public async processSelectedOptions(questionId: any, selectedOptionIds: number[]) {
+        
         const responseItem: ResponseItem = new ResponseItem(this.state.currentMessage.id, selectedOptionIds)
         await this.updateResponsePath(responseItem) // check if this works with async await
 

@@ -34,7 +34,7 @@ export default function UserMessage(props: any) {
     } else { // single select
         optionItems = options.map((option: any) => {
             return (<ListItem className="nav-list-item" id={option.id} key={option.id}>
-                <Button className={selectedOptionIds.includes(option.id) ? "nav-link selected" : "nav-link"} onClick={() => props.handleSelectOptions(questionId, option.id)}>{option.label}</Button>
+                <Button className={selectedOptionIds.includes(option.id) ? "nav-link selected" : "nav-link"} onClick={() => props.handleSelectOptions(questionId, [option.id])}>{option.label}</Button>
             </ListItem>)
         })
         userOptionComponent = (
