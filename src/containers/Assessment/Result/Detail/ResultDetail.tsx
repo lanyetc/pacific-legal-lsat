@@ -10,14 +10,14 @@ export default function ResultDetail(props: any) {
     const { context } = props;
     console.log(context.modules[1]);
     function getTabList() {
-        let tabList = [];
+        let tabList: any = [];
         tabList.push({
             title: "OUTCOME", tabContent: <Overview context={context}/>
         })
         if (context.modules) {
             Object.keys(context.modules).forEach((key:any) => {
                 tabList.push({
-                    title: context.modules[key].name, tabContent: <QuestionRepo questionList={survey[key].nodes}  resultList={context.modules[key].results}/>
+                    title: context.modules[key].name, tabContent: <QuestionRepo questionList={survey[key]}  resultList={context.modules[key].results}/>
                 })
             })
         }
