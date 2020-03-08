@@ -10,7 +10,7 @@ export class MessageFactory {
         console.log("ok");
     }
     static createMessageFromData(data: MessageData): Message|never {
-        let { id, type, content, extraInfo } = data 
+        let { id, type, content, extraInfo=null } = data 
         const triggers: Trigger[] = TriggerFactory.createTriggersFromData(data.triggers);
         const defaultTrigger:Trigger = TriggerFactory.createTriggerFromData(data.defaultTrigger);
         const options: Option[] = OptionFactory.createOptionsFromData(data.options)

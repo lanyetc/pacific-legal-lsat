@@ -15,7 +15,7 @@ export interface MessageData {
     options: any[] // TODO CHANGE THIS BACK to OptionsData[]
     triggers: TriggerData[],
     defaultTrigger: TriggerData,
-    extraInfo: any
+    extraInfo?: any
 }
 
 // TODO: we need to figure out which ones are optional 
@@ -27,7 +27,7 @@ export class Message {
         private _options: Option[], 
         private _triggers: Trigger[], 
         private _defaultTrigger: Trigger,
-        private _extraInfo: any){
+        private _extraInfo?: any){
     }
 
     // getters/setters

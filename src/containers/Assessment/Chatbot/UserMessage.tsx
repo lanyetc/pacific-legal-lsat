@@ -5,42 +5,60 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Button from '@material-ui/core/Button';
 import { MessageType, MultiSelectQuestion } from "../../../model";
+import { DisplayedMessage } from './ChatbotPage'
 
 
 
 export default function UserMessage(props: any) {
-    const options = props.message.message.options;
-    const questionId = props.message.message.id;
-    const extraOption = props.message.message.extraInfo;
+    const { message, selectedOptionIds, showExtraInfo }: DisplayedMessage = props.message;
+    const options = message.options;
+    const questionId = message.id;
+    const extraOptionContent = message.extraInfo;
     let optionItems: any = [];
-    if (props.message.message instanceof MultiSelectQuestion) {
-        optionItems = options.map((option: any) =>
-            <ListItem className="nav-list-item" id={option.id} key={option.id}>
-                <Button className={props.message.selectedOptionId === option.id ? "nav-link selected" : "nav-link"} onClick={() => props.handleMultiSelectOptions(questionId, option.id)}>{option.label}</Button>
-            </ListItem>
+    let userOptionComponent: any;
+    if (message instanceof MultiSelectQuestion) {
+        optionItems = options.map((option: any) => {
+            return (
+                <ListItem className="nav-list-item" id={option.id} key={option.id}>
+                    <Button className={selectedOptionIds.includes(option.id) ? "nav-link selected" : "nav-link"} onClick={() => props.handleMultiSelectOptions(questionId, option.id)}>{option.label}</Button>
+                </ListItem>)
+        }
         );
-        optionItems = <div> {optionItems}  <Button onClick={() => props.handleMultiSelectOptions(questionId, option.id)>Ok</Button></div>
-    } else {
-        optionItems = options.map((option: any) =>
-            <ListItem className="nav-list-item" id={option.id} key={option.id}>
-                <Button className={props.message.selectedOptionId === option.id ? "nav-link selected" : "nav-link"} onClick={() => props.handleSelectOptions(questionId, option.id)}>{option.label}</Button>
+        userOptionComponent = <List>
+            {optionItems}
+            {generateExtraOptionComponent()}
+            <ListItem className="nav-list-item">
+                <Button className="nav-link" onClick={() => props.handleMultiSelectSubmit(questionId)}>SUBMIT</Button>
             </ListItem>
-        );
+        </List>
+    } else { // single select
+        optionItems = options.map((option: any) => {
+            return (<ListItem className="nav-list-item" id={option.id} key={option.id}>
+                <Button className={selectedOptionIds.includes(option.id) ? "nav-link selected" : "nav-link"} onClick={() => props.handleSelectOptions(questionId, option.id)}>{option.label}</Button>
+            </ListItem>)
+        })
+        userOptionComponent = (
+            <List>
+                {optionItems}
+                {generateExtraOptionComponent()}
+            </List>
+        )
+        console.log(userOptionComponent);
     }
 
-    const extraOptionItem =
-        extraOption ?
-            (<ListItem className="nav-list-item">
-                <Button className={props.message.showExtraInfo ? "nav-link selected" : "nav-link"} onClick={() => props.handleShowExtraInfo(questionId)}>{extraOption.title}</Button>
-            </ListItem>) : null
+    function generateExtraOptionComponent() {
+        return (
+            extraOptionContent ?
+                (<ListItem className="nav-list-item">
+                    <Button className={showExtraInfo ? "nav-link selected" : "nav-link"} onClick={() => props.handleShowExtraInfo(questionId)}>{extraOptionContent.title}</Button>
+                </ListItem>) : null)
+    }
+
 
     return (
         <div className="chat-block user">
             <div className="bubble round">
-                <List>
-                    {optionItems}
-                    {extraOptionItem}
-                </List>
+                {userOptionComponent}
             </div>
         </div>
     )

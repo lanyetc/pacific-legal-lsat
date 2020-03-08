@@ -7,7 +7,7 @@ import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
 import { getSurvey, getModules } from "../../../data/data";
 import { ResultContext, Context } from '../../../data/context';
-import { Trigger, Message, ResponsePath, AutoPlayMessage } from '../../../model/index'
+import { Trigger, Message, ResponsePath, AutoPlayMessage, ResponseItem } from '../../../model/index'
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
 import banrdIcon from "../../../Assets/img/botavator.svg";
@@ -22,7 +22,7 @@ interface IState {
 }
 
 
-interface DisplayedMessage {
+export interface DisplayedMessage {
     message: Message,
     selectedOptionIds: number[],
     showExtraInfo: boolean // becuase there can only be one
@@ -48,10 +48,10 @@ export default class ChatbotPage extends React.Component {
             todoList: [],
             reminderList: []
         };
-        this.handleSelectOptions = this.handleSelectOptions.bind(this);
+        this.handleSingleSelectResponse = this.handleSingleSelectResponse.bind(this);
         this.handleMultiSelectSubmit = this.handleMultiSelectSubmit.bind(this)
         this.handleShowExtraInfo = this.handleShowExtraInfo.bind(this);
-        this.handleMultiSelectOptions = this.handleMultiSelectOptions.bind(this);
+        this.handleMultiSelectClick = this.handleMultiSelectClick.bind(this);
         this.getNextAction = this.getNextAction.bind(this);
     }
 
@@ -62,7 +62,7 @@ export default class ChatbotPage extends React.Component {
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
         const nextMessage: Message = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
-         const message: DisplayedMessage = {message: nextMessage, selectedOptionIds: [-1], showExtraInfo: false };
+         const message: DisplayedMessage = {message: nextMessage, selectedOptionIds: [], showExtraInfo: false };
 
         this.setState((state: IState, props) => {
             return {
@@ -103,7 +103,7 @@ export default class ChatbotPage extends React.Component {
                 state.reminderList.push(reminder)
 
             return {
-                messageList: [... state.displayedMessages ],
+                messageList: [... state.displayedMessages],
                 todoList: state.todoList,
                 reminderList: state.reminderList,
             }
@@ -111,12 +111,46 @@ export default class ChatbotPage extends React.Component {
     }
 
 
-    public handleMultiSelectOptions(questionId: any, selectedOptionIds: any){
-
+    public handleMultiSelectClick(questionId: any, selectedOptionId: any){
+        if (this.isInactiveQuestion(questionId)) {
+            return;
+        }
+        // add a selected option
+        this.markOptionIdSelected(selectedOptionId)
     }
 
-    public handleMultiSelectSubmit(){
+    public markOptionIdSelected(optionId: any){
+        this.setState((state: IState) => {
+            let lastMessageIndex = state.displayedMessages.length - 1
+            if(lastMessageIndex < 0) 
+                lastMessageIndex = 0
+            if(!state.displayedMessages[lastMessageIndex].selectedOptionIds.includes(optionId))
+                state.displayedMessages[lastMessageIndex].selectedOptionIds.push(optionId)
 
+            return {
+                displayedMessages: state.displayedMessages
+            }
+        })
+    }
+
+    // it should
+    // not submit when nothing is selected
+    // not submit when question is inactive
+    public handleMultiSelectSubmit(questionId: any){
+        if (this.isInactiveQuestion(questionId) || this.isEmptySelection()) { //TODO also prevent submission when there's nothing selected. 
+            return;
+        }
+        const lastMessage = this.state.displayedMessages.length - 1
+        this.processSelectedOptions(questionId, this.state.displayedMessages[lastMessage].selectedOptionIds)
+    }
+
+    isEmptySelection(){
+        let lastMessageIndex = this.state.displayedMessages.length - 1
+        if(lastMessageIndex < 0) 
+            lastMessageIndex = 0
+        if(this.state.displayedMessages[lastMessageIndex].selectedOptionIds.length <=  0)
+            return true;
+        return false;
     }
 
     // it should 
@@ -126,12 +160,17 @@ export default class ChatbotPage extends React.Component {
     // add a result Item to the context
     // get the next message
     // call displayNextMessage
-    public async handleSelectOptions(questionId: any, selectedOptionId: any) { 
+    public handleSingleSelectResponse(questionId: any, selectedOptionId: any) { 
         if (this.isInactiveQuestion(questionId)) {
             return;
         }
+        this.markOptionIdSelected(selectedOptionId)
+        this.processSelectedOptions(questionId, selectedOptionId)
 
-        const responseItem = { messageId: this.state.currentMessage.id, optionId: selectedOptionId }; // TODO create a ResultItem class // TODO maybe rename path to messageResponse
+    }
+
+    public async processSelectedOptions(questionId: any, selectedOptionIds: any){
+        const responseItem: ResponseItem = new ResponseItem(this.state.currentMessage.id, selectedOptionIds)
         await this.updateResponsePath(responseItem) // check if this works with async await
 
         const trigger: any = this.state.currentMessage.findTrigger(this.state.responsePath); // the responsePath has to be updated by this point because we use it to find the trigger.
@@ -139,27 +178,30 @@ export default class ChatbotPage extends React.Component {
         let resultItem: any = {
             path: responseItem,
             todo: trigger.todo ? trigger.todo : null,
-            reminder: trigger.reminders ? trigger.reminder : null,
+            reminder: trigger.reminder ? trigger.reminder : null,
             resultReport: trigger.resultReport
         }
         this.context.updateContext(this.state.currentModuleId, resultItem);  // TODO make sure this is actually the current module. i think it is. could be a test.
-        await this.updateState(trigger.reply, resultItem.todo, resultItem.reminders );
+        await this.updateState(trigger.reply, resultItem.todo, resultItem.reminder);
         // if we did update the trigger action to always contain the next module, it would be easier to make a mistake when writing the json. 
         // but it would be more elegant here. 
         let nextMessage = this.getNextAction(trigger.action); // TODO this shouldnt take any arguments.. maybe we should just have the trigger always include the module. hmmmmmm
         this.displayNextMessage(nextMessage) // TODO if we push to history in dispaly next message.. will the rest of this function even run?   
-    }   // maybe we can move the pushexit to diplayNextMessage... 
+    }// maybe we can move the pushexit to diplayNextMessage... 
 
-    public handleShowExtraInfo(questionId: any) {// TODO This.. doesn't work yet. 
+    public handleShowExtraInfo(questionId: any) {// TODO this wont inactivate previous questions. 
         if (this.isInactiveQuestion(questionId)) {
             return;
         }
         this.setState((state: IState, props: any) => {
-            const repeatMessage = cloneDeep(state.currentMessage);
-            // state.currentMessage.showExtraInfo = true;
+            let last = this.state.displayedMessages.length -1
+            if(last < 0) 
+                last = 0
+            
+            const repeatMessage = cloneDeep(state.displayedMessages[last]);
+            state.displayedMessages[last].showExtraInfo = true;
             return {
-                currentMessage: repeatMessage,
-                messageList: [...state.displayedMessages, repeatMessage]
+                displayedMessages: [...state.displayedMessages, repeatMessage]
             }
         });
     }
@@ -198,7 +240,6 @@ export default class ChatbotPage extends React.Component {
     }
 
     render() {
-        console.log("messagelist: " + JSON.stringify(this.state.displayedMessages))
         // const todos = this.context.moduleResults[this.state.currentModuleId].todos
         // const reminders = this.context.moduleResults[this.state.currentModuleId].reminders
 
@@ -216,10 +257,11 @@ export default class ChatbotPage extends React.Component {
                 <div className="main-container">
                     <ProgressBar ></ProgressBar>
                     <Chat
-                        messages={this.state.displayedMessages}
-                        handleMultiSelectOptions = {this.handleMultiSelectOptions}
+                        displayedMessages={this.state.displayedMessages}
+                        handleMultiSelectOptions = {this.handleMultiSelectClick}
+                        handleMultiSelectSubmit = {this.handleMultiSelectSubmit}
                         handleShowExtraInfo={this.handleShowExtraInfo}
-                        handleSelectOptions={this.handleSelectOptions}></Chat>
+                        handleSelectOptions={this.handleSingleSelectResponse}></Chat>
                     <ToDoSection
                         todoList={this.state.todoList}
                         reminderList={this.state.reminderList}></ToDoSection>

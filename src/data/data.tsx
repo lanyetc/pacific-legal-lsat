@@ -24,7 +24,7 @@ export function getModules(){
 
 
 export function generateMessages() {
-    const message1 = MessageFactory.createMessageFromData(
+    const message0 = MessageFactory.createMessageFromData(
         {
             id: 0,
             type: MessageType.singleSelect,
@@ -70,11 +70,54 @@ export function generateMessages() {
         }
     );
 
-    const message2 = MessageFactory.createMessageFromData(
+    const message1 = MessageFactory.createMessageFromData(
         {
             id: 1,
+            type: MessageType.multiSelect,
+            content: "Question 1: Does your org have a privacy policy? Selesct all that apply",
+            options: [
+                {
+                    id: 101,
+                    label: "Yes"
+                },
+                {
+                    id: 100,
+                    label: "No"
+                },
+                {
+                    id: 102,
+                    label: "maybe"
+                }
+            ],
+            triggers: [
+                {
+                    expectedResponses: {messageId: 1, optionIds:[100, 100]},
+                    action: { // fix this
+                        type: "nextQuestion",
+                        nextQuestionId: 0
+                    },
+                    resultReport: "multiselect that goes to q 0",
+                    todo: "todo item 1",
+                    reminder: "reminder item 1"
+                },
+            ],
+            defaultTrigger: {
+                expectedResponses: {messageId: 1, optionIds:[101, 102]},
+                    action: { // fix this
+                        type: "nextQuestion",
+                        nextQuestionId: 2
+                    },
+                    resultReport: "multiselect that goes to q2.",
+                    reply: "good job!"
+            },
+        }
+    );
+
+    const message2 = MessageFactory.createMessageFromData(
+        {
+            id: 2,
             type: MessageType.singleSelect,
-            content: "Question 1: Does your org have a privacy policy?",
+            content: "Question 2: Does your org have a privacy policy?",
             options: [
                 {
                     id: 101,
@@ -87,7 +130,7 @@ export function generateMessages() {
             ],
             triggers: [
                 {
-                    expectedResponses: {messageId: 1, optionIds:[100]},
+                    expectedResponses: {messageId: 2, optionIds:[100]},
                     action: { // fix this
                         type: "nextQuestion",
                         nextQuestionId: 1
@@ -98,10 +141,10 @@ export function generateMessages() {
                 },
             ],
             defaultTrigger: {
-                expectedResponses: {messageId: 1, optionIds:[101]},
+                expectedResponses: {messageId: 2, optionIds:[101]},
                     action: { // fix this
                         type: "nextQuestion",
-                        nextQuestionId: 1
+                        nextQuestionId: 0
                     },
                     resultReport: "some result report.",
                     reply: "good job!"
@@ -113,7 +156,7 @@ export function generateMessages() {
             }
         }
     );
-    return [message1, message2]
+    return [message0, message1, message2]
 
 }
 
