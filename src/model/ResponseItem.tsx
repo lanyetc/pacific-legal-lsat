@@ -1,3 +1,5 @@
+import { Interface } from "readline";
+
 // ResponseItem: single item in responsePath
 export class ResponseItem {
     constructor(private _messageId: number, 
@@ -18,8 +20,14 @@ export class ResponseItem {
     }
 }
 
+export interface ResponseItemData {
+    messageId: number;
+    optionIds: number[]
+}
 
-// Question: do we need ResponseFactory?
-// ResponseItem is now only generated in chatbot page
-// Can just use like this:
-// responseItem = new ResponseItem();
+export class ResponseItemFactory {
+    static createResponseItemFromData (responseItemData: ResponseItemData) {
+        let {messageId, optionIds} = responseItemData;
+        return new ResponseItem(messageId, optionIds);
+    }
+}

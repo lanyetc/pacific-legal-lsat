@@ -27,4 +27,12 @@ export class ResponsePath {
         this.responseList.push(responseItem);
         this.responseMap[responseItem.messageId] = responseItem;
     }
+
+    // get the optionIds of a certain massage
+    public getMessageOptions(messageId: number): number[]|never {
+        if(this.responseMap[messageId]) {
+            return this.responseMap[messageId].optionIds;
+        }
+        throw new Error();
+    }
 }

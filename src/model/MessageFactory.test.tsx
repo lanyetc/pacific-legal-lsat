@@ -20,7 +20,7 @@ test('Message Creation', () => {
             ],
             triggers: [
                 {
-                    expectedResponses: [100],
+                    expectedResponses: {messageId: 1, optionIds:[100]},
                     action: { // fix this
                         type: "next",
                         nextQuestionId: 5
@@ -31,7 +31,7 @@ test('Message Creation', () => {
                 },
             ],
             defaultTrigger: {
-                expectedResponses: [101],
+                expectedResponses: {messageId: 1, optionIds:[101]},
                     action: { // fix this
                         type: "next",
                         nextQuestionId: 3
