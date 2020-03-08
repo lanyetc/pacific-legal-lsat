@@ -10,20 +10,18 @@ export class MessageFactory {
         console.log("ok");
     }
     static createMessageFromData(data: MessageData): Message|never {
-        let { id, type, content, extraInfo=null } = data 
-        const triggers: Trigger[] = TriggerFactory.createTriggersFromData(data.triggers);
-        const defaultTrigger:Trigger = TriggerFactory.createTriggerFromData(data.defaultTrigger);
-        const options: Option[] = OptionFactory.createOptionsFromData(data.options)
+        let { id, type, content, extraInfo=null, defaultTriggerId } = data 
+        const triggers: Trigger[] = TriggerFactory.createTriggersFromData(data.triggers);        const options: Option[] = OptionFactory.createOptionsFromData(data.options)
         if (type == MessageType.singleSelect){
             const matcher: ResponseMatcher = new MatchPartialResponse();
             return new SingleSelectQuestion(
-                matcher, id, content, options, triggers, defaultTrigger, extraInfo
+                matcher, id, content, options, triggers, defaultTriggerId, extraInfo
             )
         }
         else if (type == MessageType.multiSelect){
             const matcher: ResponseMatcher = new MatchFullResponse();
             return new MultiSelectQuestion(
-                matcher, id, content, options, triggers, defaultTrigger, extraInfo
+                matcher, id, content, options, triggers, defaultTriggerId, extraInfo
             )
         } else if (type == MessageType.autoPlayMessage){
             // Question: do we need new matcher type for auto-play message?
@@ -31,7 +29,7 @@ export class MessageFactory {
             // THINK: how to automatically display next message of an auto-display message?
             const matcher: ResponseMatcher = new MatchPartialResponse();
             return new AutoPlayMessage(
-                matcher, id, content, options, triggers, defaultTrigger, extraInfo
+                matcher, id, content, options, triggers, defaultTriggerId, extraInfo
             )
         }
         throw new Error();       

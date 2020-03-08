@@ -3,9 +3,9 @@ import {TriggerData} from './Trigger'
 import { ResponsePath } from './ResponsePath';
 
 export enum MessageType {
-    singleSelect,
-    multiSelect,
-    autoPlayMessage
+    singleSelect = 1,
+    multiSelect = 2,
+    autoPlayMessage = 3
 }
 
 export interface MessageData {
@@ -14,7 +14,7 @@ export interface MessageData {
     content: string
     options: any[] // TODO CHANGE THIS BACK to OptionsData[]
     triggers: TriggerData[],
-    defaultTrigger: TriggerData,
+    defaultTriggerId: number,
     extraInfo?: any
 }
 
@@ -26,7 +26,7 @@ export class Message {
         private _content: string, 
         private _options: Option[], 
         private _triggers: Trigger[], 
-        private _defaultTrigger: Trigger,
+        private _defaultTriggerId: number,
         private _extraInfo?: any){
     }
 
@@ -46,12 +46,12 @@ export class Message {
     get triggers() {
         return this._triggers;
     }
-    get defaultTrigger() {
-        return this._defaultTrigger;
+    get defaultTriggerId() {
+        return this._defaultTriggerId;
     }
     
 
-    public findTrigger(responsePath: ResponsePath): Trigger {
+    public findTrigger(responsePath: ResponsePath): Trigger|never {
         for (let trigger of this.triggers) {
             let triggerExpectedResponses = trigger.expectedResponses;
             let isMatch: boolean = this.responseMatcher.matchOptions(triggerExpectedResponses, responsePath);
@@ -59,6 +59,10 @@ export class Message {
                 return trigger // this is a matching trigger.
             }
         } 
-        return this.defaultTrigger;
+        let defaultTrigger = this.triggers.find(trigger => {trigger.id === this.defaultTriggerId});
+        if(defaultTrigger) {
+            return defaultTrigger;
+        }
+        throw new Error();
     }
 }

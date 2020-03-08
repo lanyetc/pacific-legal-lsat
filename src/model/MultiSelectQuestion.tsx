@@ -10,8 +10,8 @@ export class MultiSelectQuestion extends Message {
         content: string, 
         options: Option[], 
         triggers: Trigger[], 
-        defualtTrigger: Trigger,
+        defualtTriggerId: number,
         extraInfo: any){
-            super(responseMatcher, id,content, options, triggers, defualtTrigger, extraInfo)
+            super(responseMatcher, id,content, options, triggers, defualtTriggerId, extraInfo)
     }
 }

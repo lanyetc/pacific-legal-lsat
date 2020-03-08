@@ -41,6 +41,7 @@ export function generateMessages() {
             ],
             triggers: [
                 {
+                    id: 1,
                     expectedResponses: {messageId: 0, optionIds:[100]},
                     action: { // fix this
                         type: "nextQuestion",
@@ -50,18 +51,20 @@ export function generateMessages() {
                     todo: "todo item 1",
                     reminder: "reminder item 1"
                 },
+                {
+                    id: 2,
+                    expectedResponses: {messageId: 0, optionIds:[101]},
+                        action: { // fix this
+                            type: "nextQuestion",
+                            nextQuestionId: 1
+                        },
+                        resultReport: "this is the default trigger. it runs when you click yes",
+                        reply: "good job!",
+                        todo: "todo item 1",
+                        reminder: "reminder item 1"
+                }
             ],
-            defaultTrigger: {
-                expectedResponses: {messageId: 0, optionIds:[101]},
-                    action: { // fix this
-                        type: "nextQuestion",
-                        nextQuestionId: 1
-                    },
-                    resultReport: "this is the default trigger. it runs when you click yes",
-                    reply: "good job!",
-                    todo: "todo item 1",
-                    reminder: "reminder item 1"
-            },
+            defaultTriggerId: 2,
             extraInfo: {
                 title: "What is a privacy policy?",
                 content: "A privacy policy is a document which describes whose personal information we are collecting: " +
@@ -91,6 +94,7 @@ export function generateMessages() {
             ],
             triggers: [
                 {
+                    id: 1,
                     expectedResponses: {messageId: 1, optionIds:[100, 100]},
                     action: { // fix this
                         type: "nextQuestion",
@@ -100,16 +104,18 @@ export function generateMessages() {
                     todo: "todo item 1",
                     reminder: "reminder item 1"
                 },
+                {
+                    id: 2,
+                    expectedResponses: {messageId: 1, optionIds:[101, 102]},
+                        action: { // fix this
+                            type: "nextQuestion",
+                            nextQuestionId: 2
+                        },
+                        resultReport: "multiselect that goes to q2.",
+                        reply: "good job!"
+                }
             ],
-            defaultTrigger: {
-                expectedResponses: {messageId: 1, optionIds:[101, 102]},
-                    action: { // fix this
-                        type: "nextQuestion",
-                        nextQuestionId: 2
-                    },
-                    resultReport: "multiselect that goes to q2.",
-                    reply: "good job!"
-            },
+            defaultTriggerId: 1,
         }
     );
 
@@ -130,6 +136,7 @@ export function generateMessages() {
             ],
             triggers: [
                 {
+                    id: 1,
                     expectedResponses: {messageId: 2, optionIds:[100]},
                     action: { // fix this
                         type: "nextQuestion",
@@ -139,16 +146,18 @@ export function generateMessages() {
                     todo: "todo item 1",
                     reminder: "reminder item 1"
                 },
+                {
+                    id: 2,
+                    expectedResponses: {messageId: 2, optionIds:[101]},
+                        action: { // fix this
+                            type: "nextQuestion",
+                            nextQuestionId: 0
+                        },
+                        resultReport: "some result report.",
+                        reply: "good job!"
+                }
             ],
-            defaultTrigger: {
-                expectedResponses: {messageId: 2, optionIds:[101]},
-                    action: { // fix this
-                        type: "nextQuestion",
-                        nextQuestionId: 0
-                    },
-                    resultReport: "some result report.",
-                    reply: "good job!"
-            },
+            defaultTriggerId:2,
             extraInfo: {
                 title: "What is a privacy policy?",
                 content: "A privacy policy is a document which describes whose personal information we are collecting: " +

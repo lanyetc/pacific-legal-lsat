@@ -22,6 +22,7 @@ test('find trigger of a masseage', () => {
             ],
             triggers: [
                 {
+                    id: 1,
                     expectedResponses: {messageId: 1, optionIds:[100]},
                     action: { // fix this
                         type: "next",
@@ -31,16 +32,18 @@ test('find trigger of a masseage', () => {
                     todo: "todo item 1",
                     reminder: "reminder item 1"
                 },
+                {
+                    id: 2,
+                    expectedResponses: {messageId: 1, optionIds:[101]},
+                        action: { // fix this
+                            type: "next",
+                            nextQuestionId: 3
+                        },
+                        resultReport: "some result report.",
+                        reply: "good job!"
+                }
             ],
-            defaultTrigger: {
-                expectedResponses: {messageId: 1, optionIds:[101]},
-                    action: { // fix this
-                        type: "next",
-                        nextQuestionId: 3
-                    },
-                    resultReport: "some result report.",
-                    reply: "good job!"
-            },
+            defaultTriggerId: 2,
             extraInfo: {
                 title: "What is a privacy policy?",
                 content: "A privacy policy is a document which describes whose personal information we are collecting: " +
@@ -54,6 +57,7 @@ test('find trigger of a masseage', () => {
     defaultResponsePath.addResponseItem(new ResponseItem(1, [101]));
     const correctTrigger = TriggerFactory.createTriggerFromData(
         {
+            id: 1,
             expectedResponses: {messageId: 1, optionIds:[100]},
             action: { // fix this
                 type: "next",
@@ -66,6 +70,7 @@ test('find trigger of a masseage', () => {
     )
     const defaultTrigger = TriggerFactory.createTriggerFromData(
         {
+            id: 2,
             expectedResponses: {messageId: 1, optionIds:[101]},
                 action: { // fix this
                     type: "next",

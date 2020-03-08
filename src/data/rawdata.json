@@ -1,0 +1,48 @@
+{
+    "Privacy Policy": [
+        {
+            "id": 1,
+            "type": 1,
+            "content": "Let’s get started! Do you have a privacy policy?",
+            "options": [
+                {
+                    "id": 101,
+                    "label": "Yes"
+                },
+                {
+                    "id": 100,
+                    "label": "No"
+                }
+            ],
+            "triggers": [
+                {
+                    "id": 110,
+                    "expectedResponses": {"messageId": 1, "optionIds":[100]},
+                    "action": { 
+                        "type": "nextModule",
+                        "nextModuleId": 2,
+                        "nextQuestionId": 4
+                    },
+                    "resultReport": "The Personal Information Protection Act (“PIPA”) requires societies to develop a privacy policy. A privacy policy is a document that describes the personal information we are collecting: why we are collecting it, what we use it for, how we keep it secure and when we have to disclose it. It will also include how a person can review what we are doing with it.",
+                    "todo": "Create a Privacy Policy",
+                    "reply": "Got it - I’m adding this to your to-do list."
+                },
+                {
+                    "id": 111,
+                    "expectedResponses": {"messageId": 1, "optionIds":[101]},
+                        "action": { 
+                            "type": "next",
+                            "nextQuestionId": 2
+                        },
+                        "resultReport": "The Personal Information Protection Act (“PIPA”) requires societies to develop a privacy policy. A privacy policy is a document that describes the personal information we are collecting: why we are collecting it, what we use it for, how we keep it secure and when we have to disclose it. It will also include how a person can review what we are doing with it.",
+                        "reply": "Great! Let’s talk about your privacy policy."
+                }
+            ],
+            "defaultTriggerId": 2,
+            "extraInfo": {
+                "title": "What is a privacy policy?",
+                "content": "A privacy policy is a document which describes whose personal information we are collecting: why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing."
+            }
+        }
+    ]
+}

@@ -2,6 +2,7 @@ import { ResponseItem, ResponseItemData, ResponseItemFactory } from "./ResponseI
 
 export class Trigger{ 
     constructor(
+        private _id: number,
         private _expectedResponses: ResponseItem, // NOTE: to extend question group, may need change this to an array
         private _action: any,
         private _resultReport: string,
@@ -11,6 +12,9 @@ export class Trigger{
         }
 
     // getters/setters
+    get id() {
+        return this._id;
+    }
     get expectedResponses() {
         return this._expectedResponses;
     }
@@ -37,6 +41,7 @@ export class Trigger{
 }
 
 export interface TriggerData {
+    id: number,
     expectedResponses: ResponseItemData,
     action: any,
     resultReport: string,
@@ -50,16 +55,16 @@ export class TriggerFactory{
     static createTriggersFromData(triggerDatas: TriggerData[]){
         let triggers: Trigger[] = [];
         triggerDatas.forEach(data => {
-            let {action, resultReport, todo, reminder, reply } = data;
+            let {id, action, resultReport, todo, reminder, reply } = data;
             let expectedResponses:ResponseItem = ResponseItemFactory.createResponseItemFromData(data.expectedResponses);
-            triggers.push(new Trigger(expectedResponses, action, resultReport, todo, reminder, reply));
+            triggers.push(new Trigger(id, expectedResponses, action, resultReport, todo, reminder, reply));
         });
         return triggers;
     }
     // create a single default trigger
     static createTriggerFromData(triggerData: TriggerData) {
-        let { action, resultReport, todo, reminder, reply } = triggerData;
+        let { id, action, resultReport, todo, reminder, reply } = triggerData;
         let expectedResponses:ResponseItem = ResponseItemFactory.createResponseItemFromData(triggerData.expectedResponses);
-        return new Trigger(expectedResponses, action, resultReport, todo, reminder, reply);
+        return new Trigger(id, expectedResponses, action, resultReport, todo, reminder, reply);
     }
 }
