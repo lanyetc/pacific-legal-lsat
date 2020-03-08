@@ -203,6 +203,8 @@ export default class ChatbotPage extends React.Component {
             return {
                 displayedMessages: [...state.displayedMessages, repeatMessage]
             }
+        }, () => {
+            this.scrollToBottom();
         });
     }
 
