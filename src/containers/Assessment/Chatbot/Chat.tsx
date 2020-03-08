@@ -2,6 +2,7 @@ import React from "react";
 
 import ChatbotMessage from './ChatbotMessage'
 import UserMessage from "./UserMessage";
+import { MessageType, MultiSelectQuestion } from "../../../model";
 
 export default function Chat(props: any) {
     const messageOptions = props.messages.map((message: any, key: any) => {

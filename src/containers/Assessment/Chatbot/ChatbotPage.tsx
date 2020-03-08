@@ -49,7 +49,9 @@ export default class ChatbotPage extends React.Component {
             reminderList: []
         };
         this.handleSelectOptions = this.handleSelectOptions.bind(this);
+        this.handleMultiSelectSubmit = this.handleMultiSelectSubmit.bind(this)
         this.handleShowExtraInfo = this.handleShowExtraInfo.bind(this);
+        this.handleMultiSelectOptions = this.handleMultiSelectOptions.bind(this);
         this.getNextAction = this.getNextAction.bind(this);
     }
 
@@ -108,6 +110,15 @@ export default class ChatbotPage extends React.Component {
         });
     }
 
+
+    public handleMultiSelectOptions(questionId: any, selectedOptionIds: any){
+
+    }
+
+    public handleMultiSelectSubmit(){
+
+    }
+
     // it should 
     // return when a question is inactive
     // add a responseItem to the responsePath
@@ -152,6 +163,8 @@ export default class ChatbotPage extends React.Component {
             }
         });
     }
+
+
 
     // TODO this may just redirect the user to the result page.... needs to be fixed
     getNextAction(triggerAction: any) {
@@ -204,6 +217,7 @@ export default class ChatbotPage extends React.Component {
                     <ProgressBar ></ProgressBar>
                     <Chat
                         messages={this.state.displayedMessages}
+                        handleMultiSelectOptions = {this.handleMultiSelectOptions}
                         handleShowExtraInfo={this.handleShowExtraInfo}
                         handleSelectOptions={this.handleSelectOptions}></Chat>
                     <ToDoSection

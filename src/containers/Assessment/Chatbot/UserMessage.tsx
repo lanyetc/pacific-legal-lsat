@@ -4,17 +4,30 @@ import React from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Button from '@material-ui/core/Button';
+import { MessageType, MultiSelectQuestion } from "../../../model";
+
 
 
 export default function UserMessage(props: any) {
     const options = props.message.message.options;
     const questionId = props.message.message.id;
     const extraOption = props.message.message.extraInfo;
-    const optionItems = options.map((option: any) =>
-        <ListItem className="nav-list-item" id={option.id} key={option.id}>
-            <Button className={props.message.selectedOptionId === option.id ? "nav-link selected" : "nav-link"} onClick={() => props.handleSelectOptions(questionId, option.id)}>{option.label}</Button>
-        </ListItem>
-    );
+    let optionItems: any = [];
+    if (props.message.message instanceof MultiSelectQuestion) {
+        optionItems = options.map((option: any) =>
+            <ListItem className="nav-list-item" id={option.id} key={option.id}>
+                <Button className={props.message.selectedOptionId === option.id ? "nav-link selected" : "nav-link"} onClick={() => props.handleMultiSelectOptions(questionId, option.id)}>{option.label}</Button>
+            </ListItem>
+        );
+        optionItems = <div> {optionItems}  <Button onClick={() => props.handleMultiSelectOptions(questionId, option.id)>Ok</Button></div>
+    } else {
+        optionItems = options.map((option: any) =>
+            <ListItem className="nav-list-item" id={option.id} key={option.id}>
+                <Button className={props.message.selectedOptionId === option.id ? "nav-link selected" : "nav-link"} onClick={() => props.handleSelectOptions(questionId, option.id)}>{option.label}</Button>
+            </ListItem>
+        );
+    }
+
     const extraOptionItem =
         extraOption ?
             (<ListItem className="nav-list-item">
