@@ -33,6 +33,7 @@ export class MatchFullResponse implements ResponseMatcher {
 export class MatchPartialResponse implements ResponseMatcher {
     matchOptions(expectedResponse: ResponseItem, responsePath: ResponsePath): boolean{
          const messageId = expectedResponse.messageId;
+         debugger;
          for (let optionId of expectedResponse.optionIds) {
             let ifFoundResponse:boolean = responsePath.findMessageResponse(messageId, optionId);
             if (ifFoundResponse) { // find at leat one expected response

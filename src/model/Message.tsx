@@ -43,14 +43,13 @@ export class Message {
     }
 
     public findTrigger(responsePath: ResponsePath): Trigger {
-        this.triggers.forEach(trigger => {
+        for (let trigger of this.triggers) {
             let triggerExpectedResponses = trigger.expectedResponses;
             let isMatch: boolean = this.responseMatcher.matchOptions(triggerExpectedResponses, responsePath);
             if(isMatch){
                 return trigger // this is a matching trigger.
             }
-            return trigger;
-        })
+        } 
         return this.defaultTrigger;
     }
 }
