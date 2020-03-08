@@ -16,16 +16,17 @@ interface IState {
     currentMessage: Message,
     currentModuleId: any,
     responsePath: ResponsePath,
-    displayedMessages: any[],
+    displayedMessages: DisplayedMessage[],
     todoList: any[],
     reminderList: any[],
 }
 
 
-interface displayedMessage {
+interface DisplayedMessage {
     message: Message,
-    selectedOption: any,
-    isExtraInfoActive: boolean // becuase there can only be one
+    selectedOptionIds: number[],
+    showExtraInfo: boolean // becuase there can only be one
+    reply?: string // TODO temp temporary
 }
 
 export default class ChatbotPage extends React.Component {
@@ -59,12 +60,13 @@ export default class ChatbotPage extends React.Component {
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
         const nextMessage: Message = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
-        this.state.displayedMessages.push(nextMessage);
+         const message: DisplayedMessage = {message: nextMessage, selectedOptionIds: [-1], showExtraInfo: false };
+
         this.setState((state: IState, props) => {
             return {
                 currentModuleId: next.moduleId,
                 currentMessage: nextMessage,
-                messageList: state.displayedMessages
+                displayedMessages: state.displayedMessages.concat(message)
             }
         }, () => {
             this.scrollToBottom();
@@ -86,14 +88,17 @@ export default class ChatbotPage extends React.Component {
         });
     }
 
-    private updateMessageList(message: any) {
+    private updateState(message: any, todos: any, reminders: any) { //temporary
         this.setState((state: IState, props: any) => {
             let lastMessageIndex = state.displayedMessages.length - 1
             if(lastMessageIndex < 0) 
                 lastMessageIndex = 0
-            state.displayedMessages[lastMessageIndex].response = message; // TODO add components instead of message strings.
+            state.displayedMessages[lastMessageIndex].reply = message; // TODO add components instead of message strings.
+            
             return {
-                messageList: state.displayedMessages
+                messageList: [... state.displayedMessages ],
+                todoList: state.todoList.concat(todos),
+                reminderList: state.reminderList.concat(reminders)
             }
         });
     }
@@ -114,16 +119,15 @@ export default class ChatbotPage extends React.Component {
         await this.updateResponsePath(responseItem) // check if this works with async await
 
         const trigger: any = this.state.currentMessage.findTrigger(this.state.responsePath); // the responsePath has to be updated by this point because we use it to find the trigger.
-        await this.updateMessageList(trigger.reply)
 
         let resultItem: any = {
             path: responseItem,
-            todos: trigger.todos,
-            reminders: trigger.reminders,
+            todos: trigger.todos ? trigger.todos : [],
+            reminders: trigger.reminders ? trigger.reminders : [],
             resultReport: trigger.resultReport
         }
         this.context.updateContext(this.state.currentModuleId, resultItem);  // TODO make sure this is actually the current module. i think it is. could be a test.
-
+        await this.updateState(trigger.reply, resultItem.todos, resultItem.reminders );
         // if we did update the trigger action to always contain the next module, it would be easier to make a mistake when writing the json. 
         // but it would be more elegant here. 
         let nextMessage = this.getNextAction(trigger.action); // TODO this shouldnt take any arguments.. maybe we should just have the trigger always include the module. hmmmmmm

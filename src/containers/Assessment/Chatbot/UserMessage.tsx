@@ -7,9 +7,9 @@ import Button from '@material-ui/core/Button';
 
 
 export default function UserMessage(props: any) {
-    const options = props.message.options;
-    const questionId = props.message.id;
-    const extraOption = props.message.extraInfo;
+    const options = props.message.message.options;
+    const questionId = props.message.message.id;
+    const extraOption = props.message.message.extraInfo;
     const optionItems = options.map((option: any) =>
         <ListItem className="nav-list-item" id={option.id} key={option.id}>
             <Button className={props.message.selectedOptionId === option.id ? "nav-link selected" : "nav-link"} onClick={() => props.handleSelectOptions(questionId, option.id)}>{option.label}</Button>

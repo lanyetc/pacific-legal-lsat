@@ -16,7 +16,7 @@ export default function ToDoSection(props: any) {
                         {todoList.map((item: any, key: any) => {
                             return (<ListItem key={key}>
                                 <div className="todo-item-bullet"/>
-                                <span className= "item-label" >{item.title}</span>
+                                <span className= "item-label" >{item}</span>
                             </ListItem>)
                         })} 
                     </List>
@@ -33,7 +33,7 @@ export default function ToDoSection(props: any) {
                         {reminderList.map((item: any, key: any) => {
                             return (<ListItem key={key}>
                                <div className="reminder-item-bullet"/>
-                                <span className= "item-label" >{item.title}</span>
+                                <span className= "item-label" >{item}</span>
                             </ListItem>)
                         })}
                     </List>

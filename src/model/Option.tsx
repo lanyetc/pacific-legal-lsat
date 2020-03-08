@@ -2,6 +2,14 @@ export class Option {
     constructor(private _id: number,
         private _label: string) {
     }
+
+    get id(){
+        return this._id
+    }
+
+    get label(){
+        return this._label
+    }
 }
 
 export interface OptionData {

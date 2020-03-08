@@ -5,15 +5,12 @@ import UserMessage from "./UserMessage";
 
 export default function Chat(props: any) {
     const messageOptions = props.messages.map((message: any, key: any) => {
-        if (message.content) {
+        if (message.message.content) {
             return (
                 <div key={key}>
-                    <ChatbotMessage content={message.content}></ChatbotMessage>
-                    {message.options && message.options.length > 0 && <UserMessage message={message} handleShowExtraInfo={props.handleShowExtraInfo} handleSelectOptions={props.handleSelectOptions}></UserMessage>}
-                    {message.response && message.response.length > 0 &&
-                        message.response.map((res: any, key: any) => {
-                            return (<ChatbotMessage content={res} key={key}></ChatbotMessage>)
-                        })}
+                    <ChatbotMessage content={message.message.content}></ChatbotMessage>
+                    {message.message.options && message.message.options.length > 0 && <UserMessage message={message} handleShowExtraInfo={props.handleShowExtraInfo} handleSelectOptions={props.handleSelectOptions}></UserMessage>}
+                    {message.reply && (<ChatbotMessage content={message.reply}></ChatbotMessage>)}
                     {message.showExtraInfo && <ChatbotMessage content={message.extraInfo.content}></ChatbotMessage>}
                 </div>
             )

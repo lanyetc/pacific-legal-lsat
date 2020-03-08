@@ -18,6 +18,10 @@ export class ResponseItem {
         }
         return false;
     }
+
+    public addResponseItem(item: any){
+
+    }
 }
 
 export interface ResponseItemData {
