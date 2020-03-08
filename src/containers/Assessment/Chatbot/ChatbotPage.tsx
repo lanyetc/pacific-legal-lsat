@@ -17,7 +17,8 @@ interface IState {
     currentModuleId: any,
     responsePath: ResponsePath,
     displayedMessages: any[],
-    context: Context
+    todoList: any[],
+    reminderList: any[],
 }
 
 
@@ -28,21 +29,23 @@ interface displayedMessage {
 }
 
 export default class ChatbotPage extends React.Component {
+
     survey: any;
     modules: any;
     state: IState;
 
-    constructor() {
-        super({})
+    constructor(props: any) {
+        super(props)
         this.survey = getSurvey();
         this.modules = getModules();
         const responsePath: ResponsePath = new ResponsePath()
         this.state = {
-            currentMessage: this.survey[1],
-            currentModuleId: 1,
+            currentMessage: this.survey[0],
+            currentModuleId: 0,
             responsePath: responsePath,
             displayedMessages: [], //TODO  maybe we don't need messagelist or todolist.. also responsepath here because the context gets them
-            context: this.context
+            todoList: [],
+            reminderList: []
         };
         this.handleSelectOptions = this.handleSelectOptions.bind(this);
         this.handleShowExtraInfo = this.handleShowExtraInfo.bind(this);
@@ -50,12 +53,12 @@ export default class ChatbotPage extends React.Component {
     }
 
     componentDidMount() {
-        this.displayNextMessage(1);
+        this.displayNextMessage({moduleId: 0, messageId: 0});
     }
 
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
-        const nextMessage = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
+        const nextMessage: Message = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
         this.state.displayedMessages.push(nextMessage);
         this.setState((state: IState, props) => {
             return {
@@ -66,7 +69,7 @@ export default class ChatbotPage extends React.Component {
         }, () => {
             this.scrollToBottom();
         })
-        const trigger = nextMessage.getDefaultTrigger() // do we just pass nothing in? or maybe we should do find matching trigger
+        const trigger = nextMessage.defaultTrigger // do we just pass nothing in? or maybe we should do find matching trigger
         if (nextMessage instanceof AutoPlayMessage) { // if next message type is general message, auto display next one
             this.displayNextMessage(this.getNextAction(trigger)); // TODO ughhh this too. wtf. we just need to get the default trigger. 
         }// TODO check what happens when this trigger is an exit type. 
@@ -149,15 +152,19 @@ export default class ChatbotPage extends React.Component {
         if (triggerAction.type == "exit") {
             history.push('/result')
         } else if (triggerAction.type == "nextQuestion") {
-            return { nextModuleId: this.state.currentModuleId, nextQuestionId: triggerAction.nextQuestionId };
+            return { moduleId: this.state.currentModuleId, messageId: triggerAction.nextQuestionId };
         } else if (triggerAction.type == "nextModule") {
-            return { nextModuleId: triggerAction.nextModuleId, nextQuestionId: triggerAction.nextQuestionId };
+            return { moduleId: triggerAction.nextModuleId, messageId: triggerAction.nextQuestionId };
         }
     }
 
     public scrollToBottom() {
-        let chatbotScorller = document.getElementById('chatbot-scroller') as HTMLElement;
-        chatbotScorller.scrollTop = chatbotScorller.scrollHeight;
+        try{
+        let chatbotScroller = document.getElementById('chatbot-scroller') as HTMLElement;
+        chatbotScroller.scrollTop = chatbotScroller.scrollHeight;
+        }catch(exception){
+            console.log("scroll exception");
+        }
     }
 
     public isCorrectTrigger(answer: any, currentQuestionId: any, currentOptionId: any) {
@@ -170,8 +177,8 @@ export default class ChatbotPage extends React.Component {
 
     render() {
         console.log("messagelist: " + JSON.stringify(this.state.displayedMessages))
-        const todos = this.state.context.moduleResults[this.state.currentModuleId].todos
-        const reminders = this.state.context.moduleResults[this.state.currentModuleId].reminders
+        // const todos = this.context.moduleResults[this.state.currentModuleId].todos
+        // const reminders = this.context.moduleResults[this.state.currentModuleId].reminders
 
         return (
             <div className="full-screen-container grey chatbot-page">
@@ -182,7 +189,6 @@ export default class ChatbotPage extends React.Component {
                     fixed
                     color="white"
                     rightLinks={<HeaderLinks />}
-                    leftLinks={null} // please work
                     absolute
                 />
                 <div className="main-container">
@@ -192,8 +198,8 @@ export default class ChatbotPage extends React.Component {
                         handleShowExtraInfo={this.handleShowExtraInfo}
                         handleSelectOptions={this.handleSelectOptions}></Chat>
                     <ToDoSection
-                        todoList={todos}
-                        reminderList={reminders}></ToDoSection>
+                        todoList={this.state.todoList}
+                        reminderList={this.state.reminderList}></ToDoSection>
                 </div>
 
             </div>

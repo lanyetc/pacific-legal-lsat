@@ -1,11 +1,15 @@
 
 
 import { mocked } from 'ts-jest/utils'
+import React from 'react';
+import Enzyme, { mount, shallow } from 'enzyme';
+
 
 import {MessageFactory} from '../../../model/index'
 import {MessageType, Message, ResponsePath, Trigger} from '../../../model/index'
 import {getSurvey, getModules} from '../../../data/data'
 import ChatbotPage from './ChatbotPage'
+import { ResultContextProvider } from '../../../data/context';
 // import {MessageType, Message} from '../../../model/Message'
 
 jest.mock('../../../data/data')
@@ -51,11 +55,15 @@ describe("ChatbotPage", () => {
     //     let chatbotPage: any = new ChatbotPage();
     //     console.log(JSON.stringify(chatbotPage.handleSelectOptions({moduleId: 3, messageId: 0})))
     // })
+    
 
     test('something or other', () => {
-        let chatbotPage: any = new ChatbotPage();
-        chatbotPage.isInactiveQuestion = jest.fn().mockReturnValue(false);
-        chatbotPage.handleSelectOptions(1, 0)
+        const wrapper = mount(<ResultContextProvider><ChatbotPage /></ResultContextProvider>);
+
+        const cbInstance = wrapper.childAt(0).instance()
+        
+        cbInstance.isInactiveQuestion = jest.fn().mockReturnValue(false);
+        cbInstance.handleSelectOptions(1, 0)
     })
 
     function generateMessages() {
