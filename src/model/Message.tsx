@@ -49,6 +49,14 @@ export class Message {
     get defaultTriggerId() {
         return this._defaultTriggerId;
     }
+
+    getDefaultTrigger() {
+        let x = 0
+        for(x; x < this._triggers.length; x ++) {
+            if(this._triggers[x].id == this._defaultTriggerId)
+                return this.triggers[x]
+        }
+    }
     
 
     public findTrigger(responsePath: ResponsePath): Trigger|never {
