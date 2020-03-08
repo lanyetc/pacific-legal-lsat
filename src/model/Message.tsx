@@ -34,13 +34,22 @@ export class Message {
     get id() {
         return this._id;
     }
-
+    get content() {
+        return this._content;
+    }
+    get options() {
+        return this._options;
+    }
+    get extraInfo() {
+        return this._extraInfo;
+    }
     get triggers() {
         return this._triggers;
     }
     get defaultTrigger() {
         return this._defaultTrigger;
     }
+    
 
     public findTrigger(responsePath: ResponsePath): Trigger {
         for (let trigger of this.triggers) {
