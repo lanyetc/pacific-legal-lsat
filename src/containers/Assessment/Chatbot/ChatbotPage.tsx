@@ -73,7 +73,8 @@ export default class ChatbotPage extends React.Component {
         }, () => {
             this.scrollToBottom();
         })
-        const trigger = nextMessage.defaultTrigger // do we just pass nothing in? or maybe we should do find matching trigger
+
+        const trigger: Trigger = nextMessage.getDefaultTrigger() // do we just pass nothing in? or maybe we should do find matching trigger
         if (nextMessage instanceof AutoPlayMessage) { // if next message type is general message, auto display next one
             this.displayNextMessage(this.getNextAction(trigger)); // TODO ughhh this too. wtf. we just need to get the default trigger. 
         }// TODO check what happens when this trigger is an exit type. 
@@ -203,6 +204,8 @@ export default class ChatbotPage extends React.Component {
             return {
                 displayedMessages: [...state.displayedMessages, repeatMessage]
             }
+        }, () => {
+            this.scrollToBottom();
         });
     }
 
