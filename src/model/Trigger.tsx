@@ -5,8 +5,8 @@ export class Trigger{
         private _expectedResponses: ResponseItem, // NOTE: to extend question group, may need change this to an array
         private _action: any,
         private _resultReport: string,
-        private _todos?: any[],
-        private _reminders?: any[],
+        private _todo?: any[],
+        private _reminder?: any[],
         private _reply?: string){
         }
 
@@ -27,12 +27,12 @@ export class Trigger{
         return this._resultReport;
     }
 
-    get todos() {
-        return this._todos;
+    get todo() {
+        return this._todo;
     }
 
-    get reminders() {
-        return this._reminders;
+    get reminder() {
+        return this._reminder;
     }
 }
 

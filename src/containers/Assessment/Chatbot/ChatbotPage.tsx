@@ -88,17 +88,22 @@ export default class ChatbotPage extends React.Component {
         });
     }
 
-    private updateState(message: any, todos: any, reminders: any) { //temporary
+    private updateState(message: any, todo: any, reminder: any) { //temporary
         this.setState((state: IState, props: any) => {
             let lastMessageIndex = state.displayedMessages.length - 1
             if(lastMessageIndex < 0) 
                 lastMessageIndex = 0
             state.displayedMessages[lastMessageIndex].reply = message; // TODO add components instead of message strings.
+            if(todo)
+                state.todoList.push(todo)
             
+            if(reminder)
+                state.reminderList.push(reminder)
+
             return {
                 messageList: [... state.displayedMessages ],
-                todoList: state.todoList.concat(todos),
-                reminderList: state.reminderList.concat(reminders)
+                todoList: state.todoList,
+                reminderList: state.reminderList,
             }
         });
     }
@@ -122,12 +127,12 @@ export default class ChatbotPage extends React.Component {
 
         let resultItem: any = {
             path: responseItem,
-            todos: trigger.todos ? trigger.todos : [],
-            reminders: trigger.reminders ? trigger.reminders : [],
+            todo: trigger.todo ? trigger.todo : null,
+            reminder: trigger.reminders ? trigger.reminder : null,
             resultReport: trigger.resultReport
         }
         this.context.updateContext(this.state.currentModuleId, resultItem);  // TODO make sure this is actually the current module. i think it is. could be a test.
-        await this.updateState(trigger.reply, resultItem.todos, resultItem.reminders );
+        await this.updateState(trigger.reply, resultItem.todo, resultItem.reminders );
         // if we did update the trigger action to always contain the next module, it would be easier to make a mistake when writing the json. 
         // but it would be more elegant here. 
         let nextMessage = this.getNextAction(trigger.action); // TODO this shouldnt take any arguments.. maybe we should just have the trigger always include the module. hmmmmmm

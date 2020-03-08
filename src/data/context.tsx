@@ -95,21 +95,26 @@ export class ResultContextProvider extends React.Component {
     updateContext = (id: number, contextItem: any) => {
         let context = this.state.context;
         if (context.moduleResults[id]) { // if current module already exist in result context
-            context.moduleResults[id].todos = context.moduleResults[id].todos.concat(contextItem.todos);
-            context.moduleResults[id].reminders = context.moduleResults[id].reminders.concat(contextItem.reminders);
-            context.moduleResults[id].results.push(contextItem.result);
+            if(contextItem.todo)
+                context.moduleResults[id].todos.push(contextItem.todo)
+            if(contextItem.reminder)
+                context.moduleResults[id].reminders.push(contextItem.reminder)
+            if(contextItem.result)
+                context.moduleResults[id].results.push(contextItem.result);
             context.moduleResults[id].path.push(contextItem.path);
         } else {
             context.moduleResults[id] = {
                 name: contextItem.name,
-                todos: contextItem.todos,
-                reminders: contextItem.reminders,
+                todos: [contextItem.todos],
+                reminders: [contextItem.reminders],
                 results: [contextItem.result],
                 path: [contextItem.path]
             }; // if module does not exist
         }
-        context.todos = context.todos.concat(contextItem.todos);
-        context.reminders = context.reminders.concat(contextItem.reminders);
+        if(contextItem.todo)
+            context.todos.push(contextItem.todo);
+        if(contextItem.reminder)
+            context.reminders.push(contextItem.reminder);
         this.setState({ context: context })
     }
     state = {

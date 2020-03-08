@@ -28,7 +28,7 @@ export function generateMessages() {
         {
             id: 0,
             type: MessageType.singleSelect,
-            content: "Does your org have a privacy policy?",
+            content: "Question 0: Does your org have a privacy policy?",
             options: [
                 {
                     id: 101,
@@ -46,7 +46,7 @@ export function generateMessages() {
                         type: "nextQuestion",
                         nextQuestionId: 1
                     },
-                    resultReport: "some result report.",
+                    resultReport: "this trigger runs when you press no",
                     todo: "todo item 1",
                     reminder: "reminder item 1"
                 },
@@ -57,8 +57,10 @@ export function generateMessages() {
                         type: "nextQuestion",
                         nextQuestionId: 1
                     },
-                    resultReport: "some result report.",
-                    reply: "good job!"
+                    resultReport: "this is the default trigger. it runs when you click yes",
+                    reply: "good job!",
+                    todo: "todo item 1",
+                    reminder: "reminder item 1"
             },
             extraInfo: {
                 title: "What is a privacy policy?",
@@ -72,7 +74,7 @@ export function generateMessages() {
         {
             id: 1,
             type: MessageType.singleSelect,
-            content: "Does your org have a privacy policy?",
+            content: "Question 1: Does your org have a privacy policy?",
             options: [
                 {
                     id: 101,
