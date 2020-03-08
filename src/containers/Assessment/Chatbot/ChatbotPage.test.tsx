@@ -7,7 +7,7 @@ import Enzyme, { mount, shallow } from 'enzyme';
 
 import {MessageFactory} from '../../../model/index'
 import {MessageType, Message, ResponsePath, Trigger} from '../../../model/index'
-import {getSurvey, getModules, generateMessages} from '../../../data/data'
+import {getSurvey, getModules, generateSurveyDialogue} from '../../../data/data'
 import ChatbotPage from './ChatbotPage'
 import { ResultContextProvider } from '../../../data/context';
 import {ResponseItem} from '../../../model/index'
@@ -23,7 +23,7 @@ const mockedGetModules = getModules as jest.Mock<any>
 describe("ChatbotPage", () => {
     beforeAll(() => {
 
-        const surveyDialogue = generateMessages()
+        const surveyDialogue = generateSurveyDialogue()
         mockedGetSurvey.mockReturnValue(surveyDialogue)
 
         mockedGetModules.mockReturnValue(
@@ -41,7 +41,7 @@ describe("ChatbotPage", () => {
     })
 
     test('mocked modules and questions are being loaded', () => {
-        const surveyDialogue = generateMessages()
+        const surveyDialogue = generateSurveyDialogue()
         mockedGetSurvey.mockReturnValue(surveyDialogue)
 
         const modules = [{ name: "Privacy Policy", nodes: surveyDialogue }]

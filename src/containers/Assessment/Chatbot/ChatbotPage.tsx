@@ -39,9 +39,10 @@ export default class ChatbotPage extends React.Component {
         super(props)
         this.survey = getSurvey();
         this.modules = getModules();
+        
         const responsePath: ResponsePath = new ResponsePath()
         this.state = {
-            currentMessage: this.survey[0],
+            currentMessage: this.survey[2],
             currentModuleId: 0,
             responsePath: responsePath,
             displayedMessages: [], //TODO  maybe we don't need messagelist or todolist.. also responsepath here because the context gets them
@@ -56,13 +57,13 @@ export default class ChatbotPage extends React.Component {
     }
 
     componentDidMount() {
-        this.displayNextMessage({moduleId: 0, messageId: 0});
+        this.displayNextMessage({ moduleId: 0, messageId: 2});
     }
 
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
         const nextMessage: Message = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
-         const message: DisplayedMessage = {message: nextMessage, selectedOptionIds: [], showExtraInfo: false };
+        const message: DisplayedMessage = { message: nextMessage, selectedOptionIds: [], showExtraInfo: false };
 
         this.setState((state: IState, props) => {
             return {
@@ -74,8 +75,9 @@ export default class ChatbotPage extends React.Component {
             this.scrollToBottom();
         })
 
-        const trigger: Trigger = nextMessage.getDefaultTrigger() // do we just pass nothing in? or maybe we should do find matching trigger
+         // do we just pass nothing in? or maybe we should do find matching trigger
         if (nextMessage instanceof AutoPlayMessage) { // if next message type is general message, auto display next one
+            const trigger: any = nextMessage.getDefaultTrigger()
             this.displayNextMessage(this.getNextAction(trigger)); // TODO ughhh this too. wtf. we just need to get the default trigger. 
         }// TODO check what happens when this trigger is an exit type. 
 
@@ -94,17 +96,17 @@ export default class ChatbotPage extends React.Component {
     private updateState(message: any, todo: any, reminder: any) { //temporary
         this.setState((state: IState, props: any) => {
             let lastMessageIndex = state.displayedMessages.length - 1
-            if(lastMessageIndex < 0) 
+            if (lastMessageIndex < 0)
                 lastMessageIndex = 0
             state.displayedMessages[lastMessageIndex].reply = message; // TODO add components instead of message strings.
-            if(todo)
+            if (todo)
                 state.todoList.push(todo)
-            
-            if(reminder)
+
+            if (reminder)
                 state.reminderList.push(reminder)
 
             return {
-                messageList: [... state.displayedMessages],
+                messageList: [...state.displayedMessages],
                 todoList: state.todoList,
                 reminderList: state.reminderList,
             }
@@ -112,7 +114,7 @@ export default class ChatbotPage extends React.Component {
     }
 
 
-    public handleMultiSelectClick(questionId: any, selectedOptionId: any){
+    public handleMultiSelectClick(questionId: any, selectedOptionId: any) {
         if (this.isInactiveQuestion(questionId)) {
             return;
         }
@@ -120,12 +122,12 @@ export default class ChatbotPage extends React.Component {
         this.markOptionIdSelected(selectedOptionId)
     }
 
-    public markOptionIdSelected(optionId: any){
+    public markOptionIdSelected(optionId: any) {
         this.setState((state: IState) => {
             let lastMessageIndex = state.displayedMessages.length - 1
-            if(lastMessageIndex < 0) 
+            if (lastMessageIndex < 0)
                 lastMessageIndex = 0
-            if(!state.displayedMessages[lastMessageIndex].selectedOptionIds.includes(optionId))
+            if (!state.displayedMessages[lastMessageIndex].selectedOptionIds.includes(optionId))
                 state.displayedMessages[lastMessageIndex].selectedOptionIds.push(optionId)
 
             return {
@@ -137,7 +139,7 @@ export default class ChatbotPage extends React.Component {
     // it should
     // not submit when nothing is selected
     // not submit when question is inactive
-    public handleMultiSelectSubmit(questionId: any){
+    public handleMultiSelectSubmit(questionId: any) {
         if (this.isInactiveQuestion(questionId) || this.isEmptySelection()) { //TODO also prevent submission when there's nothing selected. 
             return;
         }
@@ -145,11 +147,11 @@ export default class ChatbotPage extends React.Component {
         this.processSelectedOptions(questionId, this.state.displayedMessages[lastMessage].selectedOptionIds)
     }
 
-    isEmptySelection(){
+    isEmptySelection() {
         let lastMessageIndex = this.state.displayedMessages.length - 1
-        if(lastMessageIndex < 0) 
+        if (lastMessageIndex < 0)
             lastMessageIndex = 0
-        if(this.state.displayedMessages[lastMessageIndex].selectedOptionIds.length <=  0)
+        if (this.state.displayedMessages[lastMessageIndex].selectedOptionIds.length <= 0)
             return true;
         return false;
     }
@@ -161,7 +163,7 @@ export default class ChatbotPage extends React.Component {
     // add a result Item to the context
     // get the next message
     // call displayNextMessage
-    public handleSingleSelectResponse(questionId: any, selectedOptionId: any) { 
+    public handleSingleSelectResponse(questionId: any, selectedOptionId: any) {
         if (this.isInactiveQuestion(questionId)) {
             return;
         }
@@ -170,7 +172,7 @@ export default class ChatbotPage extends React.Component {
 
     }
 
-    public async processSelectedOptions(questionId: any, selectedOptionIds: any){
+    public async processSelectedOptions(questionId: any, selectedOptionIds: any) {
         const responseItem: ResponseItem = new ResponseItem(this.state.currentMessage.id, selectedOptionIds)
         await this.updateResponsePath(responseItem) // check if this works with async await
 
@@ -186,7 +188,7 @@ export default class ChatbotPage extends React.Component {
         await this.updateState(trigger.reply, resultItem.todo, resultItem.reminder);
         // if we did update the trigger action to always contain the next module, it would be easier to make a mistake when writing the json. 
         // but it would be more elegant here. 
-        let nextMessage = this.getNextAction(trigger.action); // TODO this shouldnt take any arguments.. maybe we should just have the trigger always include the module. hmmmmmm
+        let nextMessage = this.getNextAction(trigger); // TODO this shouldnt take any arguments.. maybe we should just have the trigger always include the module. hmmmmmm
         this.displayNextMessage(nextMessage) // TODO if we push to history in dispaly next message.. will the rest of this function even run?   
     }// maybe we can move the pushexit to diplayNextMessage... 
 
@@ -195,10 +197,10 @@ export default class ChatbotPage extends React.Component {
             return;
         }
         this.setState((state: IState, props: any) => {
-            let last = this.state.displayedMessages.length -1
-            if(last < 0) 
+            let last = this.state.displayedMessages.length - 1
+            if (last < 0)
                 last = 0
-            
+
             const repeatMessage = cloneDeep(state.displayedMessages[last]);
             state.displayedMessages[last].showExtraInfo = true;
             return {
@@ -212,24 +214,25 @@ export default class ChatbotPage extends React.Component {
 
 
     // TODO this may just redirect the user to the result page.... needs to be fixed
-    getNextAction(triggerAction: any) {
+    getNextAction(trigger: any) {
+        
         // return information for next message.
         // Can make it a switch statement
         // or, make it a part of the handleSelectOption method rather than integrate in trigger class？
-        if (triggerAction.type == "exit") {
+        if (trigger.action.type == "exit") {
             history.push('/result')
-        } else if (triggerAction.type == "nextQuestion") {
-            return { moduleId: this.state.currentModuleId, messageId: triggerAction.nextQuestionId };
-        } else if (triggerAction.type == "nextModule") {
-            return { moduleId: triggerAction.nextModuleId, messageId: triggerAction.nextQuestionId };
+        } else if (trigger.action.type == "next") {
+            return { moduleId: this.state.currentModuleId, messageId: trigger.action.nextQuestionId };
+        } else if (trigger.action.type == "nextModule") {
+            return { moduleId: trigger.action.nextModuleId, messageId: trigger.action.nextQuestionId };
         }
     }
 
     public scrollToBottom() {
-        try{
-        let chatbotScroller = document.getElementById('chatbot-scroller') as HTMLElement;
-        chatbotScroller.scrollTop = chatbotScroller.scrollHeight;
-        }catch(exception){
+        try {
+            let chatbotScroller = document.getElementById('chatbot-scroller') as HTMLElement;
+            chatbotScroller.scrollTop = chatbotScroller.scrollHeight;
+        } catch (exception) {
             console.log("scroll exception");
         }
     }
@@ -261,8 +264,8 @@ export default class ChatbotPage extends React.Component {
                     <ProgressBar ></ProgressBar>
                     <Chat
                         displayedMessages={this.state.displayedMessages}
-                        handleMultiSelectOptions = {this.handleMultiSelectClick}
-                        handleMultiSelectSubmit = {this.handleMultiSelectSubmit}
+                        handleMultiSelectOptions={this.handleMultiSelectClick}
+                        handleMultiSelectSubmit={this.handleMultiSelectSubmit}
                         handleShowExtraInfo={this.handleShowExtraInfo}
                         handleSelectOptions={this.handleSingleSelectResponse}></Chat>
                     <ToDoSection

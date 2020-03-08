@@ -51,10 +51,10 @@ export class Message {
     }
 
     getDefaultTrigger() {
-        let x = 0
-        for(x; x < this._triggers.length; x ++) {
-            if(this._triggers[x].id == this._defaultTriggerId)
-                return this.triggers[x]
+        for(let i in this._triggers){
+            if(this._triggers[i].id == this._defaultTriggerId){
+               return this._triggers[i];
+            }
         }
     }
     
@@ -67,7 +67,7 @@ export class Message {
                 return trigger // this is a matching trigger.
             }
         } 
-        let defaultTrigger = this.triggers.find(trigger => {trigger.id === this.defaultTriggerId});
+        let defaultTrigger = this.getDefaultTrigger();
         if(defaultTrigger) {
             return defaultTrigger;
         }

@@ -1,6 +1,6 @@
 import { Item, Result } from './context';
 import {Message, MessageFactory, MessageType} from '../model/index'
-
+import {module2} from './mod2'
 export interface SurveyDialogue {
     [key: number]: Message
 }
@@ -14,159 +14,26 @@ export interface Module {
 // COMMENTED OUT SURVEY UNTIL WE UPDATE IT
 
 export function getSurvey(){
-    return generateMessages()
+    return generateSurveyDialogue(module2)
 }
 
 export function getModules(){
-    const surveyDialogue = generateMessages();
+    const surveyDialogue: SurveyDialogue = generateSurveyDialogue(module2);
     return [{ name: "Privacy Policy", nodes: surveyDialogue }]
 }
 
-
-export function generateMessages() {
-    const message0 = MessageFactory.createMessageFromData(
-        {
-            id: 0,
-            type: MessageType.singleSelect,
-            content: "Question 0: Does your org have a privacy policy?",
-            options: [
-                {
-                    id: 101,
-                    label: "Yes"
-                },
-                {
-                    id: 100,
-                    label: "No"
-                }
-            ],
-            triggers: [
-                {
-                    id: 1,
-                    expectedResponses: {messageId: 0, optionIds:[100]},
-                    action: { // fix this
-                        type: "nextQuestion",
-                        nextQuestionId: 1
-                    },
-                    resultReport: "this trigger runs when you press no",
-                    todo: "todo item 1",
-                    reminder: "reminder item 1"
-                },
-                {
-                    id: 2,
-                    expectedResponses: {messageId: 0, optionIds:[101]},
-                        action: { // fix this
-                            type: "nextQuestion",
-                            nextQuestionId: 1
-                        },
-                        resultReport: "this is the default trigger. it runs when you click yes",
-                        reply: "good job!",
-                        todo: "todo item 1",
-                        reminder: "reminder item 1"
-                }
-            ],
-            defaultTriggerId: 2,
-            extraInfo: {
-                title: "What is a privacy policy?",
-                content: "A privacy policy is a document which describes whose personal information we are collecting: " +
-                    "why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing."
-            }
+export function generateSurveyDialogue(moduleData: any) {
+    let survey: SurveyDialogue = {}
+    moduleData.forEach((question:any) => {
+        try{
+       let newMessage: Message = MessageFactory.createMessageFromData(question) 
+       survey[newMessage.id] = newMessage;
+        } catch (error) {
+            console.log( "questionid failed to cast to Messagetype: " + question.id )
         }
-    );
-
-    const message1 = MessageFactory.createMessageFromData(
-        {
-            id: 1,
-            type: MessageType.multiSelect,
-            content: "Question 1: Does your org have a privacy policy? Selesct all that apply",
-            options: [
-                {
-                    id: 101,
-                    label: "Yes"
-                },
-                {
-                    id: 100,
-                    label: "No"
-                },
-                {
-                    id: 102,
-                    label: "maybe"
-                }
-            ],
-            triggers: [
-                {
-                    id: 1,
-                    expectedResponses: {messageId: 1, optionIds:[100, 100]},
-                    action: { // fix this
-                        type: "nextQuestion",
-                        nextQuestionId: 0
-                    },
-                    resultReport: "multiselect that goes to q 0",
-                    todo: "todo item 1",
-                    reminder: "reminder item 1"
-                },
-                {
-                    id: 2,
-                    expectedResponses: {messageId: 1, optionIds:[101, 102]},
-                        action: { // fix this
-                            type: "nextQuestion",
-                            nextQuestionId: 2
-                        },
-                        resultReport: "multiselect that goes to q2.",
-                        reply: "good job!"
-                }
-            ],
-            defaultTriggerId: 1,
-        }
-    );
-
-    const message2 = MessageFactory.createMessageFromData(
-        {
-            id: 2,
-            type: MessageType.singleSelect,
-            content: "Question 2: Does your org have a privacy policy?",
-            options: [
-                {
-                    id: 101,
-                    label: "Yes"
-                },
-                {
-                    id: 100,
-                    label: "No"
-                }
-            ],
-            triggers: [
-                {
-                    id: 1,
-                    expectedResponses: {messageId: 2, optionIds:[100]},
-                    action: { // fix this
-                        type: "nextQuestion",
-                        nextQuestionId: 1
-                    },
-                    resultReport: "some result report.",
-                    todo: "todo item 1",
-                    reminder: "reminder item 1"
-                },
-                {
-                    id: 2,
-                    expectedResponses: {messageId: 2, optionIds:[101]},
-                        action: { // fix this
-                            type: "nextQuestion",
-                            nextQuestionId: 0
-                        },
-                        resultReport: "some result report.",
-                        reply: "good job!"
-                }
-            ],
-            defaultTriggerId:2,
-            extraInfo: {
-                title: "What is a privacy policy?",
-                content: "A privacy policy is a document which describes whose personal information we are collecting: " +
-                    "why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing."
-            }
-        }
-    );
-    return [message0, message1, message2]
-
+    });
+    console.log("done");
+    return survey
 }
 
 // function getSurvey() {
