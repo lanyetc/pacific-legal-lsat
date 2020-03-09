@@ -1,5 +1,5 @@
 import {MessageType} from '../model/index'
-export let CollectionOfPersonalInformationModule:any = [
+export let collectionOfPersonalInformationModule:any = [
     {
         id: 4,
         type: MessageType.autoPlayMessage,
