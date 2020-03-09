@@ -22,10 +22,10 @@ export default function ResultDetail(props: any) {
         tabList.push({
             title: "OUTCOME", tabContent: <Overview context={context}/>
         })
-        if (context.modules) {
-            Object.keys(context.modules).forEach((key:any) => {
+        if (context.moduleResults) {
+            Object.keys(context.moduleResults).forEach((key:any) => {
                 tabList.push({
-                    title: context.modules[key].name, tabContent: <QuestionRepo questionList={survey[key].nodes}  resultList={context.modules[key].results}/>
+                    title: context.modules[key].name, tabContent: <QuestionRepo questionList={survey[key].nodes}  resultList={context.moduleResults[key].results}/>
                 })
             })
         }
