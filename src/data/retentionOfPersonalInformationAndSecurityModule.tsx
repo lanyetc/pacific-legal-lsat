@@ -227,7 +227,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQuestionId: 23
+              nextQuestionId: 24
             },
             reply: 'Good job!',
             resultReport: 'Use locked filing cabinets to keep personal information secured.',
