@@ -21,7 +21,7 @@
 
 .overview-container {
     height: calc(100% + 96px);
-    padding: 160px 230px 64px 230px;
+    padding: 112px 230px 64px 230px;
     box-sizing: border-box;
     overflow-y: auto;
 }
@@ -44,6 +44,15 @@
     justify-content: space-between;
 }
 
+.list-container .btn-group button{
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
+}
+
+.result.todo-container .list-container .btn-group button{
+    border: solid 0.5px #e48241;
+    color: #e48241;
+}
+
 .moudule-result-container .btn-group {
     margin-top: 24px;
     margin-bottom: 24px;
@@ -56,8 +65,8 @@
 
 .result.todo-container {
     width: 100%;
-    border-radius: 5px;
-    box-shadow: 2px 2px 6px 0 rgba(79, 118, 250, 0.76);
+    border-radius: 20px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
 .list-container {
     margin-top: 24px;
@@ -77,11 +86,11 @@
     margin-top: 80px;
     width: 100%;
     box-sizing: border-box;
-    border-radius: 5px;
-    box-shadow: 2px 2px 6px 0 rgba(79, 118, 250, 0.76);
+    border-radius: 20px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
 .repo-container {
-    padding: 160px 140px 64px 140px;
+    padding: 112px 140px 64px 140px;
     height: 100%;
     overflow-y: auto;
 }
@@ -114,17 +123,18 @@
 
 .result.todo-container .title-container,
 .result.reminder-container .title-container {
+    border-radius: 20px 20px 0 0;
     padding: 8px;
     color: white;
 }
 
 .result.todo-container .title-container {
-    background-color: #0c35bc;
+    background-color: #e48241;
     text-align: center;
 }
 
 .result.reminder-container .title-container {
-    background-color: #a7a7a7;
+    background-color: #4d4d4d;
     text-align: center;
 }
 
@@ -143,17 +153,15 @@
 
 .result .todo-item-bullet,
 .result .reminder-item-bullet {
-    border-radius: 20px;
+    border-radius: 2px;
 }
 
 .result .todo-item-bullet {
-    box-shadow: 1px 1px 3px 0 rgba(79, 118, 250, 0.76);
-    background-color: #2756f2;
+    background-color: #e48241;
 }
 
 .result .reminder-item-bullet {
-    box-shadow: 1px 1px 3px 0 rgba(79, 118, 250, 0.76);
-    background-color: #464545;
+    background-color: #4d4d4d;
 }
 
 .item-label {

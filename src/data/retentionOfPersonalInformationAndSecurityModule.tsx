@@ -263,7 +263,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
               nextQuestionId: 25
             },
             reply: 'This is a great way to keep data secure, added to your list',
-            reminder: 'Encrypt personal information stored on your compute',
+            reminder: 'Encrypt personal information stored on your computer',
             resultReport: 'Encrypt sensitive data if possible'
           },
           {
@@ -309,10 +309,10 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQuestionId: 26
+              nextQuestionId: 27
             },
             reply: 'Always use passwords to keep your digital content secure.',
-            reminder: 'Use passwords for all digital resources computer',
+            reminder: 'Use passwords for all digital resources',
             resultReport: 'Always use passwords to keep digital content secure.',
           },
           {
@@ -454,7 +454,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
       {
         id: 28,
         type: MessageType.singleSelect,
-        content: 'Do you collect Digitally Created Personal Information (D.C.P.I., such as information from website traffic?',
+        content: 'Do you collect Digitally Created Personal Information (D.C.P.I.), such as information from website traffic?',
         options: [
           {
             id: 2801,
@@ -516,7 +516,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
           },
           {
             id: 2902,
-            label: 'No Privacy Policy yet- '
+            label: 'No Privacy Policy yet'
           }
         ],
         triggers: [
@@ -616,8 +616,8 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
         ],
         defaultTriggerId: 3011,
         extraInfo: {
-            title: "What are data analytics?",
-            content: "Web analytics services are computer programs that track website usage for reporting and evaluating purposes. Google Analytics is a common example of a data analytics service."
+            title: "What are web analytics?",
+            content: "Web analytics services are computer programs that track website usage for reporting and evaluating purposes. Google Analytics is a common example of a web analytics service.",
         }
       },
       {

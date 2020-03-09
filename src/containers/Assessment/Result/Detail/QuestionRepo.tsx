@@ -23,9 +23,9 @@ export default function QuestionRepo(props: any) {
                                     })
                                 }
                             </Typography>
-                            <Typography variant="body2" component="p" className="link" >
+                            {/* <Typography variant="body2" component="p" className="link" >
                                 <Link>Change my answer</Link>
-                            </Typography>
+                            </Typography> */}
                         </div>
                         <div className="info-container">
                             <Typography variant="body2" component="p" className="title" gutterBottom>

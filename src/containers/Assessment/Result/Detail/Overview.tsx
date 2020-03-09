@@ -55,7 +55,7 @@ export default function Overview(props: any) {
                         <span className="title">DO NOW</span>
                     </Typography>
                     <Typography variant="body2" component="span">
-                    Take Care of the task on this list ASAP. This might put you in legal risk
+                    Take care of these tasks ASAP
                     </Typography>
                 </div>
                 <TodoList todoList={context.todos}></TodoList>
