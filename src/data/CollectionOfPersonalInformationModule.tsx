@@ -314,5 +314,5 @@ export let collectionOfPersonalInformationModule:any = [
           }
         ],
         defaultTriggerId: 1111
-      },
+      }
 ]
