@@ -37,6 +37,7 @@ export function getModules() {
     4: { name: "Requests for Information", nodes: requestsForInformationSurvey },
     5: { name: "Anti Spam", nodes: antiSpamSurvey }}
 
+    return modules
 
 }
 
