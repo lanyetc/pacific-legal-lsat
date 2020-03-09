@@ -186,6 +186,7 @@ export default class ChatbotPage extends React.Component {
 
         let resultItem: any = {
             path: responseItem,
+            name: this.modules.name,
             todo: trigger.todo ? trigger.todo : null,
             reminder: trigger.reminder ? trigger.reminder : null,
             resultReport: trigger.resultReport

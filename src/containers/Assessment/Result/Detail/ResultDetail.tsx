@@ -6,9 +6,17 @@ import {getModules} from "../../../../data/data";
 export default function ResultDetail(props: any) {
     console.log(props.context);
     const survey = getModules();
-    // const context = getContext();
     const { context } = props;
-    // console.log(context.modules[1]);
+
+    const tabList = getTabList();
+    return (
+        <div className="result-detail-container">
+            <TabNav 
+            tabList = {tabList}
+            ></TabNav>
+        </div>
+    );
+
     function getTabList() {
         let tabList: any = [];
         tabList.push({
@@ -23,12 +31,4 @@ export default function ResultDetail(props: any) {
         }
         return tabList;
     }
-    const tabList = getTabList();
-    return (
-        <div className="result-detail-container">
-            <TabNav 
-            tabList = {tabList}
-            ></TabNav>
-        </div>
-    );
 }
