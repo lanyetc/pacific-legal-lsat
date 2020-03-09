@@ -832,8 +832,8 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
                 ]
             },
             action: {
-              type: 'next',
-              nextQuestionId: 39
+              type: 'nextQuestion',
+              nextQuestionId: 35
             },
             reply: 'Not bad, try to review once every 6 months!',
             resultReport: 'It’s a good idea to review your antivirus software every six months.'
@@ -1086,8 +1086,9 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             action: {
               type: 'nextModule',
-              nextQuestionId: 6,
-              nextModuleId: 40
+              nextModuleId: 6,
+              nextQuestionId: 40,
+
             },
             reply: 'Keep all OFFICIAL records for at least 10 years! ',
             todo: 'Keep Official Records for 10 years, or as long as relevant ',
@@ -1102,10 +1103,11 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
               ]
             },
             action: {
-              type: 'nextModule',
-              nextQuestionId: 6,
-              nextModuleId: 40
-            },
+                type: 'nextModule',
+                nextModuleId: 6,
+                nextQuestionId: 40,
+  
+              },
             reply: 'Good start - be sure to keep relevant records as long as they are relevant.',
             resultReport: 'Non-profits need to keep all official records for at least 10 years, and longer if they are still relevant. Official records can be found here:https://wiki.clicklaw.bc.ca/index.php?title=Record-Keeping_(Societies_Act_FAQs)#What_are_the_official_records_of_a_society.3F',
 
@@ -1119,10 +1121,11 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
               ]
             },
             action: {
-              type: 'nextModule',
-              nextQuestionId: 6,
-              nextModuleId: 40
-            },
+                type: 'nextModule',
+                nextModuleId: 6,
+                nextQuestionId: 40,
+  
+              },
             reply: 'Great!',
             resultReport: 'Non-profits need to keep all official records for at least 10 years, and longer if they are still relevant. Official records can be found here:https://wiki.clicklaw.bc.ca/index.php?title=Record-Keeping_(Societies_Act_FAQs)#What_are_the_official_records_of_a_society.3F',
           }

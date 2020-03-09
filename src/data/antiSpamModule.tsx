@@ -401,7 +401,7 @@ export const antiSpamModule: any = [
     {
         id: 60,
         type: 1,
-        content: 'You completed module',
+        content: 'You completed the module',
         options: [
             {
                 id: 6000,

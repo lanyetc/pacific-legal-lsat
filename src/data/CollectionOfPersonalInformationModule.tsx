@@ -61,7 +61,7 @@ export let collectionOfPersonalInformationModule:any = [
               type: 'nextQuestion',
               nextQuestionId: 6
             },
-            reply: "Hmm, are you sure about that? All non profits collection personal information; even a members name or email address counts as personal information.",
+            reply: "Hmm, are you sure about that? All non profits collect personal information; even a members name or email address counts as personal information.",
             resultReport: ""
           }
         ],
