@@ -172,7 +172,7 @@ export default class ChatbotPage extends React.Component {
         if (this.isInactiveQuestion(questionId)) {
             return;
         }
-        this.markOptionIdSelected(selectedOptionId)
+        this.markOptionIdSelected(selectedOptionId[0]) // should only pass a number(id) rather than an array
         this.processSelectedOptions(questionId, selectedOptionId)
 
     }

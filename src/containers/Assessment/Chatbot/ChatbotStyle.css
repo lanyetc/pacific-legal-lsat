@@ -72,6 +72,7 @@
     margin-left: 20px;
     font-size: 14px;
     color: #848484;
+    max-width: 210px;
 }
 
 .todo-titile-box .icon {
