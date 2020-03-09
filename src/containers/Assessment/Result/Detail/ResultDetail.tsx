@@ -25,7 +25,7 @@ export default function ResultDetail(props: any) {
         if (context.moduleResults) {
             Object.keys(context.moduleResults).forEach((key:any) => {
                 tabList.push({
-                    title: context.modules[key].name, tabContent: <QuestionRepo questionList={survey[key].nodes}  resultList={context.moduleResults[key].results}/>
+                    title: context.moduleResults[key].name, tabContent: <QuestionRepo questionList={survey[key].nodes}  resultList={context.moduleResults[key].results}/>
                 })
             })
         }
