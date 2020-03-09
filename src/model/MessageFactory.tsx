@@ -12,18 +12,18 @@ export class MessageFactory {
     static createMessageFromData(data: MessageData): Message|never {
         let { id, type, content, extraInfo=null, defaultTriggerId } = data 
         const triggers: Trigger[] = TriggerFactory.createTriggersFromData(data.triggers);        const options: Option[] = OptionFactory.createOptionsFromData(data.options)
-        if (type == MessageType.singleSelect){
+        if (type === MessageType.singleSelect){
             const matcher: ResponseMatcher = new MatchPartialResponse();
             return new SingleSelectQuestion(
                 matcher, id, content, options, triggers, defaultTriggerId, extraInfo
             )
         }
-        else if (type == MessageType.multiSelect){
+        else if (type === MessageType.multiSelect){
             const matcher: ResponseMatcher = new MatchFullResponse();
             return new MultiSelectQuestion(
                 matcher, id, content, options, triggers, defaultTriggerId, extraInfo
             )
-        } else if (type == MessageType.autoPlayMessage){
+        } else if (type === MessageType.autoPlayMessage){
             // Question: do we need new matcher type for auto-play message?
             // since its triggers should be empty can directly return the defaultTrigger
             // THINK: how to automatically display next message of an auto-display message?

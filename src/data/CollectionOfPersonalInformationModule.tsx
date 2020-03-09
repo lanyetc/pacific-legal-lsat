@@ -58,7 +58,7 @@ export let collectionOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQeustionId: 6
+              nextQuestionId: 6
             },
             reply: "Hmm, are you sure about that? All non profits collection personal information; even a members name or email address counts as personal information.",
             resultReport: ""
@@ -204,7 +204,7 @@ export let collectionOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQeustionId: 10
+              nextQuestionId: 10
             },
             resultReport: ""
           }
@@ -252,7 +252,7 @@ export let collectionOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQeustionId: 11
+              nextQuestionId: 11
             },
             resultReport: 'The organization must notify the individual that it will be collecting employee personal information, before it collects the information.'
           }

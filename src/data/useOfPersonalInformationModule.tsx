@@ -42,7 +42,7 @@ export let useOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQeustionId: 13
+              nextQuestionId: 13
             },
             resultReport: "Information collected should be related to the society’s purpose/goals. For example, “we are a theatre company and collect information from our subscribers.” We collect personal information for the following purposes: 1.	Communicate with members; 2. Send newsletter; 3. Service phone calls and emails."
           }

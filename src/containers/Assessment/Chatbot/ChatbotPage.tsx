@@ -42,8 +42,8 @@ export default class ChatbotPage extends React.Component {
 
         const responsePath: ResponsePath = new ResponsePath()
         this.state = {
-            currentMessage: this.survey[40],
-            currentModuleId: 3,
+            currentMessage: this.survey[1],
+            currentModuleId: 1,
             responsePath: responsePath,
             displayedMessages: [], //TODO  maybe we don't need messagelist or todolist.. also responsepath here because the context gets them
             todoList: [],
@@ -57,12 +57,12 @@ export default class ChatbotPage extends React.Component {
     }
 
     componentDidMount() {
-        this.displayNextMessage({ moduleId: 3, messageId: 40 });
+        this.displayNextMessage({ moduleId: 1, messageId: 1 });
     }
 
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
-        if (next == -1) {
+        if (next === -1) {
             history.push('/result')
             return;
         }
@@ -226,11 +226,11 @@ export default class ChatbotPage extends React.Component {
         // return information for next message.
         // Can make it a switch statement
         // or, make it a part of the handleSelectOption method rather than integrate in trigger class？
-        if (trigger.action.type == "exit") {
+        if (trigger.action.type === "exit") {
             return -1
-        } else if (trigger.action.type == "next" || trigger.action.type == "nextQuestion") {
+        } else if (trigger.action.type === "next" || trigger.action.type === "nextQuestion") {
             return { moduleId: this.state.currentModuleId, messageId: trigger.action.nextQuestionId };
-        } else if (trigger.action.type == "nextModule") {
+        } else if (trigger.action.type === "nextModule") {
             return { moduleId: trigger.action.nextModuleId, messageId: trigger.action.nextQuestionId };
         }
     }

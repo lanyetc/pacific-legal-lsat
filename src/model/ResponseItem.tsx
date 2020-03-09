@@ -1,4 +1,3 @@
-import { Interface } from "readline";
 
 // ResponseItem: single item in responsePath
 export class ResponseItem {

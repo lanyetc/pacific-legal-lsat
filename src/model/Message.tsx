@@ -1,4 +1,4 @@
-import {Option, Trigger, ResponseMatcher, SingleSelectQuestion, MultiSelectQuestion, AutoPlayMessage} from './index'
+import {Option, Trigger, ResponseMatcher} from './index'
 import {TriggerData} from './Trigger'
 import { ResponsePath } from './ResponsePath';
 
@@ -52,7 +52,7 @@ export class Message {
 
     getDefaultTrigger() {
         for(let i in this._triggers){
-            if(this._triggers[i].id == this._defaultTriggerId){
+            if(this._triggers[i].id === this._defaultTriggerId){
                return this._triggers[i];
             }
         }

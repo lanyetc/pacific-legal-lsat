@@ -40,7 +40,7 @@ export let disclosureOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQeustionId: 15
+              nextQuestionId: 15
             },
             resultReport: "",
           }
@@ -72,7 +72,7 @@ export let disclosureOfPersonalInformationModule:any = [
             },
             action: {
                 type: 'nextQuestion',
-                nextQeustionId: 16
+                nextQuestionId: 16
               },
             resultReport: "",
           },
@@ -86,7 +86,7 @@ export let disclosureOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQeustionId: 16
+              nextQuestionId: 16
             },
             reply: "Great!",
             resultReport: "",
@@ -119,7 +119,7 @@ export let disclosureOfPersonalInformationModule:any = [
             },
             action: {
                 type: 'nextQuestion',
-                nextQeustionId: 18
+                nextQuestionId: 18
             },
             reply: "Personal information that is not collected for obvious reasons requires explicit consent from the individual before giving out the information.",
             todo: "Seek explicit consent before disclosing non-voluntary, non-obvious personal information",
@@ -135,7 +135,7 @@ export let disclosureOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQeustionId: 17
+              nextQuestionId: 17
             },
             resultReport: "Personal information that was not voluntarily provided or obvious may require a form of explicit consent, such as a form from the individual, before disclosing the information.",
           }
@@ -171,7 +171,7 @@ export let disclosureOfPersonalInformationModule:any = [
             },
             action: {
                 type: 'nextQuestion',
-                nextQeustionId: 18
+                nextQuestionId: 18
             },
             reply: "Personal information that is not voluntarily provided or obvious may require a form of  explicit consent, such as a form from the individual, before disclosing the information.",
             todo: "Seek explicit consent before disclosing non-voluntary, non-obvious personal information",
@@ -187,7 +187,7 @@ export let disclosureOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQeustionId: 18
+              nextQuestionId: 18
             },
             reply: "Good job!",
             resultReport: "Personal information that was not voluntarily provided or obvious may require a form of explicit consent, such as a form from the individual, before disclosing the information.",
@@ -221,7 +221,7 @@ export let disclosureOfPersonalInformationModule:any = [
             action: {
                 type: 'nextModule',
                 nextModuleId: 5,
-                nextQeustionId: 20
+                nextQuestionId: 20
             },
             resultReport: "",
           },
@@ -235,7 +235,7 @@ export let disclosureOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQeustionId: 19
+              nextQuestionId: 19
             },
             resultReport: "",
           }
