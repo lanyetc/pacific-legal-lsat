@@ -101,7 +101,7 @@ export class ResultContextProvider extends React.Component {
                 context.moduleResults[id].todos.push(contextItem.todo)
             if(contextItem.reminder)
                 context.moduleResults[id].reminders.push(contextItem.reminder)
-            if(contextItem.result)
+            if(contextItem.resultReport)
                 context.moduleResults[id].results.push(resultItem);
             context.moduleResults[id].path.push(contextItem.path);
         } else {

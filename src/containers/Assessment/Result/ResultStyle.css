@@ -20,10 +20,8 @@
 }
 
 .overview-container {
-    height: calc(100% + 96px);
     padding: 112px 230px 64px 230px;
     box-sizing: border-box;
-    overflow-y: auto;
 }
 
 .module-title {
@@ -91,8 +89,6 @@
 }
 .repo-container {
     padding: 112px 140px 64px 140px;
-    height: 100%;
-    overflow-y: auto;
 }
 .repo-item {
     padding: 24px;
@@ -119,6 +115,7 @@
 .result-detail-container .tab-nav+.container {
     box-sizing: border-box;
     padding-bottom: 64px;
+    overflow-y: auto;
 }
 
 .result.todo-container .title-container,
