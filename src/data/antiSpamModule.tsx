@@ -24,7 +24,7 @@ export const antiSpamModule: any = [
     {
         id: 51,
         type: 1,
-        content: 'Have you received or expect to receive requests for information?',
+        content: 'Would you like to learn about Canada’s Anti-Spam Law?',
         options: [
             {
                 id: 5101,

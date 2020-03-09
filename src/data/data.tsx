@@ -27,15 +27,16 @@ export function getSurvey() {
 export function getModules() {
     const privacyPolicySurvey: SurveyDialogue = generateSurveyDialogue(privacyPolicyModule);
     const personalInfoSurvey: SurveyDialogue = generateSurveyDialogue(module2);
-    const privacyOfficerSurvey: SurveyDialogue = generateSurveyDialogue(privacyOfficerModule)
+    
+    const privacyOfficerSurvey: SurveyDialogue = generateSurveyDialogue(privacyOfficerModule) // module: 3  start qid 40 
     const requestsForInformationSurvey: SurveyDialogue = generateSurveyDialogue(requestsForInformationModule);
     const antiSpamSurvey: SurveyDialogue = generateSurveyDialogue(antiSpamModule);
 
     const modules: any ={ 1: { name: "Privacy Policy", nodes: privacyPolicySurvey },
     2: { name: "Personal Info", nodes: personalInfoSurvey },
     3: { name: "Privacy Officer", nodes: privacyOfficerSurvey },
-    4: { name: "Requests for Information", nodes: requestsForInformationSurvey },
-    5: { name: "Anti Spam", nodes: antiSpamSurvey }}
+    7: { name: "Requests for Information", nodes: requestsForInformationSurvey },
+    8: { name: "Anti Spam", nodes: antiSpamSurvey }}
 
     return modules
 

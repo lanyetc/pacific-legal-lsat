@@ -39,11 +39,11 @@ export default class ChatbotPage extends React.Component {
         super(props)
         this.survey = getSurvey();
         this.modules = getModules();
-        
+
         const responsePath: ResponsePath = new ResponsePath()
         this.state = {
-            currentMessage: this.survey[1],
-            currentModuleId: 1,
+            currentMessage: this.survey[40],
+            currentModuleId: 3,
             responsePath: responsePath,
             displayedMessages: [], //TODO  maybe we don't need messagelist or todolist.. also responsepath here because the context gets them
             todoList: [],
@@ -57,11 +57,16 @@ export default class ChatbotPage extends React.Component {
     }
 
     componentDidMount() {
-        this.displayNextMessage({ moduleId: 1, messageId: 1});
+        this.displayNextMessage({ moduleId: 3, messageId: 40 });
     }
 
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
+        if (next == -1) {
+            history.push('/result')
+            return;
+        }
+
         const nextMessage: Message = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
         const message: DisplayedMessage = { message: nextMessage, selectedOptionIds: [], showExtraInfo: false };
 
@@ -75,7 +80,7 @@ export default class ChatbotPage extends React.Component {
             this.scrollToBottom();
         })
 
-         // do we just pass nothing in? or maybe we should do find matching trigger
+        // do we just pass nothing in? or maybe we should do find matching trigger
         if (nextMessage instanceof AutoPlayMessage) { // if next message type is general message, auto display next one
             const trigger: any = nextMessage.getDefaultTrigger()
             this.displayNextMessage(this.getNextAction(trigger)); // TODO ughhh this too. wtf. we just need to get the default trigger. 
@@ -86,7 +91,7 @@ export default class ChatbotPage extends React.Component {
     // TODO test that a response item is added to the responsePath
     private updateResponsePath(responseItem: any) {
         this.setState((state: IState) => {
-            state.responsePath.addResponseItem(responseItem); 
+            state.responsePath.addResponseItem(responseItem);
             return {
                 responsePath: state.responsePath
             }
@@ -216,12 +221,12 @@ export default class ChatbotPage extends React.Component {
 
     // TODO this may just redirect the user to the result page.... needs to be fixed
     getNextAction(trigger: any) {
-        
+
         // return information for next message.
         // Can make it a switch statement
         // or, make it a part of the handleSelectOption method rather than integrate in trigger class？
         if (trigger.action.type == "exit") {
-            history.push('/result')
+            return -1
         } else if (trigger.action.type == "next" || trigger.action.type == "nextQuestion") {
             return { moduleId: this.state.currentModuleId, messageId: trigger.action.nextQuestionId };
         } else if (trigger.action.type == "nextModule") {

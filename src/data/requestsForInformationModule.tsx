@@ -16,7 +16,7 @@ export const requestsForInformationModule: any = [
           },
           action: {
             type: 'nextQuestion',
-            nextQuestionId: 43
+            nextQuestionId: 44
           },
           resultReport: ''
         }
