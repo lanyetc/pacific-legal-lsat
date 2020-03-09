@@ -1,6 +1,11 @@
 import { Item, Result } from './context';
-import {Message, MessageFactory, MessageType} from '../model/index'
-import {module2} from './mod2'
+import { Message, MessageFactory, MessageType } from '../model/index'
+import { module2 } from './mod2'
+import { privacyPolicyModule } from './privacyPolicyModule'
+import { antiSpamModule } from './antiSpamModule'
+import { privacyOfficerModule } from './privacyOfficerModule'
+import { requestsForInformationModule } from './requestsForInformationModule'
+
 export interface SurveyDialogue {
     [key: number]: Message
 }
@@ -13,23 +18,36 @@ export interface Module {
 
 // COMMENTED OUT SURVEY UNTIL WE UPDATE IT
 
-export function getSurvey(){
-    return generateSurveyDialogue(module2)
+export function getSurvey() {
+    let masterModule: any = []
+    masterModule.concat(privacyPolicyModule, module2, privacyOfficerModule, requestsForInformationModule, antiSpamModule)
+    return generateSurveyDialogue(masterModule)
 }
 
-export function getModules(){
-    const surveyDialogue: SurveyDialogue = generateSurveyDialogue(module2);
-    return [{ name: "Privacy Policy", nodes: surveyDialogue }]
+export function getModules() {
+    const privacyPolicySurvey: SurveyDialogue = generateSurveyDialogue(privacyPolicyModule);
+    const personalInfoSurvey: SurveyDialogue = generateSurveyDialogue(module2);
+    const privacyOfficerSurvey: SurveyDialogue = generateSurveyDialogue(privacyOfficerModule)
+    const requestsForInformationSurvey: SurveyDialogue = generateSurveyDialogue(requestsForInformationModule);
+    const antiSpamSurvey: SurveyDialogue = generateSurveyDialogue(antiSpamModule);
+
+    const modules: any ={ 1: { name: "Privacy Policy", nodes: privacyPolicySurvey },
+    2: { name: "Personal Info", nodes: personalInfoSurvey },
+    3: { name: "Privacy Officer", nodes: privacyOfficerSurvey },
+    4: { name: "Requests for Information", nodes: requestsForInformationSurvey },
+    5: { name: "Anti Spam", nodes: antiSpamSurvey }}
+
+
 }
 
 export function generateSurveyDialogue(moduleData: any) {
     let survey: SurveyDialogue = {}
-    moduleData.forEach((question:any) => {
-        try{
-       let newMessage: Message = MessageFactory.createMessageFromData(question) 
-       survey[newMessage.id] = newMessage;
+    moduleData.forEach((question: any) => {
+        try {
+            let newMessage: Message = MessageFactory.createMessageFromData(question)
+            survey[newMessage.id] = newMessage;
         } catch (error) {
-            console.log( "questionid failed to cast to Messagetype: " + question.id )
+            console.log("questionid failed to cast to Messagetype: " + question.id)
         }
     });
     console.log("done");

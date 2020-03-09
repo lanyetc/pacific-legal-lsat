@@ -42,8 +42,8 @@ export default class ChatbotPage extends React.Component {
         
         const responsePath: ResponsePath = new ResponsePath()
         this.state = {
-            currentMessage: this.survey[2],
-            currentModuleId: 0,
+            currentMessage: this.survey[1],
+            currentModuleId: 1,
             responsePath: responsePath,
             displayedMessages: [], //TODO  maybe we don't need messagelist or todolist.. also responsepath here because the context gets them
             todoList: [],
@@ -57,7 +57,7 @@ export default class ChatbotPage extends React.Component {
     }
 
     componentDidMount() {
-        this.displayNextMessage({ moduleId: 0, messageId: 2});
+        this.displayNextMessage({ moduleId: 1, messageId: 1});
     }
 
     // TODO chnage the parameter name...
@@ -173,7 +173,7 @@ export default class ChatbotPage extends React.Component {
     }
 
     public async processSelectedOptions(questionId: any, selectedOptionIds: number[]) {
-        
+
         const responseItem: ResponseItem = new ResponseItem(this.state.currentMessage.id, selectedOptionIds)
         await this.updateResponsePath(responseItem) // check if this works with async await
 
@@ -222,7 +222,7 @@ export default class ChatbotPage extends React.Component {
         // or, make it a part of the handleSelectOption method rather than integrate in trigger class？
         if (trigger.action.type == "exit") {
             history.push('/result')
-        } else if (trigger.action.type == "next") {
+        } else if (trigger.action.type == "next" || trigger.action.type == "nextQuestion") {
             return { moduleId: this.state.currentModuleId, messageId: trigger.action.nextQuestionId };
         } else if (trigger.action.type == "nextModule") {
             return { moduleId: trigger.action.nextModuleId, messageId: trigger.action.nextQuestionId };
