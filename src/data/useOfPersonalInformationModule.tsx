@@ -1,6 +1,6 @@
 import {MessageType} from '../model/index'
 
-export let collectionOfPersonalInformationModule:any = [
+export let useOfPersonalInformationModule:any = [
     {
         id: 12,
         type: MessageType.singleSelect,
