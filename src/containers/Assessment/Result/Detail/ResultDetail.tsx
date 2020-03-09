@@ -6,23 +6,8 @@ import {getModules} from "../../../../data/data";
 export default function ResultDetail(props: any) {
     console.log(props.context);
     const survey = getModules();
-    // const context = getContext();
     const { context } = props;
-    // console.log(context.modules[1]);
-    function getTabList() {
-        let tabList: any = [];
-        tabList.push({
-            title: "OUTCOME", tabContent: <Overview context={context}/>
-        })
-        if (context.modules) {
-            Object.keys(context.modules).forEach((key:any) => {
-                tabList.push({
-                    title: context.modules[key].name, tabContent: <QuestionRepo questionList={survey[key].nodes}  resultList={context.modules[key].results}/>
-                })
-            })
-        }
-        return tabList;
-    }
+
     const tabList = getTabList();
     return (
         <div className="result-detail-container">
@@ -31,4 +16,19 @@ export default function ResultDetail(props: any) {
             ></TabNav>
         </div>
     );
+
+    function getTabList() {
+        let tabList: any = [];
+        tabList.push({
+            title: "OUTCOME", tabContent: <Overview context={context}/>
+        })
+        if (context.moduleResults) {
+            Object.keys(context.moduleResults).forEach((key:any) => {
+                tabList.push({
+                    title: context.moduleResults[key].name, tabContent: <QuestionRepo questionList={survey[key].nodes}  resultList={context.moduleResults[key].results}/>
+                })
+            })
+        }
+        return tabList;
+    }
 }

@@ -52,7 +52,7 @@ export const privacyOfficerModule: any = [
           },
           todo: 'Designate a privacy officer',
           resultReport: 'Every non-profit is required to have one person who can answer questions about the collection, use, retention and disclosure of data. This role is called the Privacy Officer.',
-          reply: 'Good job'
+          reply: 'Added to your to-do list!'
         },
         {
           id: 4111,

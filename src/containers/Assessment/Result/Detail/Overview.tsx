@@ -8,7 +8,7 @@ function TodoList(props: any) {
                 {todoList.map((item: any, key: any) => {
                     return (<ListItem className="list-item" key={key}>
                        <div className="todo-item-bullet"/>
-                        <span className= "item-label" >{item.title}</span>
+                        <span className= "item-label" >{item}</span>
                         <ListItemSecondaryAction>
                             <div className="btn-group">
                                 <Button variant="outlined">more info</Button>
@@ -30,7 +30,7 @@ function ReminderList(props: any) {
                 {reminderList.map((item: any, key: any) => {
                     return (<ListItem key={key} className="list-item">
                         <div className="reminder-item-bullet"/>
-                        <span className= "item-label" >{item.title}</span>
+                        <span className= "item-label" >{item}</span>
                          <ListItemSecondaryAction>
                             <div className="btn-group">
                                 <Button variant="outlined">more info</Button>

@@ -15,7 +15,13 @@ export default function QuestionRepo(props: any) {
                                 {questionList[result.questionId].content}
                             </Typography>
                             <Typography variant="body2" component="p">
-                                because you answered: {questionList[result.questionId].options.find((opt: { id: number; }) => opt.id === result.optionId) ?.label}
+                                because you answered:
+                                {
+                                    result.optionIds.map((selectedOptionId: number) => {
+                                        return questionList[result.questionId].options
+                                            .find((option: any) => option.id === selectedOptionId).label;
+                                    })
+                                }
                             </Typography>
                             <Typography variant="body2" component="p" className="link" >
                                 <Link>Change my answer</Link>
