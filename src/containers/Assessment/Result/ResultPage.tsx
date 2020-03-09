@@ -13,7 +13,7 @@ export default function ResultPage() {
             <Header
                 brand={banrdIcon}
                 brandName = "LSALT 2.0 | "
-                toolTitle="Non-profit Self Assessment"
+                toolTitle=" Non-profit Self Assessment"
                 fixed
                 color="white"
                 rightLinks={<HeaderLinks />}

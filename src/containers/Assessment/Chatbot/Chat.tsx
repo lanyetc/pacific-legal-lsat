@@ -9,7 +9,7 @@ export default function Chat(props: any) {
         const {message, showExtraInfo, selectedOptionIds, reply} = displayedMessage
         if (message.content) {
             return (
-                <div key={key}>
+                <div className="message-block" key={key}>
                     <ChatbotMessage content={message.content}></ChatbotMessage>
                     {message.options && message.options.length > 0 && 
                     <UserMessage 

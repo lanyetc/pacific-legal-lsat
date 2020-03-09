@@ -261,7 +261,7 @@ export default class ChatbotPage extends React.Component {
                 <Header
                     brand={banrdIcon}
                     brandName="LSALT 2.0 |"
-                    toolTitle="Non-Profit Self Assessment"
+                    toolTitle=" Non-Profit Self Assessment"
                     fixed
                     color="white"
                     rightLinks={<HeaderLinks />}

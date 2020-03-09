@@ -28,7 +28,7 @@ export default function UserMessage(props: any) {
             {optionItems}
             {generateExtraOptionComponent()}
             <ListItem className="nav-list-item">
-                <Button className="nav-link" onClick={() => props.handleMultiSelectSubmit(questionId)}>SUBMIT</Button>
+                <Button className="nav-link" onClick={() => props.handleMultiSelectSubmit(questionId)}>NEXT</Button>
             </ListItem>
         </List>
     } else { // single select

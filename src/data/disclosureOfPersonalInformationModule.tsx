@@ -143,7 +143,7 @@ export let disclosureOfPersonalInformationModule:any = [
         defaultTriggerId: 1611,
         extraInfo: {
             title: "I need an example",
-            content: "For example, an obvious reason for collection personal information could be when someone buys a ticket to a show or comes into your office to seek services."
+            content: "For example, an obvious reason for collecting personal information could occur when someone buys a ticket to a show or comes into our office to seek services.",
         }
     },
     {
