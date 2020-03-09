@@ -6,7 +6,7 @@ export interface Item {
 }
 export interface Result {
     questionId: number,
-    optionId: number,
+    optionIds: number[],
     repo: string
 }
 export interface ModuleResult {
@@ -94,20 +94,22 @@ export class ResultContextProvider extends React.Component {
 
     updateContext = (id: number, contextItem: any) => {
         let context = this.state.context;
+
+        const resultItem: Result = {questionId: contextItem.path.messageId, optionIds: contextItem.path.optionIds, repo: contextItem.resultReport}
         if (context.moduleResults[id]) { // if current module already exist in result context
             if(contextItem.todo)
                 context.moduleResults[id].todos.push(contextItem.todo)
             if(contextItem.reminder)
                 context.moduleResults[id].reminders.push(contextItem.reminder)
             if(contextItem.result)
-                context.moduleResults[id].results.push(contextItem.result);
+                context.moduleResults[id].results.push(resultItem);
             context.moduleResults[id].path.push(contextItem.path);
         } else {
             context.moduleResults[id] = {
                 name: contextItem.name,
-                todos: [contextItem.todos],
-                reminders: [contextItem.reminders],
-                results: [contextItem.result],
+                todos: [contextItem.todo],
+                reminders: [contextItem.reminder],
+                results: [resultItem],
                 path: [contextItem.path]
             }; // if module does not exist
         }
