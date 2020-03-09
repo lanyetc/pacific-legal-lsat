@@ -124,6 +124,7 @@
 }
 
 .bot .bubble {
+    white-space: pre-line;
     color: #4d4d4d;
     margin-top: 16px;
     font-size: 18px;

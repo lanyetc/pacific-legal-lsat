@@ -131,7 +131,7 @@ export let collectionOfPersonalInformationModule:any = [
       {
         id: 7,
         type: MessageType.autoPlayMessage,
-        content: "If your purpose for collecting information is obvious and voluntarily, like collecting an email address when someone signs up for your newsletter, this is implied consent.",
+        content: "If your purpose for collecting information is obvious and voluntarily, like collecting an email address when someone signs up for your newsletter, this is implied consent. \n\n If someone explicitly agrees to the collection, use, and disclosure of their information (by signing a consent form, for example) this is explicit consent. ",
         options: [],
         triggers: [
           {
@@ -142,7 +142,7 @@ export let collectionOfPersonalInformationModule:any = [
             id: 710,
             action: {
               type: 'nextQuestion',
-              nextQuestionId: 8
+              nextQuestionId: 9
             }
           }
         ],
