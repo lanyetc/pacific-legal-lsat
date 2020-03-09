@@ -8,6 +8,7 @@ export let collectionOfPersonalInformationModule:any = [
         triggers: [
           {
             expectedResponses: {
+              messageId: 4,
               optionIds: []
             },
             id: 410,
@@ -113,6 +114,7 @@ export let collectionOfPersonalInformationModule:any = [
           },
           {
             expectedResponses: {
+              messageId: 6,
               optionIds: []
             },
             id: 611,
@@ -134,6 +136,7 @@ export let collectionOfPersonalInformationModule:any = [
         triggers: [
           {
             expectedResponses: {
+              messageId: 7,
               optionIds: []
             },
             id: 710,
@@ -153,6 +156,7 @@ export let collectionOfPersonalInformationModule:any = [
         triggers: [
           {
             expectedResponses: {
+              messageId: 8,
               optionIds: []
             },
             id: 810,
@@ -302,6 +306,7 @@ export let collectionOfPersonalInformationModule:any = [
           {
             id: 1111,
             expectedResponses: {
+              messageId: 11,
               optionIds: []
             },
             action: {

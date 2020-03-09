@@ -108,7 +108,8 @@ export let useOfPersonalInformationModule:any = [
           {
             id: 1311,
             expectedResponses: {
-              optionIds: []
+                messageId: 13,
+                optionIds: []
             },
             action: {
                 type: 'nextModule',
