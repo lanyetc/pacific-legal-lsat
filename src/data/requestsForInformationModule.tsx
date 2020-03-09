@@ -5,7 +5,7 @@ export const requestsForInformationModule: any = [
     {
       id: 43,
       type: 3,
-      content: 'Sometimes a non-profit will get requests for information. If the non-profit provides community or social services, the request could be from clients. If it is an arts organization, requests might include donation related information. If the request is coming from member of a non-profit society, this is discussed in detail on the lawfornonprofits.ca website and FAQ\'s.',
+      content: "Sometimes a non-profit will get requests for information. If the non-profit provides community or social services, the request could be from clients. If it is an arts organization, requests might include donation related information. If the request is coming from a member of the non-profit society, this is discussed in detail on the lawfornonprofits.ca website and FAQ's.",
       options: [],
       triggers: [
         {
