@@ -21,7 +21,9 @@ export default function ResultPage() {
 
             />
             <div className="main-container">
-               
+               <div className="result-title-bar">
+                   <span>Review Results for Privacy Policy and Confidentiality Module </span>
+               </div>
                 <ResultContextConsumer>
                     {({ context }) => (
                         <ResultDetail context={context}></ResultDetail>

@@ -204,6 +204,7 @@
 }
 
 .chat-block .nav-list-item .nav-link.multi-next-button {
+    margin-top: 32px;
     border: solid 1.5px #e48241;
 }
 
