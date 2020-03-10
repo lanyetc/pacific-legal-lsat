@@ -47,8 +47,8 @@ export const privacyPolicyModule: any =  [
           },
           action: {
             type: 'nextModule',
-            nextModuleId: 2,
-            nextQuestionId: 4
+            nextModuleId: 1,
+            nextQuestionId: 3
           },
           resultReport: 'The Personal Information Protection Act (“PIPA”) requires societies to develop a privacy policy. A privacy policy is a document that describes the personal information we are collecting: why we are collecting it, what we use it for, how we keep it secure and when we have to disclose it. It will also include how a person can review what we are doing with it.',
           todo: 'Create a Privacy Policy',
@@ -73,7 +73,7 @@ export const privacyPolicyModule: any =  [
       defaultTriggerId: 111,
       extraInfo: {
         title: 'What is a privacy policy?',
-        content: 'A privacy policy is a document which describes whose personal information we are collecting: why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing.'
+        content: "A privacy policy is a document that describes the personal information you are collecting: why you are collecting it, what you use it for, how and when you have to disclose it, how you keep it secure, and how a person can review what you are doing.",
       }
     },
     {

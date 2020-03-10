@@ -102,7 +102,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQuestionId: 27
+              nextQuestionId: 22
             },
             resultReport: ''
           },
@@ -162,7 +162,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQuestionId: 24
+              nextQuestionId: 27
             },
             reply: 'Lock those documents up!',
             todo: 'Keep paper documents in a locked cabinet',
@@ -178,7 +178,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             action: {
                 type: 'nextQuestion',
-                nextQuestionId: 24
+                nextQuestionId: 27
             },
             reply: 'Good job!',
             resultReport: 'Use locked filing cabinets to keep personal information secured.'
@@ -476,7 +476,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQuestionId: 32
+              nextQuestionId: 30
             },
             resultReport: ''
           },
