@@ -189,7 +189,7 @@
 
 .chat-area .message-block:last-child .chat-block .bubble,
 .chat-area .message-block:last-child .chat-avatar,
-.chat-area .message-block:nth-last-child(2) .chat-block .bubble.reply,
-.chat-area .message-block:nth-last-child(2) .chat-block .bubble.extra-info{
+.chat-area .message-block:nth-last-child(2) .chat-block:not(.question-content) .chat-avatar,
+.chat-area .message-block:nth-last-child(2) .chat-block.bot:not(.question-content) .bubble{
     opacity: 1;
 }

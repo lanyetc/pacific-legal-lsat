@@ -249,7 +249,7 @@ export const requestsForInformationModule: any = [
       options: [
         {
           id: 4800,
-          label: 'Protected by solicitor-client privilege?'
+          label: 'Protected by solicitor-client privilege'
         },
         {
           id: 4801,
