@@ -7,7 +7,7 @@ export default function ChatbotMessage(props: any) {
             <div className="chat-avatar">
                 <img src={botAvator} alt="chatbot avator" />
             </div>
-            <div className="bubble white round">{props.content}</div>
+            <div className={"bubble white round " + props.bubbleClass}>{props.content}</div>
         </div>
     )
 }
