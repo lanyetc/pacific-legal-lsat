@@ -14,7 +14,7 @@ export default function HeaderLinks() {
         <Button className = "navLink">Login</Button>
       </ListItem> */}
       <ListItem className="navListItem">
-        <Button className = "navLink">Contact</Button>
+        <Button className = "navLink" href="https://www.pacificlegaloutreach.com/contact" target="_blank">Contact</Button>
       </ListItem>
     </List>
   );
