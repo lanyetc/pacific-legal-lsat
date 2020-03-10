@@ -193,3 +193,11 @@
 .chat-area .message-block:nth-last-child(2) .chat-block.bot:not(.question-content) .bubble{
     opacity: 1;
 }
+
+.chat-block .nav-list-item .nav-link.multi-next-button {
+    border: solid 1.5px #e48241;
+}
+
+.chat-block .nav-list-item .nav-link.multi-next-button .send-icon {
+    margin-left: 8px;
+}

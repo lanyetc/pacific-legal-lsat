@@ -70,8 +70,10 @@
     margin-top: 24px;
     padding: 16px 8px;
 }
-.result.todo-container .title {
-    padding-left: 24px;
+.result.todo-container .title,
+.result.reminder-container .title{
+    font-family: Lato;
+    font-weight: 800;
 }
 
 .list-container .btn-group button span{

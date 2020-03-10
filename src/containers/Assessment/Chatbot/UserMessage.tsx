@@ -6,6 +6,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Button from '@material-ui/core/Button';
 import { MultiSelectQuestion } from "../../../model";
 import { DisplayedMessage } from './ChatbotPage'
+import SendIcon from '@material-ui/icons/Send';
 
 
 
@@ -28,7 +29,10 @@ export default function UserMessage(props: any) {
             {optionItems}
             {generateExtraOptionComponent()}
             <ListItem className="nav-list-item">
-                <Button className="nav-link" onClick={() => props.handleMultiSelectSubmit(questionId)}>NEXT</Button>
+                <Button className="nav-link multi-next-button" onClick={() => props.handleMultiSelectSubmit(questionId)}>
+                    NEXT
+                    <SendIcon className="send-icon"></SendIcon>
+                </Button>
             </ListItem>
         </List>
     } else { // single select

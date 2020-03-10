@@ -63,7 +63,7 @@ export default function Overview(props: any) {
             <div className="result reminder-container">
                 <div className="title-container">
                     <Typography variant="h4" component="h4" className="title bold">
-                        <span className="title">Do Later</span>
+                        <span className="title">DO LATER</span>
                     </Typography>
                 </div>
                 <ReminderList reminderList={context.reminders}></ReminderList>
