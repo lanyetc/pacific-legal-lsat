@@ -1,22 +1,28 @@
+.chatbot-page.full-screen-container {
+    overflow-y: hidden;
+}
+
 .content-container {
     height: 100%;
-    width: calc(100% - 144px - 472px);
+    width: calc(100% - 144px - 452px);
     float: left;
 }
 
 .progress-container {
-    height: 100%;
+    height: calc(100% - 72px);
     width: 144px;
-    background-color: #193c81;
+    background-color: #e48241;
     float: left;
+    margin-top: 72px;
+    border-radius: 0 20px 0 0;
 }
 .chat.todo-container {
-    height: calc(100% - 32px);
-    width: 448px;
-    margin: 16px 0 16px;
-    box-shadow: 3px 3px 10px 0 rgba(25, 60, 129, 0.3);
+    height: calc(100% - 70px);
+    width: 338px;
+    margin: 54px 0 16px;
     float: left;
     padding: 24px;
+    background-color: #e6e6e6;
     box-sizing: border-box;
     overflow-y: auto;
 }
@@ -32,7 +38,7 @@
     margin-top: 28px;
 }
 .dolater-titile-box {
-    background-color: #4d4d4d;
+    background-color: #5d4d4d;
 }
 .donow-titile-box {
     background-color: #e48241;
@@ -43,7 +49,29 @@
     border-radius: 30px 30px 0 0;
     text-align: center;
     color: #ffffff;
-    padding: 22px 0;
+    padding: 12px 0;
+    font-size: 18px;
+  font-weight: 800;
+}
+
+.todo-item-bullet, .reminder-item-bullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.todo-item-bullet {
+    background-color: #e48241;
+}
+
+.reminder-item-bullet {
+    background-color: #848484;
+}
+
+.chat.todo-container .item-label {
+    margin-left: 20px;
+    font-size: 14px;
+    color: #848484;
 }
 
 .todo-titile-box .icon {
@@ -59,7 +87,7 @@
 
 .chat-area {
     height: 100%;
-    padding: 16px 36px;
+    padding: 54px 58px;
     box-sizing: border-box;
     overflow-y: auto;
 }
@@ -68,29 +96,82 @@
     margin-bottom: 16px;
 }
 
-.avatar {
-    height: 54px;
-    width: 54px;
+.chat-block.user {
+    text-align: right;
+}
+
+.chat-avatar {
+    display: inline-block;
     border-radius: 50px;
-    background-color: #83d8ef;
-    float: inherit;
+}
+.chat-avatar img {
+    width: 80px;
 }
 
 .bubble {
-    padding: 16px 64px;
-    width: 500px;
-    float: inherit;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    padding: 16px 32px;
+    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     vertical-align: top;
     margin: 0 8px;
+    min-width: 320px;
+    display: inline-block;
 }
 
-.chat .list-container {
-    padding: 0 86px;
+.bot .bubble {
+    margin-top: 16px;
+    font-size: 18px;
+}
+
+.user .bubble {
+    background-color: #f8f1e7;
+    right: 0;
+}
+
+@media (min-width: 1410px) {
+    .bubble {
+        max-width: 600px;
+    }
+}
+
+@media (min-width: 1320px) and (max-width: 1409px) {
+    .bubble {
+        max-width: 500px;
+    }
+}
+
+@media (min-width: 1210px) and (max-width: 1319px) {
+    .bubble {
+        max-width: 400px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1210px) {
+    .bubble {
+        max-width: calc(100% - 100px);
+    }
+}
+
+
+
+.chat-block .nav-list-item  .nav-link{
+    width: 100%;
+    background-color: #ffffff;
+    border: solid 0.5px #e48241;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+    font-size: 18px;
+    font-family: Lato;
+    font-weight: 600;
+    text-transform: initial;
+    color: #e48241;
 }
 
 .nav-list-item .nav-link.selected {
-    background-color: #193c81;
+    background-color: #e48241;
     color: #ffffff;
+}
+
+.chat .list-container {
+    margin-top: 0;
 }

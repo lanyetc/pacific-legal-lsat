@@ -9,6 +9,7 @@ import { getSurvey, getModules, NodeTypes, TriggerType, Trigger } from "../../..
 import { ResultContext, Context } from '../../../data/context';
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
+import banrdIcon from "../../../Assets/img/botavator.svg";
 
 interface IState {
     currentMessage: any,
@@ -46,6 +47,11 @@ export default class ChatbotPage extends React.Component {
         this.displayNextMsg(1);
     }
 
+    public scrollToBottom() {
+        let chatbotScorller = document.getElementById('chatbot-scroller') as HTMLElement;
+        chatbotScorller.scrollTop = chatbotScorller.scrollHeight;
+    }
+
     public displayNextMsg(qId: number) {
         const nextMessage = this.modules[this.state.currentModuleId].nodes[qId];
         this.state.messageList.push(nextMessage);
@@ -54,6 +60,8 @@ export default class ChatbotPage extends React.Component {
                 currentMessage: nextMessage,
                 messageList: state.messageList
             }
+        },() => {
+            this.scrollToBottom();
         })
         if (nextMessage.type === NodeTypes.message) { // if next message type is general message, auto display next one
             this.setState((state: IState, props) => {
@@ -62,8 +70,8 @@ export default class ChatbotPage extends React.Component {
                 }
             })
             this.displayNextMsg(nextMessage.triggers[0].nextQuestionId);
-
         }
+        
     }
 
     public handleSelectOptions(questionId: any, selectedOptionId: any) { // this method will need to be refactored and the functionality will need to be extended later.
@@ -105,13 +113,16 @@ export default class ChatbotPage extends React.Component {
                                 currentMessage: state.currentMessage,
                                 currentModuleId: this.checkModule(trigger),
                                 questionPath: state.questionPath,
-                                todoList: state.todoList.concat(newTodoList)
+                                todoList: state.todoList.concat(newTodoList),
+                                reminderList: state.reminderList.concat(newReminderList)
                             }
                         }, () => this.displayNextMsg(trigger.nextQuestionId));
                     }
                 }
             })
         })
+
+        
     }
 
     public handleShowExtraInfo(questionId: any) {
@@ -150,10 +161,11 @@ export default class ChatbotPage extends React.Component {
     render() {
         console.log("messagelist: " + JSON.stringify(this.state.messageList))
         return (
-            <div className="full-screen-container grey">
+            <div className="full-screen-container grey chatbot-page">
                 <Header
-                    brand="PLEO"
-                    toolTitle="NPO SELF ASSESSMENT "
+                    brand= {banrdIcon}
+                    brandName = "LSALT 2.0 |"
+                    toolTitle="Non-Profit Self Assessment"
                     fixed
                     color="white"
                     rightLinks={<HeaderLinks />}

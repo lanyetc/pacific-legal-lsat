@@ -23,7 +23,7 @@ export default function Chat(props: any) {
 
     return (
         <div className="content-container">
-            <div className="chat-area">
+            <div className="chat-area" id="chatbot-scroller">
                 {messageOptions}
             </div>
         </div>

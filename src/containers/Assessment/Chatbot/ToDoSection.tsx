@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, FormControlLabel, Radio } from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 
 export default function ToDoSection(props: any) {
     const { todoList, reminderList } = props;
@@ -15,14 +15,10 @@ export default function ToDoSection(props: any) {
                     <List>
                         {todoList.map((item: any, key: any) => {
                             return (<ListItem key={key}>
-                                <FormControlLabel
-                                    value={item.title}
-                                    control={<Radio color="primary" />}
-                                    label={item.title}
-                                    labelPlacement="end"
-                                />
+                                <div className="todo-item-bullet"/>
+                                <span className= "item-label" >{item.title}</span>
                             </ListItem>)
-                        })}
+                        })} 
                     </List>
                 </div>
             </div>
@@ -36,12 +32,8 @@ export default function ToDoSection(props: any) {
                     <List>
                         {reminderList.map((item: any, key: any) => {
                             return (<ListItem key={key}>
-                                <FormControlLabel
-                                    value={item.title}
-                                    control={<Radio color="primary" />}
-                                    label={item.title}
-                                    labelPlacement="end"
-                                />
+                               <div className="reminder-item-bullet"/>
+                                <span className= "item-label" >{item.title}</span>
                             </ListItem>)
                         })}
                     </List>

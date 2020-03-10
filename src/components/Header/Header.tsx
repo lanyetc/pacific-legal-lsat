@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
 import Hidden from "@material-ui/core/Hidden";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
@@ -14,16 +13,16 @@ import './HeaderStyle.css'
 import '../common.css'
 
 
-export default function Header(props: { color: any; rightLinks: any; leftLinks: any; brand: string; toolTitle: string; fixed: boolean; absolute: boolean; }) {
+export default function Header(props: { color: any; rightLinks: any; leftLinks: any; brand: string; brandName:string; toolTitle: string; fixed: boolean; absolute: boolean; }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const { rightLinks, leftLinks, brand, toolTitle } = props;
+  const { rightLinks, leftLinks, brand, toolTitle, brandName } = props;
 
-  const brandComponent = <div><Button className="navBrand">{brand}</Button><span className="navTitle">{toolTitle}</span></div>;
+const brandComponent = <div><img className="navBrand" src={brand} alt="brand icon" /><span className="brandTitle">{brandName}</span><span className="navTitle">{toolTitle}</span></div>;
   return (
-    <AppBar className="appBar transparent">
+    <AppBar className="appBar white">
       <Toolbar className="navContainer">
         {leftLinks !== undefined ? { brandComponent } : null}
         <div className="flex">

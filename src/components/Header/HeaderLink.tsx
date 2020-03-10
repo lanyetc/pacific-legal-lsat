@@ -7,12 +7,12 @@ import "./HeaderStyle.css";
 export default function HeaderLinks() {
   return (
     <List className="navList">
-      <ListItem className="navListItem">
+      {/* <ListItem className="navListItem">
         <Button className = "navLink">Help</Button>
       </ListItem>
       <ListItem className="navListItem">
         <Button className = "navLink">Login</Button>
-      </ListItem>
+      </ListItem> */}
       <ListItem className="navListItem">
         <Button className = "navLink">Contact</Button>
       </ListItem>

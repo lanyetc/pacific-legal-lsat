@@ -1,3 +1,9 @@
+.result-page.full-screen-container {
+    overflow: hidden;
+}
+
+.result-page 
+
 .moudule-result-container {
     width: 420px;
     height: 106.7vh;
@@ -11,11 +17,13 @@
     height: 100%;
     float: left;
     box-sizing: border-box;
-    padding: 0 50px;
 }
 
 .overview-container {
-    padding: 0 80px;
+    height: 100%;
+    padding: 64px 230px;
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
 .module-title {
@@ -47,7 +55,6 @@
 }
 
 .result.todo-container {
-    margin-top: 64px;
     width: 100%;
     float: left;
     border-radius: 5px;
@@ -76,7 +83,7 @@
     box-shadow: 2px 2px 6px 0 rgba(79, 118, 250, 0.76);
 }
 .repo-container {
-    padding-top: 56px;
+    padding: 64px 140px;
     height: 100%;
     overflow-y: auto;
 }
@@ -117,4 +124,36 @@
 .result.reminder-container .title-container {
     background-color: #a7a7a7;
     text-align: center;
+}
+
+.result .list-container {
+    margin-top: 0;
+    padding: 0 50px;
+}
+
+.result .list-container .list-item {
+    padding: 36px 0;
+}
+
+.result .list-container .MuiListItem-container:not(:last-child) {
+    border-bottom: solid 1px #cbcbcb;
+}
+
+.result .todo-item-bullet,
+.result .reminder-item-bullet {
+    border-radius: 20px;
+}
+
+.result .todo-item-bullet {
+    box-shadow: 1px 1px 3px 0 rgba(79, 118, 250, 0.76);
+    background-color: #2756f2;
+}
+
+.result .reminder-item-bullet {
+    box-shadow: 1px 1px 3px 0 rgba(79, 118, 250, 0.76);
+    background-color: #464545;
+}
+
+.item-label {
+    margin-left: 12px;
 }
