@@ -171,7 +171,7 @@ export let collectionOfPersonalInformationModule:any = [
     {
         id: 9,
         type: MessageType.singleSelect,
-        content: 'Would you like to review Collecting Employee Personal Information?',
+        content: 'Would you like to talk about Employee Personal Information?',
         options: [
           {
             id: 901,
