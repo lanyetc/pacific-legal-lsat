@@ -181,6 +181,15 @@
 
 .chat .list-container {
     margin-top: 0;
+    padding: 16px;
+}
+
+.chat .list-container ul li {
+    padding: 16px 8px;
+}
+
+.chat .list-container ul li:not(:last-child) {
+    border-bottom: solid 0.5px #cbcbcb;
 }
 
 .chat-area .message-block:last-child .chat-block.bot .bubble {
