@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/pacific-legal-lsat/static/css/main.bd0dbb7b.chunk.css",
+    "main.css": "/pacific-legal-lsat/static/css/main.f3ae0e20.chunk.css",
     "main.js": "/pacific-legal-lsat/static/js/main.65e148fb.chunk.js",
     "main.js.map": "/pacific-legal-lsat/static/js/main.65e148fb.chunk.js.map",
     "runtime-main.js": "/pacific-legal-lsat/static/js/runtime-main.6dffc024.js",
@@ -8,16 +8,16 @@
     "static/js/2.4bcdc6ab.chunk.js": "/pacific-legal-lsat/static/js/2.4bcdc6ab.chunk.js",
     "static/js/2.4bcdc6ab.chunk.js.map": "/pacific-legal-lsat/static/js/2.4bcdc6ab.chunk.js.map",
     "index.html": "/pacific-legal-lsat/index.html",
-    "precache-manifest.10510e8edd86f6c5599775a7117b5ab1.js": "/pacific-legal-lsat/precache-manifest.10510e8edd86f6c5599775a7117b5ab1.js",
+    "precache-manifest.00e426c9ab4b22d98c82e43e94cb2d8b.js": "/pacific-legal-lsat/precache-manifest.00e426c9ab4b22d98c82e43e94cb2d8b.js",
     "service-worker.js": "/pacific-legal-lsat/service-worker.js",
-    "static/css/main.bd0dbb7b.chunk.css.map": "/pacific-legal-lsat/static/css/main.bd0dbb7b.chunk.css.map",
+    "static/css/main.f3ae0e20.chunk.css.map": "/pacific-legal-lsat/static/css/main.f3ae0e20.chunk.css.map",
     "static/js/2.4bcdc6ab.chunk.js.LICENSE.txt": "/pacific-legal-lsat/static/js/2.4bcdc6ab.chunk.js.LICENSE.txt",
     "static/media/botavator.svg": "/pacific-legal-lsat/static/media/botavator.308830c4.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.6dffc024.js",
     "static/js/2.4bcdc6ab.chunk.js",
-    "static/css/main.bd0dbb7b.chunk.css",
+    "static/css/main.f3ae0e20.chunk.css",
     "static/js/main.65e148fb.chunk.js"
   ]
 }
