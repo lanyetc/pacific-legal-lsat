@@ -141,7 +141,7 @@ export const requestsForInformationModule: any = [
     {
       id: 46,
       type: 1,
-      content: 'Who is asking',
+      content: 'Who is asking?',
       options: [
         {
           id: 4600,

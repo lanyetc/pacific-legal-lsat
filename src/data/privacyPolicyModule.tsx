@@ -2,6 +2,27 @@
 // privacy policy
 export const privacyPolicyModule: any =  [
     {
+      id: 61,
+      type: 3,
+      content: "Hi there! I am your virtual assistant, Leo, and I will be helping you through your self-assessment. During our chat, I will help you create a personalized to-do list based on your answers.",
+      options: [],
+      triggers: [
+        {
+          id: 6110,
+          expectedResponses: {
+            messageId: 61,
+            optionIds: []
+          },
+          action: {
+            type: 'nextQuestion',
+            nextQuestionId: 1
+          },
+          resultReport: ''
+        }
+      ],
+      defaultTriggerId: 6110
+    },
+    {
       id: 1,
       type: 1,
       content: 'Let’s get started! Do you have a privacy policy?',
@@ -94,7 +115,7 @@ export const privacyPolicyModule: any =  [
             nextQuestionId: 3
           },
           resultReport: 'The Personal Information Protection Act (“PIPA”) requires societies to develop a privacy policy. A privacy policy is a document that describes the personal information we are collecting: why we are collecting it, what we use it for, how we keep it secure and when we have to disclose it. It will also include how a person can review what we are doing with it.',
-          reply: 'Good job'
+          reply: 'Good job!'
         },
         {
           id: 211,
@@ -116,7 +137,7 @@ export const privacyPolicyModule: any =  [
     {
       id: 3,
       type: 1,
-      content: 'Are your staff, directors and other volunteers trained on privacy policies',
+      content: 'Are your staff, directors and other volunteers trained on privacy policies?',
       options: [
         {
           id: 301,

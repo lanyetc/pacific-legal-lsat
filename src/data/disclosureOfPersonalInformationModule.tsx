@@ -86,7 +86,7 @@ export let disclosureOfPersonalInformationModule:any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQuestionId: 16
+              nextQuestionId: 18
             },
             reply: "Great!",
             resultReport: "",

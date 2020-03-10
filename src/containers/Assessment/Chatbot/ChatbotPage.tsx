@@ -57,7 +57,7 @@ export default class ChatbotPage extends React.Component {
     }
 
     componentDidMount() {
-        this.displayNextMessage({ moduleId: 1, messageId: 1 });
+        this.displayNextMessage({ moduleId: 1, messageId: 61 });
     }
 
     // TODO chnage the parameter name...

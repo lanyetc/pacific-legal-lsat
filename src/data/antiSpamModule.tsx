@@ -233,7 +233,7 @@ export const antiSpamModule: any = [
     {
         id: 56,
         type: 3,
-        content: 'Message sent by or on behalf of a charity with “primary purpose of raising funds for the charity” are exempt from the application of CASL. If the charity sends other kinds of emails to the public then it will have to follow CASL rules.',
+        content: "Messages sent by or on behalf of a charity with “primary purpose of raising funds for the charity” are exempt from the application of CASL. If the charity sends other kinds of emails to the public then it will have to follow CASL rules.",
         options: [],
         triggers: [
             {
@@ -405,7 +405,7 @@ export const antiSpamModule: any = [
         options: [
             {
                 id: 6000,
-                label: 'Go To Result'
+                label: 'Go To Results'
             }
         ],
         triggers: [

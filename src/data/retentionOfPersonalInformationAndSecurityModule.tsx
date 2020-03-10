@@ -102,7 +102,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             action: {
               type: 'nextQuestion',
-              nextQuestionId: 22
+              nextQuestionId: 27
             },
             resultReport: ''
           },
@@ -512,7 +512,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
           },
           {
             id: 2900,
-            label: 'N0'
+            label: 'No'
           },
           {
             id: 2902,

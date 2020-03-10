@@ -30,6 +30,7 @@
     display: inline-block;
     line-height: 52px;
     vertical-align: bottom;
+    margin-left: 4px;
 }
 
 .brandTitle {
