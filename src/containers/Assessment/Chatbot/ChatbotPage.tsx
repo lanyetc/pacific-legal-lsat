@@ -78,6 +78,7 @@ export default class ChatbotPage extends React.Component {
             }
         }, () => {
             this.scrollToBottom();
+            this.updateProgressBar(this.state.currentModuleId);
         })
 
         // do we just pass nothing in? or maybe we should do find matching trigger
@@ -244,6 +245,18 @@ export default class ChatbotPage extends React.Component {
         }
     }
 
+    public updateProgressBar(index:any) {
+        let currentProgressBar = document.getElementById('sub-module-bar-' + index) as HTMLElement;
+        let progressLength:number;
+        // let nodesarray = Object.keys(this.modules[index].nodes).length;
+        if (this.context.context.moduleResults[index]) {
+            progressLength= (this.context.context.moduleResults[index].path.length + 1) / Object.keys(this.modules[index].nodes).length;
+        } else {
+            progressLength= 1 / Object.keys(this.modules[index].nodes).length;
+        }
+        currentProgressBar.style.width = progressLength * 100 + "%";
+    }
+
     public isCorrectTrigger(answer: any, currentQuestionId: any, currentOptionId: any) {
         return answer.optionId === currentOptionId && answer.questionId === currentQuestionId
     }
@@ -268,7 +281,9 @@ export default class ChatbotPage extends React.Component {
                     absolute
                 />
                 <div className="main-container">
-                    <ProgressBar ></ProgressBar>
+                    <ProgressBar 
+                    context={this.context.context.moduleResults}
+                    currentModuleId = {this.state.currentModuleId}></ProgressBar>
                     <Chat
                         displayedMessages={this.state.displayedMessages}
                         handleMultiSelectOptions={this.handleMultiSelectClick}

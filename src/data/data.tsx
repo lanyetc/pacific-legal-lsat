@@ -22,6 +22,18 @@ export interface Module {
 
 // COMMENTED OUT SURVEY UNTIL WE UPDATE IT
 
+export function getTopModules() {
+    const modules = [
+        "Privacy & Confidentiality",
+        "Employment",
+        "Human Rights",
+        "Acess to Records",
+        "Government",
+        "Societies Act Compliance"
+    ]
+    return modules;
+}
+
 export function getSurvey() {
     let masterModule: any = []
     masterModule.concat(privacyPolicyModule, module2, privacyOfficerModule, requestsForInformationModule, antiSpamModule)
@@ -39,10 +51,10 @@ export function getModules() {
     const antiSpamSurvey: SurveyDialogue = generateSurveyDialogue(antiSpamModule);
 
     const modules: any ={ 1: { name: "Privacy Policy", nodes: privacyPolicySurvey },
-    2: { name: "Collection of Personal Information", nodes: collectionOfPersonalInformationSurvey },
-    3: { name: "Use of Personal Information", nodes: useOfPersonalInformationSurvey },
-    4: { name: "Disclosure of Personal Information", nodes: disclosureOfPersonalInformationSurvey },
-    5: { name: "Retention of Personal Information & Security", nodes: retentionOfPersonalInformationAndSecuritySurvey },
+    2: { name: "Collection of Personal Info", nodes: collectionOfPersonalInformationSurvey },
+    3: { name: "Use of Personal Info", nodes: useOfPersonalInformationSurvey },
+    4: { name: "Disclosure of Personal Info", nodes: disclosureOfPersonalInformationSurvey },
+    5: { name: "Retention of Personal Info & Security", nodes: retentionOfPersonalInformationAndSecuritySurvey },
     6: { name: "Privacy Officer", nodes: privacyOfficerSurvey },
     7: { name: "Requests for Information", nodes: requestsForInformationSurvey },
     8: { name: "Anti Spam", nodes: antiSpamSurvey }}
