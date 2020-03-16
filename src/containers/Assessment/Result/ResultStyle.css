@@ -1,5 +1,6 @@
 .result-page.full-screen-container {
     overflow: hidden;
+    color: #464545;
 }
 
 .result-page 
@@ -20,10 +21,8 @@
 }
 
 .overview-container {
-    height: 100%;
-    padding: 64px 230px;
+    padding: 112px 230px 64px 230px;
     box-sizing: border-box;
-    overflow-y: auto;
 }
 
 .module-title {
@@ -44,6 +43,15 @@
     justify-content: space-between;
 }
 
+.list-container .btn-group button{
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
+}
+
+.result.todo-container .list-container .btn-group button{
+    border: solid 0.5px #e48241;
+    color: #e48241;
+}
+
 .moudule-result-container .btn-group {
     margin-top: 24px;
     margin-bottom: 24px;
@@ -56,16 +64,17 @@
 
 .result.todo-container {
     width: 100%;
-    float: left;
-    border-radius: 5px;
-    box-shadow: 2px 2px 6px 0 rgba(79, 118, 250, 0.76);
+    border-radius: 20px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
 .list-container {
     margin-top: 24px;
     padding: 16px 8px;
 }
-.result.todo-container .title {
-    padding-left: 24px;
+.result.todo-container .title,
+.result.reminder-container .title{
+    font-family: Lato;
+    font-weight: 800;
 }
 
 .list-container .btn-group button span{
@@ -74,33 +83,33 @@
 .list-container .btn-group button:not(:last-child) {
     margin-right: 8px;
 }
-.reminder-container {
+.result.reminder-container {
     margin-top: 80px;
     width: 100%;
     box-sizing: border-box;
-    float: left;
-    border-radius: 5px;
-    box-shadow: 2px 2px 6px 0 rgba(79, 118, 250, 0.76);
+    border-radius: 20px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
 .repo-container {
-    padding: 64px 140px;
-    height: 100%;
-    overflow-y: auto;
+    padding: 112px 140px 64px 140px;
 }
 .repo-item {
     padding: 24px;
-    border-bottom: solid 0.5px #707070;
     display: flex;
 }
+
+.repo-item:not(:last-child) {
+    border-bottom: solid 0.5px #cbcbcb;
+} 
 .question-container {
-    width: 338px;
+    width: 446px;
 }
 .question-container .link {
     margin-top: 36px;
 }
 .info-container {
     width: calc(100% - 338px);
-    margin-left: 20px;
+    margin-left: 76px;
 }
 .info-container .link {
     text-align: right;
@@ -109,20 +118,26 @@
 .result-detail-container .container {
     height: 100%;
 }
+.result-detail-container .tab-nav+.container {
+    box-sizing: border-box;
+    padding-bottom: 64px;
+    overflow-y: auto;
+}
 
 .result.todo-container .title-container,
 .result.reminder-container .title-container {
+    border-radius: 20px 20px 0 0;
     padding: 8px;
     color: white;
 }
 
 .result.todo-container .title-container {
-    background-color: #0c35bc;
+    background-color: #e48241;
     text-align: center;
 }
 
 .result.reminder-container .title-container {
-    background-color: #a7a7a7;
+    background-color: #4d4d4d;
     text-align: center;
 }
 
@@ -141,19 +156,41 @@
 
 .result .todo-item-bullet,
 .result .reminder-item-bullet {
-    border-radius: 20px;
+    border-radius: 2px;
 }
 
 .result .todo-item-bullet {
-    box-shadow: 1px 1px 3px 0 rgba(79, 118, 250, 0.76);
-    background-color: #2756f2;
+    background-color: #e48241;
 }
 
 .result .reminder-item-bullet {
-    box-shadow: 1px 1px 3px 0 rgba(79, 118, 250, 0.76);
-    background-color: #464545;
+    background-color: #4d4d4d;
 }
 
 .item-label {
     margin-left: 12px;
+}
+
+.result-title-bar {
+    text-align: center;
+    height: 64px;
+    padding: 18px;
+    box-sizing: border-box;
+    background-color: #e48241;
+    
+}
+
+.result-title-bar span{
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 28px;
+}
+
+.repo-item .question-container .title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #e48241;
+    font-family: Lato;
+    margin-bottom: 24px;
 }

@@ -5,149 +5,256 @@ import HeaderLinks from "../../../components/Header/HeaderLink"
 import ProgressBar from "./ProgressBar";
 import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
-import { getSurvey, getModules, NodeTypes, TriggerType, Trigger } from "../../../data/data";
+import { getSurvey, getModules } from "../../../data/data";
 import { ResultContext, Context } from '../../../data/context';
+import { Trigger, Message, ResponsePath, AutoPlayMessage, ResponseItem } from '../../../model/index'
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
 import banrdIcon from "../../../Assets/img/botavator.svg";
 
 interface IState {
-    currentMessage: any,
+    currentMessage: Message,
     currentModuleId: any,
-    questionPath: any,
-    messageList: any[],
+    responsePath: ResponsePath,
+    displayedMessages: DisplayedMessage[],
     todoList: any[],
     reminderList: any[],
-    context: Context
+}
+
+
+export interface DisplayedMessage {
+    message: Message,
+    selectedOptionIds: number[],
+    showExtraInfo: boolean // becuase there can only be one
+    reply?: string // TODO temp temporary
 }
 
 export default class ChatbotPage extends React.Component {
+
     survey: any;
     modules: any;
     state: IState;
 
     constructor(props: any) {
-        super(props);
+        super(props)
         this.survey = getSurvey();
         this.modules = getModules();
+
+        const responsePath: ResponsePath = new ResponsePath()
         this.state = {
             currentMessage: this.survey[1],
             currentModuleId: 1,
-            questionPath: [],
-            messageList: [],
+            responsePath: responsePath,
+            displayedMessages: [], //TODO  maybe we don't need messagelist or todolist.. also responsepath here because the context gets them
             todoList: [],
-            reminderList: [],
-            context: this.context
+            reminderList: []
         };
-        this.handleSelectOptions = this.handleSelectOptions.bind(this);
+        this.handleSingleSelectResponse = this.handleSingleSelectResponse.bind(this);
+        this.handleMultiSelectSubmit = this.handleMultiSelectSubmit.bind(this)
         this.handleShowExtraInfo = this.handleShowExtraInfo.bind(this);
+        this.handleMultiSelectClick = this.handleMultiSelectClick.bind(this);
+        this.getNextAction = this.getNextAction.bind(this);
     }
 
     componentDidMount() {
-        this.displayNextMsg(1);
+        this.displayNextMessage({ moduleId: 1, messageId: 61 });
     }
 
-    public scrollToBottom() {
-        let chatbotScorller = document.getElementById('chatbot-scroller') as HTMLElement;
-        chatbotScorller.scrollTop = chatbotScorller.scrollHeight;
-    }
+    // TODO chnage the parameter name...
+    public displayNextMessage(next: any) {// have this also take a module id? 
+        if (next === -1) {
+            history.push('/result')
+            return;
+        }
 
-    public displayNextMsg(qId: number) {
-        const nextMessage = this.modules[this.state.currentModuleId].nodes[qId];
-        this.state.messageList.push(nextMessage);
+        const nextMessage: Message = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
+        const message: DisplayedMessage = { message: nextMessage, selectedOptionIds: [], showExtraInfo: false };
+
         this.setState((state: IState, props) => {
             return {
+                currentModuleId: next.moduleId,
                 currentMessage: nextMessage,
-                messageList: state.messageList
+                displayedMessages: state.displayedMessages.concat(message)
             }
-        },() => {
+        }, () => {
             this.scrollToBottom();
-        })
-        if (nextMessage.type === NodeTypes.message) { // if next message type is general message, auto display next one
-            this.setState((state: IState, props) => {
-                return {
-                    currentModuleId: this.checkModule(nextMessage.triggers[0])
-                }
-            })
-            this.displayNextMsg(nextMessage.triggers[0].nextQuestionId);
-        }
-        
-    }
-
-    public handleSelectOptions(questionId: any, selectedOptionId: any) { // this method will need to be refactored and the functionality will need to be extended later.
-        if (this.isInactiveQuestion(questionId)) {
-            return;
-        }
-
-        // add the result item to the question path
-        let resultItem: any = {};
-        resultItem.path = { questionId: this.state.currentMessage.id, optionId: selectedOptionId };
-        this.state.questionPath.push(resultItem.path); // FIXME modifies state outside of setstate
-
-        // why are we using some?
-        this.state.currentMessage.triggers.forEach((trigger: Trigger) => {
-            if (trigger.type === TriggerType.default) { // why do we need default?
-                return false; // changed this to return false to make it clear that no trigger ends up running. 
-            }
-
-            trigger.answers.forEach((answer: any, index: any) => { // check path  
-                const pathLength = this.state.questionPath.length - 1;
-                const { optionId, questionId } = this.state.questionPath[pathLength - index];
-                if (this.isCorrectTrigger(answer, questionId, optionId)) {
-                    if (trigger.type === TriggerType.exit) {
-                        history.push('/result')
-                    } else {
-                        // add to result
-                        let newTodoList = trigger.todos ? trigger.todos : []
-                        let newReminderList = trigger.reminders ? trigger.reminders : []
-                        resultItem.name = "Privacy Policy";
-                        resultItem.todos = newTodoList;
-                        resultItem.reminders = newReminderList; // change it to reminderlist
-                        resultItem.result = trigger.result;
-                        this.context.updateContext(this.state.currentModuleId, resultItem);
-
-                        this.setState((state: IState, props: any) => {
-                            state.currentMessage.selectedOptionId = selectedOptionId;
-                            state.messageList[this.state.messageList.length - 1].response = trigger.response; // add response, may need to be rewrite
-                            return {
-                                currentMessage: state.currentMessage,
-                                currentModuleId: this.checkModule(trigger),
-                                questionPath: state.questionPath,
-                                todoList: state.todoList.concat(newTodoList),
-                                reminderList: state.reminderList.concat(newReminderList)
-                            }
-                        }, () => this.displayNextMsg(trigger.nextQuestionId));
-                    }
-                }
-            })
+            this.updateProgressBar(this.state.currentModuleId);
         })
 
-        
+        // do we just pass nothing in? or maybe we should do find matching trigger
+        if (nextMessage instanceof AutoPlayMessage) { // if next message type is general message, auto display next one
+            const trigger: any = nextMessage.getDefaultTrigger()
+            this.displayNextMessage(this.getNextAction(trigger)); // TODO ughhh this too. wtf. we just need to get the default trigger. 
+        }// TODO check what happens when this trigger is an exit type. 
+
     }
 
-    public handleShowExtraInfo(questionId: any) {
-        if (this.isInactiveQuestion(questionId)) {
-            return;
-        }
-        this.setState((state: IState, props: any) => {
-            const repeatMessage = cloneDeep(state.currentMessage);
-            state.currentMessage.showExtraInfo = true;
+    // TODO test that a response item is added to the responsePath
+    private updateResponsePath(responseItem: any) {
+        this.setState((state: IState) => {
+            state.responsePath.addResponseItem(responseItem);
             return {
-                currentMessage: repeatMessage,
-                messageList: [...state.messageList, repeatMessage]
+                responsePath: state.responsePath
             }
         });
     }
 
-    public checkModule(trigger: Trigger) {
-        let moduleId = this.state.currentModuleId;
-        switch (trigger.type) {
-            case TriggerType.skip:
-                moduleId = trigger.nextModuleId;
-                break;
-            default:
+    private updateState(message: any, todo: any, reminder: any) { //temporary
+        this.setState((state: IState, props: any) => {
+            let lastMessageIndex = state.displayedMessages.length - 1
+            if (lastMessageIndex < 0)
+                lastMessageIndex = 0
+            state.displayedMessages[lastMessageIndex].reply = message; // TODO add components instead of message strings.
+            if (todo)
+                state.todoList.push(todo)
+
+            if (reminder)
+                state.reminderList.push(reminder)
+
+            return {
+                messageList: [...state.displayedMessages],
+                todoList: state.todoList,
+                reminderList: state.reminderList,
+            }
+        });
+    }
+
+
+    public handleMultiSelectClick(questionId: any, selectedOptionId: any) {
+        if (this.isInactiveQuestion(questionId)) {
+            return;
         }
-        return moduleId;
+        // add a selected option
+        this.markOptionIdSelected(selectedOptionId)
+    }
+
+    public markOptionIdSelected(optionId: any) {
+        this.setState((state: IState) => {
+            let lastMessageIndex = state.displayedMessages.length - 1
+            if (lastMessageIndex < 0)
+                lastMessageIndex = 0
+            if (!state.displayedMessages[lastMessageIndex].selectedOptionIds.includes(optionId))
+                state.displayedMessages[lastMessageIndex].selectedOptionIds.push(optionId)
+
+            return {
+                displayedMessages: state.displayedMessages
+            }
+        })
+    }
+
+    // it should
+    // not submit when nothing is selected
+    // not submit when question is inactive
+    public handleMultiSelectSubmit(questionId: any) {
+        if (this.isInactiveQuestion(questionId) || this.isEmptySelection()) { //TODO also prevent submission when there's nothing selected. 
+            return;
+        }
+        const lastMessage = this.state.displayedMessages.length - 1
+        this.processSelectedOptions(questionId, this.state.displayedMessages[lastMessage].selectedOptionIds)
+    }
+
+    isEmptySelection() {
+        let lastMessageIndex = this.state.displayedMessages.length - 1
+        if (lastMessageIndex < 0)
+            lastMessageIndex = 0
+        if (this.state.displayedMessages[lastMessageIndex].selectedOptionIds.length <= 0)
+            return true;
+        return false;
+    }
+
+    // it should 
+    // return when a question is inactive
+    // add a responseItem to the responsePath
+    // update the messageList with a reply 
+    // add a result Item to the context
+    // get the next message
+    // call displayNextMessage
+    public handleSingleSelectResponse(questionId: any, selectedOptionId: any) {
+        if (this.isInactiveQuestion(questionId)) {
+            return;
+        }
+        this.markOptionIdSelected(selectedOptionId[0]) // should only pass a number(id) rather than an array
+        this.processSelectedOptions(questionId, selectedOptionId)
+
+    }
+
+    public async processSelectedOptions(questionId: any, selectedOptionIds: number[]) {
+
+        const responseItem: ResponseItem = new ResponseItem(this.state.currentMessage.id, selectedOptionIds)
+        await this.updateResponsePath(responseItem) // check if this works with async await
+
+        const trigger: any = this.state.currentMessage.findTrigger(this.state.responsePath); // the responsePath has to be updated by this point because we use it to find the trigger.
+
+        let resultItem: any = {
+            path: responseItem,
+            name: this.modules[this.state.currentModuleId].name,
+            todo: trigger.todo ? trigger.todo : null,
+            reminder: trigger.reminder ? trigger.reminder : null,
+            resultReport: trigger.resultReport
+        }
+        this.context.updateContext(this.state.currentModuleId, resultItem);  // TODO make sure this is actually the current module. i think it is. could be a test.
+        await this.updateState(trigger.reply, resultItem.todo, resultItem.reminder);
+        // if we did update the trigger action to always contain the next module, it would be easier to make a mistake when writing the json. 
+        // but it would be more elegant here. 
+        let nextMessage = this.getNextAction(trigger); // TODO this shouldnt take any arguments.. maybe we should just have the trigger always include the module. hmmmmmm
+        this.displayNextMessage(nextMessage) // TODO if we push to history in dispaly next message.. will the rest of this function even run?   
+    }// maybe we can move the pushexit to diplayNextMessage... 
+
+    public handleShowExtraInfo(questionId: any) {// TODO this wont inactivate previous questions. 
+        if (this.isInactiveQuestion(questionId)) {
+            return;
+        }
+        this.setState((state: IState, props: any) => {
+            let last = this.state.displayedMessages.length - 1
+            if (last < 0)
+                last = 0
+
+            const repeatMessage = cloneDeep(state.displayedMessages[last]);
+            state.displayedMessages[last].showExtraInfo = true;
+            return {
+                displayedMessages: [...state.displayedMessages, repeatMessage]
+            }
+        }, () => {
+            this.scrollToBottom();
+        });
+    }
+
+
+
+    // TODO this may just redirect the user to the result page.... needs to be fixed
+    getNextAction(trigger: any) {
+
+        // return information for next message.
+        // Can make it a switch statement
+        // or, make it a part of the handleSelectOption method rather than integrate in trigger class？
+        if (trigger.action.type === "exit") {
+            return -1
+        } else if (trigger.action.type === "next" || trigger.action.type === "nextQuestion") {
+            return { moduleId: this.state.currentModuleId, messageId: trigger.action.nextQuestionId };
+        } else if (trigger.action.type === "nextModule") {
+            return { moduleId: trigger.action.nextModuleId, messageId: trigger.action.nextQuestionId };
+        }
+    }
+
+    public scrollToBottom() {
+        try {
+            let chatbotScroller = document.getElementById('chatbot-scroller') as HTMLElement;
+            chatbotScroller.scrollTop = chatbotScroller.scrollHeight;
+        } catch (exception) {
+            console.log("scroll exception");
+        }
+    }
+
+    public updateProgressBar(index:any) {
+        let currentProgressBar = document.getElementById('sub-module-bar-' + index) as HTMLElement;
+        let progressLength:number;
+        // let nodesarray = Object.keys(this.modules[index].nodes).length;
+        if (this.context.context.moduleResults[index]) {
+            progressLength= (this.context.context.moduleResults[index].path.length + 1) / Object.keys(this.modules[index].nodes).length;
+        } else {
+            progressLength= 1 / Object.keys(this.modules[index].nodes).length;
+        }
+        currentProgressBar.style.width = progressLength * 100 + "%";
     }
 
     public isCorrectTrigger(answer: any, currentQuestionId: any, currentOptionId: any) {
@@ -159,25 +266,30 @@ export default class ChatbotPage extends React.Component {
     }
 
     render() {
-        console.log("messagelist: " + JSON.stringify(this.state.messageList))
+        // const todos = this.context.moduleResults[this.state.currentModuleId].todos
+        // const reminders = this.context.moduleResults[this.state.currentModuleId].reminders
+
         return (
             <div className="full-screen-container grey chatbot-page">
                 <Header
-                    brand= {banrdIcon}
-                    brandName = "LSALT 2.0 |"
-                    toolTitle="Non-Profit Self Assessment"
+                    brand={banrdIcon}
+                    brandName="LSALT 2.0 |"
+                    toolTitle=" Legal Compliance Self Assessment"
                     fixed
                     color="white"
                     rightLinks={<HeaderLinks />}
                     absolute
-
                 />
                 <div className="main-container">
-                    <ProgressBar ></ProgressBar>
+                    <ProgressBar 
+                    context={this.context.context.moduleResults}
+                    currentModuleId = {this.state.currentModuleId}></ProgressBar>
                     <Chat
-                        messages={this.state.messageList}
+                        displayedMessages={this.state.displayedMessages}
+                        handleMultiSelectOptions={this.handleMultiSelectClick}
+                        handleMultiSelectSubmit={this.handleMultiSelectSubmit}
                         handleShowExtraInfo={this.handleShowExtraInfo}
-                        handleSelectOptions={this.handleSelectOptions}></Chat>
+                        handleSelectOptions={this.handleSingleSelectResponse}></Chat>
                     <ToDoSection
                         todoList={this.state.todoList}
                         reminderList={this.state.reminderList}></ToDoSection>

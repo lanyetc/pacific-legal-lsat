@@ -1,3 +1,16 @@
 .result-page .tab-nav {
     padding: 0 120px;
+    position: fixed;
+    background-color: #ffffff;
+    z-index: 100;
+}
+
+.tab-nav .tab.MuiTab-root {
+    max-width: 380px;
+    min-width: 120px;
+    font-size: 18px;
+}
+
+.tab-nav .MuiTabs-indicator {
+    background-color: #e48241;
 }

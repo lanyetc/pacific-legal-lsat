@@ -17,7 +17,12 @@ export default function TabNav(props: any) {
     });
     return (
         <div className="container">
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" variant="fullWidth" className="tab-nav">
+            <Tabs 
+            value={value} onChange={handleChange} 
+            aria-label="simple tabs example" 
+            variant="scrollable" 
+            scrollButtons="auto"
+            className="tab-nav">
                 {tabs}
             </Tabs>
             {tabList.map((prop: any, key: any) => {

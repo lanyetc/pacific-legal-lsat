@@ -1,12 +1,17 @@
-import {Option, Trigger, Node, OptionMatcher} from './index'
+import {Option} from './Option'
+import {Trigger} from './Trigger'
+import {Message} from './Message'
+import { ResponseMatcher } from './ResponseMatcher'
 
-export class MultiSelectQuestion extends Node {
+export class MultiSelectQuestion extends Message {
     constructor(
-        content: string[], 
+        responseMatcher: ResponseMatcher,
+        id: number,
+        content: string, 
         options: Option[], 
         triggers: Trigger[], 
-        extraInfo: string[],
-        matchOptions: OptionMatcher){
-            super(content, options, triggers, extraInfo, matchOptions)
+        defualtTriggerId: number,
+        extraInfo: any){
+            super(responseMatcher, id,content, options, triggers, defualtTriggerId, extraInfo)
     }
 }
