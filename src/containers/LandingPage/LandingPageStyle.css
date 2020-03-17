@@ -1,0 +1,264 @@
+
+.LandTopwithPic
+{    
+    display: flex;   
+    background-color: #f7f7f7;
+    padding: 80px 95.1px 66px 95.1px;
+    box-sizing: border-box;;
+    justify-content: space-between;
+}
+.LandTopwithPic img
+{
+    width: 540px;
+    padding-top: 66px ;
+    
+}
+.landleftwords
+{
+        width: 508px;
+        display: block;
+        padding: 66px 0px 0px 0px;
+
+}
+.LandTopwithPic .h1title{
+    font-family: Merriweather;
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 1.25;
+    text-align: left;
+    color: #e48241;
+    display: block;
+}
+.LandTopwithPic .h2title{
+    font-family: Merriweather;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.25;
+    text-align: left;
+    color: #e48241;
+    display: block;
+
+}
+.LandTopwithPic .topwords{
+    font-family: Lato;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 1.4;
+    text-align: left;
+    color: #464545;
+    padding-top: 48px;
+}
+.Howwedoitout h1{
+
+    font-family: Merriweather;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.25;
+    text-align: center;
+    color: #e48241;
+}
+.Howwedoitout{
+    padding: 31.4px 95.1px 66px 95.1px;
+    background-color: rgba(203, 203, 203, .4);
+}
+.HowWeDoIt{
+    display: flex;
+    justify-content: space-between;
+
+    }
+.how123{
+    text-align: center;
+}
+.HowWeDoIt .how123 h1{
+    font-family: Lato;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1.2;
+  text-align: center;
+  color: #585858;
+}
+.HowWeDoIt .how123 img
+{height: 220px;
+ width:200px ;
+}
+.LandParagraph{
+    display: flex;   
+    background-color: #f7f7f7;
+    padding: 0px 95.1px 66px 95.1px;
+    justify-content: space-between;
+}
+.LSALTleftHead {
+    font-family: Merriweather;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.25;
+  text-align: left;
+  color: #e48241;
+  width: 100%;
+}
+
+.LSALTleft h1{
+  font-family: Merriweather;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.25;
+  text-align: left;
+  color: #e48241;
+}
+.LSALTleft{
+    font-family: Lato;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 1.4;
+    text-align: left;
+    color: #464545;
+    width: 483px;
+    padding-top: 63.9px;
+    padding-bottom: 36px;
+    border-bottom: solid 1px;
+
+}
+.LSALTright{
+    font-family: Lato;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 1.4;
+    text-align: left;
+    color: #464545;
+    width: 483px;
+    padding-top: 166.9px;
+    padding-bottom: 36px;
+    border-bottom: solid 1px;
+}
+.ModuleMenu{
+    background-color: #f7f7f7;
+    padding-top: 61.5px;
+}
+
+.ModuleMenu .ModuleItems div.MuiGrid-item:first-child:hover h1 {
+
+    color: #e48241;
+}
+
+.ModuleMenu .ModuleItems .icon1 {
+    border-radius: 100px;
+    display: inline-block;
+    width: 117px;
+    height: 117px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../../Assets/img/icon0.png");
+}
+
+.ModuleMenu .ModuleItems div.MuiGrid-item:first-child:hover .icon1{
+    background-image: url("../../Assets/img/icon1.png");
+    box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+.ModuleMenu h1{
+    height: 45px;
+    font-family: Merriweather;
+    font-size: 36px;
+    padding-bottom: 40px;
+    font-weight: bold;
+    line-height: 1.25;
+    text-align: center;
+    color: #464545;
+}
+
+.ModuleItems{
+    justify-content: space-between;
+    display: flex;
+    /* padding-left: 262px; */
+}
+.MuiGrid-spacing-xs-3 {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+.ModuleItems h1{
+    /* width: 144px;
+    height: 24px; */
+    font-family: Lato;
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: center;
+    color: #cccccc;
+}
+.LandTopwithPic .start-btn {
+    color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(46, 46, 46, 0.31);
+    background-color: #e48241;
+    margin-top: 66px;
+}
+.LandContact{
+    display: flex;
+    justify-content: space-between;
+    padding: 71px 90px;
+    font-family: Lato;
+    font-size: 16px;
+    line-height: 1.25;
+    text-align: left;
+    color: #464545;
+    background-color: #f7f7f7;
+
+}
+.LandContact .leftcontact h1{
+    width: 115px;
+    height: 32px;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.22;
+    margin: 0;
+    text-align: left;
+    color: #464545;
+}
+
+.LandContact .leftcontact{
+    display: flex;
+}
+.LandContact .rightcontact h1{
+    width: 182px;
+    height: 32px;
+    position: absolute;
+    top: -10px;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.22;
+    text-align: left;
+    color: #464545;
+}
+.underline {
+    text-decoration: underline;
+    font-weight: bold;
+}
+.LandContact .rightcontact{
+    width: 714px;
+    position: relative;
+}
+.LandContact .rightcontact span {
+    width: 85%;
+    float: right;
+}
+
+.LandContact img{
+    width: 46px;
+    height: 60px;
+    margin: -15px 10px 0 0;
+}
+.FooterLand h1 {
+    font-family: Lato;
+    font-size: 13px;
+    text-align: center;
+    color: #ffffff;
+    padding: 26px 64px 26px 64px;
+  }
+.FooterLand{
+    height: 70px;
+    background-color: #464646;
+    /* display: flex; */
+
+}
