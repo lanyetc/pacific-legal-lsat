@@ -6,12 +6,13 @@ import { DisplayedMessage } from "./ChatbotPage";
 import { AutoPlayMessage } from "../../../model";
 
 export default function Chat(props: any) {
+
     const messageOptions = props.displayedMessages.map((displayedMessage: DisplayedMessage, key: any) => {
         const {message, showExtraInfo, selectedOptionIds, reply} = displayedMessage;
         const messageClass = (message instanceof AutoPlayMessage) ? "auto-message-content" : "question-content";
         if (message.content) {
             return (
-                <div className="message-block" key={key}>
+                <div className="message-block" key={key} id={"message-block-"+key}>
                     <ChatbotMessage bubbleClass={messageClass}  content={message.content}></ChatbotMessage>
                     {message.options && message.options.length > 0 && 
                     <UserMessage 

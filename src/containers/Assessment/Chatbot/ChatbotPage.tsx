@@ -11,6 +11,7 @@ import { Trigger, Message, ResponsePath, AutoPlayMessage, ResponseItem } from '.
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
 import banrdIcon from "../../../Assets/img/botavator.svg";
+import Scroll from "react-scroll";
 
 interface IState {
     currentMessage: Message,
@@ -33,12 +34,14 @@ export default class ChatbotPage extends React.Component {
 
     survey: any;
     modules: any;
+    scroller: any;
     state: IState;
 
     constructor(props: any) {
         super(props)
         this.survey = getSurvey();
         this.modules = getModules();
+        this.scroller = Scroll.scroller;
 
         const responsePath: ResponsePath = new ResponsePath()
         this.state = {
@@ -238,21 +241,29 @@ export default class ChatbotPage extends React.Component {
 
     public scrollToBottom() {
         try {
-            let chatbotScroller = document.getElementById('chatbot-scroller') as HTMLElement;
-            chatbotScroller.scrollTop = chatbotScroller.scrollHeight;
+            // let chatbotScroller = document.getElementById('chatbot-scroller') as HTMLElement;
+            // chatbotScroller.scrollTop = chatbotScroller.scrollHeight;
+            const scrollToElement = "message-block-" + (this.state.displayedMessages.length - 1);
+            this.scroller.scrollTo(scrollToElement, {
+                duration: 600,
+                delay: 30,
+                smooth: true,
+                containerId: 'chatbot-scroller',
+                offset: -100, // Scrolls to element + 50 pixels down the page
+            });
         } catch (exception) {
             console.log("scroll exception");
         }
     }
 
-    public updateProgressBar(index:any) {
+    public updateProgressBar(index: any) {
         let currentProgressBar = document.getElementById('sub-module-bar-' + index) as HTMLElement;
-        let progressLength:number;
+        let progressLength: number;
         // let nodesarray = Object.keys(this.modules[index].nodes).length;
         if (this.context.context.moduleResults[index]) {
-            progressLength= (this.context.context.moduleResults[index].path.length + 1) / Object.keys(this.modules[index].nodes).length;
+            progressLength = (this.context.context.moduleResults[index].path.length + 1) / Object.keys(this.modules[index].nodes).length;
         } else {
-            progressLength= 1 / Object.keys(this.modules[index].nodes).length;
+            progressLength = 1 / Object.keys(this.modules[index].nodes).length;
         }
         currentProgressBar.style.width = progressLength * 100 + "%";
     }
@@ -281,9 +292,9 @@ export default class ChatbotPage extends React.Component {
                     absolute
                 />
                 <div className="main-container">
-                    <ProgressBar 
-                    context={this.context.context.moduleResults}
-                    currentModuleId = {this.state.currentModuleId}></ProgressBar>
+                    <ProgressBar
+                        context={this.context.context.moduleResults}
+                        currentModuleId={this.state.currentModuleId}></ProgressBar>
                     <Chat
                         displayedMessages={this.state.displayedMessages}
                         handleMultiSelectOptions={this.handleMultiSelectClick}
