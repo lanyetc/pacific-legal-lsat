@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Link } from "@material-ui/core";
+import { Typography, Link, List, ListItem } from "@material-ui/core";
 import { Result } from "../../../../data/context";
 export default function QuestionRepo(props: any) {
     const { resultList, questionList } = props;
@@ -14,15 +14,18 @@ export default function QuestionRepo(props: any) {
                             <Typography variant="body2" component="p" className="title" gutterBottom>
                                 {questionList[result.questionId].content}
                             </Typography>
-                            <Typography variant="body2" component="p">
-                                because you answered:
-                                {
-                                    result.optionIds.map((selectedOptionId: number) => {
-                                        return questionList[result.questionId].options
-                                            .find((option: any) => option.id === selectedOptionId).label;
-                                    })
-                                }
-                            </Typography>
+                            <div className="option-container">
+                                <span>You answered:</span>
+                                <List>
+                                    {result.optionIds.map((selectedOptionId: number, key: any) => {
+                                        const optionLabel = questionList[result.questionId].options.find((option: any) => option.id === selectedOptionId).label;
+                                        return (<ListItem key={key}>
+                                            <div className="todo-item-bullet" />
+                                            <span className="item-label" >{optionLabel}</span>
+                                        </ListItem>)
+                                    })}
+                                </List>
+                            </div>
                             {/* <Typography variant="body2" component="p" className="link" >
                                 <Link>Change my answer</Link>
                             </Typography> */}
@@ -32,7 +35,7 @@ export default function QuestionRepo(props: any) {
                                 {result.repo}
                             </Typography>
                             <Typography variant="body2" component="p" className="link" >
-                                <Link>Learn more</Link>
+                                {/* <Link>Learn more</Link> */}
                             </Typography>
                         </div>
                     </div>
