@@ -12,7 +12,7 @@ export default function LandTopAnim() {
                 <span className="h2title">Legal compliance simplified</span>
                 <div className="topwords">We understand that non-profits are driven by passion, and we want to help you focus on your contributions to society and making this world a better place.
 </div>
-                <Button variant="contained" className="start-btn">Start Survey</Button>
+                <Button variant="contained" className="start-btn" href="/assessment">Start Survey</Button>
             </div>
             <img src={TopAnim}></img>
 

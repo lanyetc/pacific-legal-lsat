@@ -168,7 +168,7 @@
 .ModuleItems{
     justify-content: space-between;
     display: flex;
-    /* padding-left: 262px; */
+    padding: 0 95px;
 }
 .MuiGrid-spacing-xs-3 {
     width: 100%;
@@ -177,11 +177,11 @@
 }
 
 .ModuleItems h1{
-    /* width: 144px;
-    height: 24px; */
+    height: auto;
+    padding: 0;
+    margin: 0;
     font-family: Lato;
     font-size: 20px;
-    line-height: 1.2;
     text-align: center;
     color: #cccccc;
 }
@@ -261,4 +261,13 @@
     background-color: #464646;
     /* display: flex; */
 
+}
+
+.ModuleItems .MuiPaper-root {
+    background: transparent;
+    box-shadow: none;
+}
+
+.ModuleItems .module-card {
+    padding: 40px 0;
 }
