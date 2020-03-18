@@ -49,25 +49,28 @@ function ReminderList(props: any) {
 export default function Overview(props: any) {
     const { context } = props;
     return (
-        <div className="overview-container">
-            <div className="result todo-container">
-                <div className="title-container">
-                    <Typography variant="h4" component="h4" className="title bold">
-                        <span className="title">DO NOW</span>
+        <div>
+            <div className="overview-container">
+
+                <div className="result todo-container">
+                    <div className="title-container">
+                        <Typography variant="h4" component="h4" className="title bold">
+                            <span className="title">DO NOW</span>
+                        </Typography>
+                        <Typography variant="body2" component="span">
+                            Take care of these tasks ASAP
                     </Typography>
-                    <Typography variant="body2" component="span">
-                        Take care of these tasks ASAP
-                    </Typography>
+                    </div>
+                    <TodoList todoList={context.todos}></TodoList>
                 </div>
-                <TodoList todoList={context.todos}></TodoList>
-            </div>
-            <div className="result reminder-container">
-                <div className="title-container">
-                    <Typography variant="h4" component="h4" className="title bold">
-                        <span className="title">DO LATER</span>
-                    </Typography>
+                <div className="result reminder-container">
+                    <div className="title-container">
+                        <Typography variant="h4" component="h4" className="title bold">
+                            <span className="title">DO LATER</span>
+                        </Typography>
+                    </div>
+                    <ReminderList reminderList={context.reminders}></ReminderList>
                 </div>
-                <ReminderList reminderList={context.reminders}></ReminderList>
             </div>
         </div>
     );

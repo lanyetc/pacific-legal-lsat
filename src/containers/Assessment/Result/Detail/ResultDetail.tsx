@@ -2,7 +2,8 @@ import React from "react";
 import TabNav from "../../../../components/TabNav/TabNav";
 import Overview from "./Overview";
 import QuestionRepo from "./QuestionRepo";
-import {getModules} from "../../../../data/data";
+import { getModules } from "../../../../data/data";
+import { Button } from "@material-ui/core";
 
 export default function ResultDetail(props: any) {
     const { context } = props;
@@ -11,22 +12,22 @@ export default function ResultDetail(props: any) {
     const tabList = getTabList();
 
     return (
-        <div className="result-detail-container">
-            <TabNav 
-            tabList = {tabList}
-            ></TabNav>
-        </div>
+            <div className="result-detail-container">
+                <TabNav
+                    tabList={tabList}
+                ></TabNav>
+            </div>
     );
 
     function getTabList() {
         let tabList: any = [];
         tabList.push({
-            title: "OUTCOME", tabContent: <Overview context={context}/>
+            title: "OUTCOME", tabContent: <Overview context={context} />
         })
         if (context.moduleResults) {
-            Object.keys(context.moduleResults).forEach((key:any) => {
+            Object.keys(context.moduleResults).forEach((key: any) => {
                 tabList.push({
-                    title: context.moduleResults[key].name, tabContent: <QuestionRepo questionList={survey[key].nodes}  resultList={context.moduleResults[key].results}/>
+                    title: context.moduleResults[key].name, tabContent: <QuestionRepo questionList={survey[key].nodes} resultList={context.moduleResults[key].results} />
                 })
             })
         }

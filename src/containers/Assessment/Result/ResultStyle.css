@@ -180,7 +180,7 @@
     
 }
 
-.result-title-bar span{
+.result-title-bar{
     font-size: 22px;
     font-weight: 800;
     color: #ffffff;
@@ -193,4 +193,14 @@
     color: #e48241;
     font-family: Lato;
     margin-bottom: 24px;
+}
+
+.share-btn Button{
+    border: solid 0.5px #e48241;
+    background-color: white;
+    color: #e48241;
+    display: inline-block;
+    float: right;
+
+
 }
