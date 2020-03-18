@@ -21,7 +21,12 @@
 }
 
 .appBar .navBrand {
-    width: 52px;
+    width: 64px;
+}
+
+.home-button {
+    vertical-align: bottom !important;
+    font-weight: initial !important;
 }
 
 .navTitle, .brandTitle {
@@ -59,6 +64,10 @@
     font-weight: normal;
 }
 
+.appBar .navLink:not(:last-child) {
+    margin-right: 12px;
+}
+
 .tab span{
     font-size: 12px;
 }
@@ -67,4 +76,9 @@
     button.tab{
         min-width: 80px;
     }
+}
+
+.inline-blank-tab-link {
+    color: #464545;
+    text-decoration: none;
 }

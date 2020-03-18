@@ -108,9 +108,14 @@
     margin-top: 36px;
 }
 .info-container {
-    width: calc(100% - 338px);
+    width: calc(100% - 446px);
     margin-left: 76px;
 }
+
+.info-container .title {
+    font-size: 18px;
+}
+
 .info-container .link {
     text-align: right;
 }

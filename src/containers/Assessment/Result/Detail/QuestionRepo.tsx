@@ -20,7 +20,7 @@ export default function QuestionRepo(props: any) {
                                     {result.optionIds.map((selectedOptionId: number, key: any) => {
                                         const optionLabel = questionList[result.questionId].options.find((option: any) => option.id === selectedOptionId).label;
                                         return (<ListItem key={key}>
-                                            <div className="todo-item-bullet" />
+                                            <div className="reminder-item-bullet" />
                                             <span className="item-label" >{optionLabel}</span>
                                         </ListItem>)
                                     })}

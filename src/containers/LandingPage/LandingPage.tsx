@@ -17,7 +17,7 @@ export default function LandingPage(props: any) {
             <Header
                 brand={banrdIcon}
                 brandName="LSALT 2.0 | "
-                toolTitle=" Non-profit Self Assessment"
+                toolTitle=" Legal Compliance Self Assessment"
                 fixed
                 color="white"
                 rightLinks={<HeaderLinks />}

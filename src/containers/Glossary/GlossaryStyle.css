@@ -1,0 +1,8 @@
+.glossary-container {
+    height: calc(100% - 64px);
+    overflow-y: auto;
+}
+
+.terms-container {
+    padding: 36px 140px 64px 140px;
+}

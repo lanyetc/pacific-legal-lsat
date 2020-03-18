@@ -11,8 +11,12 @@ import Menu from "@material-ui/icons/Menu";
 
 import './HeaderStyle.css'
 import '../common.css'
+import { Button, Link } from "@material-ui/core";
+import history from '../../history';
 
-
+function goToLandingPage() {
+  history.push("/");
+}
 export default function Header(props: { color: any; rightLinks: any; leftLinks: any; brand: string; brandName:string; toolTitle: string; fixed: boolean; absolute: boolean; }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -20,7 +24,15 @@ export default function Header(props: { color: any; rightLinks: any; leftLinks: 
   };
   const { rightLinks, leftLinks, brand, toolTitle, brandName } = props;
 
-const brandComponent = <div><img className="navBrand" src={brand} alt="brand icon" /><span className="brandTitle">{brandName}</span><span className="navTitle">{toolTitle}</span></div>;
+  const brandComponent = 
+    <div>
+      <img className="navBrand" src={brand} alt="brand icon" />
+      <Button className="home-button" onClick={() => goToLandingPage()}>
+          <span className="brandTitle">{brandName}</span>
+          <span className="navTitle">{toolTitle}</span>
+      </Button>
+    </div>;
+
   return (
     <AppBar className="appBar white">
       <Toolbar className="navContainer">
