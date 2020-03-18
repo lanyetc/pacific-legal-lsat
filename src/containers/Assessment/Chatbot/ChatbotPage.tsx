@@ -6,7 +6,7 @@ import ProgressBar from "./ProgressBar";
 import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
 import { getSurvey, getModules } from "../../../data/data";
-import { ResultContext} from '../../../data/context';
+import { ResultContext } from '../../../data/context';
 import { Message, ResponsePath, AutoPlayMessage, ResponseItem } from '../../../model/index'
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
@@ -66,7 +66,10 @@ export default class ChatbotPage extends React.Component {
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
         if (next === -1) {
-            history.push('/result/123444')
+            let sanitized_context = encodeURIComponent(JSON.stringify(this.context))
+            let encoded_context = btoa(sanitized_context); // converts to base64 string
+            console.log("the encoded context: "+encoded_context)
+            history.push('/result/' + encoded_context)
             return;
         }
 

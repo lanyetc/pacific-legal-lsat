@@ -1,11 +1,8 @@
 import React from "react";
 import { Typography, List, ListItem, ListItemSecondaryAction, Button } from "@material-ui/core";
-import { useParams } from "react-router-dom";
 
 function TodoList(props: any) {
-    let { results } = useParams();
-    console.log(JSON.stringify(results))
-    
+    console.log("TODO list props; " + JSON.stringify(props))
     const { todoList } = props;
     return (
         <div className="list-container round">

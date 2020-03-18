@@ -50,7 +50,8 @@ export function getModules() {
     const requestsForInformationSurvey: SurveyDialogue = generateSurveyDialogue(requestsForInformationModule);
     const antiSpamSurvey: SurveyDialogue = generateSurveyDialogue(antiSpamModule);
 
-    const modules: any ={ 1: { name: "Privacy Policy", nodes: privacyPolicySurvey },
+    const modules: any ={ 
+    1: { name: "Privacy Policy", nodes: privacyPolicySurvey },
     2: { name: "Collection of Personal Info", nodes: collectionOfPersonalInformationSurvey },
     3: { name: "Use of Personal Info", nodes: useOfPersonalInformationSurvey },
     4: { name: "Disclosure of Personal Info", nodes: disclosureOfPersonalInformationSurvey },
