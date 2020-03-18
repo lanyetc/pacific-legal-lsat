@@ -12,26 +12,23 @@ import Menu from "@material-ui/icons/Menu";
 import './HeaderStyle.css'
 import '../common.css'
 import { Button, Link } from "@material-ui/core";
-import history from '../../history';
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import BrandElement from "./brandElement"
 
-function goToLandingPage() {
-  history.push("/");
+interface Props extends RouteComponentProps {
+  brand: string,
+  brandName: string,
+  toolTitle: string,
 }
-export default function Header(props: { color: any; rightLinks: any; leftLinks: any; brand: string; brandName:string; toolTitle: string; fixed: boolean; absolute: boolean; }) {
+
+export default function Header(props: { color: any; rightLinks: any; leftLinks: any; brand: string; brandName: string; toolTitle: string; fixed: boolean; absolute: boolean; }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   const { rightLinks, leftLinks, brand, toolTitle, brandName } = props;
 
-  const brandComponent = 
-    <div>
-      <img className="navBrand" src={brand} alt="brand icon" />
-      <Button className="home-button" onClick={() => goToLandingPage()}>
-          <span className="brandTitle">{brandName}</span>
-          <span className="navTitle">{toolTitle}</span>
-      </Button>
-    </div>;
+  const brandComponent = <BrandElement brand = {brand} toolTitle = {toolTitle} brandName ={brandName}></BrandElement>
 
   return (
     <AppBar className="appBar white">

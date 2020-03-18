@@ -6,8 +6,10 @@ import "./GlossaryStyle.css";
 import banrdIcon from "../../Assets/img/botavator.svg";
 import { Typography, List, ListItem } from "@material-ui/core";
 import { glossaryContent } from "../../data/glossaryContent";
+import { withRouter } from "react-router-dom";
 
-export default function ResultPage() {
+
+let GlossaryPage:any =  function () {
     return (
         <div className="full-screen-container white result-page">
             <Header
@@ -61,3 +63,5 @@ export default function ResultPage() {
         </div>
     );
 }
+
+export default GlossaryPage = withRouter(GlossaryPage)

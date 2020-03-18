@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, List, ListItem, ListItemSecondaryAction, Button } from "@material-ui/core";
+
 function TodoList(props: any) {
     const { todoList } = props;
     return (
@@ -7,8 +8,8 @@ function TodoList(props: any) {
             <List>
                 {todoList.map((item: any, key: any) => {
                     return (<ListItem className="list-item" key={key}>
-                       <div className="todo-item-bullet"/>
-                        <span className= "item-label" >{item}</span>
+                        <div className="todo-item-bullet" />
+                        <span className="item-label" >{item}</span>
                         <ListItemSecondaryAction>
                             <div className="btn-group">
                                 <Button variant="outlined">more info</Button>
@@ -29,9 +30,9 @@ function ReminderList(props: any) {
             <List>
                 {reminderList.map((item: any, key: any) => {
                     return (<ListItem key={key} className="list-item">
-                        <div className="reminder-item-bullet"/>
-                        <span className= "item-label" >{item}</span>
-                         <ListItemSecondaryAction>
+                        <div className="reminder-item-bullet" />
+                        <span className="item-label" >{item}</span>
+                        <ListItemSecondaryAction>
                             <div className="btn-group">
                                 <Button variant="outlined">more info</Button>
                                 {/* <Button variant="contained" color="primary">create now</Button> */}
@@ -46,27 +47,30 @@ function ReminderList(props: any) {
 
 
 export default function Overview(props: any) {
-    const { context } = props;
+    const { todos, reminders } = props;
     return (
-        <div className="overview-container">
-            <div className="result todo-container">
-                <div className="title-container">
-                    <Typography variant="h4" component="h4" className="title bold">
-                        <span className="title">DO NOW</span>
+        <div>
+            <div className="overview-container">
+
+                <div className="result todo-container">
+                    <div className="title-container">
+                        <Typography variant="h4" component="h4" className="title bold">
+                            <span className="title">DO NOW</span>
+                        </Typography>
+                        <Typography variant="body2" component="span">
+                            Take care of these tasks ASAP
                     </Typography>
-                    <Typography variant="body2" component="span">
-                    Take care of these tasks ASAP
-                    </Typography>
+                    </div>
+                    <TodoList todoList={todos}></TodoList>
                 </div>
-                <TodoList todoList={context.todos}></TodoList>
-            </div>
-            <div className="result reminder-container">
-                <div className="title-container">
-                    <Typography variant="h4" component="h4" className="title bold">
-                        <span className="title">DO LATER</span>
-                    </Typography>
+                <div className="result reminder-container">
+                    <div className="title-container">
+                        <Typography variant="h4" component="h4" className="title bold">
+                            <span className="title">DO LATER</span>
+                        </Typography>
+                    </div>
+                    <ReminderList reminderList={reminders}></ReminderList>
                 </div>
-                <ReminderList reminderList={context.reminders}></ReminderList>
             </div>
         </div>
     );

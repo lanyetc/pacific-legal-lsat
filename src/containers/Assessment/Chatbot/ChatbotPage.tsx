@@ -6,12 +6,13 @@ import ProgressBar from "./ProgressBar";
 import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
 import { getSurvey, getModules } from "../../../data/data";
-import { ResultContext, Context } from '../../../data/context';
-import { Trigger, Message, ResponsePath, AutoPlayMessage, ResponseItem } from '../../../model/index'
+import { ResultContext } from '../../../data/context';
+import { Message, ResponsePath, AutoPlayMessage, ResponseItem } from '../../../model/index'
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
 import banrdIcon from "../../../Assets/img/botavator.svg";
 import Scroll from "react-scroll";
+import { withRouter, RouteComponentProps } from 'react-router';
 
 interface IState {
     currentMessage: Message,
@@ -30,7 +31,7 @@ export interface DisplayedMessage {
     reply?: string // TODO temp temporary
 }
 
-export default class ChatbotPage extends React.Component {
+ class ChatbotPage extends React.Component<RouteComponentProps> {
 
     survey: any;
     modules: any;
@@ -66,14 +67,18 @@ export default class ChatbotPage extends React.Component {
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
         if (next === -1) {
-            history.push('/result')
+            console.log("module results in chatbot page: " + JSON.stringify(this.context.context))
+            let sanitized_context = encodeURIComponent(JSON.stringify(this.context.context)) // TODO why is it .context.context?
+            let encoded_context = btoa(sanitized_context); // converts to base64 string
+            console.log("the encoded context: "+encoded_context)
+            this.props.history.push('/result/' + encoded_context)
             return;
         }
 
         const nextMessage: Message = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
         const message: DisplayedMessage = { message: nextMessage, selectedOptionIds: [], showExtraInfo: false };
 
-        this.setState((state: IState, props) => {
+        this.setState((state: IState) => {
             return {
                 currentModuleId: next.moduleId,
                 currentMessage: nextMessage,
@@ -187,13 +192,14 @@ export default class ChatbotPage extends React.Component {
         await this.updateResponsePath(responseItem) // check if this works with async await
 
         const trigger: any = this.state.currentMessage.findTrigger(this.state.responsePath); // the responsePath has to be updated by this point because we use it to find the trigger.
-
+        console.log("triggerId in chatbot page: " + trigger.id)
         let resultItem: any = {
             path: responseItem,
             name: this.modules[this.state.currentModuleId].name,
             todo: trigger.todo ? trigger.todo : null,
             reminder: trigger.reminder ? trigger.reminder : null,
-            resultReport: trigger.resultReport
+            resultReport: trigger.resultReport,
+            triggerId: trigger.id
         }
         this.context.updateContext(this.state.currentModuleId, resultItem);  // TODO make sure this is actually the current module. i think it is. could be a test.
         await this.updateState(trigger.reply, resultItem.todo, resultItem.reminder);
@@ -261,7 +267,7 @@ export default class ChatbotPage extends React.Component {
         let progressLength: number;
         // let nodesarray = Object.keys(this.modules[index].nodes).length;
         if (this.context.context.moduleResults[index]) {
-            progressLength = (this.context.context.moduleResults[index].path.length + 1) / Object.keys(this.modules[index].nodes).length;
+            progressLength = (this.context.context.moduleResults[index].results.length + 1) / Object.keys(this.modules[index].nodes).length;
         } else {
             progressLength = 1 / Object.keys(this.modules[index].nodes).length;
         }
@@ -277,8 +283,6 @@ export default class ChatbotPage extends React.Component {
     }
 
     render() {
-        // const todos = this.context.moduleResults[this.state.currentModuleId].todos
-        // const reminders = this.context.moduleResults[this.state.currentModuleId].reminders
 
         return (
             <div className="full-screen-container grey chatbot-page">
@@ -313,4 +317,4 @@ export default class ChatbotPage extends React.Component {
 }
 
 ChatbotPage.contextType = ResultContext;
-
+ export default withRouter(ChatbotPage)
