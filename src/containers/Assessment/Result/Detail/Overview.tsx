@@ -2,7 +2,6 @@ import React from "react";
 import { Typography, List, ListItem, ListItemSecondaryAction, Button } from "@material-ui/core";
 
 function TodoList(props: any) {
-    console.log("TODO list props; " + JSON.stringify(props))
     const { todoList } = props;
     return (
         <div className="list-container round">
