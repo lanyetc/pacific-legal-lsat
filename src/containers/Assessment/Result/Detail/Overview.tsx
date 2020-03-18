@@ -49,6 +49,7 @@ function ReminderList(props: any) {
 export default function Overview(props: any) {
     const { todos, reminders } = props;
     return (
+<<<<<<< HEAD
         <div>
             <div className="overview-container">
 
@@ -59,6 +60,16 @@ export default function Overview(props: any) {
                         </Typography>
                         <Typography variant="body2" component="span">
                             Take care of these tasks ASAP
+=======
+        <div className="overview-container">
+            <div className="result todo-container">
+                <div className="title-container">
+                    <Typography variant="h4" component="h4" className="title bold">
+                        <span className="title">DO NOW</span>
+                    </Typography>
+                    <Typography variant="body2" component="span">
+                        Take care of these tasks ASAP
+>>>>>>> added the ability to pass info through url
                     </Typography>
                     </div>
                     <TodoList todoList={todos}></TodoList>
