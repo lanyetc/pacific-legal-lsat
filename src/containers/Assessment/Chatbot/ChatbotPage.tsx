@@ -66,7 +66,8 @@ export default class ChatbotPage extends React.Component {
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
         if (next === -1) {
-            let sanitized_context = encodeURIComponent(JSON.stringify(this.context))
+            console.log("module results in chatbot page: " + JSON.stringify(this.context.context))
+            let sanitized_context = encodeURIComponent(JSON.stringify(this.context.context)) // TODO why is it .context.context?
             let encoded_context = btoa(sanitized_context); // converts to base64 string
             console.log("the encoded context: "+encoded_context)
             history.push('/result/' + encoded_context)
@@ -190,13 +191,14 @@ export default class ChatbotPage extends React.Component {
         await this.updateResponsePath(responseItem) // check if this works with async await
 
         const trigger: any = this.state.currentMessage.findTrigger(this.state.responsePath); // the responsePath has to be updated by this point because we use it to find the trigger.
-
+        console.log("triggerId in chatbot page: " + trigger.id)
         let resultItem: any = {
             path: responseItem,
             name: this.modules[this.state.currentModuleId].name,
             todo: trigger.todo ? trigger.todo : null,
             reminder: trigger.reminder ? trigger.reminder : null,
-            resultReport: trigger.resultReport
+            resultReport: trigger.resultReport,
+            triggerId: trigger.id
         }
         this.context.updateContext(this.state.currentModuleId, resultItem);  // TODO make sure this is actually the current module. i think it is. could be a test.
         await this.updateState(trigger.reply, resultItem.todo, resultItem.reminder);
@@ -264,7 +266,7 @@ export default class ChatbotPage extends React.Component {
         let progressLength: number;
         // let nodesarray = Object.keys(this.modules[index].nodes).length;
         if (this.context.context.moduleResults[index]) {
-            progressLength = (this.context.context.moduleResults[index].path.length + 1) / Object.keys(this.modules[index].nodes).length;
+            progressLength = (this.context.context.moduleResults[index].results.length + 1) / Object.keys(this.modules[index].nodes).length;
         } else {
             progressLength = 1 / Object.keys(this.modules[index].nodes).length;
         }

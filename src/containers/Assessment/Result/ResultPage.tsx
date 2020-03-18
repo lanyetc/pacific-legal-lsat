@@ -14,11 +14,12 @@ export default function ResultPage() {
 
     let { results } = useParams();
     const encoded_result_string: any = results
-    let the_context: any = null;
+    let decodedModuleResults: any = null;
 
     try {
-        let { context } = JSON.parse(decodeURIComponent(atob(encoded_result_string)))
-        the_context = context
+        let { moduleResults } = JSON.parse(decodeURIComponent(atob(encoded_result_string)))
+        decodedModuleResults = moduleResults
+        console.log("moduleResults: " + JSON.stringify(moduleResults))
     } catch (e) {
         console.log("there was an error: " + e)
     }
@@ -70,7 +71,7 @@ export default function ResultPage() {
               </Tooltip>
                     </span>
                 </div>
-                <ResultDetail context={the_context}></ResultDetail>
+                <ResultDetail moduleResults={decodedModuleResults}></ResultDetail>
             </div>
             {/* <Footer></Footer> */}
         </div>

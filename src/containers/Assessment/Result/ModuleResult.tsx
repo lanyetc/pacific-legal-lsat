@@ -8,8 +8,8 @@ import ScreenShareOutlinedIcon from '@material-ui/icons/ScreenShareOutlined';
 
 import './ResultStyle.css';
 
-export default function ModuleResult() {
-    let module = {name: "Privacy"};
+export default function ModuleResult() { // is this component supposed to be a footer?
+    let module = {name: "Privacy"}; 
     let result = {
         repo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
     }

@@ -47,7 +47,7 @@ function ReminderList(props: any) {
 
 
 export default function Overview(props: any) {
-    const { context } = props;
+    const { todos, reminders } = props;
     return (
         <div>
             <div className="overview-container">
@@ -61,7 +61,7 @@ export default function Overview(props: any) {
                             Take care of these tasks ASAP
                     </Typography>
                     </div>
-                    <TodoList todoList={context.todos}></TodoList>
+                    <TodoList todoList={todos}></TodoList>
                 </div>
                 <div className="result reminder-container">
                     <div className="title-container">
@@ -69,7 +69,7 @@ export default function Overview(props: any) {
                             <span className="title">DO LATER</span>
                         </Typography>
                     </div>
-                    <ReminderList reminderList={context.reminders}></ReminderList>
+                    <ReminderList reminderList={reminders}></ReminderList>
                 </div>
             </div>
         </div>
