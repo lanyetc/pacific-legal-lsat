@@ -6,8 +6,8 @@ import ProgressBar from "./ProgressBar";
 import Chat from "./Chat";
 import ToDoSection from "./ToDoSection";
 import { getSurvey, getModules } from "../../../data/data";
-import { ResultContext, Context } from '../../../data/context';
-import { Trigger, Message, ResponsePath, AutoPlayMessage, ResponseItem } from '../../../model/index'
+import { ResultContext} from '../../../data/context';
+import { Message, ResponsePath, AutoPlayMessage, ResponseItem } from '../../../model/index'
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
 import banrdIcon from "../../../Assets/img/botavator.svg";
