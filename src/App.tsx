@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/assessment" component={ChatbotPage} />
           <Route path="/result" component={ResultPage} />
           <Route path="/landing" component={LandingPage} />
-          <Route path="/" component={ChatbotPage} />
+          <Route path="/" component={LandingPage} />
         </Switch>
       </ResultContextProvider>
     </Router>

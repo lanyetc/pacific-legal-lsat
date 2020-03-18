@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from '@material-ui/core/Grid';
-import { Breadcrumbs, Link, Button, Card, CardActionArea } from "@material-ui/core";
+import { Card, CardActionArea } from "@material-ui/core";
 import './LandingPageStyle.css';
 import icon0 from "../../Assets/img/icon0.png"
 import icon2 from "../../Assets/img/icon2.png"
@@ -8,6 +8,12 @@ import icon3 from "../../Assets/img/icon3.png"
 import icon4 from "../../Assets/img/icon4.png"
 import icon5 from "../../Assets/img/icon5.png"
 import icon6 from "../../Assets/img/icon6.png"
+
+import history from '../../history';
+
+function goToChatbotPage() {
+    history.push('/assessment')
+}
 
 export default function ModuleMenu() {
     return (
@@ -18,7 +24,7 @@ export default function ModuleMenu() {
                 <Grid container spacing={3}>
                     <Grid item xs={4}>
                         <Card >
-                            <CardActionArea className="module-card" href="/assessment">
+                            <CardActionArea className="module-card" onClick={() => goToChatbotPage()}>
                                 <span className="icon1" />
                                 <h1>PRIVACY & CONFIDENTIALITY</h1>
                             </CardActionArea>
