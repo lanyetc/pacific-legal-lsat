@@ -64,7 +64,8 @@
 .HowWeDoIt{
     display: flex;
     justify-content: space-between;
-
+    padding-left: 130px;
+    padding-right: 130px;
     }
 .how123{
     text-align: center;
@@ -170,7 +171,8 @@
 .ModuleItems{
     justify-content: space-between;
     display: flex;
-    /* padding-left: 262px; */
+    padding-left: 170px;
+    padding-right: 170px;
 }
 .MuiGrid-spacing-xs-3 {
     width: 100%;
