@@ -8,14 +8,11 @@ import icon3 from "../../Assets/img/icon3.png"
 import icon4 from "../../Assets/img/icon4.png"
 import icon5 from "../../Assets/img/icon5.png"
 import icon6 from "../../Assets/img/icon6.png"
+import { withRouter } from "react-router-dom";
 
-import history from '../../history';
-
-function goToChatbotPage() {
-    history.push('/assessment')
-}
-
-export default function ModuleMenu() {
+ let ModuleMenu: any = function(props: any) {
+    let {history} = props
+    console.log("histo          ry: " + history)
     return (
         <div className="ModuleMenu">
             <h1>Choose a module to start</h1>
@@ -24,7 +21,7 @@ export default function ModuleMenu() {
                 <Grid container spacing={3}>
                     <Grid item xs={4}>
                         <Card >
-                            <CardActionArea className="module-card" onClick={() => goToChatbotPage()}>
+                            <CardActionArea className="module-card" onClick={() => history.push('/assessment')}>
                                 <span className="icon1" />
                                 <h1>PRIVACY & CONFIDENTIALITY</h1>
                             </CardActionArea>
@@ -65,3 +62,5 @@ export default function ModuleMenu() {
         </div>
     );
 }
+
+export default ModuleMenu = withRouter(ModuleMenu)
