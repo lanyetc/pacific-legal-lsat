@@ -2,7 +2,7 @@ import React from "react";
 import Grid from '@material-ui/core/Grid';
 import { Breadcrumbs, Link, Button } from "@material-ui/core";
 import './LandingPageStyle.css';
-import icon0 from "../../Assets/img/icon0.png"
+import icon0 from "../../Assets/img/icon1.png"
 import icon2 from "../../Assets/img/icon2.png"
 import icon3 from "../../Assets/img/icon3.png"
 import icon4 from "../../Assets/img/icon4.png"
@@ -16,7 +16,7 @@ export default function ModuleMenu() {
             <div className="ModuleItems">
 
                 <Grid container spacing={3}>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} >
                         <span className="icon1"/>
                         <h1>PRIVACY & CONFIDENTIALITY</h1>
                     </Grid>
