@@ -1,10 +1,12 @@
 import React from "react";
 import Header from "../../../components/Header/Header";
+import Footer from "../../../components/Footer/Footer";
 import HeaderLinks from "../../../components/Header/HeaderLink";
 import ResultDetail from "./Detail/ResultDetail";
 import "./ResultStyle.css";
 import banrdIcon from "../../../Assets/img/botavator.svg";
 import { useParams } from "react-router-dom";
+
 
 export default function ResultPage() {
     let { results } = useParams();
@@ -37,7 +39,7 @@ export default function ResultPage() {
                 </div>
                 <ResultDetail context={the_context}></ResultDetail>
             </div>
-            {/* <Footer></Footer> */}
+            <Footer></Footer>
         </div>
     );
 }

@@ -5,12 +5,10 @@ import QuestionRepo from "./QuestionRepo";
 import {getModules} from "../../../../data/data";
 
 export default function ResultDetail(props: any) {
-    console.log("FROM RESULT DETAIL: " + JSON.stringify(props.context));
     const survey = getModules();
-    const { context } = props;
-    console.log("FROM RESULT DETAIL: " + JSON.stringify(context));
-
     const tabList = getTabList();
+    const { context } = props;
+
     return (
         <div className="result-detail-container">
             <TabNav 
