@@ -1,14 +1,19 @@
 import React from "react";
 import { Typography, List, ListItem, ListItemSecondaryAction, Button } from "@material-ui/core";
+import { useParams } from "react-router-dom";
+
 function TodoList(props: any) {
+    let { results } = useParams();
+    console.log(JSON.stringify(results))
+    
     const { todoList } = props;
     return (
         <div className="list-container round">
             <List>
                 {todoList.map((item: any, key: any) => {
                     return (<ListItem className="list-item" key={key}>
-                       <div className="todo-item-bullet"/>
-                        <span className= "item-label" >{item}</span>
+                        <div className="todo-item-bullet" />
+                        <span className="item-label" >{item}</span>
                         <ListItemSecondaryAction>
                             <div className="btn-group">
                                 <Button variant="outlined">more info</Button>
@@ -29,9 +34,9 @@ function ReminderList(props: any) {
             <List>
                 {reminderList.map((item: any, key: any) => {
                     return (<ListItem key={key} className="list-item">
-                        <div className="reminder-item-bullet"/>
-                        <span className= "item-label" >{item}</span>
-                         <ListItemSecondaryAction>
+                        <div className="reminder-item-bullet" />
+                        <span className="item-label" >{item}</span>
+                        <ListItemSecondaryAction>
                             <div className="btn-group">
                                 <Button variant="outlined">more info</Button>
                                 {/* <Button variant="contained" color="primary">create now</Button> */}
@@ -55,7 +60,7 @@ export default function Overview(props: any) {
                         <span className="title">DO NOW</span>
                     </Typography>
                     <Typography variant="body2" component="span">
-                    Take care of these tasks ASAP
+                        Take care of these tasks ASAP
                     </Typography>
                 </div>
                 <TodoList todoList={context.todos}></TodoList>

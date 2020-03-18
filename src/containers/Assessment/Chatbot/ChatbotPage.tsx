@@ -66,14 +66,14 @@ export default class ChatbotPage extends React.Component {
     // TODO chnage the parameter name...
     public displayNextMessage(next: any) {// have this also take a module id? 
         if (next === -1) {
-            history.push('/result')
+            history.push('/result/123444')
             return;
         }
 
         const nextMessage: Message = this.modules[next.moduleId].nodes[next.messageId]; // TODO create modules class.. modules.getMessage(messageId)
         const message: DisplayedMessage = { message: nextMessage, selectedOptionIds: [], showExtraInfo: false };
 
-        this.setState((state: IState, props) => {
+        this.setState((state: IState) => {
             return {
                 currentModuleId: next.moduleId,
                 currentMessage: nextMessage,
@@ -277,8 +277,6 @@ export default class ChatbotPage extends React.Component {
     }
 
     render() {
-        // const todos = this.context.moduleResults[this.state.currentModuleId].todos
-        // const reminders = this.context.moduleResults[this.state.currentModuleId].reminders
 
         return (
             <div className="full-screen-container grey chatbot-page">
