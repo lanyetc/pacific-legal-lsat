@@ -46,20 +46,24 @@ export class Message {
     get triggers() {
         return this._triggers;
     }
+
     get defaultTriggerId() {
         return this._defaultTriggerId;
     }
 
-    getDefaultTrigger() {
+    public getDefaultTrigger() {
+        return this.findTriggerById(this._defaultTriggerId);
+    }
+
+    public findTriggerById(id: number) {
         for(let i in this._triggers){
-            if(this._triggers[i].id === this._defaultTriggerId){
+            if(this._triggers[i].id === id){
                return this._triggers[i];
             }
         }
     }
     
-
-    public findTrigger(responsePath: ResponsePath): Trigger|never {
+    public findTrigger(responsePath: ResponsePath): Trigger|never { // TODO naming.. find matching trigger? find active trigger? 
         for (let trigger of this.triggers) {
             let triggerExpectedResponses = trigger.expectedResponses;
             let isMatch: boolean = this.responseMatcher.matchOptions(triggerExpectedResponses, responsePath);
