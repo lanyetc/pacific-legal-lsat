@@ -11,11 +11,11 @@ export default function LandHowWedo() {
             <h1>How we do it</h1>
             <div className="HowWeDoIt">
                 <div className="how123">
-                    <img src={Artboard1}></img>
+                    <img src={Artboard2}></img>
                     <h1>Take the 20 minutes survey</h1>
                 </div>
                 <div className="how123">
-                    <img src={Artboard2}></img>
+                    <img src={Artboard1}></img>
                     <h1>Generate a compliance to-do list</h1>
                 </div>
                 <div className="how123">

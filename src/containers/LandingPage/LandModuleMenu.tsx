@@ -2,7 +2,7 @@ import React from "react";
 import Grid from '@material-ui/core/Grid';
 import { Card, CardActionArea } from "@material-ui/core";
 import './LandingPageStyle.css';
-import icon0 from "../../Assets/img/icon0.png"
+import icon0 from "../../Assets/img/icon1.png"
 import icon2 from "../../Assets/img/icon2.png"
 import icon3 from "../../Assets/img/icon3.png"
 import icon4 from "../../Assets/img/icon4.png"

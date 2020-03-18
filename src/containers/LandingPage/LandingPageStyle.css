@@ -9,7 +9,7 @@
 }
 .LandTopwithPic img
 {
-    width: 540px;
+    width: 50%;
     padding-top: 66px ;
     
 }
@@ -21,7 +21,7 @@
 
 }
 .LandTopwithPic .h1title{
-    font-family: Merriweather;
+    font-family: "PT Serif Caption";
     font-size: 60px;
     font-weight: bold;
     line-height: 1.25;
@@ -30,7 +30,7 @@
     display: block;
 }
 .LandTopwithPic .h2title{
-    font-family: Merriweather;
+    font-family: "PT Serif Caption";
     font-size: 36px;
     font-weight: bold;
     line-height: 1.25;
@@ -50,7 +50,7 @@
 }
 .Howwedoitout h1{
 
-    font-family: Merriweather;
+    font-family: "PT Serif Caption";
     font-size: 36px;
     font-weight: bold;
     line-height: 1.25;
@@ -64,7 +64,8 @@
 .HowWeDoIt{
     display: flex;
     justify-content: space-between;
-
+    padding-left: 130px;
+    padding-right: 130px;
     }
 .how123{
     text-align: center;
@@ -88,7 +89,7 @@
     justify-content: space-between;
 }
 .LSALTleftHead {
-    font-family: Merriweather;
+    font-family: "PT Serif Caption";
   font-size: 36px;
   font-weight: bold;
   line-height: 1.25;
@@ -98,7 +99,7 @@
 }
 
 .LSALTleft h1{
-  font-family: Merriweather;
+  font-family: "PT Serif Caption";
   font-size: 36px;
   font-weight: bold;
   line-height: 1.25;
@@ -135,7 +136,7 @@
     padding-top: 61.5px;
 }
 
-.ModuleMenu .ModuleItems div.MuiGrid-item:first-child:hover h1 {
+.ModuleMenu .ModuleItems div.MuiGrid-item:first-child h1 {
 
     color: #e48241;
 }
@@ -147,16 +148,18 @@
     height: 117px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url("../../Assets/img/icon0.png");
+    background-image: url("../../Assets/img/icon1.png");
+    box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);
+
 }
 
 .ModuleMenu .ModuleItems div.MuiGrid-item:first-child:hover .icon1{
-    background-image: url("../../Assets/img/icon1.png");
+    background-image: url("../../Assets/img/icon0.png");
     box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
 .ModuleMenu h1{
     height: 45px;
-    font-family: Merriweather;
+    font-family:"PT Serif Caption";
     font-size: 36px;
     padding-bottom: 40px;
     font-weight: bold;
@@ -168,7 +171,8 @@
 .ModuleItems{
     justify-content: space-between;
     display: flex;
-    padding: 0 95px;
+    padding-left: 170px;
+    padding-right: 170px;
 }
 .MuiGrid-spacing-xs-3 {
     width: 100%;
