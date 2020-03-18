@@ -12,6 +12,7 @@ import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
 import banrdIcon from "../../../Assets/img/botavator.svg";
 import Scroll from "react-scroll";
+import { withRouter, RouteComponentProps } from 'react-router';
 
 interface IState {
     currentMessage: Message,
@@ -30,7 +31,7 @@ export interface DisplayedMessage {
     reply?: string // TODO temp temporary
 }
 
-export default class ChatbotPage extends React.Component {
+ class ChatbotPage extends React.Component<RouteComponentProps> {
 
     survey: any;
     modules: any;
@@ -70,7 +71,7 @@ export default class ChatbotPage extends React.Component {
             let sanitized_context = encodeURIComponent(JSON.stringify(this.context.context)) // TODO why is it .context.context?
             let encoded_context = btoa(sanitized_context); // converts to base64 string
             console.log("the encoded context: "+encoded_context)
-            history.push('/result/' + encoded_context)
+            this.props.history.push('/result/' + encoded_context)
             return;
         }
 
@@ -316,4 +317,4 @@ export default class ChatbotPage extends React.Component {
 }
 
 ChatbotPage.contextType = ResultContext;
-
+ export default withRouter(ChatbotPage)
