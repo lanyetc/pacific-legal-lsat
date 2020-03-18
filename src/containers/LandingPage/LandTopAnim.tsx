@@ -1,9 +1,15 @@
 import React from "react";
 
-import { Breadcrumbs, Link, Button } from "@material-ui/core";
+import {Button } from "@material-ui/core";
 import TopAnim from '../../Assets/img/animation-final.gif';
+import history from '../../history';
 
 import './LandingPageStyle.css';
+
+function goToChatbotPage() {
+    history.push('/assessment')
+}
+
 export default function LandTopAnim() {
     return (
         <div className="LandTopwithPic">
@@ -12,7 +18,7 @@ export default function LandTopAnim() {
                 <span className="h2title">Legal compliance simplified</span>
                 <div className="topwords">We understand that non-profits are driven by passion, and we want to help you focus on your contributions to society and making this world a better place.
 </div>
-                <Button variant="contained" className="start-btn" href="/assessment">Start Survey</Button>
+                <Button variant="contained" className="start-btn" onClick={() => goToChatbotPage()}>Start Survey</Button>
             </div>
             <img src={TopAnim}></img>
 
