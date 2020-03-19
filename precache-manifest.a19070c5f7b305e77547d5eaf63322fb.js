@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dbd6ab5fda9c79e98bac6c3e6dd21dce",
+    "revision": "da5c3f8cd6697c48f17ffa439ba29b55",
     "url": "/pacific-legal-lsat/index.html"
   },
   {
-    "revision": "003046f5433f889176e8",
+    "revision": "dce1ce14e7d069f2f7d2",
     "url": "/pacific-legal-lsat/static/css/main.5d397b65.chunk.css"
   },
   {
-    "revision": "8a1f23399c30615cefdc",
-    "url": "/pacific-legal-lsat/static/js/2.862a0b82.chunk.js"
+    "revision": "53ef9f330c62f77a894f",
+    "url": "/pacific-legal-lsat/static/js/2.d96e56b5.chunk.js"
   },
   {
     "revision": "6f5f1c4a5f7f6e382b8aeca1b4ac8d96",
-    "url": "/pacific-legal-lsat/static/js/2.862a0b82.chunk.js.LICENSE.txt"
+    "url": "/pacific-legal-lsat/static/js/2.d96e56b5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "003046f5433f889176e8",
-    "url": "/pacific-legal-lsat/static/js/main.ae5edc48.chunk.js"
+    "revision": "dce1ce14e7d069f2f7d2",
+    "url": "/pacific-legal-lsat/static/js/main.e7f835c2.chunk.js"
   },
   {
     "revision": "f26db3a15b7c96bc593d",
@@ -54,6 +54,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "7606c784036c2e87ad5bba414d3da203",
     "url": "/pacific-legal-lsat/static/media/animation-final.7606c784.gif"
+  },
+  {
+    "revision": "8137231798aca1b092af56926e25ca06",
+    "url": "/pacific-legal-lsat/static/media/bot_ic_70px-04.81372317.svg"
   },
   {
     "revision": "308830c4b4e85f76ae2e84f26160ec16",

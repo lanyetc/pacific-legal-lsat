@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/pacific-legal-lsat/static/css/main.5d397b65.chunk.css",
-    "main.js": "/pacific-legal-lsat/static/js/main.ae5edc48.chunk.js",
-    "main.js.map": "/pacific-legal-lsat/static/js/main.ae5edc48.chunk.js.map",
+    "main.js": "/pacific-legal-lsat/static/js/main.e7f835c2.chunk.js",
+    "main.js.map": "/pacific-legal-lsat/static/js/main.e7f835c2.chunk.js.map",
     "runtime-main.js": "/pacific-legal-lsat/static/js/runtime-main.6dffc024.js",
     "runtime-main.js.map": "/pacific-legal-lsat/static/js/runtime-main.6dffc024.js.map",
-    "static/js/2.862a0b82.chunk.js": "/pacific-legal-lsat/static/js/2.862a0b82.chunk.js",
-    "static/js/2.862a0b82.chunk.js.map": "/pacific-legal-lsat/static/js/2.862a0b82.chunk.js.map",
+    "static/js/2.d96e56b5.chunk.js": "/pacific-legal-lsat/static/js/2.d96e56b5.chunk.js",
+    "static/js/2.d96e56b5.chunk.js.map": "/pacific-legal-lsat/static/js/2.d96e56b5.chunk.js.map",
     "index.html": "/pacific-legal-lsat/index.html",
-    "precache-manifest.a709a9a402915cc638b8ba96ae978af8.js": "/pacific-legal-lsat/precache-manifest.a709a9a402915cc638b8ba96ae978af8.js",
+    "precache-manifest.a19070c5f7b305e77547d5eaf63322fb.js": "/pacific-legal-lsat/precache-manifest.a19070c5f7b305e77547d5eaf63322fb.js",
     "service-worker.js": "/pacific-legal-lsat/service-worker.js",
     "static/css/main.5d397b65.chunk.css.map": "/pacific-legal-lsat/static/css/main.5d397b65.chunk.css.map",
-    "static/js/2.862a0b82.chunk.js.LICENSE.txt": "/pacific-legal-lsat/static/js/2.862a0b82.chunk.js.LICENSE.txt",
+    "static/js/2.d96e56b5.chunk.js.LICENSE.txt": "/pacific-legal-lsat/static/js/2.d96e56b5.chunk.js.LICENSE.txt",
     "static/media/Artboard1.svg": "/pacific-legal-lsat/static/media/Artboard1.835de089.svg",
     "static/media/Artboard2.svg": "/pacific-legal-lsat/static/media/Artboard2.fbd32e39.svg",
     "static/media/Artboard3.svg": "/pacific-legal-lsat/static/media/Artboard3.d07988a1.svg",
@@ -20,14 +20,15 @@
     "static/media/a_act_ic.svg": "/pacific-legal-lsat/static/media/a_act_ic.83d76e08.svg",
     "static/media/access_ic.svg": "/pacific-legal-lsat/static/media/access_ic.ab4d77ec.svg",
     "static/media/animation-final.gif": "/pacific-legal-lsat/static/media/animation-final.7606c784.gif",
+    "static/media/bot_ic_70px-04.svg": "/pacific-legal-lsat/static/media/bot_ic_70px-04.81372317.svg",
     "static/media/botavator.svg": "/pacific-legal-lsat/static/media/botavator.308830c4.svg",
     "static/media/gov_ic.svg": "/pacific-legal-lsat/static/media/gov_ic.76f7bdaf.svg",
     "static/media/privacy_ic.svg": "/pacific-legal-lsat/static/media/privacy_ic.da29d1b7.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.6dffc024.js",
-    "static/js/2.862a0b82.chunk.js",
+    "static/js/2.d96e56b5.chunk.js",
     "static/css/main.5d397b65.chunk.css",
-    "static/js/main.ae5edc48.chunk.js"
+    "static/js/main.e7f835c2.chunk.js"
   ]
 }
