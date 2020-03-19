@@ -10,11 +10,17 @@ import { antiSpamModule } from './antiSpamModule'
 import { privacyOfficerModule } from './privacyOfficerModule'
 import { requestsForInformationModule } from './requestsForInformationModule'
 import privacyIcon from "../Assets/img/privacy_ic.svg"
+import privacyActiveIcon from "../Assets/img/privacy_ic_chat-active.svg"
 import employIcon from "../Assets/img/Employ_ic.svg"
+import employActiveIcon from "../Assets/img/Employ_ic_chat_active.svg"
 import humanIcon from "../Assets/img/H_RIGHTS_ic.svg"
+import humanActiveIcon from "../Assets/img/H_RIGHTS_ic_chat_active.svg"
 import accessIcon from "../Assets/img/access_ic.svg"
+import accessActiveIcon from "../Assets/img/access_ic_chat_active.svg"
 import governmentIcon from "../Assets/img/gov_ic.svg"
+import governmentActiveIcon from "../Assets/img/gov_ic_chat_active.svg"
 import socialIcon from "../Assets/img/a_act_ic.svg"
+import socialAcitveIcon from "../Assets/img/s_act_ic_chat_active.svg"
 
 export interface SurveyDialogue {
     [key: number]: Message
@@ -28,12 +34,12 @@ export interface Module {
 
 export function getTopModules() {
     const modules = [
-        {name: "Privacy & Confidentiality", icon: privacyIcon},
-        {name: "Employment", icon: employIcon},
-        {name: "Human Rights", icon: humanIcon},
-        {name: "Access to Records", icon: accessIcon},
-        {name: "Government", icon: governmentIcon},
-        {name: "Societies Act Compliance", icon: socialIcon}
+        {name: "Privacy & Confidentiality", defaultIcon: privacyIcon, activeIcon: privacyActiveIcon},
+        {name: "Employment", defaultIcon: employIcon, activeIcon: employActiveIcon},
+        {name: "Human Rights", defaultIcon: humanIcon, activeIcon: humanActiveIcon},
+        {name: "Access to Records", defaultIcon: accessIcon, activeIcon: accessActiveIcon},
+        {name: "Government", defaultIcon: governmentIcon, activeIcon: governmentActiveIcon},
+        {name: "Societies Act Compliance", defaultIcon: socialIcon, activeIcon: socialAcitveIcon}
     ]
     return modules;
 }

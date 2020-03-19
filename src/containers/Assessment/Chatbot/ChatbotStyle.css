@@ -246,12 +246,17 @@
 .left-module-bar ul li {
     flex: 1;
     padding-left: 6px;
-    padding-right: 6px;
+    padding-right: 0px;
 }
 
 .module-link-nav {
     width: 100%;
     padding: 6px;
+}
+
+.module-link-nav.active {
+    background-color: #e48241;
+    border-radius: 50px 0 0 50px;
 }
 
 

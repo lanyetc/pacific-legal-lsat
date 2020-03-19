@@ -14,8 +14,8 @@ export default function ProgressBar(props:any) {
                 <List className="sub-module-list">
                     {topModules.map((topModule, key: any) => (
                         <ListItem key={key}>
-                            <div className="module-link-nav">
-                                <span className="module-icon"><img src={topModule.icon} /></span>
+                            <div className={ currentTopModule.name === topModule.name ? "module-link-nav active" : "module-link-nav"}>
+                                <span className="module-icon"><img src={currentTopModule.name === topModule.name ? topModule.activeIcon : topModule.defaultIcon} /></span>
                             </div>
                         </ListItem>
                     ))}
