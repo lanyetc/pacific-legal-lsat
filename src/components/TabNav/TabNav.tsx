@@ -16,7 +16,7 @@ export default function TabNav(props: any) {
         return true; // FIXME adding this for now to quiet the compiler warnings
     });
     return (
-        <div className="container">
+        <div className="full-height-container">
             <Tabs 
             value={value} onChange={handleChange} 
             aria-label="simple tabs example" 
@@ -27,7 +27,7 @@ export default function TabNav(props: any) {
             </Tabs>
             {tabList.map((prop: any, key: any) => {
                 if (key === value) {
-                    return <div key={key} className="container">{prop.tabContent}</div>;
+                    return <div key={key} className="container with-bottom-padding">{prop.tabContent}</div>;
                 }
                 return null;
             })}

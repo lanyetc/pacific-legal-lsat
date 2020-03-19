@@ -47,7 +47,7 @@ html, body, #root {
     }
 } */
 
-.full-screen-container {
+.full-screen-container, .full-height-container {
     height: 100%;
 }
 
@@ -77,4 +77,8 @@ svg + span {
 
 .container {
     margin: auto !important;
+}
+
+.with-bottom-padding {
+    padding-bottom: 64px;
 }

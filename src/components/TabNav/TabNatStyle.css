@@ -3,6 +3,12 @@
     position: fixed;
     background-color: #ffffff;
     z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tab-nav .MuiTabs-flexContainer {
+    justify-content: space-between;
 }
 
 .tab-nav .tab.MuiTab-root {

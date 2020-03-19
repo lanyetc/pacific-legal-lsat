@@ -18,6 +18,9 @@ export const glossaryContent:any = [
     {
         name: "Official Records",
         explanation: "These are the 14 records set out in Section 20(1) and (2) of the Societies Act, which include: ",
-        list: ["Certificate of Incorporation", "Constitution", "Bylaws", "Statement of Directors and Registered Office"]
+        list: ["Certificate of Incorporation", "Constitution of the society", "By-Laws of the society", "Statement of Directors and Registered Office of the society",
+                "Any official documents provided by the Registrar", "Legal orders from the court or government", "Register of Directors + Consents to act as Directors + Written Resignations of Directors",
+                "Register of Members of the society", "Annual General Meeting minutes + General Meeting minutes", "Board of Directors meeting minutes",
+                "Written resolutions (RARE)", "Ordinary and Special Resolutions not included in A/GM minutes", "Financial Statements and Auditor’s Reports", "Accounting records"]
     }
 ]
