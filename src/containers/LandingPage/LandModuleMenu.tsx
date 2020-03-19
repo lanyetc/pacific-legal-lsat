@@ -28,31 +28,31 @@ import { withRouter } from "react-router-dom";
                         </Card>
                     </Grid>
                     <Grid item xs={4}>
-                        <CardActionArea className="module-card" >
+                        <CardActionArea disabled={true} className="module-card" >
                             <img src={icon2}></img>
                             <h1>EMPLOYMENT</h1>
                         </CardActionArea>
                     </Grid>
                     <Grid item xs={4}>
-                        <CardActionArea className="module-card" >
+                        <CardActionArea disabled={true} className="module-card" >
                             <img src={icon3}></img>
                             <h1>HUMAN RIGHTS</h1>
                         </CardActionArea>
                     </Grid>
                     <Grid item xs={4}>
-                        <CardActionArea className="module-card" >
+                        <CardActionArea disabled={true} className="module-card" >
                             <img src={icon4}></img>
                             <h1>ACCESS TO RECORDS</h1>
                         </CardActionArea>
                     </Grid>
                     <Grid item xs={4}>
-                        <CardActionArea className="module-card" >
+                        <CardActionArea disabled={true} className="module-card" >
                             <img src={icon5}></img>
                             <h1>GOVERNANCE</h1>
                         </CardActionArea>
                     </Grid>
                     <Grid item xs={4}>
-                        <CardActionArea className="module-card" >
+                        <CardActionArea disabled={true} className="module-card" >
                             <img src={icon6}></img>
                             <h1>SOCIETIES ACT COMPLIANCE</h1>
                         </CardActionArea>
