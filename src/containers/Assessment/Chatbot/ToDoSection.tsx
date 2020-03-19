@@ -12,6 +12,7 @@ export default function ToDoSection(props: any) {
                     </div>
                 </div>
                 <div className="list-container ">
+                    <div className="empty-tip" hidden={todoList.length>0 ? true : false}>Here we’ll list your high-priority tasks</div>
                     <List>
                         {todoList.map((item: any, key: any) => {
                             return (<ListItem key={key}>
@@ -29,6 +30,7 @@ export default function ToDoSection(props: any) {
                     </div>
                 </div>
                 <div className="list-container ">
+                    <div className="empty-tip" hidden={reminderList.length>0 ? true : false}>Here we’ll list your lower-priority tasks</div>
                     <List>
                         {reminderList.map((item: any, key: any) => {
                             return (<ListItem key={key}>

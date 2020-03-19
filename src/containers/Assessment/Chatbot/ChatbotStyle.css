@@ -331,3 +331,11 @@
 .progress-block .current-module-title {
     font-weight: 800;
 }
+
+.empty-tip {
+    width: 100%;
+    font-size: 14px;
+    font-style: italic;
+    color: #848484;
+    text-align: center;
+}
