@@ -22,5 +22,13 @@ export const glossaryContent:any = [
                 "Any official documents provided by the Registrar", "Legal orders from the court or government", "Register of Directors + Consents to act as Directors + Written Resignations of Directors",
                 "Register of Members of the society", "Annual General Meeting minutes + General Meeting minutes", "Board of Directors meeting minutes",
                 "Written resolutions (RARE)", "Ordinary and Special Resolutions not included in A/GM minutes", "Financial Statements and Auditor’s Reports", "Accounting records"]
+    },
+    {
+        name: "Personal Information",
+        explanation: "Personal information is information that is personal to an individual. Some examples include: name, address, email address, birthdate, SIN, gender, medical information, educational history, employment status, IP address, family status and income."
+    },
+    {
+        name: "Privacy Policy",
+        explanation: "The Personal Information Protection Act (“PIPA”) requires societies to develop a privacy policy. \n\n Privacy policies should explain to the person whose personal information we are collecting: why we are collecting it, what we use it for, how and when we have to disclose it, and how a person can review what we are doing.The privacy policy should include a reference to the society’s obligations under the Societies Act (see Access to Records). Privacy policies should cover the collection, use (including storage) and disclosure of personal information."
     }
 ]

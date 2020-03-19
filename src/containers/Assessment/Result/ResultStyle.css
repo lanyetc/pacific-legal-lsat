@@ -114,6 +114,7 @@
 
 .info-container .title {
     font-size: 18px;
+    white-space: pre-line;
 }
 
 .info-container .link {
