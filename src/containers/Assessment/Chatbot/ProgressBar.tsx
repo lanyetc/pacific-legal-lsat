@@ -12,10 +12,10 @@ export default function ProgressBar(props:any) {
         <div className="progress-container">
             <div className="left-module-bar">
                 <List className="sub-module-list">
-                    {topModules.map((obj, key: any) => (
+                    {topModules.map((topModule, key: any) => (
                         <ListItem key={key}>
                             <div className="module-link-nav">
-                                <span className="module-icon"></span>
+                                <span className="module-icon"><img src={topModule.icon} /></span>
                             </div>
                         </ListItem>
                     ))}
@@ -23,7 +23,7 @@ export default function ProgressBar(props:any) {
             </div>
             <div className="right-module-bar">
                 <div className="module-title">
-                    <span>{currentTopModule + " Module"}</span>
+                    <span>{currentTopModule.name + " Module"}</span>
                     <span className="title-split-line"><i className="bottom-arrow" /></span>
                 </div>
                 <div className="sub-module-list">

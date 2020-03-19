@@ -9,6 +9,12 @@ import { privacyPolicyModule } from './privacyPolicyModule'
 import { antiSpamModule } from './antiSpamModule'
 import { privacyOfficerModule } from './privacyOfficerModule'
 import { requestsForInformationModule } from './requestsForInformationModule'
+import privacyIcon from "../Assets/img/privacy_ic.svg"
+import employIcon from "../Assets/img/Employ_ic.svg"
+import humanIcon from "../Assets/img/H_RIGHTS_ic.svg"
+import accessIcon from "../Assets/img/access_ic.svg"
+import governmentIcon from "../Assets/img/gov_ic.svg"
+import socialIcon from "../Assets/img/a_act_ic.svg"
 
 export interface SurveyDialogue {
     [key: number]: Message
@@ -22,12 +28,12 @@ export interface Module {
 
 export function getTopModules() {
     const modules = [
-        "Privacy & Confidentiality",
-        "Employment",
-        "Human Rights",
-        "Acess to Records",
-        "Government",
-        "Societies Act Compliance"
+        {name: "Privacy & Confidentiality", icon: privacyIcon},
+        {name: "Employment", icon: employIcon},
+        {name: "Human Rights", icon: humanIcon},
+        {name: "Access to Records", icon: accessIcon},
+        {name: "Government", icon: governmentIcon},
+        {name: "Societies Act Compliance", icon: socialIcon}
     ]
     return modules;
 }
@@ -57,9 +63,9 @@ export function getModules() {
     const antiSpamSurvey: SurveyDialogue = generateSurveyDialogue(antiSpamModule);
 
     const modules: any = {
-        1: { name: "Privacy Policy", nodes: privacyPolicySurvey },
-        2: { name: "Collection of Personal Info", nodes: collectionOfPersonalInformationSurvey },
-        3: { name: "Use of Personal Info", nodes: useOfPersonalInformationSurvey },
+        1: { name: "Privacy Policy", nodes: privacyPolicySurvey},
+        2: { name: "Collection of Personal Info", nodes: collectionOfPersonalInformationSurvey},
+        3: { name: "Use of Personal Info", nodes: useOfPersonalInformationSurvey},
         4: { name: "Disclosure of Personal Info", nodes: disclosureOfPersonalInformationSurvey },
         5: { name: "Retention of Personal Info & Security", nodes: retentionOfPersonalInformationAndSecuritySurvey },
         6: { name: "Privacy Officer", nodes: privacyOfficerSurvey },
