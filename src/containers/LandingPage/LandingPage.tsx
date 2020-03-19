@@ -1,7 +1,7 @@
 import React from "react";
 import "./LandingPage";
 import { Button } from "@material-ui/core";
-import banrdIcon from "../../Assets/img/botavator.svg";
+import banrdIcon from "../../Assets/img/bot_ic_70px-04.svg";
 import Header from "../../components/Header/Header";
 import HeaderLinks from "../../components/Header/HeaderLink";
 import LandTopAnim from "./LandTopAnim"

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../../components/Header/Header";
 import HeaderLinks from "../../../components/Header/HeaderLink";
 import "./ResultStyle.css";
-import banrdIcon from "../../../Assets/img/botavator.svg";
+import banrdIcon from "../../../Assets/img/bot_ic_70px-04.svg";
 import { useParams } from "react-router-dom";
 import { Button, Tooltip } from "@material-ui/core";
 import TabNav from "../../../components/TabNav/TabNav";

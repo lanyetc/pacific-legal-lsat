@@ -1,5 +1,5 @@
 import React from "react";
-import botAvator from "../../../Assets/img/botavator.svg"
+import botAvator from "../../../Assets/img/bot_ic_70px-04.svg"
 import Scroll from "react-scroll"
 
 export default function ChatbotMessage(props: any) {

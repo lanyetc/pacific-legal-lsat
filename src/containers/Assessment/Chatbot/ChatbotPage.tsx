@@ -10,7 +10,7 @@ import { ResultContext } from '../../../data/context';
 import { Message, ResponsePath, AutoPlayMessage, ResponseItem } from '../../../model/index'
 import history from '../../../history';
 import cloneDeep from 'lodash/cloneDeep';
-import banrdIcon from "../../../Assets/img/botavator.svg";
+import banrdIcon from "../../../Assets/img/bot_ic_70px-04.svg";
 import Scroll from "react-scroll";
 import { withRouter, RouteComponentProps } from 'react-router';
 
