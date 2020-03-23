@@ -15,7 +15,8 @@ export interface MessageData {
     options: any[] // TODO CHANGE THIS BACK to OptionsData[]
     triggers: TriggerData[],
     defaultTriggerId: number,
-    extraInfo?: any
+    extraInfo?: any,
+    exclusiveOption?: boolean
 }
 
 // TODO: we need to figure out which ones are optional 
@@ -27,7 +28,8 @@ export class Message {
         private _options: Option[], 
         private _triggers: Trigger[], 
         private _defaultTriggerId: number,
-        private _extraInfo?: any){
+        private _extraInfo?: any,
+        private _exclusiveOption?: boolean){
     }
 
     // getters/setters
@@ -45,6 +47,9 @@ export class Message {
     }
     get triggers() {
         return this._triggers;
+    }
+    get exclusiveOption() {
+        return this._exclusiveOption;
     }
 
     get defaultTriggerId() {

@@ -10,7 +10,7 @@ export class MessageFactory {
         console.log("ok");
     }
     static createMessageFromData(data: MessageData): Message|never {
-        let { id, type, content, extraInfo=null, defaultTriggerId } = data 
+        let { id, type, content, extraInfo=null, defaultTriggerId, exclusiveOption=null } = data 
         const triggers: Trigger[] = TriggerFactory.createTriggersFromData(data.triggers);        const options: Option[] = OptionFactory.createOptionsFromData(data.options)
         if (type === MessageType.singleSelect){
             const matcher: ResponseMatcher = new MatchPartialResponse();
@@ -18,7 +18,12 @@ export class MessageFactory {
                 matcher, id, content, options, triggers, defaultTriggerId, extraInfo
             )
         }
-        else if (type === MessageType.multiSelect){
+        else if (type === MessageType.multiSelect && exclusiveOption){
+            const matcher: ResponseMatcher = new MatchPartialResponse();
+            return new MultiSelectQuestion(
+                matcher, id, content, options, triggers, defaultTriggerId, extraInfo
+            )
+        } else if (type === MessageType.multiSelect && !exclusiveOption){
             const matcher: ResponseMatcher = new MatchFullResponse();
             return new MultiSelectQuestion(
                 matcher, id, content, options, triggers, defaultTriggerId, extraInfo

@@ -57,6 +57,7 @@ export let useOfPersonalInformationModule:any = [
         id: 13,
         type: MessageType.multiSelect,
         content: 'Select the reasons you use personal information.',
+        exclusiveOption: true,
         options: [
           {
             id: 1300,

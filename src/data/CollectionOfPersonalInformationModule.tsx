@@ -71,6 +71,7 @@ export let collectionOfPersonalInformationModule:any = [
         id: 6,
         type: MessageType.multiSelect,
         content: 'Select the ways you collect information ... ',
+        exclusiveOption: true,
         options: [
           {
             id: 600,
@@ -267,6 +268,7 @@ export let collectionOfPersonalInformationModule:any = [
         id: 11,
         type: MessageType.multiSelect,
         content: 'Select your reasons for collecting employee information.',
+        exclusiveOption: true,
         options: [
           {
             id: 1100,

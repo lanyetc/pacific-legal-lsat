@@ -11,7 +11,7 @@ let LandTopAnim: any = function (props: any) {
     return (
         <div className="LandTopwithPic">
             <div className="landleftwords">
-                <span className="h1title">LSALT2.0</span>
+                <span className="h1title">LSALT 2.0</span>
                 <span className="h2title">Legal compliance simplified</span>
                 <div className="topwords">We understand that non-profits are driven by passion, and we want to help you focus on your contributions to society and making this world a better place.
 </div>
