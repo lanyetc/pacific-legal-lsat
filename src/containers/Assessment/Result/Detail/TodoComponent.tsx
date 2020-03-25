@@ -15,10 +15,10 @@ export default function TodoList(props: any) {
                     {todoList.map((item: any, key: any) => {
                         return (<ListItem className="list-item" key={key}>
                             <div className={priority === "donow" ? "todo-item-bullet" : "reminder-item-bullet"} />
-                            <span className="item-label" >{item}</span>
+                            <span className="item-label" >{item.content}</span>
                             <ListItemSecondaryAction>
                                 <div className="btn-group">
-                                    <Button variant="outlined">more info</Button>
+                                    <Button variant="outlined" onClick={() => props.handleMoreInfo(item.tabValue, item.questionId)}>more info</Button>
                                     {/* <Button variant="contained" color="primary">create now</Button> */}
                                 </div>
                             </ListItemSecondaryAction>

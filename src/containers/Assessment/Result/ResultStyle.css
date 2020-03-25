@@ -212,3 +212,33 @@
 .result-page .full-height-container{
     overflow-y: auto;
 }
+
+
+.result-page .tab-nav {
+    padding: 0 120px;
+    position: fixed;
+    background-color: #ffffff;
+    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tab-nav .MuiTabs-flexContainer {
+    justify-content: space-between;
+}
+
+.tab-nav .tab.MuiTab-root {
+    max-width: 380px;
+    min-width: 120px;
+    font-size: 18px;
+}
+
+.tab-nav .MuiTabs-indicator {
+    background-color: #e48241;
+}
+
+.tab-content {
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+}

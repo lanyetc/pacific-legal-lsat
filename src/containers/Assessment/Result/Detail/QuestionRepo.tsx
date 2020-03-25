@@ -5,10 +5,10 @@ export default function QuestionRepo(props: any) {
     const { resultList, questionList } = props;
     console.log(questionList);
     return (
-        <div className="repo-container">
+        <div className="repo-container" id="repo-container">
             {resultList.map((result: Result, key: any) => {
                 return (
-                    <div className="repo-item" key={key}>
+                    <div className="repo-item" key={key} id={"repo-item-" + result.questionId}>
 
                         <div className="question-container">
                             <Typography variant="body2" component="p" className="title" gutterBottom>
