@@ -68,7 +68,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
               },
             reply: 'Let’s change the access to a few designated individuals!',
             todo: 'Only allow a few individuals to access personal information',
-            resultReport: 'some repo on question 28 volunteers'
+            resultReport: 'Only a small number of authorized individuals should have access to stored personal information.'
           }
         ],
         defaultTriggerId: 2012
@@ -264,7 +264,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             reply: 'This is a great way to keep data secure, added to your list',
             reminder: 'Encrypt personal information stored on your computer',
-            resultReport: 'Encrypt sensitive data if possible'
+            resultReport: 'Encrypt sensitive data if possible.'
           },
           {
             id: 2411,
