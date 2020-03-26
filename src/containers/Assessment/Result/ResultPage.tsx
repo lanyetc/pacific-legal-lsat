@@ -117,6 +117,8 @@ class ResultPage extends React.Component<RouteComponentProps>{
             // let chatbotScroller = document.getElementById('chatbot-scroller') as HTMLElement;
             // chatbotScroller.scrollTop = chatbotScroller.scrollHeight;
             const scrollToElement = id;
+            let focusItem = document.getElementById(scrollToElement) as HTMLElement;
+            focusItem.classList.add("grey");
             this.scroller.scrollTo(scrollToElement, {
                 duration: 600,
                 delay: 30,
