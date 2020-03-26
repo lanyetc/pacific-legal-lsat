@@ -1022,7 +1022,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
             },
             reply: 'Keep financial information for 7 years.',
             todo: 'Keep financial information for 7 years before shredding these records',
-            resultReport: 'Keep financial information for 7 years before shedding it.'
+            resultReport: 'Keep financial information for 7 years before shredding it.'
           },
           {
             id: 3811,
@@ -1037,7 +1037,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
               nextQuestionId: 39
             },
             reply: 'Perfect!',
-            resultReport: 'Keep financial information for 7 years before shedding it.'
+            resultReport: 'Keep financial information for 7 years before shredding it.'
           },
           {
             id: 3812,
@@ -1052,7 +1052,7 @@ export let retentionOfPersonalInformationAndSecurityModule: any = [
               nextQuestionId: 39
             },
             reply: 'You can shred financial information after 7 years.',
-            resultReport: 'Keep financial information for 7 years before shedding it.'
+            resultReport: 'Keep financial information for 7 years before shredding it.'
           }
         ],
         defaultTriggerId: 3812

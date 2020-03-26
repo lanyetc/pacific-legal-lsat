@@ -183,6 +183,7 @@
     padding: 18px;
     box-sizing: border-box;
     background-color: #e48241;
+    position: relative;
     
 }
 
@@ -206,7 +207,8 @@
     background-color: white;
     color: #e48241;
     display: inline-block;
-    float: right;
+    position: absolute;
+    right: 48px;
 }
 
 .result-page .full-height-container{

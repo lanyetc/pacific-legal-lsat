@@ -291,7 +291,7 @@
 	border-left-color:transparent;
 	position:relative;
 	top:9px;
-	left:calc(50% - 14px);
+	left:calc(50% - 7px);
 }
 
 .title-split-line .bottom-arrow::after {
@@ -302,7 +302,7 @@
 	border-left-color:transparent;
 	position:relative;
 	top:7px;
-	right:calc(27px - 50%);
+	right:calc(20px - 50%);
 }
 
 .progress-block .sub-module-title {
