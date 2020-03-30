@@ -4,7 +4,7 @@ export const privacyPolicyModule: any =  [
     {
       id: 61,
       type: 3,
-      content: "Hi there! I am your virtual assistant, Leo, and I will be helping you through your self-assessment. During our chat, I will help you create a personalized to-do list based on your answers.",
+      content: "Hi there! I am your virtual assistant, Lia, and I will be helping you through your self-assessment. During our chat, I will help you create a personalized to-do list based on your answers. Don’t worry about taking notes - all the key information in this module will be included in the final results for future reference!",
       options: [],
       triggers: [
         {
