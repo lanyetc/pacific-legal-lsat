@@ -1,44 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# LSALT 2.0 | Legal compliance simplified
+A platform for creating complex legal surveys. 
 
-## Available Scripts
+Check it out! https://pacific-legal-portal.github.io/pacific-legal-lsat/#/
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Technical Overview
+This project is bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and TypeScript. It's a static single page application that is hosted using github pages. We use TravisCI for continuous integration and continuous deployment. 
 
-### `npm test`
+## Getting Started 
+We recommend first playing around with the application to get a better understanding of what this project is about. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. [Install](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki/Technical-Overview#installation)
+2. Conceptual Overview
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Overview
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+At this time, the LSALT is built to accomplish two things for the users:
+1. Provide non-profits with user friendly self assessment surveys using a conversational format as well as immdediate survey feedback.
+2. Provide content creators the flexibility to write surveys with complex decision making functionality.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Life Cycle of a Survey Module
 
-### `npm run eject`
+First, the survey content is written and a script is prepared. 
+The content follows a well defined schema with a graph-like structure.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Once it is written, the survey is handed down to the developers who translate it into a structured JSON format. Since there is currently no integrated survey editor, the translation from script to JSON is manual. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Next, the JSON file is included in the data directory within the project and is added to the list of existing active survey modules.
+ 
+When the page is loaded, the JSON files are assembled into linked typescript objects, representing questions or messages. Since this is a _conversational_ survey, both questions and messages are represented. These objects establish all possible survey paths and outcomes, and the actual outcome depends on how the user procedes through the survey.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+As the user selects answers to each question, the program adds to a running list of results, and then decides where to go next by looking up an action associated to the selected answer.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Adding a Survey
+We'll begin by introducing Messages and Triggers as the fundamental elements of a survey and their relationship to one another. It's useful to imagine a survey as a directed, acyclic graph - a collection of nodes, the Messages, linked together by edges, the Triggers. 
 
-## Learn More
+fig1 - simple graph
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+*Message*
+A Message is any prompt made by the chatbot. It could be a question for the user, either a MultiSelectQuestion or a SingleSelectQuestion. or it could be a simple statement, an AutoPlayMessage, requiring no response. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+fig2- simple message
+
+*Triggers* 
+Triggers are the arrows in the graph because they describe where to go and what to do every time a user selects an answer. For example, "If option A is selected, go to question 2, otherwise if option B is selected, go to question 3". In general, a trigger contains 3 main pieces of information:
+1. expectedResponses - one or more options that the user chooses to answer a question.
+2. results - given this response, we may want to provide some feedback. It can be a reply in the chat, a more detailed result that will be revealed on the results page, or a todo item.
+3. action - given this response to this question, what should be shown to the user next? Either the another question, or the results page. 
+
+
+Note: A single trigger "point" to a single next message, but depending on the answer, a question might have many possible next messages. So it follows that questions can have one or more triggers. 
+
+
+fig3 - simple Trigger
+
+
+# extras ====
+
+It's worth mentioning that we've restricted the answers users can give to a predefined list of options in order to simplify the implementation of the mvp. 
+
+These surveys are meant to take on a friendly conversational tone, hence why they're modeled using a chatbot format. 
+
+
+## Modeling The Survey Structure
+The underlying survey structure is graph-like. Imagine we have a three questions, 
+
+
+
+It's graph-like because every answer to a question, could lead to another question and so the questions end up being linked to each other. 
+
+This page is meant to be a quickstart guide geared toward bringing a potential developer up to speed.
+
+## question groups
+We've discussed triggers that point from one question to another given a certain answer, but it's worth mentioning that a single trigger, can in theory, point from many questions to another question. It's reasonable to imagine that sometimes we need the answers to multiple questions in order to figure out what to do next. This is functionality that we decided not to implement since the modules we were provided did not include such dependencies between questions and so it wasn't worth the complexity at the timme. 
