@@ -124,16 +124,15 @@ fig 4
 
 
 ## Presentational Components
-
+These components have very little logic or state in them, they're almost strictly for formatting parts of the view. 
 
 ## View Model
-The view Model queries the Domain model to figure out how to manipulate what the user sees and the state of the view; it's the brains of the view. These are typically called container components in react. See this[https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0] article on the differences between container components vs presentational components.   
+The view Model queries the Domain model to figure out how to manipulate what the user sees and the state of the view; it's the brains of the view. These are typically container components in react. See this[https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0] article on the differences between container components vs presentational components.   
 
 The main container components in our application are: 
 
 * `ChatbotPage.tsx`
 * `ResultPage.tsx`
-* `
 
 ## Domain Model and Business Logic
 This is where the 'brain of the survey' lives, the "machinery", so to speak. It's how a survey operates "under the hood", so it's completely independent of the view. The user interface could be anything and this domain model its business logic would remain roughly the same so long as the application is still meant to be a conversational Survey. For example, we decided to represent this survey as a chatbot, but it could have a voice assistant just as easily. It's not hard to imagine that both chatbot and voice assistant need to accept an answer and somehow figure out what the next question/message should be - this is common logic to both applications. 
@@ -168,4 +167,3 @@ Here are a few benefits of a layered approach, in which each layer maintains a s
 
 3. Layer implemenations can be swapped out without disrupting other Layers. Since each layer communicates with the layer below using an agreed upon contract (a set of methods), the exact implementation of any layer can be swapped out without disruption to the other layers (so long as the contract remains unbroken). More concretely, let's suppose a server needs to be added. In this case, the domain logic, model, would be moved to a server, and the data would move to a database. The fundamental functionality that the domain layer provides for the view model would remain the same, but the implementation would be moved out of the front end. Now the view needs to call the server api to get its data instead of the methods it used to use. We can save a lot of time and anguish by cleverly replacing the implementation of each method that used to exist with calls to the backend and the layers above would be none the wiser. 
 
-## React Component Architecture
