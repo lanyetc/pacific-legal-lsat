@@ -157,6 +157,7 @@ Note: This is somewhat of a controversial layer, since it's a little bit painful
 ## Data
 The JSON files stored in the `pacific-legal-lsat/src/data` directory. This is the structured survey content. 
 
+# Technical Reasoning
 ## Why did we use a layered architecture?
 
 Here are a few benefits of a layered approach, in which each layer maintains a single general responsibility and only knows about and communicates with the layer immediately below it: 
@@ -167,3 +168,57 @@ Here are a few benefits of a layered approach, in which each layer maintains a s
 
 3. Layer implemenations can be swapped out without disrupting other Layers. Since each layer communicates with the layer below using an agreed upon contract (a set of methods), the exact implementation of any layer can be swapped out without disruption to the other layers (so long as the contract remains unbroken). More concretely, let's suppose a server needs to be added. In this case, the domain logic, model, would be moved to a server, and the data would move to a database. The fundamental functionality that the domain layer provides for the view model would remain the same, but the implementation would be moved out of the front end. Now the view needs to call the server api to get its data instead of the methods it used to use. We can save a lot of time and anguish by cleverly replacing the implementation of each method that used to exist with calls to the backend and the layers above would be none the wiser. 
 
+## Why didn't we add a server?
+We could have decided to add a server to this project, but given the time line and the limited requirements we had to work with, a server wasn't justified since everything could easily be handled statically. 
+
+It's only after a certain point of necessary complexity, that servers can be used to actually manage complexity and increase maintainability. Until that point, it's a lot like using a slicing ham with a chain saw. 
+
+Additionally, we didn't want to sink resources into a more complex architecture at a time because it was unclear whether we were building the right thing. We decided that experimenting with the core functionality, getting user feedback, and figuring out the overall product direction was more valuable than building and maintaing a server, which would slow down the rate of feature output. 
+
+
+## why did we use TypeScript?
+Our choice to use TypeScript is possibly the best technical decision we made throughout the development of this project and the reasoning is two fold: 
+
+1. Schema Validation - We needed some sort of mechanism for schema validation. Inputting the survey content manually is quite an error prone process; it's easy to forget an object here, or use a string instead of an array there. Using Typescript, we know right away that an object is invalid and we know why. From there, it's easy to fix the error, and continue developing without being slowed down. 
+
+
+2. Debugging - TypeScript makes debugging infinitely easier. There are few things more frustrating than trying to trace a null pointer exception in a non trivial project without strong types and it's something that is less of an issue when using TypeScript. It's especially useful when different areas of the application need to communicate with eachother because the types provide extra contextual information around what _should_ be happening and prevent errors from propogating too far from the source until they are reported. 
+
+## (The Good,) The Bad, and The Ugly
+Since most of the technical discussion so far focuses on positive aspects of the implemenation, this section is devoted to the mistakes made along the way, and aspects that still need to be dealt with.
+
+It's important to keep in mind that this project, as far as it's come, is an experiment. It's about exploring possibilities and validating a hypothesis and in order to accomplish that, we we built rather hastily at times, sacrificing longer term maintainability, for more feature output. Here are some of the biggest issues that still exist:
+
+## Leaky Abstractions
+
+## Data Model 
+
+## Naming
+It's always easier to consider naming in retrospect
+1. conceptual mismatch
+2. inconsistency
+
+## The CSS
+
+## File Organization
+
+## Lack of Tests
+
+## Manual Content Entry
+
+## The Context
+
+## The link sharing feature
+
+## The link between the object data and the components
+
+
+# Key Takeaways 
+
+
+
+# Limitations
+## The limited next question decision logic
+
+
+# Extensions 
