@@ -75,7 +75,56 @@ That said, alongside the tutorial, it would be useful to have a basic idea of th
 
 # FAQ
 
-## How are the modules structured? 
+### How is 'the next question' chosen after the user submits an answer?
+Let trigger1 and trigger2 belong to the same question.
+
+```
+trigger1 = {
+    expectedResponses: [
+        {questionId: 1, optionIds: [1,4,2] },
+    ],
+    todo: "make a privacy policy",
+    reply: "not good"
+    resultReport: "some paragraph about privacy policies" 
+    action: { type: 'next', nextQuestionId: 10 }
+
+}
+
+trigger2 = {
+    expectedResponses: [
+        {questionId: 1, optionIds: [8,2] },
+    ],
+    reply: "great"
+    action: { type: 'next', nextQuestionId: 5 }
+}
+```
+Suppose the question is a *multi-select* question and the user selects optionIds 1, 4, and 2. 
+How does the survey figure out what the next question is? What does it do afterward? Here are the steps it takes:
+
+1. look through each trigger's expectedResponses
+2. check that all of optionIds 1, 4, and 2 exist
+3. If they all exist: 
+* add the reply to the chat. 
+* add the result report to the context
+* use the action to determine which question to go to, which submodule/module to continue to, or whether to exit the survey.
+
+Following these steps, the trigger that would run is trigger1.
+
+Now suppose the question is a *single-select* question and the user selects option 4. What changes?
+For single-select, only step 2 changes. The survey only checks that *one* of the selected options exist in the user's answer.
+
+Following these steps, trigge1 would still run.
+
+Notice that the multi-select question assumes an AND between each optionId - "This trigger will run if the user chooses "option1 AND option4, AND option2". 
+In contrast, notice that the single-select question assumes an OR between each optionId - "This trigger will run if the user chooses "option1 OR option4, OR option2"
+
+### What happens when none of the triggers match the user's selected response?
+Each question has a default trigger that runs in such a case.
+
+### How does the application know when the survey is over? 
+Major control flow is determined by the action object inside the trigger. There are three possibilities: "exit", "start a new module", and "next question"
+
+### How are the modules structured? 
 Modules contain submodules, which contain questions. Refer to these classes for more information. 
 
 
@@ -169,7 +218,7 @@ Our choice to use TypeScript is possibly the best technical decision we made thr
 
 2. Debugging - TypeScript makes debugging infinitely easier. There are few things more frustrating than trying to trace a null pointer exception in a non trivial project without strong types and it's something that is less of an issue when using TypeScript. It's especially useful when different areas of the application need to communicate with eachother because the types provide extra contextual information around what _should_ be happening and prevent errors from propogating too far from the source until they are reported. 
 
-## Grievances and Shortcomings 
+## Grievances
 Since most of the technical discussion so far focuses on positive aspects of the implemenation, this section is devoted to the mistakes made along the way, and aspects that still need to be dealt with.
 
 It's important to keep in mind that this project, as far as it's come, is an experiment. It's about exploring possibilities and validating a hypothesis and in order to accomplish that, we built rather hastily at times, sacrificing longer term maintainability, for an increase in feature output. Here are some of the biggest issues that still exist:
@@ -196,15 +245,72 @@ As it is now, it's awkward to add code for a user to choose a module from the la
 
 `data.tsx` also technically loads it twice every time the `getSurvey()` function is invoked. 
 
+# Limitations
+The following limitations resulted from our efforts to contain complexity: 
+
 ## Question Groups
 We've discussed triggers that point from one question to another given a certain answer, but it's worth mentioning that a single trigger can, in theory, point from many questions to another question. It's reasonable to imagine that sometimes we need the answers to multiple questions in order to figure out what to do next. This is functionality that we decided not to implement since the modules we were provided did not include such dependencies between questions and so it wasn't worth the complexity at the timme. 
 
 ## The link sharing feature
 After a user completes the survey, they're taken to the results page and have the option to copy a link that they can then share with their peers. This feature, was originally not supposed to be included since it required a server, but by itself did not justify building a server. We decided to build it anyway and so a creative solution had to be implemented. We stored all of the object IDs from a user's survey session in the URL of the results page. The results page decodes the object IDs from the URL, looks up the objects in the survey data structure, and then uses it to populate the results. This will unfortunately fail once the url becomes too long to hold all the necessary IDs. 
 
+## Question Types
+We only added a few question types, namely, autoplay messages, single select questions, and multi select questions. There are many more question types that can be added, but it wasn't something we needed to prioritize.
+
+## The link sharing feature
+After a user completes the survey, they're taken to the results page and have the option to copy a link that they can then share with their peers. This feature, was originally not supposed to be included since it required a server, but by itself did not justify building a server. We decided to build it anyway and so a creative solution had to be implemented. We stored all of the object IDs from a user's survey session in the URL of the results page. The results page decodes the object IDs from the URL, looks up the objects in the survey data structure, and then uses it to populate the results. This will unfortunately fail once the url becomes too long to hold all the necessary IDs. 
+
+## choosing the next question based on more complex logic
+Figuring out what the next question is, involves looking through each possible answer the user could have given (a question's list of triggers) and matching one of the triggers to the answer that was actually selected. 
+
+Let the following be a trigger for question 1, which is a multi-select question:
+
+```
+trigger1 = {
+    expectedResponses: [
+        {questionId: 1, optionIds: [1,4,2] },
+    ],
+    action: {
+        type: 'next',
+        nextQuestionId: 10
+    }
+
+}
+```
+
+Suppose the user answers the question with optionIds 1, 4, and 2. It makes sense that this trigger would be chosen. 
+
+Now suppose the user answers the question with just optionId 1. Should this trigger run now?
+
+It depends on whether the logic between the options is "option1 AND option4 AND option2", or if it's "option1 OR option4 OR option2". But it could also be "option 1 AND option 4 OR option 2".
+
+Why stop there? This could get infinitely complex; the logic could be: 
+
+```
+AND: [
+    OR: [
+        AND: [
+            4,
+            2
+        ],
+        9
+    ],
+    OR: [
+        4,
+        1
+    ],
+    NOT: 3
+]
+
+```
+
+This structure is intentionally complex, but it's not inconceivable that nested logic could be useful, or even just a mixture of ANDs and ORs. The module we've implemented thus far doesn't justify such complexity, but it certainly still counts as a limitation.
+
 # Extensions
-The following is a list of feature ideas we didn't get to:
+The following is a list of features and other extensions we didn't get to:
 
 1. The ability to retake a question. It's not uncommon for users to go back and change their answers to certain questions. As it is, They have to retake the whole survey. 
 
-2. Analytics. 
+2. Analytics. .We were considering google analytics 
+
+3. no dynamic links/tooltips in the content. The survey messages can only contain plain text - functionality for rendering links, pictures, etc hasn't been implemented. 
