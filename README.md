@@ -9,8 +9,9 @@ Check it out! https://pacific-legal-portal.github.io/pacific-legal-lsat/#/
 We recommend first playing around with the application to get a better understanding of what this project is about. 
 
 1. [Install](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki/Technical-Overview#installation)
-2. Conceptual Overview
-3. Adding a simple survey
+2. [Conceptual Overview](#Overview)
+3. [Adding a simple survey](https://github.com/pacific-legal-portal/pacific-legal-lsat#adding-a-simple-survey)
+4. [Whats next?](https://github.com/pacific-legal-portal/pacific-legal-lsat#whats-next)
 
 ## Overview
 
@@ -31,10 +32,10 @@ When the page is loaded, the JSON files are assembled into linked typescript obj
 
 As the user selects answers to each question, the program adds to a running list of results, and then decides where to go next by looking up an action associated to the selected answer.
 
-## Tutorial - Adding a Simple Survey 
+## Adding a Simple Survey 
 We'll begin by introducing Messages and Triggers as the fundamental elements of a survey and their relationship to one another. It's useful to imagine a survey as a directed, acyclic graph - a collection of nodes, the Messages, linked together by edges, the Triggers. 
 
-fig1 - simple graph
+![Figure 1](/diagrams/figure1.png)
 
 This figure reveals the underlying structure of the survey content.
 
@@ -43,7 +44,8 @@ Here's a link to some documentation given to content creators about writing the 
 ### Message
 A Message is any prompt made by the chatbot. It could be a question for the user, either a MultiSelectQuestion or a SingleSelectQuestion. It could also be a simple statement, an AutoPlayMessage, requiring no response. 
 
-fig2- simple message
+![Figure 2](/diagrams/figure2.png)
+
 
 ### Trigger
 Triggers are the arrows in the graph because they describe where to go and what to do every time a user selects an answer. For example, "If option A is selected, go to question 2, otherwise if option B is selected, go to question 3". In general, a trigger contains 3 main pieces of information:
@@ -53,14 +55,76 @@ Triggers are the arrows in the graph because they describe where to go and what 
 
 Note: A single trigger "points" to a single next message, but naturally, a question might have many possible next messages, depending on the answer. It follows that questions can have one or more triggers. 
 
-fig3 - simple Trigger
+![Figure 3](/diagrams/figure3.png)
+
 
 ### Putting it all together
-These are the same three questions from above formatted into a JSON object.
+These are the roughly the same three questions from above formatted into a JSON object.
 
-fig4 - sample json 
+```
+    {
+        id: 1,
+        type: MessageType.singleSelect,
+        content: 'Do you have a privacy policy',
+        options: [ { id: 501, label: 'Yes' },
+                    { id: 500, label: 'No'} ],
+        triggers: [
+         {
+            id: 510,
+            expectedResponses: { messageId: 1, optionIds: [501]},
+            action: { type: 'nextQuestion', nextQuestionId: 3 },
+            resultReport: ''
+          },
+          {
+            id: 511,
+            expectedResponses: { messageId: 1, optionIds: [500]},
+            action: { type: 'nextQuestion', nextQuestionId: 6 },
+            reply: "",
+            resultReport: ""
+          }
+        ],
+        defaultTriggerId: 410
+    },
+        {
+        id: 2,
+        type: MessageType.singleSelect,
+        content: 'Do you have a privacy officer?',
+        options: [ { id: 566, label: 'Yes' },
+          { id: 567, label: 'No'} ],
+        triggers: [
+         {
+            id: 566,
+            expectedResponses: { messageId: 2, optionIds: [566]},
+            action: { type: 'nextQuestion', nextQuestionId: 9 },
+            resultReport: ''
+          },
+          {
+            id: 567,
+            expectedResponses: { messageId: 2, optionIds: [567]},
+            action: { type: 'nextQuestion', nextQuestionId: 10 },
+            reply: "",
+            resultReport: ""
+          }
+        ],
+        defaultTriggerId: 410
+    },
+        {
+        id: 3,
+        type: MessageType.autoPlayMessage,
+        content: 'That's the end of the survey',
+        triggers: [
+          {
+            id: 517,
+            action: { type: 'exit'},
+          }
+        ],
+        defaultTriggerId: 517
+    },
 
-This file can be added to the following directory `pacific-legal-lsat/src/data/` 
+```
+
+
+This can be added to the following directory as a typescript type any object `pacific-legal-lsat/src/data/` 
 
 The survey module can then be imported in the `data.tsx` file and added to the application's list of survey modules. 
 
@@ -69,11 +133,11 @@ Note that these messages won't be displayed in the app unless (1) the starting m
 From here, the data is loaded from the JSON files and passed as a prop to the landing page. 
 
 # What's next?
-It's rare that a nontrivial codebase is handed off to a new set of developers who then simply continue development. There's understandably a significant amount of time to be put toward, toil, code archaeology, and wondering why certain things are the way they are. If this project is to be extended, we've laid out the rest of this documentation in such a way that it can be referred to on an as needed basis to hopefully answer those questions as they are asked.
+It's rare that a nontrivial codebase is handed off to a new set of developers who then simply continue development without any guidance. When it happens, there's understandably a significant amount of time that must be put toward, toil, code archaeology, and just wondering why certain things are the way they are. If this project is to be extended, we've layed out the rest of this documentation in such a way that it can be referred to on an as needed basis to hopefully answer those questions as they are asked.
 
 That said, alongside the tutorial, it would be useful to have a basic idea of the general architecture, the domain model, and the React component structure. 
 
-# FAQ
+# common questions and examples
 
 ### How is 'the next question' chosen after the user submits an answer?
 Let trigger1 and trigger2 belong to the same question.
@@ -113,7 +177,7 @@ Following these steps, the trigger that would run is trigger1.
 Now suppose the question is a *single-select* question and the user selects option 4. What changes?
 For single-select, only step 2 changes. The survey only checks that *one* of the selected options exist in the user's answer.
 
-Following these steps, trigge1 would still run.
+Following these steps, trigger1 would still run.
 
 Notice that the multi-select question assumes an AND between each optionId - "This trigger will run if the user chooses "option1 AND option4, AND option2". 
 In contrast, notice that the single-select question assumes an OR between each optionId - "This trigger will run if the user chooses "option1 OR option4, OR option2"
@@ -155,8 +219,7 @@ click here to find out why we only keep ids in the context.
 
 # General Architecture 
 
-fig 4
-
+![Figure 5](/diagrams/figure5.png)
 
 ## Presentational Components
 These components have very little logic or state in them, they're almost strictly for formatting parts of the view. 
@@ -218,7 +281,7 @@ Our choice to use TypeScript is possibly the best technical decision we made thr
 
 2. Debugging - TypeScript makes debugging infinitely easier. There are few things more frustrating than trying to trace a null pointer exception in a non trivial project without strong types and it's something that is less of an issue when using TypeScript. It's especially useful when different areas of the application need to communicate with eachother because the types provide extra contextual information around what _should_ be happening and prevent errors from propogating too far from the source until they are reported. 
 
-## Grievances
+# Grievances
 Since most of the technical discussion so far focuses on positive aspects of the implemenation, this section is devoted to the mistakes made along the way, and aspects that still need to be dealt with.
 
 It's important to keep in mind that this project, as far as it's come, is an experiment. It's about exploring possibilities and validating a hypothesis and in order to accomplish that, we built rather hastily at times, sacrificing longer term maintainability, for an increase in feature output. Here are some of the biggest issues that still exist:
@@ -249,10 +312,7 @@ As it is now, it's awkward to add code for a user to choose a module from the la
 The following limitations resulted from our efforts to contain complexity: 
 
 ## Question Groups
-We've discussed triggers that point from one question to another given a certain answer, but it's worth mentioning that a single trigger can, in theory, point from many questions to another question. It's reasonable to imagine that sometimes we need the answers to multiple questions in order to figure out what to do next. This is functionality that we decided not to implement since the modules we were provided did not include such dependencies between questions and so it wasn't worth the complexity at the timme. 
-
-## The link sharing feature
-After a user completes the survey, they're taken to the results page and have the option to copy a link that they can then share with their peers. This feature, was originally not supposed to be included since it required a server, but by itself did not justify building a server. We decided to build it anyway and so a creative solution had to be implemented. We stored all of the object IDs from a user's survey session in the URL of the results page. The results page decodes the object IDs from the URL, looks up the objects in the survey data structure, and then uses it to populate the results. This will unfortunately fail once the url becomes too long to hold all the necessary IDs. 
+We've discussed triggers that point from one question to another given a certain answer, but it's worth mentioning that a single trigger can, in theory, point from many questions to another question. It's reasonable to imagine that sometimes we need the answers to multiple questions in order to figure out what to do next. This is functionality that we decided not to implement since the modules we were provided did not include such dependencies between questions and so it wasn't worth the complexity at the time. 
 
 ## Question Types
 We only added a few question types, namely, autoplay messages, single select questions, and multi select questions. There are many more question types that can be added, but it wasn't something we needed to prioritize.
@@ -307,10 +367,10 @@ AND: [
 This structure is intentionally complex, but it's not inconceivable that nested logic could be useful, or even just a mixture of ANDs and ORs. The module we've implemented thus far doesn't justify such complexity, but it certainly still counts as a limitation.
 
 # Extensions
-The following is a list of features and other extensions we didn't get to:
+The following are a few of the features we didn't get to:
 
 1. The ability to retake a question. It's not uncommon for users to go back and change their answers to certain questions. As it is, They have to retake the whole survey. 
 
-2. Analytics. .We were considering google analytics 
+2. Analytics
 
 3. no dynamic links/tooltips in the content. The survey messages can only contain plain text - functionality for rendering links, pictures, etc hasn't been implemented. 
