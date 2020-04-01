@@ -28,7 +28,7 @@ Once it is written, the survey is handed down to the developers who translate it
 
 Next, the JSON file is included in the data directory within the project and is added to the list of existing active survey modules.
  
-When the page is loaded, the JSON files are assembled into linked typescript objects, representing questions or messages. Since this is a _conversational_ survey that will be presented as a chatbot, both questions and messages are represented. These objects establish all possible survey paths and outcomes, and the actual outcome depends on how the user procedes through the survey.
+When the page is loaded, the JSON files are assembled into linked typescript objects, representing questions or messages. Since this is a _conversational_ survey that will be presented as a chatbot, both questions and messages are represented. These objects establish all possible survey paths and outcomes, and the actual outcome depends on how the user proceeds through the survey.
 
 As the user selects answers to each question, the program adds to a running list of results, and then decides where to go next by looking up an action associated to the selected answer.
 
