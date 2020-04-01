@@ -68,9 +68,10 @@ Note that these messages won't be displayed in the app unless (1) the starting m
 
 From here, the data is loaded from the JSON files and passed as a prop to the landing page. 
 
-### How are survey modules organized?
-A module is composed of sub-modules and sub-modules contain messages.
+# What's next?
+It's rare that a nontrivial codebase is handed off to a new set of developers who then simply continue development. There's understandably a significant amount of time must be put toward, toil, code archaeology, and wondering why certain things are the way they are. If this project is to be extended, we've laid out the rest of this documentation in such a way that it can be referred to on an as needed basis and hopefully answer those questions as they are asked. Most of what's written isn't relevant until it's something that's in question. 
 
+That said, alongside the tutorial, it would be useful to have a basic idea of the general architecture, the domain model, and the React component structure. 
 
 ### How does the application keep track of a user's progress through a survey?
 We keep a global object, called Context, using reacts context API to store the user's progress through the survey. Every time the user answers a question, the application adds the following Result to the context:
@@ -96,27 +97,6 @@ Context: {
 The context is used to provide access to data that needs to be shared across the application. The ChatBotPage component, adds to the context as questions are answered, and the ResultsPage component reads from it to layout the user's results. 
 
 click here to find out why we only keep ids in the context. 
-
-# extras ====
-
-It's worth mentioning that we've restricted the answers users can give to a predefined list of options in order to simplify the implementation of the mvp. 
-
-These surveys are meant to take on a friendly conversational tone, hence why they're modeled using a chatbot format. 
-
-It's graph-like because every answer to a question, could lead to another question and so the questions end up being linked to each other. 
-
-This page is meant to be a quickstart guide geared toward bringing a potential developer up to speed. 
-
-click here to find out why we only keep ids in the context
-
-## question groups
-We've discussed triggers that point from one question to another given a certain answer, but it's worth mentioning that a single trigger, can in theory, point from many questions to another question. It's reasonable to imagine that sometimes we need the answers to multiple questions in order to figure out what to do next. This is functionality that we decided not to implement since the modules we were provided did not include such dependencies between questions and so it wasn't worth the complexity at the timme. 
-
-in case youre wondering why the repo is called pacific-legal-lsat instead of lsalt.. the name changed, but it is lsalt.
-
-answers to questions from different submodules do not depend on eachother. 
-
-is the survey data actually passed into the landing page component? it should be if it isnt. (so long as it's not hard coded.)
 
 # General Architecture 
 
@@ -181,44 +161,44 @@ Our choice to use TypeScript is possibly the best technical decision we made thr
 
 1. Schema Validation - We needed some sort of mechanism for schema validation. Inputting the survey content manually is quite an error prone process; it's easy to forget an object here, or use a string instead of an array there. Using Typescript, we know right away that an object is invalid and we know why. From there, it's easy to fix the error, and continue developing without being slowed down. 
 
-
 2. Debugging - TypeScript makes debugging infinitely easier. There are few things more frustrating than trying to trace a null pointer exception in a non trivial project without strong types and it's something that is less of an issue when using TypeScript. It's especially useful when different areas of the application need to communicate with eachother because the types provide extra contextual information around what _should_ be happening and prevent errors from propogating too far from the source until they are reported. 
 
-## (The Good,) The Bad, and The Ugly
+## Grievances and Shortcomings 
 Since most of the technical discussion so far focuses on positive aspects of the implemenation, this section is devoted to the mistakes made along the way, and aspects that still need to be dealt with.
 
-It's important to keep in mind that this project, as far as it's come, is an experiment. It's about exploring possibilities and validating a hypothesis and in order to accomplish that, we we built rather hastily at times, sacrificing longer term maintainability, for more feature output. Here are some of the biggest issues that still exist:
+It's important to keep in mind that this project, as far as it's come, is an experiment. It's about exploring possibilities and validating a hypothesis and in order to accomplish that, we built rather hastily at times, sacrificing longer term maintainability, for an increase in feature output. Here are some of the biggest issues that still exist:
 
 ## Leaky Abstractions
+Since we didn't have time to refactor as much as we should have, the context, which keeps track of the users progress through the survey, doesn't encapsulate it's members or it's functionality. There's a lot of functionality that should belong in the context, that can be found in the code associated with the results page. Changes to the context schema are quite disruptive to the results page code, since the results page code knows about (and in some cases, controls) how the context functionality is implemented.
 
 ## Data Model 
-
-## Naming
-It's always easier to consider naming in retrospect
-1. conceptual mismatch
-2. inconsistency
+fig 6
 
 ## The CSS
+The CSS is quite brittle. Making small changes often leads to completely unexpected results. We should have followed flexbox recommendations more closely. 
 
 ## File Organization
+We made two folders for react containers and components, but there are components inside the folder for containers. Really, both folders shouuld either be merged together or reorganized. 
 
 ## Lack of Tests
-
-## Manual Content Entry
-
-## The Context
-
-## The link sharing feature
+We needed to sacrifice how much time we put toward writing tests to keep up with the feature requests. There are arguments for and against doing so, but it will certainly make changing the code more difficult. 
 
 ## The link between the object data and the components
+Currently, the data is loaded from several components right out of a file called `data.tsx`. The data should either be loaded once from the context, or loaded once from the parent react component and then passed into the other components as props. 
 
+As it is now, it's awkward to add code for a user to choose a module from the landing page now because the logic that determines what module to run is in the chatbot page itself.
 
-# Key Takeaways 
+`data.tsx` also technically loads it twice every time the `getSurvey()` function is invoked. 
 
+## Question Groups
+We've discussed triggers that point from one question to another given a certain answer, but it's worth mentioning that a single trigger can, in theory, point from many questions to another question. It's reasonable to imagine that sometimes we need the answers to multiple questions in order to figure out what to do next. This is functionality that we decided not to implement since the modules we were provided did not include such dependencies between questions and so it wasn't worth the complexity at the timme. 
 
+## The link sharing feature
+After a user completes the survey, they're taken to the results page and have the option to copy a link that they can then share with their peers. This feature, was originally not supposed to be included since it required a server, but by itself did not justify building a server. We decided to build it anyway and so a creative solution had to be implemented. We stored all of the object IDs from a user's survey session in the URL of the results page. The results page decodes the object IDs from the URL, looks up the objects in the survey data structure, and then uses it to populate the results. This will unfortunately fail once the url becomes too long to hold all the necessary IDs. 
 
-# Limitations
-## The limited next question decision logic
+# Extensions
+The following is a list of feature ideas we didn't get to:
 
+1. The ability to retake a question. It's not uncommon for users to go back and change their answers to certain questions. As it is, They have to retake the whole survey. 
 
-# Extensions 
+2. Analytics. 
