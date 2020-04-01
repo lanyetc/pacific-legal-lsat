@@ -9,7 +9,7 @@ Check it out! https://pacific-legal-portal.github.io/pacific-legal-lsat/#/
 We recommend first playing around with the application to get a better understanding of what this project is about. 
 
 1. [Install](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki/Technical-Overview#installation)
-2. [Conceptual Overview](#Overview)
+2. [Overview](#Overview)
 3. [Adding a simple survey](https://github.com/pacific-legal-portal/pacific-legal-lsat#adding-a-simple-survey)
 4. [Whats next?](https://github.com/pacific-legal-portal/pacific-legal-lsat#whats-next)
 
