@@ -51,7 +51,7 @@ A Message is any prompt made by the chatbot. It could be a question for the user
 Triggers are the arrows in the graph because they describe where to go and what to do every time a user selects an answer. For example, "If option A is selected, go to question 2, otherwise if option B is selected, go to question 3". In general, a trigger contains 3 main pieces of information:
 1. expectedResponses - one or more options that the user chooses to answer a question.
 2. results - given this response, we may want to provide some feedback. It can be a reply in the chat, a more detailed result that will be revealed on the results page, or a todo item.
-3. action - given this response to this question, what should be shown to the user next? Either the another question, or the results page. 
+3. action - given this response to this question, what should be shown to the user next? Either another question, or the results page. 
 
 Note: A single trigger "points" to a single next message, but naturally, a question might have many possible next messages, depending on the answer. It follows that questions can have one or more triggers. 
 
@@ -133,7 +133,7 @@ Note that these messages won't be displayed in the app unless (1) the starting m
 From here, the data is loaded from the JSON files and passed as a prop to the landing page. 
 
 # What's next?
-It's rare that a nontrivial codebase is handed off to a new set of developers who then simply continue development without any guidance. When it happens, there's understandably a significant amount of time that must be put toward, toil, code archaeology, and just wondering why certain things are the way they are. If this project is to be extended, we've layed out the rest of this documentation in such a way that it can be referred to on an as needed basis to hopefully answer those questions as they are asked.
+It's rare that a nontrivial codebase is handed off to a new set of developers who then simply continue development without any guidance. When it happens, there's understandably a significant amount of time that must be put toward, toil, code archaeology, and just wondering why certain things are the way they are. If this project is to be extended, we've laid out the rest of this documentation in such a way that it can be referred to on an as needed basis to hopefully answer those questions as they are asked.
 
 That said, alongside the tutorial, it would be useful to have a basic idea of the [general architecture](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki/General-Architecture), the [domain model](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki/Domain-model), and the [React component structure](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki/Component_structure). 
 
