@@ -135,4 +135,6 @@ From here, the data is loaded from the JSON files and passed as a prop to the la
 # What's next?
 It's rare that a nontrivial codebase is handed off to a new set of developers who then simply continue development without any guidance. When it happens, there's understandably a significant amount of time that must be put toward, toil, code archaeology, and just wondering why certain things are the way they are. If this project is to be extended, we've layed out the rest of this documentation in such a way that it can be referred to on an as needed basis to hopefully answer those questions as they are asked.
 
-That said, alongside the tutorial, it would be useful to have a basic idea of the general architecture, the domain model, and the React component structure. 
+That said, alongside the tutorial, it would be useful to have a basic idea of the [general architecture](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki/General-Architecture), the [domain model](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki/Domain-model), and the [React component structure](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki/Component_structure). 
+
+See the [wiki](https://github.com/pacific-legal-portal/pacific-legal-lsat/wiki) for more details
