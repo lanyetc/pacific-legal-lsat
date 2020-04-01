@@ -69,9 +69,15 @@ Note that these messages won't be displayed in the app unless (1) the starting m
 From here, the data is loaded from the JSON files and passed as a prop to the landing page. 
 
 # What's next?
-It's rare that a nontrivial codebase is handed off to a new set of developers who then simply continue development. There's understandably a significant amount of time must be put toward, toil, code archaeology, and wondering why certain things are the way they are. If this project is to be extended, we've laid out the rest of this documentation in such a way that it can be referred to on an as needed basis and hopefully answer those questions as they are asked. Most of what's written isn't relevant until it's something that's in question. 
+It's rare that a nontrivial codebase is handed off to a new set of developers who then simply continue development. There's understandably a significant amount of time to be put toward, toil, code archaeology, and wondering why certain things are the way they are. If this project is to be extended, we've laid out the rest of this documentation in such a way that it can be referred to on an as needed basis to hopefully answer those questions as they are asked.
 
 That said, alongside the tutorial, it would be useful to have a basic idea of the general architecture, the domain model, and the React component structure. 
+
+# FAQ
+
+## How are the modules structured? 
+Modules contain submodules, which contain questions. Refer to these classes for more information. 
+
 
 ### How does the application keep track of a user's progress through a survey?
 We keep a global object, called Context, using reacts context API to store the user's progress through the survey. Every time the user answers a question, the application adds the following Result to the context:
